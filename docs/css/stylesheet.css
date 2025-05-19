@@ -1,0 +1,33 @@
+.content-root {
+    display: flex;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+nav a {
+    padding: 10px;
+}
+
+nav a:hover{
+    background-color: gold;
+    display: block;
+}
+
+div article {
+    display: none;
+    padding: 20px;
+}
+
+.active {
+    display: block;
+}
+
+.Opening-card-text-block {
+    display: block;
+}

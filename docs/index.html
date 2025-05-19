@@ -9,6 +9,7 @@
         <!-- Dependencies -->
 
         <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="javascript" href="css/javascript.js">
 
 
         <!-- Metadata -->
@@ -77,10 +78,10 @@
 
                             </h2>
 
-                            <a data-id="Bio" class="current"></a>
-                            <a data-id="Portfolio"></a>
-                            <a data-id="AI"></a>
-                            <a data-id="Hobbies"></a>
+                            <a data-id="1" class="active">Bio</a>
+                            <a data-id="2">Portfolio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
 
                         </nav>
 
@@ -128,10 +129,10 @@
 
                             </h2>
 
-                            <a data-id="Bio"></a>
-                            <a data-id="Portfolio" class="current"></a>
-                            <a data-id="AI"></a>
-                            <a data-id="Hobbies"></a>
+                            <a data-id="1">Bio</a>
+                            <a data-id="2">Portfolio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
 
                         </nav>
 
@@ -179,10 +180,10 @@
 
                             </h2>
 
-                            <a data-id="Bio"></a>
-                            <a data-id="Portfolio"></a>
-                            <a data-id="AI" class="current"></a>
-                            <a data-id="Hobbies"></a>
+                            <a data-id="1">Bio</a>
+                            <a data-id="2">Portfolio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
 
                         </nav>
 
@@ -229,11 +230,11 @@
                                 Santtu Nurmi
     
                             </h2>
-    
-                            <a data-id="Bio"></a>
-                            <a data-id="Portfolio"></a>
-                            <a data-id="AI"></a>
-                            <a data-id="Hobbies" class="current"></a>
+
+                            <a data-id="1">Bio</a>
+                            <a data-id="2">Portfolio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
     
                         </nav>
     
@@ -245,7 +246,7 @@
 
             <!-- Article content-change classification for "bio" -->
 
-            <article class="Bio">
+            <article class="active">
 
                 <!-- Article header -->
 
@@ -458,7 +459,7 @@
 
             <!-- Article content-change classification for "portfolio" -->
 
-            <article class="Portfolio">
+            <article>
 
                 <!-- Portfolio project container left -->
 
@@ -498,7 +499,7 @@
 
             <!-- Article content-change classification for "AI" -->
 
-            <article class="AI">
+            <article>
 
                 <!-- Article title -->
 
@@ -537,7 +538,7 @@
 
             <!-- Article content-change classification for "Hobbies" -->
 
-            <article class="Hobbies">
+            <article>
 
                 <!-- Article title -->
 
@@ -583,6 +584,16 @@
             </article>
 
         </div>
+
+        <!-- Script section -->
+
+        <script type="text/javascript" src="javascript/javascript.js">
+
+            /* Script for managing the pages that are currently active on the site, allowing for seamless transition between the different sections of the page. */
+
+            navEventListener();
+
+        </script>
 
     </body>
 
