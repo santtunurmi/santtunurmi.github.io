@@ -272,7 +272,7 @@
         }
 
         h4.education{
-            max-width: 11.1135em;
+            width: 20em;
         }
 
         div.education-container {
@@ -296,7 +296,7 @@
         }
 
         div.June-2022-education {
-            top: 55%;
+            height: 40%;
         }
 
         div.August-2022-education {
@@ -369,6 +369,7 @@
             position: absolute;
             width: 0.1111em;
             background-color: rgb(255, 255, 255);
+            z-index: 1;
             top: 0;
             bottom: 0;
             right: 26.96em;
@@ -376,43 +377,80 @@
 
         h4.career{
             position: relative;
-            max-width: 11.11em;
-            left: 13.34em;
+            float: right;
+            width: 20em;
         }
 
-        div.dates p {
+        div.work-container {
+            position: relative;
+            float: right;
+            margin-top: 1em;
+            width: 20em;
+        }
+
+        div.dates {
             position: absolute;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 8.335em;
             right: 27.8em;
         }
 
-        p.June-2018 {
-            bottom: 11.335em;
+        div.June-2018 {
+            bottom: 8%;
         }
 
-        p.June-2019 {
-            bottom: 20.84em;
+        div.June-2019 {
+            bottom: 26%;
         }
 
-        p.July-2019 {
-            bottom: 25.3em;
+        div.July-2019 {
+            height: 5%;
         }
 
-        p.July-2019_2 {
-            bottom: 32.3em;
+        div.July-2019_2 {
+            bottom: 40%;
         }
 
-        p.August-2019 {
-            bottom: 36.7em;
+        div.August-2019 {
+            height: 5%;
         }       
 
-        p.May-2022 {
-            bottom: 46.9em;
+        div.May-2022 {
+            bottom: 62%;
         }
 
-        p.August-2022 {
-            bottom: 58em;
+        div.August-2022 {
+            height: 20%;
+        }
+
+        div.dates h4 {
+            position: relative;
+            left: 0;
+            width: 8.335em;
+            margin: 0;
+            text-align: left;
+
+        }
+
+        div.dates p {
+            position: relative;
+            left: 0;
+            width: 8.335em;
+            margin: 0;
+            text-align: left;
+        }
+
+        div.dates::after {
+            content: '';
+            position: absolute;
+            width: 0.111em;
+            background: top rgb(0, 153, 255);
+            left: 9.07em;
+            top: 0;
+            bottom: 0.166em;
+            z-index: 2;
         }
 
         div.dates p::after {
@@ -420,19 +458,11 @@
             position: absolute;
             width: 0.834em;
             height: 0.834em;
-            right: -1.22em;
+            right: -1.25em;
             background-color: rgb(0, 153, 255);
             border: 0.11em solid #ffffff;
             border-radius: 0.55em;
-            z-index: 1;
-        }
-
-        div.work-container {
-            padding: 1em 4.4em;
-            position: relative;
-            top: 5em;
-            left: 8.9em;
-            width: 27.6em;
+            z-index: 3;
         }
 
     p.bio a {
