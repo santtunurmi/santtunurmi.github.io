@@ -239,8 +239,9 @@
         visibility: visible;
         position: relative;
         float: right;
-        height: 1.5em;
+        height: 3.5em;
         width: auto;
+        top: -1.1em;
         padding: 0;
     }
 
