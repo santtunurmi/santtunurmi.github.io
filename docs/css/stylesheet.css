@@ -20,6 +20,8 @@
     p {
         line-height: 1.5em;
         text-indent: 3.5em;
+        margin: 0;
+        padding-bottom: 0.25em;
     }
 
     p:first-of-type {
@@ -279,9 +281,10 @@
     }
 
     p.bio {
-        font-size: 1em;
         float: left;
-    }
+        margin: 0;
+        font-size: 1em;
+        }
 
     div.career-container {
         height: 89em;
@@ -295,6 +298,7 @@
             height: 33.34em;
             width: 33.34em;
             margin: 0 0;
+            margin-top: 1.5em;
             font-size: 1em;
         }
 
@@ -302,6 +306,7 @@
             content: '';
             position: absolute;
             width: 0.111em;
+            min-width: 2px;
             background-color: rgb(255, 255, 255);
             z-index: 1;
             top: 0;
@@ -320,12 +325,16 @@
             width: 20em;
         }
 
+        div.education-container p {
+            text-indent: 0;
+        }
+
         div.dates-education {
             position: absolute;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 8.335em;
+            width: 9em;
             left: 23.12em;
         }
 
@@ -347,19 +356,20 @@
 
         div.dates-education p {
             position: relative;
-            left: 0;
-            width: 8.335em;
+            bottom: 0.25em;
             margin: 0;
             text-align: right;
+            text-indent: 0;
         }
 
         div.dates-education::before {
             content: '';
             position: absolute;
             width: 0.111em;
+            min-width: 2px;
             background: top rgb(0, 153, 255);
             top: 0;
-            bottom: 0.166em;
+            bottom: 0.5em;
             left: 0em;
             z-index: 2;
         }
@@ -369,7 +379,8 @@
             position: absolute;
             width: 0.834em;
             height: 0.834em;
-            left: -0.41em;
+            top: 0.25em;
+            left: -0.44em;
             background-color: rgb(0, 153, 255);
             border: 0.111em solid #ffffff;
             border-radius: 0.55em;
@@ -380,6 +391,7 @@
         position: relative;
         float: right;
         max-width: 36.68em;
+        margin-top: 1.5em;
         font-size: 1em;
     }
 
@@ -388,6 +400,7 @@
         float: left;
         left: 0;
         max-width: 33.34em;
+        margin-top: 1.5em;
         font-size: 1em;
     }
 
@@ -399,6 +412,7 @@
             height: 66.68em;
             width: 33.34em;
             margin: 0 0;
+            margin-top: 1.5em;
             font-size: 1em;
         }
 
@@ -406,6 +420,7 @@
             content: '';
             position: absolute;
             width: 0.1111em;
+            min-width: 2px;
             background-color: rgb(255, 255, 255);
             z-index: 1;
             top: 0;
@@ -426,21 +441,25 @@
             width: 20em;
         }
 
+        div.work-container p {
+            text-indent: 0;
+        }
+
         div.dates {
             position: absolute;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 8.335em;
-            right: 27.8em;
+            width: 9em;
+            left: -3.4em;
         }
 
         div.June-2018 {
-            bottom: 8%;
+            bottom: 6%;
         }
 
         div.June-2019 {
-            bottom: 26%;
+            bottom: 30%;
         }
 
         div.July-2019 {
@@ -448,7 +467,7 @@
         }
 
         div.July-2019_2 {
-            bottom: 40%;
+            bottom: 45%;
         }
 
         div.August-2019 {
@@ -456,7 +475,7 @@
         }       
 
         div.May-2022 {
-            bottom: 62%;
+            bottom: 65%;
         }
 
         div.August-2022 {
@@ -474,20 +493,21 @@
 
         div.dates p {
             position: relative;
-            left: 0;
-            width: 8.335em;
+            bottom: 0.25em;
             margin: 0;
             text-align: left;
+            text-indent: 0;
         }
 
         div.dates::after {
             content: '';
             position: absolute;
             width: 0.111em;
+            min-width: 2px;
             background: top rgb(0, 153, 255);
-            left: 9.07em;
+            left: 9.66em;
             top: 0;
-            bottom: 0.166em;
+            bottom: 0.5em;
             z-index: 2;
         }
 
@@ -497,6 +517,7 @@
             width: 0.834em;
             height: 0.834em;
             right: -1.25em;
+            top: 0.25em;
             background-color: rgb(0, 153, 255);
             border: 0.11em solid #ffffff;
             border-radius: 0.55em;
