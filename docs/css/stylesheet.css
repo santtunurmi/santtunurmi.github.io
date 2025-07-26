@@ -21,7 +21,6 @@
         line-height: 1.5em;
         text-indent: 3.5em;
         margin: 0;
-        padding-bottom: 0.25em;
     }
 
     p:first-of-type {
@@ -130,7 +129,6 @@
         background: rgba(0, 0, 0, 0.888);
         border-radius: 0.2778em;
         padding: 1.111em;
-        padding: 1.111em;
     }
 
     .Opening-card-text-block h4 {
@@ -141,6 +139,7 @@
         padding-bottom: 0.5em;
         margin: 0;
         font-size: 1.2em;
+        text-indent: 0;
         font-family: monospace;
     }
 
@@ -287,7 +286,13 @@
         }
 
     div.career-container {
-        height: 89em;
+        float: left;
+        width: 100%;
+        margin: 1.5em 0;
+    }
+
+    div.left-side {
+        float: left;
     }
 
     /* Education-timeline css. */
@@ -295,10 +300,10 @@
         section.education-timeline {
             position: relative;
             float: left;
-            height: 33.34em;
             width: 33.34em;
+            height: 33.34em;
             margin: 0 0;
-            margin-top: 1.5em;
+            margin-bottom: 1.5em;
             font-size: 1em;
         }
 
@@ -387,20 +392,22 @@
             z-index: 3;
         }
 
-    p.Education-info {
-        position: relative;
-        float: right;
-        max-width: 36.68em;
-        margin-top: 1.5em;
-        font-size: 1em;
-    }
-
     p.Work-info {
         position: relative;
         float: left;
         left: 0;
         max-width: 33.34em;
-        margin-top: 1.5em;
+        font-size: 1em;
+    }
+
+    div.right-side {
+        float: right;
+    }
+
+    p.Education-info {
+        position: relative;
+        float: right;
+        max-width: 36.68em;
         font-size: 1em;
     }
 
@@ -409,8 +416,8 @@
         section.work-timeline {
             position: relative;
             float: right;
-            height: 66.68em;
             width: 33.34em;
+            height: 66.68em;
             margin: 0 0;
             margin-top: 1.5em;
             font-size: 1em;
@@ -459,11 +466,11 @@
         }
 
         div.June-2018 {
-            bottom: 6%;
+            bottom: 8%;
         }
 
         div.June-2019 {
-            bottom: 27.3%;
+            bottom: 28.6%;
         }
 
         div.July-2019 {
@@ -471,7 +478,7 @@
         }
 
         div.July-2019_2 {
-            bottom: 30.41%;
+            bottom: 32.1%;
         }
 
         div.August-2019 {
@@ -501,7 +508,7 @@
             width: 0.111em;
             min-width: 2.03px;
             background: top rgb(0, 153, 255);
-            left: 9.65em;
+            left: 9.653em;
             top: 0;
             bottom: 0.5em;
             z-index: 2;
@@ -542,12 +549,11 @@
     div.info-hobby-left {
         position: relative;
         float: left;
-        width: 25em;
+        width: 25.3em;
         max-width: 100%;
-        margin: 0.5em 0.5em 0.5em 0;
-        padding: 0.625em;
-        border: 0.0625em solid #aaa;
-        background-color: black;
+        margin: 0.5em 1em 0.5em 0;
+        padding: 0.5em;
+        border: 0.1em solid #aaa;
         z-index: 1;
     }
 
@@ -556,23 +562,17 @@
         margin-top: 0;
         margin-bottom: 0;
         text-align: left;
+        font-size: 0.9em;
     }
 
     p.info-hobby-left-text {
         margin: 0.5em 0 1em 0;
         margin-top: 0;
         margin-bottom: 0;
+        padding: 0;
         text-align: left;
-    }
-
-    div.info-hobby-background {
-        position: absolute;
-        top: 76.721em;
-        left: 0;
-        width: 25.2em;
-        height: 42em;
-        background-color: #494949;
-        z-index: 0;
+        font-size: 0.9em;
+        line-height: 1.4em;
     }
 
 /* Footer CSS */
