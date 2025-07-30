@@ -6,11 +6,6 @@
 
     <head>
 
-        <!-- Dependencies -->
-
-        <link rel="stylesheet" href="css/stylesheet.css">
-        <link rel="javascript" href="css/javascript.js">
-
         <!-- Metadata -->
 
         <meta name="description" content="Portfolio of Santtu Nurmi">
@@ -22,6 +17,11 @@
         <!-- Title -->
 
         <title>Portfolio of Santtu Nurmi</title>
+
+        <!-- Dependencies -->
+
+        <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="javascript" href="css/javascript.js">
 
     </head>
 
@@ -51,7 +51,7 @@
 
                         <!-- Opening card text block -->
 
-                        <article class="Opening-card-text-block">
+                        <article class="Opening-card-text-block read-more">
 
                             <p>
 
@@ -64,6 +64,8 @@
                             <code>&gt;Machine learning with kNN, Naive Bayes, Random Forest & PCA.&lt;</code>
                             <code>&gt;C, C#, C++, Powershell, Microsfot Azure & AWS.&lt;</code>
                             <code>&gt;Davinci Resolve & OBS.&lt;</code>
+
+                            <button class="read-more-button"></button>
                             
                         </article>
 
@@ -1043,12 +1045,22 @@
 
         </div>
 
-        <!-- Script section -->
+        <!-- Javascript file is ran. -->
 
-        <script type="text/javascript" src="javascript/javascript.js">
+        <script type="text/javascript" src="javascript/javascript.js"></script>
 
-            /* Scripts are ran entirely in the javascript file. */
+        <!-- Functions get ran. -->
 
+        <script>
+        
+            /* Script for managing the pages that are currently active on the site, allowing for seamless transition between the different sections of the page. */
+
+            navEventListener();
+
+            /* Checks screen width for mobile-specific functions. */
+                        
+            WidthChange(mq);
+        
         </script>
 
     </body>
