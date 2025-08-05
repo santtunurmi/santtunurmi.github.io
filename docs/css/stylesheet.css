@@ -163,14 +163,14 @@
         position: absolute;
         left: 2%;
         bottom: 6%;
-        width: 50%;
+        width: 51%;
         display: flex;
         flex-direction: column;
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.888);
         border-radius: 0.2778em;
         padding: 1.111em;
-        z-index: 2;
+        z-index: 3;
     }
 
     .Opening-card-text-block p {
@@ -182,10 +182,13 @@
     }
 
     .Opening-card-text-block code {
+        display: inline;
         font-size: 1.2em;
         line-height: 1.5em;
         font-family: revert;
     }
+
+    .more {display: none;}
 
     /* Opening-card-related css @ < 600px. */
 
@@ -268,6 +271,7 @@
                 width: 30%;
                 cursor: pointer;
                 padding: 0.8vw 0;
+                margin-top: 0.5em;
                 background-color: #ffffff;
                 color: #000000;
                 border-radius: 1.25vw;
@@ -283,6 +287,7 @@
             button.read-more-button text:hover {
                 cursor: pointer;
             }
+
         }
 
 /* Nav-bar-related css. */
@@ -318,6 +323,7 @@
         display: block;
     }
 
+
     nav a text:hover {
         cursor: pointer;
     }
@@ -341,6 +347,22 @@
             nav a {
                 padding: 1.5vw;
                 font-size: 4vw;
+            }
+
+            nav.test {
+                left: 3%;
+                top: 5%;
+                width: 91.5%;
+                flex-direction: row;
+                padding: 1.5vw;
+            }
+
+            nav.test h2 {
+                margin: 1.5vw;
+            }
+
+            nav.test a {
+                padding: 1.5vw;
             }
 
         }

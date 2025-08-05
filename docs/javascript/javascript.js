@@ -3,7 +3,7 @@
     /* Adds event listeneres to the nav bar for changing site content. */
 
     function navEventListener() {
-        document.querySelectorAll("nav a").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id)}));
+        document.querySelectorAll("nav a").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id); WidthChange(mq)}));
     };
 
     /* Handles which nav bar should be active on the site. */
@@ -26,33 +26,30 @@
 
 /* Script for setting up "read more" -pages when viewport is less than 600px. */
 
-    function buttonReadMore(checks, fullText) {
-        document.querySelectorAll("article.read-more")[checks].innerHTML = fullText;
-        document.querySelectorAll("button.read-more-button")[checks].classList.add("inactive");
-        document.querySelectorAll("button.read-more-button")[checks].classList.remove("active");
-        checks += 1
-    }
-
-    function ReadMoreAdd() {
-        let ReadMores = document.querySelectorAll("article.read-more");
-        let shortText;
-        checks = ReadMores.length - 1
-        const shortTextLength = 231;
-        ReadMores.forEach(Readmore => {
-            fullText = Readmore.innerHTML;
-            shortText = Readmore.innerHTML.substr(0, shortTextLength) + "... </p>" +
-            "<button class='read-more-button'>Show more</button>";
-            Readmore.innerHTML = shortText;
-            document.querySelectorAll("button.read-more-button").forEach(button => button.addEventListener("click", _ => {buttonReadMore(checks, fullText)}));
-        });
+    function readMore() {
+        var readMores = document.getElementsByClassName("read-more")
+        readMores = Array.from(readMores);
+        readMores.forEach(readMore => { 
+            var showMore = readMore.getElementsByClassName("more");
+            var button = readMore.getElementsByClassName("read-more-button");
+            showMore = Array.from(showMore);
+            nav = document.querySelectorAll("div.Opening-card-portfolio nav")
+            nav = Array.from(nav)
+            if (showMore[0].style.display === "none") {
+                button[0].innerHTML = "Read less";
+                showMore.forEach(moreText => {moreText.style.display = "inline"});
+                nav.forEach(nav => {nav.classList.add("test")});
+            }
+            
+            else {
+                button[0].innerHTML = "Read more";
+                showMore.forEach(moreText => {moreText.style.display = "none"});
+                nav.forEach(nav => {nav.classList.remove("test")});
+            }
+        })
     };
 
-    function ReadMoreRemove() {
-        document.querySelectorAll("article.read-more").forEach(Readmore => {try{Readmore.innerHTML = fullText} catch{""}})
-        document.querySelectorAll("button.read-more-button").forEach(page => {page.classList.remove("active"); page.classList.add("inactive")});
-    };
-
-    /* Viewport monitoring */
+    /* Viewport monitoring for scripts. */
 
     if (matchMedia) {
         var mq = window.matchMedia("(max-width: 600px)");
@@ -60,10 +57,20 @@
     }
 
     function WidthChange(mq) {
-        if (mq.matches) { 
-            ReadMoreAdd();
-        } 
-        else { 
-            ReadMoreRemove();
+        buttons = document.getElementsByClassName("read-more-button");
+        buttons = Array.from(buttons);
+        showMore = document.getElementsByClassName("more");
+        showMore = Array.from(showMore);
+        nav = document.querySelectorAll("div.Opening-card-portfolio nav")
+        nav = Array.from(nav)
+        if (mq.matches) {
+            buttons.forEach(button => {button.classList.remove("inactive"); button.classList.add("active"); button.innerHTML="Read more"});
+            showMore.forEach(moreText => {moreText.style.display = "none"});
+            nav.forEach(nav => {nav.classList.remove("test")});
+        }
+
+        else {
+            buttons.forEach(button => {button.classList.remove("active"); button.classList.add("inactive")});
+            showMore.forEach(moreText => {moreText.style.display = "inline"});
         }
     }
