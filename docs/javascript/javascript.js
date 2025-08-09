@@ -33,7 +33,7 @@
             var showMore = readMore.getElementsByClassName("more");
             var button = readMore.getElementsByClassName("read-more-button");
             showMore = Array.from(showMore);
-            nav = document.querySelectorAll("div.Opening-card-portfolio nav")
+            nav = document.querySelectorAll("nav.opening-card-nav")
             nav = Array.from(nav)
             if (showMore[0].style.display === "none") {
                 button[0].innerHTML = "Read less";
@@ -49,6 +49,24 @@
         })
     };
 
+    function readMoreOther() {
+        var readMores = document.getElementsByClassName("read-more-other")
+        readMores = Array.from(readMores);
+        readMores.forEach(readMore => { 
+            var showMore = readMore.getElementsByClassName("more-other");
+            var button = readMore.getElementsByClassName("read-more-other-button");
+            showMore = Array.from(showMore);
+            if (showMore[0].style.display === "none") {
+                button[0].innerHTML = "Read less";
+                showMore.forEach(moreText => {moreText.style.display = "inline"});
+            }
+            
+            else {
+                button[0].innerHTML = "Read more";
+                showMore.forEach(moreText => {moreText.style.display = "none"});
+            }
+        })
+    };
     /* Viewport monitoring for scripts. */
 
     if (matchMedia) {
@@ -59,18 +77,27 @@
     function WidthChange(mq) {
         buttons = document.getElementsByClassName("read-more-button");
         buttons = Array.from(buttons);
+        otherbuttons = document.getElementsByClassName("read-more-other-button");
+        otherbuttons = Array.from(otherbuttons);
         showMore = document.getElementsByClassName("more");
         showMore = Array.from(showMore);
+        showOthers = document.getElementsByClassName("more-other");
+        showOthers = Array.from(showOthers);
         nav = document.querySelectorAll("div.Opening-card-portfolio nav")
         nav = Array.from(nav)
         if (mq.matches) {
             buttons.forEach(button => {button.classList.remove("inactive"); button.classList.add("active"); button.innerHTML="Read more"});
+            otherbuttons.forEach(button => {button.classList.remove("inactive"); button.classList.add("active"); button.innerHTML="Read more"});
             showMore.forEach(moreText => {moreText.style.display = "none"});
+            showOthers.forEach(moreText => {moreText.style.display = "none"});
             nav.forEach(nav => {nav.classList.remove("test")});
         }
 
         else {
             buttons.forEach(button => {button.classList.remove("active"); button.classList.add("inactive")});
-            showMore.forEach(moreText => {moreText.style.display = "inline"});
+            otherbuttons.forEach(button => {button.classList.remove("active"); button.classList.add("inactive")});
+            showMore.forEach(moreText => {moreText.style.display = "block"});
+            showOthers.forEach(moreText => {moreText.style.display = "block"});
+            Array.from(document.querySelectorAll("span.more-other")).forEach(span => {span.style.display = "inline"});
         }
     }
