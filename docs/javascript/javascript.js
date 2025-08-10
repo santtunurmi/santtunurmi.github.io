@@ -37,12 +37,14 @@
             nav = Array.from(nav)
             if (showMore[0].style.display === "none") {
                 button[0].innerHTML = "Read less";
+                button[0].style.margin="0.5em 0 0 0";
                 showMore.forEach(moreText => {moreText.style.display = "inline"});
                 nav.forEach(nav => {nav.classList.add("test")});
             }
             
             else {
                 button[0].innerHTML = "Read more";
+                button[0].style.margin="0";
                 showMore.forEach(moreText => {moreText.style.display = "none"});
                 nav.forEach(nav => {nav.classList.remove("test")});
             }

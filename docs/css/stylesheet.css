@@ -16,7 +16,6 @@
     .content-root {
         position: relative;
         float: left;
-        min-width: 75%;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -110,10 +109,11 @@
         position: relative;
         float: left;
         width: 100%;
-        height: 39vw;
+        height: 70vw;
+        max-height: 650px;
         margin: 0.6em 0.3em;
         background: url('../content/Portrait.jpg') no-repeat;
-        background-position: -5vw -12vw;
+        background-position: -5.7em -14.3em;
         background-size: 70%;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
@@ -131,10 +131,11 @@
         position: relative;
         float: left;
         width: 100%;
-        height: 39vw;
+        height: 70vw;
+        max-height: 650px;
         margin: 0.6em 0.3em;
         background: url('../content/Portrait.jpg') no-repeat;
-        background-position: -5vw -12vw;
+        background-position: -5.7em -14.3em;
         background-size: 70%;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
@@ -195,8 +196,6 @@
         bottom: 6%;
         width: 51%;
         min-width: 650px;
-        display: flex;
-        flex-direction: column;
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.888);
         border-radius: 0.2778em;
@@ -220,50 +219,79 @@
     }
 
     .more {display: none;}
-
-
-    /* Site-wide css @ < 1600px. */
-
-    @media (max-width: 1600px) {
-
-        .Opening-card-portfolio {
-            height: 625px;
-            background-position: -4.7em -11.3em;
-        }
-        
-    }
-
+    
     /* Site-wide css @ < 1200px. */
 
     @media (max-width: 1200px) {
 
         .Opening-card-portfolio {
-            height: 70vw;
-            max-height: 585px;
-            width: 97%;
-            background-size: 70%;
+            background-position: -7vw -17vw;
+        }  
+        
+        .Opening-card-fade-portfolio {
+            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+        }
+        
+        .Opening-card-bio {
             background-position: -6vw -15vw;
+        }
+
+        .Opening-card-fade-bio {
+            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+        }
+
+        .Opening-card-text-block {
+            min-width: 0;
+            width: 45em;
+            max-width: 68%;
+            max-height: 45%;
+            padding: 1.1vw;
+        }
+        
+    }
+
+    /* Site-wide css @ < 800px. */
+
+    @media (max-width: 800px) {
+
+        .Opening-card-portfolio {
+            width: 100%;
+            height: 70vw;
+            max-height: 560px;
+            background-size: 70%;
         }
 
         .Opening-card-fade-portfolio {
             box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
+        .Opening-card-bio {
+            width: 100%;
+            height: 70vw;
+            max-height: 560px;
+            background-size: 70%;
+        }
+
+        .Opening-card-fade-bio {
+            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+        }
+
         .Opening-card-text-block {
             min-width: 0;
-            width: 650px;
-            max-width: 65%;
+            width: 45em;
+            max-width: 68%;
+            max-height: 45%;
             padding: 1.1vw;
         }
     
         .Opening-card-text-block p {
-            line-height: 19px;
-            font-size: 14px;
+            line-height: 2.9vw;
+            font-size: 1.95vw;
         }
 
         .Opening-card-text-block code {
-            line-height: 19px;
-            font-size: 14px;
+            line-height: 2.9vw;
+            font-size: 1.95vw;
         }
         
     }
@@ -329,8 +357,6 @@
         }
     
         .Opening-card-text-block p {
-            padding: 0;
-            padding-top: 0.5em;
             font-size: 3.5vw;
         }
 
@@ -344,7 +370,6 @@
             width: 30%;
             cursor: pointer;
             padding: 0.8vw 0;
-            margin-top: 0.5em;
             background-color: #ffffff;
             color: #000000;
             font-size: 4vw;
@@ -536,6 +561,11 @@
 
     @media (max-width: 1200px) {
 
+        h4.portfolio-title {
+            margin: 0 0 0.25em 0;
+            padding: 0 0 0.5em 0;
+        }
+        
         div.portfolio-project {
             width: 50%;
             padding-bottom: 1em;
@@ -581,9 +611,9 @@
     
     }
 
-    /* Portfolio page-specific css @ < 600px. */
+    /* Portfolio page-specific css @ < 800px. */
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
 
         h4.portfolio-title {
             font-size: 200%;
@@ -868,26 +898,20 @@
         color: #ffffff;
     }
 
-    /* Bio page-specific css @ < 600px. */
+    /* Bio page-specific css @ < 1200px. */
 
-    @media (max-width: 600px) {
-
-        h3.bio {
-            font-size: 0.9em;
-            margin: 0.9em 0;
-        }
-
-        div.career-container p {
-            padding: 0; 
-        }
+    @media (max-width: 1200px) {
 
         section.education-timeline {
             width: 100%;
-            font-size: 0.8em;
         }
 
         section.education-timeline::after {
             left: 70%;
+        }
+
+        div.education-container {
+            width: 60%;
         }
 
         h4.education{
@@ -896,28 +920,18 @@
             margin-bottom: 1em;
         }
 
-        div.education-container {
-            width: 60%;
-        }
-
         div.dates-education {
             width: 8em;
             left: 70%;
         }
-
-        div.dates-education p::before {
-            left: -0.4em;
-        }
-
+        
         div.Education-info {
             float: left;
-            max-width: 100%;
-            font-size: 0.9em;
+            width: 100%;
         }
 
         div.Work-info {
-            max-width: 100%;
-            font-size: 0.9em;
+            width: 100%;
         }
 
         section.work-timeline {
@@ -925,9 +939,8 @@
             width: 100%;
             height: 66.68em;
             margin: 1.111em 0;
-            font-size: 0.8em;
         }
-        
+
         section.work-timeline::before {
             display: none;
         }
@@ -966,11 +979,7 @@
         }
 
         div.July-2019_2 {
-            bottom: 32.25%;
-        }
-
-        div.dates p {
-            text-align: right;
+            bottom: 32.1%;
         }
 
         div.dates::after {
@@ -989,6 +998,10 @@
             z-index: 2;
         }
 
+        div.dates p {
+            text-align: right;
+        }
+
         div.dates p::after {
             display: none;
         }
@@ -1005,6 +1018,40 @@
             z-index: 3;
         }
         
+    }
+
+    /* Bio page-specific css @ < 600px. */
+
+    @media (max-width: 600px) {
+
+        h3.bio {
+            font-size: 0.9em;
+        }
+
+        section.education-timeline {
+            font-size: 0.8em;
+        }
+
+        div.dates-education p::before {
+            left: -0.4em;
+        }
+
+        div.Education-info {
+            font-size: 0.9em;
+        }
+
+        div.Work-info {
+            font-size: 0.9em;
+        }
+
+        section.work-timeline {
+            font-size: 0.8em;
+        }
+
+        div.July-2019_2 {
+            bottom: 32.25%;
+        }
+                
         p.bio {
             line-height: 1.3em;
             font-size: 0.81em;
