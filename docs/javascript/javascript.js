@@ -49,6 +49,8 @@
         })
     };
 
+    /* Seperate script for read more pages that aren't located in an opening card. */
+
     function readMoreOther() {
         var readMores = document.getElementsByClassName("read-more-other")
         readMores = Array.from(readMores);
@@ -67,6 +69,7 @@
             }
         })
     };
+
     /* Viewport monitoring for scripts. */
 
     if (matchMedia) {
