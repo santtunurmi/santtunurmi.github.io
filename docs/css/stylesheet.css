@@ -108,7 +108,7 @@
     .Opening-card-portfolio {
         position: relative;
         float: left;
-        width: 100%;
+        width: 97%;
         height: 70vw;
         max-height: 650px;
         margin: 0.6em 0.3em;
@@ -130,7 +130,7 @@
     .Opening-card-bio {
         position: relative;
         float: left;
-        width: 100%;
+        width: 97%;
         height: 70vw;
         max-height: 650px;
         margin: 0.6em 0.3em;
@@ -152,7 +152,7 @@
     .Opening-card-AI {
         position: relative;
         float: left;
-        width: 100%;
+        width: 97%;
         height: 70vw;
         max-height: 650px;
         margin: 0.6em 0.3em;
@@ -174,7 +174,7 @@
     .Opening-card-hobbies {
         position: relative;
         float: left;
-        width: 100%;
+        width: 97%;
         height: 70vw;
         max-height: 650px;
         margin: 0.6em 0.3em;
@@ -385,6 +385,10 @@
             font-family: revert;
         }
 
+        div.Opening-card-hobbies article.Opening-card-text-block{
+            max-width: unset;
+        }
+
         div.Opening-card-AI article.Opening-card-text-block p{
             font-size: 3.5vw;
             line-height: 4.5vw;
@@ -409,6 +413,12 @@
 
         button.read-more-button text:hover {
             cursor: pointer;
+        }
+
+        button.highlighted {
+            background-color: rgb(0, 153, 255);
+            color: rgb(255, 255, 255);
+            text-shadow: #000000 0.15vw 0.15vw;
         }
 
     }
@@ -1206,11 +1216,28 @@
 
         button.read-more-other-button {
             width: fit-content;
-            padding: 0 0.4em;
-            margin-top: 0.4em;
+            cursor: pointer;
+            margin-top: 0.5em;
+            padding: 0.1em 0.75em;
             font-size: 0.9em;
+            line-height: 1.5em;
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 1.25vw;
+            border: none;
         }
-        
+
+        button.read-more-other-button:hover {
+            background-color: rgb(0, 153, 255);
+            color: rgb(255, 255, 255);
+            text-shadow: #000000 0.15vw 0.15vw;
+        }
+
+        button.highlighted-more {
+            background-color: rgb(0, 153, 255);
+            color: rgb(255, 255, 255);
+            text-shadow: #000000 0.15vw 0.15vw;
+        }
     }
 
 /* Footer CSS */

@@ -33,9 +33,11 @@
 
     function readMore() {
         var readMores = document.getElementsByClassName("read-more")
+        readMores = Array.from(readMores);
         readMores.forEach(readMore => { 
             var showMore = readMore.getElementsByClassName("more");
             var button = readMore.getElementsByClassName("read-more-button");
+            button[0].classList.add("highlighted")
             showMore = Array.from(showMore);
             nav = document.querySelectorAll("nav.opening-card-nav")
             nav = Array.from(nav)
@@ -51,6 +53,7 @@
                 button[0].style.margin="0";
                 showMore.forEach(moreText => {moreText.style.display = "none"});
                 nav.forEach(nav => {nav.classList.remove("test")});
+                button[0].classList.remove("highlighted");
             }
         })
     };
@@ -63,6 +66,7 @@
         readMores.forEach(readMore => { 
             var showMore = readMore.getElementsByClassName("more-other");
             var button = readMore.getElementsByClassName("read-more-other-button");
+            button[0].classList.add("highlighted-more")
             showMore = Array.from(showMore);
             if (showMore[0].style.display === "none") {
                 button[0].innerHTML = "Read less";
@@ -72,6 +76,7 @@
             else {
                 button[0].innerHTML = "Read more";
                 showMore.forEach(moreText => {moreText.style.display = "none"});
+                button[0].classList.remove("highlighted-more");
             }
         })
     };
