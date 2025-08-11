@@ -6,11 +6,6 @@
 
     <head>
 
-        <!-- Dependencies -->
-
-        <link rel="stylesheet" href="css/stylesheet.css">
-        <link rel="javascript" href="css/javascript.js">
-
         <!-- Metadata -->
 
         <meta name="description" content="Portfolio of Santtu Nurmi">
@@ -23,6 +18,11 @@
 
         <title>Portfolio of Santtu Nurmi</title>
 
+        <!-- Dependencies -->
+
+        <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="javascript" href="css/javascript.js">
+
     </head>
 
     <!-- Body -->
@@ -31,7 +31,7 @@
 
         <!-- Root div -->
 
-        <div class="content-root">
+        <div class="content-root" id="root">
 
             <!-- Header -->
 
@@ -43,41 +43,35 @@
 
                 <!-- Opening Card html -->
 
-                    <div class="Opening-card">
+                    <div class="Opening-card-portfolio">
 
-                        <!-- Background image -->
+                        <!-- Fade-effect for the portfolio opening card image. -->
 
-                        <div class="Opening-card-image-portfolio">
-
-                            <img src="content/Portrait.jpg" alt="Portarit of me">
-
-                        </div>
+                        <div class="Opening-card-fade-portfolio"></div>
 
                         <!-- Opening card text block -->
 
-                        <div class="Opening-card-left">
+                        <article class="Opening-card-text-block read-more">
 
-                            <article class="Opening-card-text-block">
+                            <p>
 
-                                <p>
+                                Aspiring ICT-engineer and developer, specializing in AI. Based in Finland.
+                                Studying information and communication technology at JAMK.
 
-                                    Aspiring ICT-engineer and developer, specializing in AI. Based in Finland.
-                                    Studying information and communication technology at JAMK.
+                            </p>
+                            <code class="more">&gt;Python, Pandas, R, SQL, MariaDB & Rest API&lt;</code>
+                            <code class="more">&gt;HTML, CSS & Javascript&lt;</code>
+                            <code class="more">&gt;Machine learning with kNN, Naive Bayes, Random Forest & PCA.&lt;</code>
+                            <code class="more">&gt;C, C#, C++, Powershell, Microsfot Azure & AWS.&lt;</code>
+                            <code class="more">&gt;Davinci Resolve & OBS.&lt;</code>
 
-                                </p>
-                                <code>&gt;Python, Pandas, R, SQL, MariaDB & Rest API&lt;</code>
-                                <code>&gt;HTML, CSS & Javascript&lt;</code>
-                                <code>&gt;Machine learning with kNN, Naive Bayes, Random Forest & PCA.&lt;</code>
-                                <code>&gt;C, C#, C++, Powershell, Microsfot Azure & AWS.&lt;</code>
-                                <code>&gt;Davinci Resolve & OBS.&lt;</code>
-                                
-                            </article>
-
-                        </div>
+                            <button onclick=" readMore()" class="read-more-button">Read more</button>
+                            
+                        </article>
 
                         <!-- Right-side nav -->
 
-                        <nav>
+                        <nav class="opening-card-nav">
 
                             <h2>Santtu Nurmi</h2>
 
@@ -98,37 +92,34 @@
 
                 <!-- Opening Card html -->
 
-                    <div class="Opening-card">
+                    <div class="Opening-card-bio">
 
-                        <!-- Background image -->
+                        <!-- Fade-effect for the bio opening card image. -->
 
-                        <div class="Opening-card-image-bio">
-
-                            <img src="content/Portrait.jpg" alt="Image of me coding">
-
-                        </div>
+                        <div class="Opening-card-fade-bio"></div>
 
                         <!-- Opening card text block -->
 
-                        <article class="Opening-card-text-block">
+                        <article class="Opening-card-text-block read-more">
 
                             <p>People have described me as analytical, improvement-oriented and reflective on my own work, by being able to take in feedback.</p>
                                
-                            <p>
+                            <p class="more">
 
                                 I would put it like this: I have a wide range of interests, in which I want to cultivate my skills.
                                 I think, that I can offer a wide range of expertise, but in equal measure, I think that there is a lot for me to still learn.
 
                             </p>
 
-                            <p style="margin-top: 0.5em; text-indent: 0;">Below, you can read a bit more about how my skillset came to be:</p>
+                            <p class="more" style="padding: 0;">Below, you can read a bit more about how my skillset came to be:</p>
 
+                            <button onclick="readMore()" class="read-more-button">Read more</button>
 
                         </article>
 
                         <!-- Right-side nav -->
 
-                        <nav>
+                        <nav class="opening-card-nav">
 
                             <h2>Santtu Nurmi</h2>
 
@@ -149,21 +140,15 @@
 
                 <!-- Opening Card html -->
 
-                    <div class="Opening-card">
+                    <div class="Opening-card-AI">
 
-                        <!-- Background image -->
-
-                        <div class="Opening-card-image-AI">
-
-                            <img src="content/machine-learning-code.png" alt="Image of me coding">
-
-                        </div>
+                        <div class="Opening-card-fade-AI"></div>
 
                         <!-- Opening card text block -->
 
                         <article class="Opening-card-text-block">
 
-                            <p>A small snippet of data preprocessing code written as part of my machine learning assignment.</p>
+                            <p style="padding: 0;">A small snippet of data preprocessing code written as part of my machine learning assignment.</p>
 
                         </article>
 
@@ -190,19 +175,13 @@
 
                 <!-- Opening Card html -->
     
-                    <div class="Opening-card">
-    
-                        <!-- Background image -->
-    
-                        <div class="Opening-card-image-hobbies">
-
-                            <img src="content/bassplaying.jpg" alt="Image of me coding">
-
-                        </div>
-    
+                    <div class="Opening-card-hobbies">
+            
+                        <div class="Opening-card-fade-hobbies"></div>
+                        
                         <!-- Opening card text block -->
     
-                        <article class="Opening-card-text-block">
+                        <article class="Opening-card-text-block read-more">
         
                             <p>
         
@@ -211,19 +190,21 @@
                                 
                             </p>
                             
-                            <p>
+                            <p class="more" style="padding: 0;">
 
                                 Even as I was writing this, I got distracted and played for 15 minutes,
                                 until my timer that reminds me to get back to working on this website got me out of it. Next on my list is to just take 2 weeks,
                                 and do nothing but play bass.
 
                             </p>
+
+                            <button onclick="readMore()" class="read-more-button">Read more</button>
     
                         </article>
     
                         <!-- Right-side nav -->
     
-                        <nav>
+                        <nav class="opening-card-nav">
     
                             <h2>Santtu Nurmi</h2>
 
@@ -252,19 +233,19 @@
 
                 </h4>
 
-                <!-- Portfolio project container left -->
+                <!-- Portfolio project container AI -->
 
                 <div class="portfolio-container">
 
                     <div class="portfolio-project">
 
-                        <img src="content/AI-project.png" alt="Data preprocessing code." class="portfolio-project-left">
+                        <img src="content/AI-project.png" alt="Data preprocessing code." class="portfolio-project-AI">
 
-                        <h4 class="portfolio-project-left">
+                        <h4 class="portfolio-project-AI">
 
                             Developing AI
                                                 
-                            <a onclick="JS_NavLoading(3); JS_PageLoading(3)" href="javascript:void(0);" title="Website for this project.">
+                            <a onclick="JS_NavLoading(3); JS_PageLoading(3); jump()" href="javascript:void(0);" title="Website for this project.">
 
                                 <img src="content/globe-solid.svg" alt="Project website">
 
@@ -298,13 +279,13 @@
 
                     </div>
 
-                    <!-- Portfolio project container middle -->
+                    <!-- Portfolio project container Esports. -->
 
-                    <div class="portfolio-project">
+                    <div class="portfolio-project" id="Esports">
 
-                        <img src="content/ladder-league.png" alt="Layout and race from ladder league." class="portfolio-project-middle">
+                        <img src="content/ladder-league.png" alt="Layout and race from ladder league." class="portfolio-project-Esports">
 
-                        <h4 class="portfolio-project-middle">
+                        <h4 class="portfolio-project-Esports">
 
                             Small-scale esports production
                         
@@ -326,7 +307,7 @@
                         <p>
 
                             Most of the events gather money for charity,
-                            and despite our smaller community, so far, we have been able to raise over 10 000 dollars total to several charities through our many events.
+                            and despite our smaller community, so far, we have been able to raise over $10,000 USD total to several charities through our many events.
                             Most events are held online, and it should be noted, that the people involved do the work as a hobby, meaning that none of us get a salary.
                             Instead, we get our drive from genuine passion, in not only speedrunning, but developing our amazing community, by organizing fun and exciting events.
 
@@ -350,21 +331,67 @@
 
                     </div>
 
-                    <!-- Portfolio project container right -->
+                    <!-- Portfolio project container portfolio website. -->
 
                     <div class="portfolio-project">
 
-                        <img src="content/minecraft-wall.jpg" alt="b" class="portfolio-project-right">
+                        <img src="content/Portfolio-website.png" alt="Image of this website." class="portfolio-project-portfolio-website">
 
-                        <h4 class="portfolio-project-right">
+                        <h4 class="portfolio-project-portfolio-website">
+
+                            This website
+
+                            <a href="https://github.com/santtunurmi/santtunurmi.github.io" target="_blank" title="GitHub for this project.">
+
+                                <img src="content/github-mark-white.png" alt="Project GitHub">
+
+                            </a>
+
+                        </h4>
+
+                        <p>    
+                        
+                            Having studied HTML and CSS pretty extensively, I felt confident, that I could pull of a great portfolio website
+                            with just HTML, CSS and JavaScript.
+
+                        </p>
+
+                        <p>
+                            
+                            I started this project to learn more about all three of those languages, as well as web development, full-stack
+                            and about hosting a website in general. At the same time I could get bang for my buck by getting a sweet portfolio website,
+                            which could help me stand out from the crowd of other potential hirees.
+
+                        </p>
+
+                        <p>
+                            
+                            Part of me wanted to also prove to myself, that I was worth more than the grade 1 in full-stack, that I got, which was a result of issues long since resolved.
+                            I don't think I'm quite there yet, but this site should already serve as a solid foundational statement, which I can always add on to, later on.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Portfolio project container wall-calculator -->
+
+                    <div class="portfolio-project" id="wall-calculator">
+
+                        <img src="content/minecraft-wall.jpg" alt="Image of pillars in minecraft." class="portfolio-project-wall-calculator">
+
+                        <h4 class="portfolio-project-wall-calculator">
 
                             Minecraft wall calculator
                         
+                            <!-- Coming soon.
+
                             <a href="/Minecraft-wall-calculator" title="Website for this project.">
 
                                 <img src="content/globe-solid.svg" alt="Project website">
 
                             </a>
+
+                            -->
 
                             <a href="https://github.com/santtunurmi/Minecraft-Wall-Calculator" target="_blank" title="GitHub for this project.">
 
@@ -400,12 +427,6 @@
 
                         <p>
 
-                            Santtu Nurmi
-
-                        </p>
-
-                        <p>
-
                             Phone: +358 45 1382240
 
                         </p>
@@ -432,10 +453,16 @@
 
                     <nav>
 
-                        <a data-id="1">Portfolio</a>
-                        <a data-id="2">Bio</a>
-                        <a data-id="3">AI</a>
-                        <a data-id="4">Hobbies</a>
+                        <h2>Santtu Nurmi</h2>
+
+                        <div>
+
+                            <a data-id="1">Portfolio</a>
+                            <a data-id="2">Bio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
+
+                        </div>
 
                     </nav>
 
@@ -519,7 +546,7 @@
                             
                         </div>
 
-                        <div style="height: 25%; width: 20em; float: left;"></div>
+                        <div style="height: 25%; width: 50%; float: left;"></div>
 
                         <div class="education-container">
         
@@ -537,23 +564,27 @@
                         </div>
 
                     </section>
-
-                    <p class="Education-info">
-
-                        After high school, it was crystal clear to me, that I wanted to choose my higher education to be in the tech industry.
-                        This was largely because I have always been interested in computers, internet and tech,
-                        but also due to me wanting to pursue a more hands-on field in academia.
-                        
-                    </p>
                     
-                    <p class="Education-info">
-                        
-                        Currently I am on course for finishing my degree in 2026.
-                        I have always been above average as a student, but I am more focused on projects and innovation,
-                        rather than finding my passion in learning to simply learn. I have my curiosities, and often they are the impetus to my projects and ideas,
-                        but I prefer to create something tangible with my efforts, rather than to build up skills just to show them off for validation.
+                    <div class="Education-info">
 
-                    </p>
+                        <p>
+
+                            After high school, it was crystal clear to me, that I wanted to choose my higher education to be in the tech industry.
+                            This was largely because I have always been interested in computers, internet and tech,
+                            but also due to me wanting to pursue a more hands-on field in academia.
+                            
+                        </p>
+                        
+                        <p>
+                            
+                            Currently I am on course for finishing my degree in 2026.
+                            I have always been above average as a student, but I am more focused on projects and innovation,
+                            rather than finding my passion in learning to simply learn. I have my curiosities, and often they are the impetus to my projects and ideas,
+                            but I prefer to create something tangible with my efforts, rather than to build up skills just to show them off for validation.
+
+                        </p>
+
+                    </div>
 
                     <!-- Work timeline. -->
         
@@ -565,7 +596,7 @@
 
                         </h4>
 
-                        <div style="height: 11%; width: 20em; float: left;"></div>
+                        <div style="height: 11%; width: 50%; float: right;"></div>
                         
                         <div class="dates August-2022 May-2022">
 
@@ -584,7 +615,7 @@
 
                         </div>
 
-                        <div style="height: 20%; width: 20em; float: left;"></div>
+                        <div style="height: 20%; width: 50%; float: right;"></div>
                         
                         <div class="dates August-2019 July-2019_2">
 
@@ -610,7 +641,7 @@
 
                         </div>
 
-                        <div style="height: 2%; width: 20em; float: left;"></div>
+                        <div style="height: 2%; width: 50%; float: right;"></div>
 
                         <div class="work-container">
                                 
@@ -622,7 +653,7 @@
 
                         </div>
 
-                        <div style="height: 2%; width: 20em; float: left;"></div>
+                        <div style="height: 2%; width: 50%; float: right;"></div>
                         
                         <div class="dates June-2018">
 
@@ -642,31 +673,35 @@
 
                     </section>
 
-                    <p style="text-indent: 0;" class="Work-info">
+                    <div class="Work-info">
 
-                        In my teenage years I worked several "summer jobs" to get work experience. It is quite common in Finland to do a short one-month internship
-                        at a local grocery store, for example, as you are not allowed to work even part-time as a teenager, but a short summer job can still give you
-                        some valuable work experience and own money. Pair that with me growing up working class and my mom owning a small local business,
-                        which she also ran by working there full-time, I had plenty of influence on my relationship to work.
+                        <p>
 
-                    </p>    
+                            In my teenage years I worked several "summer jobs" to get work experience. It is quite common in Finland to do a short one-month internship
+                            at a local grocery store, for example, as you are not allowed to work even part-time as a teenager, but a short summer job can still give you
+                            some valuable work experience and own money. Pair that with me growing up working class and my mom owning a small local business,
+                            which she also ran by working there full-time, I had plenty of influence on my relationship to work.
 
-                    <p class="Work-info">
+                        </p>
+
+                        <p>
+                            
+                            One of these key lessons was the fact, that in all of the places that I worked at, the manager would do work as everyone else.
+                            Often better and more efficient than everyone else, too. The fact that you see your boss working right there beside you gives you the confidence
+                            and respect of their leadership. It makes it obvious, that they know the work inside-and-out, and can use that knowledge to make better decisions,
+                            when managing the bigger picture. In addition, my coworkers were always encouraging, open to help, and most of all, respected me as one of their colleagues,
+                            despite of the fact, that I was just a summer intern.
                         
-                        One of these key lessons was the fact, that in all of the places that I worked at, the manager would do work as everyone else.
-                        Often better and more efficient than everyone else, too. The fact that you see your boss working right there beside you gives you the confidence
-                        and respect of their leadership. It makes it obvious, that they know the work inside-and-out, and can use that knowledge to make better decisions,
-                        when managing the bigger picture. In addition, my coworkers were always encouraging, open to help, and most of all, respected me as one of their colleagues,
-                        despite of the fact, that I was just a summer intern.
-                    
-                    </p>
+                        </p>
 
-                    <p class="Work-info"> 
+                        <p> 
 
-                        This left an impression on me, and it's one of the core values, that I wish from any future employer.
-                        I believe it's not just for my benefit, but the work culture as a whole will be a lot more open and focused, leading to a better business.
+                            This left an impression on me, and it's one of the core values, that I wish from any future employer.
+                            I believe it's not just for my benefit, but the work culture as a whole will be a lot more open and focused, leading to a better business.
 
-                    </p>
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -699,12 +734,6 @@
 
                         <p>
 
-                            Santtu Nurmi
-
-                        </p>
-
-                        <p>
-
                             Phone: +358 45 1382240
 
                         </p>
@@ -731,10 +760,16 @@
 
                     <nav>
 
-                        <a data-id="1">Portfolio</a>
-                        <a data-id="2">Bio</a>
-                        <a data-id="3">AI</a>
-                        <a data-id="4">Hobbies</a>
+                        <h2>Santtu Nurmi</h2>
+
+                        <div>
+
+                            <a data-id="1">Portfolio</a>
+                            <a data-id="2">Bio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
+
+                        </div>
 
                     </nav>
 
@@ -816,12 +851,6 @@
 
                         <p>
 
-                            Santtu Nurmi
-
-                        </p>
-
-                        <p>
-
                             Phone: +358 45 1382240
 
                         </p>
@@ -848,10 +877,16 @@
 
                     <nav>
 
-                        <a data-id="1">Portfolio</a>
-                        <a data-id="2">Bio</a>
-                        <a data-id="3">AI</a>
-                        <a data-id="4">Hobbies</a>
+                        <h2>Santtu Nurmi</h2>
+
+                        <div>
+
+                            <a data-id="1">Portfolio</a>
+                            <a data-id="2">Bio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
+
+                        </div>
 
                     </nav>
 
@@ -922,38 +957,44 @@
                     
                 </p>
 
-                <div class="info-hobby-left">
+                <div class="info-hobby-left read-more-other">
 
-                    <h4 class="info-hobby-left-title">Of Adrenaline:</h4>
+                    <div class="container">
+
+                        <h4 class="info-hobby-left-title">Of Adrenaline:</h4>
+                            
+                        <p class="info-hobby-left-text">
+
+                            One of the more interesting functions in the body, is the natural production of adrenaline. Largely responsible for a number of automatic behaviors,
+                            adrenaline is how we are able to function at a much higher level during, let's say, fight or flight.
+                            The automatic sensory behavior during fight or flight is much more than just one hormone, but adrenaline's role in increasing blood flow to muscles 
+                            is one of the reasons why it is so pivotal to peak-level human performance. This is obviously handy if you get attacked,
+                            but for as long as sports have been played, it's effects can also be seen there, as being under extreme stress can cultivate extraordinary physical capabilites.
+
+                        </p>
+
+                        <p class="info-hobby-left-text">
                         
-                    <p class="info-hobby-left-text">
-
-                        One of the more interesting functions in the body, is the natural production of adrenaline. Largely responsible for a number of automatic behaviors,
-                        adrenaline is how we are able to function at a much higher level during, let's say, fight or flight.
-                        The automatic sensory behavior during fight or flight is much more than just one hormone, but adrenaline's role in increasing blood flow to muscles 
-                        is one of the reasons why it is so pivotal to peak-level human performance. This is obviously handy if you get attacked,
-                        but for as long as sports have been played, it's effects can also be seen there, as being under extreme stress can cultivate extraordinary physical capabilites.
-
-                    </p>
-
-                    <p class="info-hobby-left-text">
-                    
-                        This is also my personal experience with the phenomena. From my experience with being able to deal with stress in speedrunning, I have found,
-                        that adrenaline plays a pivotal role in me being able to perform at my highest level. In-fact, I'd argue, that being able to handle stress well is caused by
-                        being able to channel the adrenaline in your body correctly. Making your focus be "avoiding disasters", causes your behavior under the immense stress to be fight,
-                        not flight. To make sure, that you are in control and that you use your hightened vigilance for negative emotions to anticipate potential disasters,
-                        and focus your attention on dealing with them.
+                            This is also my personal experience with the phenomena. <span class="more-other">From my experience with being able to deal with stress in speedrunning, I have found,
+                            that adrenaline plays a pivotal role in me being able to perform at my highest level. In-fact, I'd argue, that being able to handle stress well is caused by
+                            being able to channel the adrenaline in your body correctly. Making your focus be "avoiding disasters", causes your behavior under the immense stress to be fight,
+                            not flight. To make sure, that you are in control and that you use your hightened vigilance for negative emotions to anticipate potential disasters,
+                            and focus your attention on dealing with them.</span>
+                            
+                        </p>
                         
-                    </p>
-                    
-                    <p class="info-hobby-left-text">
-                        
-                        I find, that when this is done, generally the increased blood flow in your muscles allows your muscle memory
-                        to handle the actual execution of the task much better than one could consciously. This often helps dealing with unexpected situations.
-                        In moments of surprise or mistake, there may be a moment of panic, but with good preparation, you can get yourself to react correctly, which with adrenaline,
-                        will happen very quickly, minimizing damage.
+                        <p class="info-hobby-left-text more-other">
+                            
+                            I find, that when this is done, generally the increased blood flow in your muscles allows your muscle memory
+                            to handle the actual execution of the task much better than one could consciously. This often helps dealing with unexpected situations.
+                            In moments of surprise or mistake, there may be a moment of panic, but with good preparation, you can get yourself to react correctly, which with adrenaline,
+                            will happen very quickly, minimizing damage.
 
-                    </p>
+                        </p>
+
+                        <button onclick="readMoreOther()" class="read-more-other-button">Read more</button>
+
+                    </div>
 
                 </div>
 
@@ -1022,12 +1063,6 @@
 
                         <p>
 
-                            Santtu Nurmi
-
-                        </p>
-
-                        <p>
-
                             Phone: +358 45 1382240
 
                         </p>
@@ -1054,10 +1089,16 @@
 
                     <nav>
 
-                        <a data-id="1">Portfolio</a>
-                        <a data-id="2">Bio</a>
-                        <a data-id="3">AI</a>
-                        <a data-id="4">Hobbies</a>
+                        <h2>Santtu Nurmi</h2>
+
+                        <div>
+
+                            <a data-id="1">Portfolio</a>
+                            <a data-id="2">Bio</a>
+                            <a data-id="3">AI</a>
+                            <a data-id="4">Hobbies</a>
+
+                        </div>
 
                     </nav>
 
@@ -1067,12 +1108,22 @@
 
         </div>
 
-        <!-- Script section -->
+        <!-- Javascript file is ran. -->
 
-        <script type="text/javascript" src="javascript/javascript.js">
+        <script type="text/javascript" src="javascript/javascript.js"></script>
 
-            /* Scripts are ran entirely in the javascript file. */
+        <!-- Functions get ran. -->
 
+        <script>
+        
+            /* Script for managing the pages that are currently active on the site, allowing for seamless transition between the different sections of the page. */
+
+            navEventListener();
+
+            /* Checks screen width for mobile-specific functions. */
+                        
+            WidthChange(mq);
+        
         </script>
 
     </body>
