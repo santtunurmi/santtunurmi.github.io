@@ -33,6 +33,7 @@
 
     function readMore() {
         var readMores = document.getElementsByClassName("read-more")
+        readMores = Array.from(readMores);
         readMores.forEach(readMore => { 
             var showMore = readMore.getElementsByClassName("more");
             var button = readMore.getElementsByClassName("read-more-button");
