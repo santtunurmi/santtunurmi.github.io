@@ -3,7 +3,7 @@
     /* Adds event listeneres to the nav bar for changing site content. */
 
     function navEventListener() {
-        document.querySelectorAll("nav a").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id); WidthChange(mq)}));
+        document.querySelectorAll("nav a").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id); WidthChange(mq); jump()}));
     };
 
     /* Handles which nav bar should be active on the site. */
@@ -24,11 +24,15 @@
         pages[nav_id - 1].classList.add("active");
     };
 
+    function jump(){
+        var top = document.getElementById("root").offsetTop;
+        window.scrollTo(0, top);
+    }
+
 /* Script for setting up "read more" -pages when viewport is less than 600px. */
 
     function readMore() {
         var readMores = document.getElementsByClassName("read-more")
-        readMores = Array.from(readMores);
         readMores.forEach(readMore => { 
             var showMore = readMore.getElementsByClassName("more");
             var button = readMore.getElementsByClassName("read-more-button");

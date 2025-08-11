@@ -31,7 +31,7 @@
 
         <!-- Root div -->
 
-        <div class="content-root">
+        <div class="content-root" id="root">
 
             <!-- Header -->
 
@@ -65,7 +65,7 @@
                             <code class="more">&gt;C, C#, C++, Powershell, Microsfot Azure & AWS.&lt;</code>
                             <code class="more">&gt;Davinci Resolve & OBS.&lt;</code>
 
-                            <button onclick="readMore()" class="read-more-button">Read more</button>
+                            <button onclick=" readMore()" class="read-more-button">Read more</button>
                             
                         </article>
 
@@ -233,19 +233,19 @@
 
                 </h4>
 
-                <!-- Portfolio project container left -->
+                <!-- Portfolio project container AI -->
 
                 <div class="portfolio-container">
 
                     <div class="portfolio-project">
 
-                        <img src="content/AI-project.png" alt="Data preprocessing code." class="portfolio-project-left">
+                        <img src="content/AI-project.png" alt="Data preprocessing code." class="portfolio-project-AI">
 
-                        <h4 class="portfolio-project-left">
+                        <h4 class="portfolio-project-AI">
 
                             Developing AI
                                                 
-                            <a onclick="JS_NavLoading(3); JS_PageLoading(3)" href="javascript:void(0);" title="Website for this project.">
+                            <a onclick="JS_NavLoading(3); JS_PageLoading(3); jump()" href="javascript:void(0);" title="Website for this project.">
 
                                 <img src="content/globe-solid.svg" alt="Project website">
 
@@ -279,13 +279,13 @@
 
                     </div>
 
-                    <!-- Portfolio project container middle -->
+                    <!-- Portfolio project container Esports. -->
 
-                    <div class="portfolio-project" id="middle">
+                    <div class="portfolio-project" id="Esports">
 
-                        <img src="content/ladder-league.png" alt="Layout and race from ladder league." class="portfolio-project-middle">
+                        <img src="content/ladder-league.png" alt="Layout and race from ladder league." class="portfolio-project-Esports">
 
-                        <h4 class="portfolio-project-middle">
+                        <h4 class="portfolio-project-Esports">
 
                             Small-scale esports production
                         
@@ -331,21 +331,67 @@
 
                     </div>
 
-                    <!-- Portfolio project container right -->
+                    <!-- Portfolio project container portfolio website. -->
 
                     <div class="portfolio-project">
 
-                        <img src="content/minecraft-wall.jpg" alt="b" class="portfolio-project-right">
+                        <img src="content/Portfolio-website.png" alt="Image of this website." class="portfolio-project-portfolio-website">
 
-                        <h4 class="portfolio-project-right">
+                        <h4 class="portfolio-project-portfolio-website">
+
+                            This website
+
+                            <a href="https://github.com/santtunurmi/santtunurmi.github.io" target="_blank" title="GitHub for this project.">
+
+                                <img src="content/github-mark-white.png" alt="Project GitHub">
+
+                            </a>
+
+                        </h4>
+
+                        <p>    
+                        
+                            Having studied HTML and CSS pretty extensively, I felt confident, that I could pull of a great portfolio website
+                            with just HTML, CSS and JavaScript.
+
+                        </p>
+
+                        <p>
+                            
+                            I started this project to learn more about all three of those languages, as well as web development, full-stack
+                            and about hosting a website in general. At the same time I could get bang for my buck by getting a sweet portfolio website,
+                            which could help me stand out from the crowd of other potential hirees.
+
+                        </p>
+
+                        <p>
+                            
+                            Part of me wanted to also prove to myself, that I was worth more than the grade 1 in full-stack, that I got, which was a result of issues long since resolved.
+                            I don't think I'm quite there yet, but this site should already serve as a solid foundational statement, which I can always add on to, later on.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Portfolio project container wall-calculator -->
+
+                    <div class="portfolio-project" id="wall-calculator">
+
+                        <img src="content/minecraft-wall.jpg" alt="Image of pillars in minecraft." class="portfolio-project-wall-calculator">
+
+                        <h4 class="portfolio-project-wall-calculator">
 
                             Minecraft wall calculator
                         
+                            <!-- Coming soon.
+
                             <a href="/Minecraft-wall-calculator" title="Website for this project.">
 
                                 <img src="content/globe-solid.svg" alt="Project website">
 
                             </a>
+
+                            -->
 
                             <a href="https://github.com/santtunurmi/Minecraft-Wall-Calculator" target="_blank" title="GitHub for this project.">
 

@@ -153,10 +153,12 @@
         position: relative;
         float: left;
         width: 100%;
-        height: 39vw;
+        height: 70vw;
+        max-height: 650px;
         margin: 0.6em 0.3em;
         background: url('../content/machine-learning-code.png') no-repeat;
-        background-size: 110%;
+        background-size: 90em;
+        background-position: 45%;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
     }
@@ -173,11 +175,12 @@
         position: relative;
         float: left;
         width: 100%;
-        height: 39vw;
+        height: 70vw;
+        max-height: 650px;
         margin: 0.6em 0.3em;
         background: url('../content/bassplaying.jpg')  no-repeat;
         background-size: 50%;
-        background-position: -1vw -7vw;
+        background-position: -1em -9em;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
     }
@@ -218,6 +221,11 @@
         font-family: revert;
     }
 
+    div.Opening-card-AI article.Opening-card-text-block {
+        width: 60%;
+        font-size: 1.2em;
+    }
+
     .more {display: none;}
     
     /* Site-wide css @ < 1200px. */
@@ -233,10 +241,25 @@
         }
         
         .Opening-card-bio {
-            background-position: -6vw -15vw;
+            background-position: -7vw -17vw;
         }
 
         .Opening-card-fade-bio {
+            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+        }
+
+        .Opening-card-fade-AI {
+            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 500px, rgb(0, 0, 0, 1) 757px);
+        }
+
+        .Opening-card-hobbies {
+            background-size: 37.5em;
+            background-position: -1.5vw -9em; 
+        }
+
+        .Opening-card-fade-hobbies {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 380px, rgb(0, 0, 0, 1) 580px);
             box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
@@ -246,6 +269,10 @@
             max-width: 68%;
             max-height: 45%;
             padding: 1.1vw;
+        }
+
+        div.Opening-card-AI article.Opening-card-text-block {
+            max-height: unset;
         }
         
     }
@@ -255,35 +282,34 @@
     @media (max-width: 800px) {
 
         .Opening-card-portfolio {
-            width: 100%;
-            height: 70vw;
             max-height: 560px;
-            background-size: 70%;
-        }
-
-        .Opening-card-fade-portfolio {
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
         .Opening-card-bio {
-            width: 100%;
-            height: 70vw;
             max-height: 560px;
-            background-size: 70%;
         }
 
-        .Opening-card-fade-bio {
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+        .Opening-card-AI {
+            max-height: 560px;
         }
 
-        .Opening-card-text-block {
-            min-width: 0;
-            width: 45em;
-            max-width: 68%;
-            max-height: 45%;
-            padding: 1.1vw;
+        .Opening-card-hobbies {
+            max-height: 560px;
         }
-    
+
+        .Opening-card-fade-AI {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 62.5%, rgb(0, 0, 0, 1) 94.5%);
+        }
+
+        .Opening-card-hobbies {
+            background-size: 75%;
+            background-position: -1em -9em; 
+        }
+
+        .Opening-card-fade-hobbies {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 48%, rgb(0, 0, 0, 1) 72%);
+        }
+
         .Opening-card-text-block p {
             line-height: 2.9vw;
             font-size: 1.95vw;
@@ -292,6 +318,15 @@
         .Opening-card-text-block code {
             line-height: 2.9vw;
             font-size: 1.95vw;
+        }
+
+        div.Opening-card-AI article.Opening-card-text-block p{
+            font-size: 1.2em;
+            line-height: 1.5em;
+        }
+
+        div.Opening-card-hobbies article.Opening-card-text-block{
+            max-width: 65%;
         }
         
     }
@@ -302,48 +337,30 @@
 
         .Opening-card-portfolio {
             min-height: 0;
-            width: 97%;
             height: 100vw;
             background-size: 100%;
             background-position: -27vw -25vw;
-        }
-
-        .Opening-card-fade-portfolio {
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
         .Opening-card-bio {
-            width: 97%;
             height: 100vw;
             background-size: 100%;
             background-position: -27vw -25vw;
         }
 
-        .Opening-card-fade-bio {
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
-        }
-
         .Opening-card-AI {
-            width: 97%;
             height: 100vw;
-            background-size: 200%;
-            background-position: -50vw;
-        }
-
-        .Opening-card-fade-AI {
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+            background-position: -410px -65px;
         }
 
         .Opening-card-hobbies {
-            width: 97%;
             height: 100vw;
             background-size: 100%;
-            background-position: -14vw -25vw; 
+            background-position: -1.4vw -24vw;
         }
 
         .Opening-card-fade-hobbies {
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 42%, rgb(0, 0, 0, 1) 63%);
-            box-shadow: 0 -1.4vw 2vw 2vw black inset;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 63%, rgb(0, 0, 0, 1) 96.5%);
         }
         
         .Opening-card-text-block {
@@ -351,12 +368,14 @@
             bottom: 3%;
             width: 91.5%;
             height: auto;
+            max-height: unset;
             max-width: unset;
             margin: 2%;
             padding: 3vw;
         }
     
         .Opening-card-text-block p {
+            line-height: 4.5vw;
             font-size: 3.5vw;
         }
 
@@ -364,6 +383,11 @@
             font-size: 3.5vw;
             line-height: 4.5vw;
             font-family: revert;
+        }
+
+        div.Opening-card-AI article.Opening-card-text-block p{
+            font-size: 3.5vw;
+            line-height: 4.5vw;
         }
         
         button.read-more-button {
@@ -400,13 +424,13 @@
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.808);
         border-radius: 0.2778em;
-        padding-left: 1.111em;
-        padding-right: 1.111em;
+        padding: 1.111em;
         z-index: 2;
     }
 
     nav h2 {
         font-size: 1.111em;
+        margin-top: 0;
     }
 
     nav a {
@@ -422,9 +446,14 @@
         display: block;
     }
 
-
     nav a text:hover {
         cursor: pointer;
+    }
+
+    nav a:focus {
+        background-color: white;
+        color: black;
+        display: block;
     }
 
     /* Nav-bar-related css @ < 600px. */
@@ -494,7 +523,7 @@
         width: inherit;
     }
 
-    h4.portfolio-project-left{
+    h4.portfolio-project-AI{
         font-size: 1em;
         margin-top: 1em;
         margin-bottom: 1em;
@@ -502,7 +531,7 @@
         padding-right: 1.111em;
     }
 
-    h4.portfolio-project-left a img {
+    h4.portfolio-project-AI a img {
         visibility: visible;
         position: relative;
         float: right;
@@ -512,7 +541,7 @@
         padding: 0;
     }
 
-    h4.portfolio-project-middle{
+    h4.portfolio-project-Esports{
         font-size: 1em;
         margin-top: 1em;
         margin-bottom: 1em;
@@ -520,7 +549,7 @@
         padding-right: 1.111em;
     }
 
-    h4.portfolio-project-middle a img {
+    h4.portfolio-project-Esports a img {
         visibility: visible;
         position: relative;
         float: right;
@@ -530,7 +559,7 @@
         padding: 0;
     }
 
-    h4.portfolio-project-right{
+    h4.portfolio-project-wall-calculator{
         font-size: 1em;
         margin-top: 1em;
         margin-bottom: 1em;
@@ -538,7 +567,26 @@
         padding-right: 1.111em;
     }
 
-    h4.portfolio-project-right a img {
+    h4.portfolio-project-wall-calculator a img {
+        position: relative;
+        visibility: visible;
+        float: right;
+        height: 2em;
+        width: auto;
+        top: -0.5em;
+        padding: 0;
+        padding-left: 0.55em;
+    }
+
+    h4.portfolio-project-portfolio-website{
+        font-size: 1em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding-left: 1.111em;
+        padding-right: 1.111em;
+    }
+
+    h4.portfolio-project-portfolio-website a img {
         position: relative;
         visibility: visible;
         float: right;
@@ -584,29 +632,32 @@
             padding: 0;
         }
 
-        div.portfolio-project h4.portfolio-project-left {
+        div.portfolio-project h4.portfolio-project-AI {
             padding-right: 2.2em;
         }
 
-        div.portfolio-project img.portfolio-project-left {
+        div.portfolio-project img.portfolio-project-AI {
             padding-right: 2.2em;
         }
 
-        #middle {
+        div.portfolio-project h4.portfolio-project-portfolio-website {
+            padding-right: 2.2em;
+        }
+
+        div.portfolio-project img.portfolio-project-portfolio-website {
+            padding-right: 2.2em;
+        }
+
+        #Esports {
             float: right;
         }
 
-        div.portfolio-project h4.portfolio-project-middle {
+        #wall-calculator {
+            float: right;
+        }
+
+        div.portfolio-project h4.portfolio-project-Esports {
             font-size: 0.9em;
-        }
-
-        div.portfolio-project h4.portfolio-project-right {
-            padding-right: 2.2em;
-            font-size: 0.95em;
-        }
-
-        div.portfolio-project img.portfolio-project-right {
-            padding-right: 2.2em;
         }
     
     }
@@ -639,6 +690,22 @@
             padding: 1em 0;
             padding-top: 0;
             padding-bottom: 0.25em;
+        }
+
+        div.portfolio-project h4.portfolio-project-AI {
+            padding-right: 0;
+        }
+
+        div.portfolio-project img.portfolio-project-AI {
+            padding-right: 0;
+        }
+
+        div.portfolio-project h4.portfolio-project-portfolio-website {
+            padding-right: 0;
+        }
+
+        div.portfolio-project img.portfolio-project-portfolio-website {
+            padding-right: 0;
         }
 
     }
