@@ -3,7 +3,7 @@
     /* Adds event listeneres to the nav bar for changing site content. */
 
     function navEventListener() {
-        document.querySelectorAll("nav a").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id); WidthChange(mq); jump()}));
+        document.querySelectorAll("nav a.page").forEach(nav_row => nav_row.addEventListener("click", _ => {JS_NavLoading(nav_row.dataset.id); JS_PageLoading(nav_row.dataset.id); WidthChange(mq); jump()}));
     };
 
     /* Handles which nav bar should be active on the site. */
@@ -97,11 +97,11 @@
         showMore = Array.from(showMore);
         showOthers = document.getElementsByClassName("more-other");
         showOthers = Array.from(showOthers);
-        nav = document.querySelectorAll("div.Opening-card-portfolio nav")
+        nav = document.querySelectorAll("nav.opening-card-nav")
         nav = Array.from(nav)
         if (mq.matches) {
-            buttons.forEach(button => {button.classList.remove("inactive"); button.classList.add("active"); button.innerHTML="Read more"});
-            otherbuttons.forEach(button => {button.classList.remove("inactive"); button.classList.add("active"); button.innerHTML="Read more"});
+            buttons.forEach(button => {button.classList.remove("inactive", "highlighted"); button.classList.add("active"); button.innerHTML="Read more"});
+            otherbuttons.forEach(button => {button.classList.remove("inactive", "highlighted-more"); button.classList.add("active"); button.innerHTML="Read more"});
             showMore.forEach(moreText => {moreText.style.display = "none"});
             showOthers.forEach(moreText => {moreText.style.display = "none"});
             nav.forEach(nav => {nav.classList.remove("test")});
