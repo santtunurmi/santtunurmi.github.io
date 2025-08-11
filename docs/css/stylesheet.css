@@ -435,6 +435,7 @@
         background: rgba(0, 0, 0, 0.808);
         border-radius: 0.2778em;
         padding: 1.111em;
+        padding-right: 0;
         z-index: 2;
     }
 
@@ -444,6 +445,7 @@
     }
 
     nav a {
+        color: white;
         padding: 0.55em;
         font-size: 1.111em;
         cursor: pointer;
@@ -460,7 +462,7 @@
         cursor: pointer;
     }
 
-    nav a:focus {
+    .cv:focus-visible {
         background-color: white;
         color: black;
         display: block;
@@ -472,7 +474,7 @@
 
         nav {
             left: 55%;
-            top: 10%;
+            top: 2%;
             padding-left: 4vw;
             padding-right: 4vw;
             padding-bottom: 3.5vw;
@@ -496,11 +498,12 @@
         }
 
         nav.test h2 {
-            margin: 1.5vw;
+            display: none;
         }
 
         nav.test a {
             padding: 1.5vw;
+            text-wrap: nowrap;
         }
 
     }
