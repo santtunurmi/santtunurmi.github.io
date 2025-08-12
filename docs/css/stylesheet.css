@@ -179,8 +179,8 @@
         max-height: 650px;
         margin: 0.6em 0.3em;
         background: url('../content/bassplaying.jpg')  no-repeat;
-        background-size: 50%;
-        background-position: -1em -9em;
+        background-size: 52%;
+        background-position: -3em -9em;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
     }
@@ -254,12 +254,12 @@
         }
 
         .Opening-card-hobbies {
-            background-size: 37.5em;
-            background-position: -1.5vw -9em; 
+            background-size: 37.85em;
+            background-position: -4vw -9em; 
         }
 
         .Opening-card-fade-hobbies {
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 380px, rgb(0, 0, 0, 1) 580px);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 355px, rgb(0, 0, 0, 1) 555px);
             box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
@@ -302,12 +302,12 @@
         }
 
         .Opening-card-hobbies {
-            background-size: 75%;
-            background-position: -1em -9em; 
+            background-size: 78%;
+            background-position: -2em -9em; 
         }
 
         .Opening-card-fade-hobbies {
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 48%, rgb(0, 0, 0, 1) 72%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 45.5%, rgb(0, 0, 0, 1) 71.5%);
         }
 
         .Opening-card-text-block p {
