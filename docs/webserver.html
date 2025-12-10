@@ -23,13 +23,21 @@
                 <!-- Fade-effect for the webserver opening card image. -->
                 <div class="Opening-card-fade-webserver"></div>
                 <!-- Opening card text block -->
-                <article class="Opening-card-text-block read-more">
-                    <div class="container-sm login d-block" style="width: 25%; min-width: 20em; margin-top: 1em;">
+                <article class="Opening-card-text-block">
+                    <!-- Login form -->
+                    <div class="container-sm login d-block">
                         <form class="login">
+                            <div class="row g-3">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">
+                                    You must login to view your current speedruns and to add new ones.</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="(login is secure)">
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                <div id="emailHelp" class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -37,25 +45,32 @@
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
+                    <!-- "Add speedrun" -form -->
                     <div class="container-sm input d-none">
-                        <h2>Create Album</h2>
+                        <h2>Add Speedrun</h2>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Album name" aria-label="Album name" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="Game" aria-label="Game" aria-describedby="basic-addon2">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Artist" aria-label="Artist" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon2">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Release year" aria-label="Release year" aria-describedby="basic-addon2">
-                            <input type="text" class="form-control" placeholder="Number of tracks" aria-label="Number of tracks" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="Time. (e.g. 1:00:00.000)" aria-label="Time" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="Variables. (e.g. RTA=yes)" aria-label="Variables" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Video Link" aria-label="Video" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="input-group mb-3">
+                            <textarea class="form-control" placeholder="Comments." aria-label="Comments"></textarea>
                         </div>
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-3">Create Album</button>
+                            <button type="submit" class="btn btn-primary mb-3">Add Speedrun</button>
                         </div>
                     </div>
                 </article>
@@ -72,6 +87,7 @@
             </div>
         </header>
         <article>
+            <h3>Speedruns:</h3>
             <footer>
                 <address>
                     <p>Phone: +358 45 1382240</p>
