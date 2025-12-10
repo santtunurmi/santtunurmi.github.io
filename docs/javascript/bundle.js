@@ -9292,11 +9292,11 @@
     }
   });
 
-  // node_modules/jquery-import.js
+  // jquery-import.js
   var import_jquery = __toESM(require_jquery());
   window.jQuery = window.$ = import_jquery.default;
 
-  // node_modules/index.js
+  // index.js
   var import_bootstrap_min = __toESM(require_bootstrap_min());
 })();
 /*! Bundled license information:
