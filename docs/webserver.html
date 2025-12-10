@@ -1,71 +1,36 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
-<!-- Head -->
-
 <head>
-
     <!-- Metadata -->
-
     <meta name="description" content="Portfolio of Santtu Nurmi">
     <meta name="keywords"
         content="Portfolio, AI, data-analytics, Programming, Job Searching, Internship, Finnish, English, full-stack, innovation, College Student">
     <meta name="author" content="Santtu Nurmi">
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <meta charset="utf-8">
-
     <!-- Title -->
-
     <title>Portfolio of Santtu Nurmi</title>
-
-    <!-- Dependencies -->
-
+    <!-- CSS -->
     <link rel="stylesheet" href="css/stylesheet.css">
-
 </head>
-
-<!-- Body -->
-
 <body>
-
-    <!-- Root div -->
-
     <div class="content-root" id="root">
-
-        <!-- Header -->
-
         <header>
-
             <!-- Opening Card html -->
-
             <div class="Opening-card-webserver">
-
                 <!-- Fade-effect for the webserver opening card image. -->
-
                 <div class="Opening-card-fade-webserver"></div>
-
                 <!-- Opening card text block -->
-
                 <article class="Opening-card-text-block read-more">
-
                     <p></p>
-
-                    <p class="more">
-
-
-                    </p>
-
+                    <p class="more"></p>
                     <p class="more" style="padding: 0;"></p>
-
+                    <!-- Mobile-specific "read more"-button -->
                     <button onclick="readMore()" class="read-more-button">Read more</button>
-
                 </article>
-
                 <!-- Right-side nav -->
-
                 <nav class="opening-card-nav">
-
                     <h2>Santtu Nurmi</h2>
                     <!-- Nav links -->
                     <a href="index.html" class="page" data-id="1">Portfolio</a>
@@ -73,47 +38,24 @@
                     <a href="ai.html" class="page" data-id="3">AI</a>
                     <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
                     <a class="CV" href="content/CV.pdf" target="_blank">Download CV</a>
-
                 </nav>
-
             </div>
         </header>
-
         <article>
-                        <footer>
-
+            <footer>
                 <address>
-
+                    <p>Phone: +358 45 1382240</p>
+                    <p>Email: santtunurmi2003@gmail.com</p>
                     <p>
-
-                        Phone: +358 45 1382240
-
-                    </p>
-
-                    <p>
-
-                        Email: santtunurmi2003@gmail.com
-
-                    </p>
-
-                    <p>
-
                         LinkedIn: <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
                             title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/</a>
-
                     </p>
-
                     <p>
-
                         GitHub: <a href="https://github.com/santtunurmi" target="_blank"
                             title="GitHub">https://github.com/santtunurmi</a>
-
                     </p>
-
                 </address>
-
                 <nav>
-
                     <h2>Santtu Nurmi</h2>
                     <!-- Footer nav links -->
                     <div>
@@ -122,33 +64,18 @@
                         <a href="ai.html" class="page" data-id="3">AI</a>
                         <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
                     </div>
-
                 </nav>
-
             </footer>
         </article>
-
     </div>
-
-
     <!-- Javascript file is ran. -->
-
     <script type="module" src="./javascript/bundle.js"></script>
-
     <script type="text/javascript" src="./javascript/javascript.js"></script>
     <!-- Javascript files are ran. -->
     <script>
-
-        /* Script for managing the pages that are currently active on the site, allowing for seamless transition between the different sections of the page. */
-
-        navEventListener();
-
         /* Checks screen width for mobile-specific functions. */
-
         WidthChange(mq);
-
     </script>
-
 </body>
 
 </html>
