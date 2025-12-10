@@ -1,6 +1,6 @@
 <!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
 
-<html lang="en">
 <head>
     <!-- Metadata -->
     <meta name="description" content="Portfolio of Santtu Nurmi">
@@ -14,6 +14,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
+
 <body>
     <div class="content-root" id="root">
         <header>
@@ -23,11 +24,40 @@
                 <div class="Opening-card-fade-webserver"></div>
                 <!-- Opening card text block -->
                 <article class="Opening-card-text-block read-more">
-                    <p></p>
-                    <p class="more"></p>
-                    <p class="more" style="padding: 0;"></p>
-                    <!-- Mobile-specific "read more"-button -->
-                    <button onclick="readMore()" class="read-more-button">Read more</button>
+                    <div class="container-sm login d-block" style="width: 25%; min-width: 20em; margin-top: 1em;">
+                        <form class="login">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="container-sm input d-none">
+                        <h2>Create Album</h2>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Album name" aria-label="Album name" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Artist" aria-label="Artist" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Release year" aria-label="Release year" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="Number of tracks" aria-label="Number of tracks" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Create Album</button>
+                        </div>
+                    </div>
                 </article>
                 <!-- Right-side nav -->
                 <nav class="opening-card-nav">
@@ -75,6 +105,26 @@
     <script>
         /* Checks screen width for mobile-specific functions. */
         WidthChange(mq);
+    </script>
+        <script>
+        var lgn = document.querySelector("div.login")
+        var form = document.querySelector("div.input")
+        lgn.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            clearLogin()
+        });
+        function clearLogin() {
+            if (lgn.classList.contains('d-block')) {
+                lgn.classList.remove("d-block"); lgn.classList.add("d-none")
+                form.classList.remove("d-none"); form.classList.add("d-block")
+            }
+
+            else {
+                form.classList.remove("d-block"); form.classList.add("d-none")
+                lgn.classList.remove("d-none"); lgn.classList.add("d-block")
+            }
+        }
+
     </script>
 </body>
 
