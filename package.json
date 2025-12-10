@@ -11,7 +11,7 @@
   "homepage": "https://santtunurmi.netlify.app/",
   "scripts": {
     "build": "npm run css",
-    "js-compile": "esbuild ./node_modules/index.js --bundle --outfile=./docs/javascript/bundle.js",
+    "js-compile": "esbuild index.js --bundle --outfile=./docs/javascript/bundle.js",
     "css-compile": "sass ./scss/main.scss ./docs/css/stylesheet.css",
     "css-prefix": "postcss --replace docs/css/stylesheet.css --use autoprefixer --map",
     "css": "npm-run-all css-compile css-prefix js-compile"
