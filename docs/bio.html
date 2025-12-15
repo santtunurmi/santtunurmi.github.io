@@ -17,47 +17,45 @@
 
 <body>
     <div class="content-root" id="root">
-        <header>
-            <!-- Opening Card html -->
-            <div class="Opening-card-bio">
-                <!-- Fade-effect for the bio opening card image. -->
-                <div class="Opening-card-fade-bio"></div>
-                <!-- Opening card text block -->
-                <article class="Opening-card-text-block read-more">
-                    <p>People have described me as analytical, improvement-oriented and reflective on my own work, by
-                        being able to take in feedback.</p>
-                    <p class="more">
-                        I would put it like this: I have a wide range of interests, in which I want to cultivate my
-                        skills.
-                        I think, that I can offer a wide range of expertise, but in equal measure, I think that there is
-                        a lot for me to still learn.
-                    </p>
-                    <p class="more" style="padding: 0;">Below, you can read a bit more about how my skillset came to be:
-                    </p>
-                    <!-- Mobile-specific "read more"-button -->
-                    <button onclick="readMore()" class="read-more-button">Read more</button>
-                </article>
-                <!-- Right-side nav -->
-                <nav class="nav nav-pills flex-column">
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Nav links -->
-                    <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
-                    <!-- Dropdown -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-expanded="false">Bio</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item active" href="bio.html">Main Bio</a></li>
-                            <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
+        <header class="card border-0 mh-10">
+            <!-- Fade-effect for the portfolio opening card image. -->
+            <div class="Opening-card-fade-portfolio"></div>
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <!-- Opening card article -->
+                    <div class="portfolio">
+                        <article class="Opening-card-text-block">
+                            <p>
+                                People have described me as hard-working, analytical and improvement-oriented.
+                                I have received praise from the ability to be reflective on my own work, by
+                                being able to take in feedback. I try to make every product the best it can be through constant learning.
+                                You can see my skillset in more detail below:
+                            </p>
+                        </article>
                     </div>
-                    <a class="nav-link" href="ai.html">AI</a>
-                    <a class="nav-link" href="hobbies.html">Hobbies</a>
-                    <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
-                </nav>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <!-- Right-side nav -->
+                        <nav class="nav nav-pills flex-column">
+                            <h2>Santtu Nurmi</h2>
+                            <!-- Nav links -->
+                            <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
+                            <!-- Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"
+                                    href="#" role="button" aria-expanded="false">Bio</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item active" href="bio.html">Main Bio</a></li>
+                                    <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="ai.html">AI</a>
+                            <a class="nav-link" href="hobbies.html">Hobbies</a>
+                            <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </header>
         <!-- Article content-change classification for "bio" -->

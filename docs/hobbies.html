@@ -17,48 +17,46 @@
 
 <body>
     <div class="content-root" id="root">
-        <header>
-            <!-- Opening Card html -->
-            <div class="Opening-card-hobbies">
-                <!-- Fade-effect for the hobbies opening card image. -->
-                <div class="Opening-card-fade-hobbies"></div>
-                <!-- Opening card text block -->
-                <article class="Opening-card-text-block read-more">
-                    <p>
-                        I am blessed to have a family, which is so supportive of everything that I do. I got this bass
-                        as a birthday gift,
-                        with a dozen of family members contributing.
-                    </p>
-                    <p class="more" style="padding: 0;">
-                        Even as I was writing this, I got distracted and played for 15 minutes,
-                        until my timer that reminds me to get back to working on this website got me out of it. Next on
-                        my list is to just take 2 weeks,
-                        and do nothing but play bass.
-                    </p>
-                    <!-- Mobile-specific "read more"-button -->
-                    <button onclick="readMore()" class="read-more-button">Read more</button>
-                </article>
-                <!-- Right-side nav -->
-                <nav class="nav nav-pills flex-column">
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Nav links -->
-                    <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
-                    <!-- Dropdown -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-expanded="false">Bio</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
-                            <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
+        <header class="card border-0 mh-10">
+            <!-- Fade-effect for the portfolio opening card image. -->
+            <div class="Opening-card-fade-portfolio"></div>
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <!-- Opening card article -->
+                    <div class="Hobbies-image">
+                        <article class="Opening-card-text-block">
+                            <p>
+                                I believe, that one should constantly learn new things.
+                                When you make this a habit, you can get much more out of your days,
+                                allowing you to live a more fullfilling life.
+                                On the career-side of things, you will avoid burnout and gain experience
+                                you wouldn't from your work alone.
+                            </p>
+                        </article>
                     </div>
-                    <a class="nav-link" href="ai.html">AI</a>
-                    <a class="nav-link active" href="hobbies.html">Hobbies</a>
-                    <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
-                </nav>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <!-- Right-side nav -->
+                        <nav class="nav nav-pills flex-column">
+                            <h2>Santtu Nurmi</h2>
+                            <!-- Nav links -->
+                            <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
+                            <!-- Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                                    href="#" role="button" aria-expanded="false">Bio</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
+                                    <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="ai.html">AI</a>
+                            <a class="nav-link active" href="hobbies.html">Hobbies</a>
+                            <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </header>
         <!-- Article content-change classification for "Hobbies" -->

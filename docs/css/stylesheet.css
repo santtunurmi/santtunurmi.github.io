@@ -3115,7 +3115,7 @@ textarea.form-control-lg {
   --bs-dropdown-spacer: 0.125rem;
   --bs-dropdown-font-size: 1rem;
   --bs-dropdown-color: var(--bs-body-color);
-  --bs-dropdown-bg: var(--bs-body-bg);
+  --bs-dropdown-bg: rgb(0, 0, 0);
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
@@ -3125,7 +3125,7 @@ textarea.form-control-lg {
   --bs-dropdown-box-shadow: var(--bs-box-shadow);
   --bs-dropdown-link-color: var(--bs-body-color);
   --bs-dropdown-link-hover-color: var(--bs-body-color);
-  --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
+  --bs-dropdown-link-hover-bg: rgb(0, 153, 255);
   --bs-dropdown-link-active-color: #fff;
   --bs-dropdown-link-active-bg: #0d6efd;
   --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
@@ -3402,8 +3402,8 @@ textarea.form-control-lg {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
-  --bs-nav-link-color: var(--bs-link-color);
-  --bs-nav-link-hover-color: var(--bs-link-hover-color);
+  --bs-nav-link-color: rgba(0, 153, 255, 0.9);
+  --bs-nav-link-hover-color: rgba(0, 153, 255, 0.9);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   display: flex;
   flex-wrap: wrap;
@@ -3476,7 +3476,7 @@ textarea.form-control-lg {
 .nav-pills {
   --bs-nav-pills-border-radius: var(--bs-border-radius);
   --bs-nav-pills-link-active-color: #fff;
-  --bs-nav-pills-link-active-bg: #0d6efd;
+  --bs-nav-pills-link-active-bg: rgb(0, 153, 255);
 }
 .nav-pills .nav-link {
   border-radius: var(--bs-nav-pills-border-radius);
@@ -9839,6 +9839,10 @@ body {
   color: white;
 }
 
+header.card {
+  background-color: #000000;
+}
+
 .content-root {
   position: relative;
   float: left;
@@ -9912,19 +9916,50 @@ h4, .h4 {
 article.active {
   float: left;
   padding: 1.111em;
+  padding-top: 0em;
 }
 
 /* Opening-card-related css. */
-.Opening-card-portfolio {
+.portfolio {
   position: relative;
-  float: left;
-  width: 97%;
-  height: 70vw;
+  height: 50vw;
   max-height: 650px;
   margin: 0.6em 0.3em;
-  background: url("../content/Portrait.jpg") no-repeat;
-  background-position: -5.7em -14.3em;
-  background-size: 70%;
+  background: url(../content/Portrait.png) no-repeat;
+  background-size: 100%;
+  box-shadow: 0 -0.4vw 1vw 1vw black inset;
+  z-index: 0;
+}
+
+.AI-image {
+  position: relative;
+  height: 50vw;
+  max-height: 650px;
+  margin: 0.6em 0.3em;
+  background: url(../content/machine-learning-code.png) no-repeat;
+  background-size: 200%;
+  box-shadow: 0 -0.4vw 1vw 1vw black inset;
+  z-index: 0;
+}
+
+.Hobbies-image {
+  position: relative;
+  height: 50vw;
+  max-height: 650px;
+  margin: 0.6em 0.3em;
+  background: url(../content/bassplaying.png) no-repeat;
+  background-size: 100%;
+  box-shadow: 0 -0.4vw 1vw 1vw black inset;
+  z-index: 0;
+}
+
+.Web-server-image {
+  position: relative;
+  height: 50vw;
+  max-height: 650px;
+  margin: 0.6em 0.3em;
+  background: url(../content/mario64opening.png) no-repeat;
+  background-size: 120%;
   box-shadow: 0 -0.4vw 1vw 1vw black inset;
   z-index: 0;
 }
@@ -10024,11 +10059,10 @@ article.active {
 }
 
 .Opening-card-text-block {
-  position: absolute;
-  left: 2%;
-  bottom: 6%;
-  width: 51%;
-  min-width: 650px;
+  position: relative;
+  left: 5%;
+  top: 70%;
+  width: 90%;
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.888);
   border-radius: 0.2778em;
@@ -10036,8 +10070,23 @@ article.active {
   z-index: 3;
 }
 
+.Web-server-text-block {
+  position: relative;
+  top: 5%;
+  margin: 2em;
+  width: 90%;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.888);
+  border-radius: 0.2778em;
+  padding: 0.9vw;
+  z-index: 3;
+}
+
+.webserver-form {
+  height: 75vw;
+}
+
 .Opening-card-text-block p {
-  padding-bottom: 0.5em;
   margin: 0;
   font-size: 1.2em;
   text-indent: 0;
@@ -10086,15 +10135,12 @@ div.Opening-card-AI article.Opening-card-text-block {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 355px, rgb(0, 0, 0) 555px);
     box-shadow: 0 -1.4vw 2vw 2vw black inset;
   }
-  .Opening-card-text-block {
-    min-width: 0;
-    width: 45em;
-    max-width: 68%;
-    max-height: 50%;
-    padding: 1.1vw;
-  }
   div.Opening-card-AI article.Opening-card-text-block {
     max-height: unset;
+  }
+  .Opening-card-text-block p {
+    line-height: 2vw;
+    font-size: 1.5vw;
   }
 }
 /* Site-wide css @ < 800px. */
@@ -10121,10 +10167,6 @@ div.Opening-card-AI article.Opening-card-text-block {
   .Opening-card-fade-hobbies {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 45.5%, rgb(0, 0, 0) 71.5%);
   }
-  .Opening-card-text-block p {
-    line-height: 2.9vw;
-    font-size: 1.95vw;
-  }
   .Opening-card-text-block code {
     line-height: 2.9vw;
     font-size: 1.95vw;
@@ -10138,7 +10180,19 @@ div.Opening-card-AI article.Opening-card-text-block {
   }
 }
 /* Opening-card-related css @ < 600px. */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .portfolio {
+    height: 80vw;
+  }
+  .AI-image {
+    height: 80vw;
+  }
+  .Hobbies-image {
+    height: 80vw;
+  }
+  .Web-server-image {
+    height: 80vw;
+  }
   .Opening-card-portfolio {
     min-height: 0;
     height: 100vw;
@@ -10161,20 +10215,6 @@ div.Opening-card-AI article.Opening-card-text-block {
   }
   .Opening-card-fade-hobbies {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 63%, rgb(0, 0, 0) 96.5%);
-  }
-  .Opening-card-text-block {
-    left: 1%;
-    bottom: 3%;
-    width: 91.5%;
-    height: auto;
-    max-height: unset;
-    max-width: unset;
-    margin: 2%;
-    padding: 3vw;
-  }
-  .Opening-card-text-block p {
-    line-height: 4.5vw;
-    font-size: 3.5vw;
   }
   .Opening-card-text-block code {
     font-size: 3.5vw;
@@ -10211,11 +10251,22 @@ div.Opening-card-AI article.Opening-card-text-block {
     color: rgb(255, 255, 255);
     text-shadow: #000000 0.15vw 0.15vw;
   }
+  .Opening-card-text-block {
+    top: 65%;
+    width: 60%;
+  }
+  .Web-server-text-block {
+    width: 60%;
+  }
+  .Opening-card-text-block p {
+    font-size: 2.5vw;
+    line-height: 4vw;
+  }
 }
 /* Nav-bar-related css. */
 nav {
   position: absolute;
-  left: 70%;
+  left: 80%;
   top: 20%;
   display: flex;
   flex-direction: column;
@@ -10257,34 +10308,10 @@ nav a text:hover {
 }
 
 /* Nav-bar-related css @ < 600px. */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   nav {
-    left: 55%;
-    top: 2%;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-bottom: 3.5vw;
-  }
-  nav h2, nav .h2 {
-    font-size: 4vw;
-  }
-  nav a {
-    padding: 1.5vw;
-    font-size: 4vw;
-  }
-  nav.test {
-    left: 3%;
-    top: 5%;
-    width: 91.5%;
-    flex-direction: row;
-    padding: 1.5vw;
-  }
-  nav.test h2, nav.test .h2 {
-    display: none;
-  }
-  nav.test a {
-    padding: 1.5vw;
-    text-wrap: nowrap;
+    width: 25vw;
+    left: 70%;
   }
 }
 /* Portfolio page-specific css. */
@@ -10398,10 +10425,6 @@ div.portfolio-project p {
 
 /* Portfolio page-specific css @ < 1200px. */
 @media (max-width: 1200px) {
-  h4.portfolio-title, .portfolio-title.h4 {
-    margin: 0 0 0.25em 0;
-    padding: 0 0 0.5em 0;
-  }
   div.portfolio-project {
     width: 50%;
     padding-bottom: 1em;
@@ -10629,7 +10652,7 @@ section.work-timeline::before {
 h4.career, .career.h4 {
   position: relative;
   float: right;
-  width: 20em;
+  width: 13.5em;
 }
 
 div.work-container {

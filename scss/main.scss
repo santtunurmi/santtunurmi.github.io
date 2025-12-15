@@ -1,11 +1,16 @@
 //sass --watch ./scss/main.scss ./docs/css/stylesheet.css
+//^^ sass compiler command
 
-
-// Include functions first
+// Functions first
 @import "../node_modules/bootstrap/scss/functions";
 
-// Customize some defaults
+// Customizations to defaults
 
+$nav-pills-link-active-bg: rgb(0, 153, 255);
+$nav-link-color: rgba(0, 153, 255, 0.90);
+$nav-link-hover-color: rgba(0, 153, 255, 0.90);
+$dropdown-bg: rgb(0, 0, 0);
+$dropdown-link-hover-bg: rgb(0, 153, 255);
 
 // Required
 @import "../node_modules/bootstrap/scss/variables";
@@ -67,6 +72,10 @@
     body {
         background-color: black;
         color: white;
+    }
+
+    header.card {
+        background-color: #000000;
     }
 
     .content-root {
@@ -153,20 +162,51 @@
     article.active {
         float: left;
         padding: 1.111em;
+        padding-top: 0em;
     }
 
 /* Opening-card-related css. */
 
-    .Opening-card-portfolio {
+    .portfolio {
         position: relative;
-        float: left;
-        width: 97%;
-        height: 70vw;
+        height: 50vw;
         max-height: 650px;
         margin: 0.6em 0.3em;
-        background: url('../content/Portrait.jpg') no-repeat;
-        background-position: -5.7em -14.3em;
-        background-size: 70%;
+        background: url(../content/Portrait.png) no-repeat;
+        background-size: 100%;
+        box-shadow: 0 -0.4vw 1vw 1vw black inset;
+        z-index: 0;
+    }
+
+    .AI-image {
+        position: relative;
+        height: 50vw;
+        max-height: 650px;
+        margin: 0.6em 0.3em;
+        background: url(../content/machine-learning-code.png) no-repeat;
+        background-size: 200%;
+        box-shadow: 0 -0.4vw 1vw 1vw black inset;
+        z-index: 0;
+    }
+
+    .Hobbies-image {
+        position: relative;
+        height: 50vw;
+        max-height: 650px;
+        margin: 0.6em 0.3em;
+        background: url(../content/bassplaying.png) no-repeat;
+        background-size: 100%;
+        box-shadow: 0 -0.4vw 1vw 1vw black inset;
+        z-index: 0;
+    }
+
+    .Web-server-image {
+        position: relative;
+        height: 50vw;
+        max-height: 650px;
+        margin: 0.6em 0.3em;
+        background: url(../content/mario64opening.png) no-repeat;
+        background-size: 120%;
         box-shadow: 0 -0.4vw 1vw 1vw black inset;
         z-index: 0;
     }
@@ -266,11 +306,10 @@
     }
     
     .Opening-card-text-block {
-        position: absolute;
-        left: 2%;
-        bottom: 6%;
-        width: 51%;
-        min-width: 650px;
+        position: relative;
+        left: 5%;
+        top: 70%;
+        width: 90%;
         background: rgb(0, 0, 0);
         background: rgba(0, 0, 0, 0.888);
         border-radius: 0.2778em;
@@ -278,8 +317,23 @@
         z-index: 3;
     }
 
+    .Web-server-text-block {
+        position: relative;
+        top: 5%;
+        margin: 2em;
+        width: 90%;
+        background: rgb(0, 0, 0);
+        background: rgba(0, 0, 0, 0.888);
+        border-radius: 0.2778em;
+        padding: 0.9vw;
+        z-index: 3;
+    }
+
+    .webserver-form {
+        height: 75vw;
+    }
+
     .Opening-card-text-block p {
-        padding-bottom: 0.5em;
         margin: 0;
         font-size: 1.2em;
         text-indent: 0;
@@ -335,16 +389,13 @@
             box-shadow: 0 -1.4vw 2vw 2vw black inset;
         }
 
-        .Opening-card-text-block {
-            min-width: 0;
-            width: 45em;
-            max-width: 68%;
-            max-height: 50%;
-            padding: 1.1vw;
-        }
-
         div.Opening-card-AI article.Opening-card-text-block {
             max-height: unset;
+        }
+
+        .Opening-card-text-block p {
+            line-height: 2vw;
+            font-size: 1.5vw;
         }
         
     }
@@ -382,11 +433,6 @@
             background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 45.5%, rgb(0, 0, 0, 1) 71.5%);
         }
 
-        .Opening-card-text-block p {
-            line-height: 2.9vw;
-            font-size: 1.95vw;
-        }
-
         .Opening-card-text-block code {
             line-height: 2.9vw;
             font-size: 1.95vw;
@@ -405,7 +451,23 @@
 
     /* Opening-card-related css @ < 600px. */
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+
+        .portfolio {
+            height: 80vw;
+        }
+
+        .AI-image {
+            height: 80vw;
+        }
+
+        .Hobbies-image {
+            height: 80vw;
+        }
+
+        .Web-server-image {
+            height: 80vw;
+        }
 
         .Opening-card-portfolio {
             min-height: 0;
@@ -433,22 +495,6 @@
 
         .Opening-card-fade-hobbies {
             background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 63%, rgb(0, 0, 0, 1) 96.5%);
-        }
-        
-        .Opening-card-text-block {
-            left: 1%;
-            bottom: 3%;
-            width: 91.5%;
-            height: auto;
-            max-height: unset;
-            max-width: unset;
-            margin: 2%;
-            padding: 3vw;
-        }
-    
-        .Opening-card-text-block p {
-            line-height: 4.5vw;
-            font-size: 3.5vw;
         }
 
         .Opening-card-text-block code {
@@ -493,13 +539,25 @@
             text-shadow: #000000 0.15vw 0.15vw;
         }
 
+        .Opening-card-text-block {
+            top: 65%;
+            width: 60%;
+        }
+        .Web-server-text-block {
+            width: 60%;
+        }
+        .Opening-card-text-block p {
+            font-size: 2.5vw;
+            line-height: 4vw;
+        }
+
     }
 
 /* Nav-bar-related css. */
 
     nav {
         position: absolute;
-        left: 70%;
+        left: 80%;
         top: 20%;
         display: flex;
         flex-direction: column;
@@ -542,42 +600,12 @@
 
     /* Nav-bar-related css @ < 600px. */
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
 
         nav {
-            left: 55%;
-            top: 2%;
-            padding-left: 4vw;
-            padding-right: 4vw;
-            padding-bottom: 3.5vw;
+            width: 25vw;
+            left: 70%;
         }
-
-        nav h2 {
-            font-size: 4vw;
-        }
-
-        nav a {
-            padding: 1.5vw;
-            font-size: 4vw;
-        }
-
-        nav.test {
-            left: 3%;
-            top: 5%;
-            width: 91.5%;
-            flex-direction: row;
-            padding: 1.5vw;
-        }
-
-        nav.test h2 {
-            display: none;
-        }
-
-        nav.test a {
-            padding: 1.5vw;
-            text-wrap: nowrap;
-        }
-
     }
 
 /* Portfolio page-specific css. */
@@ -693,11 +721,6 @@
     /* Portfolio page-specific css @ < 1200px. */
 
     @media (max-width: 1200px) {
-
-        h4.portfolio-title {
-            margin: 0 0 0.25em 0;
-            padding: 0 0 0.5em 0;
-        }
         
         div.portfolio-project {
             width: 50%;
@@ -953,7 +976,7 @@
         h4.career{
             position: relative;
             float: right;
-            width: 20em;
+            width: 13.5em;
         }
 
         div.work-container {
