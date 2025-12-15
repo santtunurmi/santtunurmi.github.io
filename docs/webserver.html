@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <!-- Metadata -->
+    <meta name="description" content="Portfolio of Santtu Nurmi">
+    <meta name="keywords"
+        content="Portfolio, AI, data-analytics, Programming, Job Searching, Internship, Finnish, English, full-stack, innovation, College Student">
+    <meta name="author" content="Santtu Nurmi">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta charset="utf-8">
+    <!-- Title -->
+    <title>Portfolio of Santtu Nurmi</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+
+<body>
+    <div class="content-root" id="root">
+                <header class="card border-0 mh-10">
+            <!-- Fade-effect for the portfolio opening card image. -->
+            <div class="Opening-card-fade-portfolio"></div>
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <!-- Opening card article -->
+                    <div class="Web-server-image">
+                        <article class="Web-server-text-block">
+                            <!-- Login form -->
+                            <div class="container-sm login d-block">
+                                <form class="login">
+                                    <div class="row g-3">
+                                        <label for="staticEmail" class="col-form-label">
+                                            You must login to view your current speedruns and to add new ones.</label>
+                                        <div class="">
+                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="(login is secure)">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <div id="emailHelp" class="form-text"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <!-- "Add speedrun" -form -->
+                            <div class="container-sm input d-none">
+                                <h2>Add Speedrun</h2>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Game" aria-label="Game" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Time. (e.g. 1:00:00.000)" aria-label="Time" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Variables. (e.g. RTA=yes)" aria-label="Variables" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Video Link" aria-label="Video" aria-describedby="basic-addon2">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <textarea class="form-control" placeholder="Comments." aria-label="Comments"></textarea>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">Add Speedrun</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <!-- Right-side nav -->
+                        <nav class="nav nav-pills flex-column">
+                            <h2>Santtu Nurmi</h2>
+                            <!-- Nav links -->
+                            <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
+                            <!-- Dropdown -->
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"
+                                    href="#" role="button" aria-expanded="false">Bio</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
+                                    <li><a class="dropdown-item active" href="webserver.html">Webserver</a></li>
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="ai.html">AI</a>
+                            <a class="nav-link" href="hobbies.html">Hobbies</a>
+                            <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <article>
+            <h3>Speedruns:</h3>
+            <footer>
+                <address>
+                    <p>Phone: +358 45 1382240</p>
+                    <p>Email: santtunurmi2003@gmail.com</p>
+                    <p>
+                        LinkedIn: <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
+                            title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/</a>
+                    </p>
+                    <p>
+                        GitHub: <a href="https://github.com/santtunurmi" target="_blank"
+                            title="GitHub">https://github.com/santtunurmi</a>
+                    </p>
+                </address>
+                <nav>
+                    <h2>Santtu Nurmi</h2>
+                    <!-- Footer nav links -->
+                    <div>
+                        <a href="index.html" class="page" data-id="1">Portfolio</a>
+                        <a href="bio.html" class="page" data-id="2">Bio</a>
+                        <a href="ai.html" class="page" data-id="3">AI</a>
+                        <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
+                    </div>
+                </nav>
+            </footer>
+        </article>
+    </div>
+    <!-- Javascript file is ran. -->
+    <script type="module" src="./javascript/bundle.js"></script>
+    <script type="text/javascript" src="./javascript/javascript.js"></script>
+    <!-- Javascript files are ran. -->
+    <script>
+        /* Checks screen width for mobile-specific functions. */
+        WidthChange(mq);
+    </script>
+        <script>
+        var lgn = document.querySelector("div.login")
+        var form = document.querySelector("div.input")
+        lgn.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            clearLogin()
+        });
+        function clearLogin() {
+            if (lgn.classList.contains('d-block')) {
+                lgn.classList.remove("d-block"); lgn.classList.add("d-none")
+                form.classList.remove("d-none"); form.classList.add("d-block")
+            }
+
+            else {
+                form.classList.remove("d-block"); form.classList.add("d-none")
+                lgn.classList.remove("d-none"); lgn.classList.add("d-block")
+            }
+        }
+
+    </script>
+</body>
+
+</html>
