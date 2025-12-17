@@ -1,4 +1,8 @@
 @charset "UTF-8";
+:root {
+  --main-h-color: rgb(0, 153, 255);
+}
+
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -3115,7 +3119,7 @@ textarea.form-control-lg {
   --bs-dropdown-spacer: 0.125rem;
   --bs-dropdown-font-size: 1rem;
   --bs-dropdown-color: var(--bs-body-color);
-  --bs-dropdown-bg: rgb(0, 0, 0);
+  --bs-dropdown-bg: var(--main-h-color);
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
@@ -3124,10 +3128,10 @@ textarea.form-control-lg {
   --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: var(--bs-box-shadow);
   --bs-dropdown-link-color: var(--bs-body-color);
-  --bs-dropdown-link-hover-color: var(--bs-body-color);
-  --bs-dropdown-link-hover-bg: rgb(0, 153, 255);
-  --bs-dropdown-link-active-color: #fff;
-  --bs-dropdown-link-active-bg: #0d6efd;
+  --bs-dropdown-link-hover-color: black;
+  --bs-dropdown-link-hover-bg: white;
+  --bs-dropdown-link-active-color: black;
+  --bs-dropdown-link-active-bg: white;
   --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
   --bs-dropdown-item-padding-x: 1rem;
   --bs-dropdown-item-padding-y: 0.25rem;
@@ -3392,8 +3396,8 @@ textarea.form-control-lg {
   --bs-dropdown-link-hover-color: #fff;
   --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
   --bs-dropdown-link-hover-bg: rgba(255, 255, 255, 0.15);
-  --bs-dropdown-link-active-color: #fff;
-  --bs-dropdown-link-active-bg: #0d6efd;
+  --bs-dropdown-link-active-color: black;
+  --bs-dropdown-link-active-bg: white;
   --bs-dropdown-link-disabled-color: #adb5bd;
   --bs-dropdown-header-color: #adb5bd;
 }
@@ -3402,8 +3406,8 @@ textarea.form-control-lg {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
   --bs-nav-link-font-weight: ;
-  --bs-nav-link-color: rgba(0, 153, 255, 0.9);
-  --bs-nav-link-hover-color: rgba(0, 153, 255, 0.9);
+  --bs-nav-link-color: white;
+  --bs-nav-link-hover-color: black;
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
   display: flex;
   flex-wrap: wrap;
@@ -3475,8 +3479,8 @@ textarea.form-control-lg {
 
 .nav-pills {
   --bs-nav-pills-border-radius: var(--bs-border-radius);
-  --bs-nav-pills-link-active-color: #fff;
-  --bs-nav-pills-link-active-bg: rgb(0, 153, 255);
+  --bs-nav-pills-link-active-color: black;
+  --bs-nav-pills-link-active-bg: white;
 }
 .nav-pills .nav-link {
   border-radius: var(--bs-nav-pills-border-radius);
@@ -9829,33 +9833,7 @@ textarea.form-control-lg {
   }
 }
 /* Global CSS */
-* {
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-body {
-  background-color: black;
-  color: white;
-}
-
-header.card {
-  background-color: #000000;
-}
-
-.content-root {
-  position: relative;
-  float: left;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-img {
-  max-width: 100%;
-}
-
 p {
-  line-height: 1.5em;
   text-indent: 3.5em;
   margin: 0;
 }
@@ -9867,6 +9845,13 @@ span {
 
 p:first-of-type {
   text-indent: 0;
+}
+
+h1, .h1 {
+  font-size: 2.1em;
+  text-align: center;
+  padding: 1.111em;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h2, .h2 {
@@ -9881,38 +9866,7 @@ h4, .h4 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Site-wide css @ < 600px. */
-@media (max-width: 600px) {
-  .content-root {
-    width: 100%;
-  }
-  p {
-    line-height: 1.3em;
-    text-indent: 2.5em;
-    margin: 0;
-    padding: 0;
-    font-size: 0.9em;
-  }
-  article {
-    width: 100%;
-  }
-}
-/* Site-wide css @ < 1200px. */
-@media (min-width: 1200px) {
-  .content-root {
-    width: 100%;
-    max-width: 1200px;
-  }
-}
 /* CSS for the page loading system. */
-.inactive {
-  display: none;
-}
-
-.active {
-  display: block;
-}
-
 article.active {
   float: left;
   padding: 1.111em;
@@ -9921,14 +9875,22 @@ article.active {
 
 /* Opening-card-related css. */
 .portfolio {
-  position: relative;
-  height: 50vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
+  backdrop-filter: blur(0px); /* This fixes a white line appearing on
+the right side of a div with a box shadow and a background image
+if there is no parent element resizing it and the width is defined in the element.
+Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
+  height: 75vw;
   background: url(../content/Portrait.png) no-repeat;
   background-size: 100%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
+  box-shadow: 0 0 1.6vw 1.3vw black inset;
+}
+
+.webserver {
+  backdrop-filter: blur(0px);
+  height: 75vw;
+  background: url(../content/mario64opening.png) no-repeat;
+  background-size: 100%;
+  box-shadow: 0 0 1.6vw 1.3vw black inset;
 }
 
 .AI-image {
@@ -9961,21 +9923,24 @@ article.active {
   background: url(../content/mario64opening.png) no-repeat;
   background-size: 120%;
   box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
 }
 
 .Opening-card-fade-portfolio {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 40%, rgb(0, 0, 0) 61%);
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.14);
 }
 
+@media (min-width: 768px) {
+  .Opening-card-fade-portfolio {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 40%, rgb(0, 0, 0) 61%);
+  }
+}
 .Opening-card-bio {
   position: relative;
   float: left;
   width: 97%;
-  height: 70vw;
+  height: 650px;
   max-height: 650px;
   margin: 0.6em 0.3em;
   background: url("../content/Portrait.jpg") no-repeat;
@@ -10059,27 +10024,18 @@ article.active {
 }
 
 .Opening-card-text-block {
-  position: relative;
+  width: 90%;
   left: 5%;
   top: 70%;
-  width: 90%;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.888);
   border-radius: 0.2778em;
-  padding: 0.9vw;
-  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.888);
 }
 
 .Web-server-text-block {
-  position: relative;
-  top: 5%;
-  margin: 2em;
-  width: 90%;
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.888);
   border-radius: 0.2778em;
   padding: 0.9vw;
-  z-index: 3;
 }
 
 .webserver-form {
@@ -10087,218 +10043,32 @@ article.active {
 }
 
 .Opening-card-text-block p {
-  margin: 0;
-  font-size: 1.2em;
-  text-indent: 0;
+  font-size: 2.5vw;
   font-family: monospace;
 }
 
-.Opening-card-text-block code {
-  display: inline;
-  font-size: 1.2em;
-  line-height: 1.5em;
-  font-family: revert;
-}
-
-div.Opening-card-AI article.Opening-card-text-block {
-  width: 60%;
-  font-size: 1.2em;
-}
-
-.more {
-  display: none;
-}
-
-/* Site-wide css @ < 1200px. */
-@media (max-width: 1200px) {
-  .Opening-card-portfolio {
-    background-position: -7vw -17vw;
-  }
-  .Opening-card-fade-portfolio {
-    box-shadow: 0 -1.4vw 2vw 2vw black inset;
-  }
-  .Opening-card-bio {
-    background-position: -7vw -17vw;
-  }
-  .Opening-card-fade-bio {
-    box-shadow: 0 -1.4vw 2vw 2vw black inset;
-  }
-  .Opening-card-fade-AI {
-    box-shadow: 0 -1.4vw 2vw 2vw black inset;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 500px, rgb(0, 0, 0) 757px);
-  }
-  .Opening-card-hobbies {
-    background-size: 37.85em;
-    background-position: -4vw -9em;
-  }
-  .Opening-card-fade-hobbies {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 355px, rgb(0, 0, 0) 555px);
-    box-shadow: 0 -1.4vw 2vw 2vw black inset;
-  }
-  div.Opening-card-AI article.Opening-card-text-block {
-    max-height: unset;
-  }
-  .Opening-card-text-block p {
-    line-height: 2vw;
-    font-size: 1.5vw;
-  }
-}
-/* Site-wide css @ < 800px. */
-@media (max-width: 800px) {
-  .Opening-card-portfolio {
-    max-height: 560px;
-  }
-  .Opening-card-bio {
-    max-height: 560px;
-  }
-  .Opening-card-AI {
-    max-height: 560px;
-  }
-  .Opening-card-hobbies {
-    max-height: 560px;
-  }
-  .Opening-card-fade-AI {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 62.5%, rgb(0, 0, 0) 94.5%);
-  }
-  .Opening-card-hobbies {
-    background-size: 78%;
-    background-position: -2em -9em;
-  }
-  .Opening-card-fade-hobbies {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 45.5%, rgb(0, 0, 0) 71.5%);
-  }
-  .Opening-card-text-block code {
-    line-height: 2.9vw;
-    font-size: 1.95vw;
-  }
-  div.Opening-card-AI article.Opening-card-text-block p {
-    font-size: 1.2em;
-    line-height: 1.5em;
-  }
-  div.Opening-card-hobbies article.Opening-card-text-block {
-    max-width: 65%;
-  }
-}
-/* Opening-card-related css @ < 600px. */
-@media (max-width: 768px) {
-  .portfolio {
-    height: 80vw;
-  }
-  .AI-image {
-    height: 80vw;
-  }
-  .Hobbies-image {
-    height: 80vw;
-  }
-  .Web-server-image {
-    height: 80vw;
-  }
-  .Opening-card-portfolio {
-    min-height: 0;
-    height: 100vw;
-    background-size: 100%;
-    background-position: -27vw -25vw;
-  }
-  .Opening-card-bio {
-    height: 100vw;
-    background-size: 100%;
-    background-position: -27vw -25vw;
-  }
-  .Opening-card-AI {
-    height: 100vw;
-    background-position: -410px -65px;
-  }
-  .Opening-card-hobbies {
-    height: 100vw;
-    background-size: 100%;
-    background-position: -1.4vw -24vw;
-  }
-  .Opening-card-fade-hobbies {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 63%, rgb(0, 0, 0) 96.5%);
-  }
-  .Opening-card-text-block code {
-    font-size: 3.5vw;
-    line-height: 4.5vw;
-    font-family: revert;
-  }
-  div.Opening-card-hobbies article.Opening-card-text-block {
-    max-width: unset;
-  }
-  div.Opening-card-AI article.Opening-card-text-block p {
-    font-size: 3.5vw;
-    line-height: 4.5vw;
-  }
-  button.read-more-button {
-    width: 30%;
-    cursor: pointer;
-    padding: 0.8vw 0;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 4vw;
-    border-radius: 1.25vw;
-    border: none;
-  }
-  button.read-more-button:hover {
-    background-color: rgb(0, 153, 255);
-    color: rgb(255, 255, 255);
-    text-shadow: #000000 0.15vw 0.15vw;
-  }
-  button.read-more-button text:hover {
-    cursor: pointer;
-  }
-  button.highlighted {
-    background-color: rgb(0, 153, 255);
-    color: rgb(255, 255, 255);
-    text-shadow: #000000 0.15vw 0.15vw;
-  }
-  .Opening-card-text-block {
-    top: 65%;
-    width: 60%;
-  }
-  .Web-server-text-block {
-    width: 60%;
-  }
-  .Opening-card-text-block p {
-    font-size: 2.5vw;
-    line-height: 4vw;
-  }
-}
 /* Nav-bar-related css. */
 nav {
-  position: absolute;
-  left: 80%;
-  top: 20%;
-  display: flex;
-  flex-direction: column;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.808);
+  background: var(--main-h-color);
   border-radius: 0.2778em;
   padding: 1.111em;
   padding-right: 0;
   z-index: 2;
 }
 
+.nav-link:hover, .nav-link:focus {
+  background-color: white;
+}
+
 nav h2, nav .h2 {
   font-size: 1.111em;
+  text-align: center;
   margin-top: 0;
 }
 
 nav a {
-  color: white;
-  padding: 0.55em;
   font-size: 1.111em;
-  cursor: pointer;
   font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-nav a:hover {
-  background-color: white;
-  color: black;
-  display: block;
-}
-
-nav a text:hover {
-  cursor: pointer;
 }
 
 .cv:focus-visible {
@@ -10307,20 +10077,7 @@ nav a text:hover {
   display: block;
 }
 
-/* Nav-bar-related css @ < 600px. */
-@media (max-width: 768px) {
-  nav {
-    width: 25vw;
-    left: 70%;
-  }
-}
 /* Portfolio page-specific css. */
-h4.portfolio-title, .portfolio-title.h4 {
-  font-size: 2.1em;
-  text-align: center;
-  padding: 1.111em;
-}
-
 div.portfolio-container {
   display: table;
 }
@@ -10423,80 +10180,6 @@ div.portfolio-project p {
   margin: 0;
 }
 
-/* Portfolio page-specific css @ < 1200px. */
-@media (max-width: 1200px) {
-  div.portfolio-project {
-    width: 50%;
-    padding-bottom: 1em;
-  }
-  div.portfolio-project h4, div.portfolio-project .h4 {
-    padding: 0;
-  }
-  div.portfolio-project p {
-    padding: 0;
-    padding-right: 2.2em;
-  }
-  div.portfolio-project img {
-    padding: 0;
-  }
-  div.portfolio-project h4.portfolio-project-AI, div.portfolio-project .portfolio-project-AI.h4 {
-    padding-right: 2.2em;
-  }
-  div.portfolio-project img.portfolio-project-AI {
-    padding-right: 2.2em;
-  }
-  div.portfolio-project h4.portfolio-project-portfolio-website, div.portfolio-project .portfolio-project-portfolio-website.h4 {
-    padding-right: 2.2em;
-  }
-  div.portfolio-project img.portfolio-project-portfolio-website {
-    padding-right: 2.2em;
-  }
-  #Esports {
-    float: right;
-  }
-  #wall-calculator {
-    float: right;
-  }
-  div.portfolio-project h4.portfolio-project-Esports, div.portfolio-project .portfolio-project-Esports.h4 {
-    font-size: 0.9em;
-  }
-}
-/* Portfolio page-specific css @ < 800px. */
-@media (max-width: 800px) {
-  h4.portfolio-title, .portfolio-title.h4 {
-    font-size: 200%;
-    margin: 0.25em 0;
-    padding: 0.5em 0;
-  }
-  div.portfolio-project {
-    float: left;
-    width: 100%;
-  }
-  div.portfolio-project h4, div.portfolio-project .h4 {
-    padding: 0;
-  }
-  div.portfolio-project img {
-    padding: 0.9em 0 0 0;
-  }
-  div.portfolio-project p {
-    font-size: 0.9em;
-    padding: 1em 0;
-    padding-top: 0;
-    padding-bottom: 0.25em;
-  }
-  div.portfolio-project h4.portfolio-project-AI, div.portfolio-project .portfolio-project-AI.h4 {
-    padding-right: 0;
-  }
-  div.portfolio-project img.portfolio-project-AI {
-    padding-right: 0;
-  }
-  div.portfolio-project h4.portfolio-project-portfolio-website, div.portfolio-project .portfolio-project-portfolio-website.h4 {
-    padding-right: 0;
-  }
-  div.portfolio-project img.portfolio-project-portfolio-website {
-    padding-right: 0;
-  }
-}
 /* Bio page-specific css. */
 h3.bio, .bio.h3 {
   font-size: 1em;
@@ -10749,145 +10432,6 @@ p.bio a:hover {
   color: #ffffff;
 }
 
-/* Bio page-specific css @ < 1200px. */
-@media (max-width: 1200px) {
-  section.education-timeline {
-    width: 100%;
-  }
-  section.education-timeline::after {
-    left: 70%;
-  }
-  div.education-container {
-    width: 60%;
-  }
-  h4.education, .education.h4 {
-    width: 60%;
-    margin: 0;
-    margin-bottom: 1em;
-  }
-  div.dates-education {
-    width: 8em;
-    left: 70%;
-  }
-  div.Education-info {
-    float: left;
-    width: 100%;
-  }
-  div.Work-info {
-    width: 100%;
-  }
-  section.work-timeline {
-    float: left;
-    width: 100%;
-    height: 66.68em;
-    margin: 1.111em 0;
-  }
-  section.work-timeline::before {
-    display: none;
-  }
-  section.work-timeline::after {
-    content: "";
-    position: absolute;
-    width: 0.111em;
-    min-width: 2.03px;
-    background-color: rgb(255, 255, 255);
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    left: 70%;
-  }
-  h4.career, .career.h4 {
-    float: left;
-    width: 60%;
-    margin: 0;
-    margin-bottom: 1em;
-  }
-  div.work-container {
-    float: left;
-    width: 60%;
-  }
-  div.work-container h4, div.work-container .h4 {
-    text-wrap: initial;
-  }
-  div.dates {
-    width: 8em;
-    left: 70%;
-  }
-  div.July-2019_2 {
-    bottom: 32.1%;
-  }
-  div.dates::after {
-    display: none;
-  }
-  div.dates::before {
-    content: "";
-    position: absolute;
-    width: 0.111em;
-    min-width: 2.03px;
-    background: top rgb(0, 153, 255);
-    top: 0;
-    bottom: 0.5em;
-    left: 0em;
-    z-index: 2;
-  }
-  div.dates p {
-    text-align: right;
-  }
-  div.dates p::after {
-    display: none;
-  }
-  div.dates p::before {
-    content: "";
-    position: absolute;
-    width: 0.834em;
-    height: 0.834em;
-    left: -0.44em;
-    background-color: rgb(0, 153, 255);
-    border: 0.111em solid #ffffff;
-    border-radius: 0.55em;
-    z-index: 3;
-  }
-}
-/* Bio page-specific css @ < 600px. */
-@media (max-width: 600px) {
-  h3.bio, .bio.h3 {
-    font-size: 0.9em;
-  }
-  section.education-timeline {
-    font-size: 0.8em;
-  }
-  div.dates-education p::before {
-    left: -0.4em;
-  }
-  div.Education-info {
-    font-size: 0.9em;
-  }
-  div.Work-info {
-    font-size: 0.9em;
-  }
-  section.work-timeline {
-    font-size: 0.8em;
-  }
-  div.July-2019_2 {
-    bottom: 32.25%;
-  }
-  p.bio {
-    line-height: 1.3em;
-    font-size: 0.81em;
-  }
-}
-/* AI page-specific css */
-h3.AI, .AI.h3 {
-  font-size: 0.95em;
-}
-
-/* AI page-specific css @ < 600px. */
-@media (max-width: 600px) {
-  h3.AI, .AI.h3 {
-    font-size: 0.9em;
-    margin: 0.9em 0;
-  }
-}
 /* Hobbies page-specific css */
 h3.hobbies, .hobbies.h3 {
   font-size: 0.95em;
@@ -10927,45 +10471,6 @@ p.info-hobby-left-text {
   line-height: 1.4em;
 }
 
-/* Hobbies page-specific css @ < 600px. */
-@media (max-width: 600px) {
-  h3.hobbies, .hobbies.h3 {
-    font-size: 0.9em;
-    margin: 0.9em 0;
-  }
-  div.info-hobby-left {
-    width: 100%;
-    font-size: 0.8em;
-    padding: 0.5em 0;
-  }
-  h4.info-hobby-left-title, .info-hobby-left-title.h4 {
-    margin: 0.25em 0 0.5em 0;
-    text-align: left;
-    font-size: 0.9em;
-  }
-  button.read-more-other-button {
-    width: fit-content;
-    cursor: pointer;
-    margin-top: 0.5em;
-    padding: 0.1em 0.75em;
-    font-size: 0.9em;
-    line-height: 1.5em;
-    background-color: #ffffff;
-    color: #000000;
-    border-radius: 1.25vw;
-    border: none;
-  }
-  button.read-more-other-button:hover {
-    background-color: rgb(0, 153, 255);
-    color: rgb(255, 255, 255);
-    text-shadow: #000000 0.15vw 0.15vw;
-  }
-  button.highlighted-more {
-    background-color: rgb(0, 153, 255);
-    color: rgb(255, 255, 255);
-    text-shadow: #000000 0.15vw 0.15vw;
-  }
-}
 /* Footer CSS */
 footer {
   position: relative;
@@ -11019,27 +10524,6 @@ footer nav a:hover {
   display: inline;
   background-color: white;
   color: black;
-}
-
-/* Footer-related css @ < 600px. */
-@media (max-width: 600px) {
-  footer {
-    padding: 6vw 1.5vw 1.5vw 1.5vw;
-    margin-top: 1.111em;
-    font-size: 0.76em;
-  }
-  footer nav {
-    top: 0;
-    flex-direction: row;
-    padding: 1.5vw;
-    font-size: 1.5vw;
-  }
-  footer nav a {
-    padding: 1.5vw;
-  }
-  footer address {
-    font-size: 3vw;
-  }
 }
 
 /*# sourceMappingURL=stylesheet.css.map */
