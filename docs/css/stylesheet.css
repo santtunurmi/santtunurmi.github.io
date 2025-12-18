@@ -1,8 +1,4 @@
 @charset "UTF-8";
-:root {
-  --main-h-color: rgb(0, 153, 255);
-}
-
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -3119,7 +3115,7 @@ textarea.form-control-lg {
   --bs-dropdown-spacer: 0.125rem;
   --bs-dropdown-font-size: 1rem;
   --bs-dropdown-color: var(--bs-body-color);
-  --bs-dropdown-bg: var(--main-h-color);
+  --bs-dropdown-bg: var(--bs-body-bg);
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
@@ -9838,243 +9834,80 @@ p {
   margin: 0;
 }
 
-span {
-  text-indent: 0;
-  display: inline;
-}
-
 p:first-of-type {
   text-indent: 0;
 }
 
 h1, .h1 {
   font-size: 2.1em;
-  text-align: center;
-  padding: 1.111em;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-h2, .h2 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h3, .h3 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h4, .h4 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* CSS for the page loading system. */
-article.active {
-  float: left;
-  padding: 1.111em;
-  padding-top: 0em;
-}
-
-/* Opening-card-related css. */
-.portfolio {
+/* Opening-card-related CSS */
+.opening-card-background {
   backdrop-filter: blur(0px); /* This fixes a white line appearing on
 the right side of a div with a box shadow and a background image
 if there is no parent element resizing it and the width is defined in the element.
 Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
   height: 75vw;
-  background: url(../content/Portrait.png) no-repeat;
-  background-size: 100%;
   box-shadow: 0 0 1.6vw 1.3vw black inset;
 }
 
-.webserver {
-  backdrop-filter: blur(0px);
-  height: 75vw;
-  background: url(../content/mario64opening.png) no-repeat;
-  background-size: 100%;
-  box-shadow: 0 0 1.6vw 1.3vw black inset;
-}
-
-.AI-image {
-  position: relative;
-  height: 50vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url(../content/machine-learning-code.png) no-repeat;
-  background-size: 200%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Hobbies-image {
-  position: relative;
-  height: 50vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url(../content/bassplaying.png) no-repeat;
-  background-size: 100%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Web-server-image {
-  position: relative;
-  height: 50vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url(../content/mario64opening.png) no-repeat;
-  background-size: 120%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-}
-
-.Opening-card-fade-portfolio {
+.Opening-card-fade {
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.14);
 }
 
 @media (min-width: 768px) {
-  .Opening-card-fade-portfolio {
+  .Opening-card-fade {
     background: rgb(0, 0, 0);
     background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 40%, rgb(0, 0, 0) 61%);
   }
 }
-.Opening-card-bio {
-  position: relative;
-  float: left;
-  width: 97%;
-  height: 650px;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url("../content/Portrait.jpg") no-repeat;
-  background-position: -5.7em -14.3em;
-  background-size: 70%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Opening-card-fade-bio {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 40%, rgb(0, 0, 0) 61%);
-  z-index: 1;
-}
-
-.Opening-card-AI {
-  position: relative;
-  float: left;
-  width: 97%;
-  height: 70vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url("../content/machine-learning-code.png") no-repeat;
-  background-size: 90em;
-  background-position: 45%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Opening-card-fade-AI {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 42%, rgb(0, 0, 0) 63%);
-  z-index: 1;
-}
-
-.Opening-card-hobbies {
-  position: relative;
-  float: left;
-  width: 97%;
-  height: 70vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url("../content/bassplaying.jpg") no-repeat;
-  background-size: 52%;
-  background-position: -3em -9em;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Opening-card-fade-hobbies {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 32%, rgb(0, 0, 0) 48%);
-  z-index: 1;
-}
-
-.Opening-card-webserver {
-  position: relative;
-  float: left;
-  width: 97%;
-  height: 70vw;
-  max-height: 650px;
-  margin: 0.6em 0.3em;
-  background: url("../content/hippo.png") no-repeat;
-  background-size: 70%;
-  box-shadow: 0 -0.4vw 1vw 1vw black inset;
-  z-index: 0;
-}
-
-.Opening-card-fade-webserver {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgba(0, 0, 0, 0.14) 40%, rgb(0, 0, 0) 61%);
-  z-index: 1;
-}
-
 .Opening-card-text-block {
   width: 90%;
   left: 5%;
-  top: 70%;
-  border-radius: 0.2778em;
+  top: 66.6666666667%;
+  background: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.888);
 }
 
-.Web-server-text-block {
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.888);
-  border-radius: 0.2778em;
-  padding: 0.9vw;
-}
-
-.webserver-form {
-  height: 75vw;
-}
-
 .Opening-card-text-block p {
-  font-size: 2.5vw;
+  font-size: 3vw;
   font-family: monospace;
 }
 
-/* Nav-bar-related css. */
-nav {
-  background: var(--main-h-color);
-  border-radius: 0.2778em;
-  padding: 1.111em;
-  padding-right: 0;
-  z-index: 2;
+.portfolio-image {
+  background: url(../content/Portrait.png) no-repeat;
+  background-size: 100%;
 }
 
+.webserver-image {
+  background: url(../content/mario64opening.png) no-repeat;
+  background-size: 100%;
+}
+
+.bio-image {
+  background: url(../content/Portrait.png) no-repeat;
+  background-size: 100%;
+}
+
+.AI-image {
+  background: url(../content/AI-project.png) no-repeat;
+  background-size: 200%;
+}
+
+.Hobbies-image {
+  background: url(../content/bassplaying.png) no-repeat;
+  background-size: 100%;
+}
+
+/* Nav-bar-related css. */
 .nav-link:hover, .nav-link:focus {
   background-color: white;
 }
 
-nav h2, nav .h2 {
-  font-size: 1.111em;
-  text-align: center;
-  margin-top: 0;
-}
-
 nav a {
-  font-size: 1.111em;
   font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-.cv:focus-visible {
-  background-color: white;
-  color: black;
-  display: block;
 }
 
 /* Portfolio page-specific css. */

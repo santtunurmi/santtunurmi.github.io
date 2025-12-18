@@ -7,7 +7,8 @@
     <meta name="keywords"
         content="Portfolio, AI, data-analytics, Programming, Job Searching, Internship, Finnish, English, full-stack, innovation, College Student">
     <meta name="author" content="Santtu Nurmi">
-    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta name="viewport"
+        content="width = device-width, initial-scale = 1.0, minimum-scale = 1.0">
     <meta charset="utf-8">
     <!-- Title -->
     <title>Portfolio of Santtu Nurmi</title>
@@ -15,48 +16,50 @@
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 
-<body>
-    <div class="content-root" id="root">
-        <header class="card border-0 mh-10">
+<body class="bg-black">
+    <div id="root">
+        <!-- Nav -->
+        <div class="position-fixed min-wv-25 h-100 end-0 z-2">
+            <nav class="nav flex-column p-2 m-3 text-bg-primary rounded-1" aria-orientation="vertical">
+                <button class="navbar-toggler p-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mobile-nav" aria-controls="mobile-nav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse nav-pills navbar-collapse" id="mobile-nav">
+                    <h2 class="text-center fs-4">Santtu Nurmi</h2>
+                    <!-- Nav links -->
+                    <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
+                    <!-- Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            href="#" role="button" aria-expanded="false">Bio</a>
+                        <ul class="dropdown-menu text-bg-primary">
+                            <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
+                            <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
+                        </ul>
+                    </div>
+                    <a class="nav-link" href="ai.html">AI</a>
+                    <a class="nav-link active" href="hobbies.html">Hobbies</a>
+                    <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
+                </div>
+            </nav>
+        </div>
+        <header class="card border-0 mh-10 bg-black">
             <!-- Fade-effect for the portfolio opening card image. -->
-            <div class="Opening-card-fade-portfolio"></div>
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <!-- Opening card article -->
-                    <div class="Hobbies-image">
-                        <article class="Opening-card-text-block">
-                            <p>
-                                I believe, that one should constantly learn new things.
-                                When you make this a habit, you can get much more out of your days,
-                                allowing you to live a more fullfilling life.
-                                On the career-side of things, you will avoid burnout and gain experience
-                                you wouldn't from your work alone.
-                            </p>
-                        </article>
-                    </div>
+            <div class="row g-0 gap-0 row-gab-0">
+                <div class="Opening-card-fade position-absolute h-100 p-0 z-1"></div>
+                <div class="opening-card-background Hobbies-image col-md-8 p-0 z-0">
                 </div>
-                <div class="col-md-4">
-                    <div class="card-body">
-                        <!-- Right-side nav -->
-                        <nav class="nav nav-pills flex-column">
-                            <h2>Santtu Nurmi</h2>
-                            <!-- Nav links -->
-                            <a class="nav-link" aria-current="page" href="index.html">Portfolio</a>
-                            <!-- Dropdown -->
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                    href="#" role="button" aria-expanded="false">Bio</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
-                                    <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
-                                </ul>
-                            </div>
-                            <a class="nav-link" href="ai.html">AI</a>
-                            <a class="nav-link active" href="hobbies.html">Hobbies</a>
-                            <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
-                        </nav>
-                    </div>
-                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <!-- Opening card article -->
+            <div class="Opening-card-text-block position-absolute rounded-1 p-2 z-1">
+                <p>
+                    I believe, that one should constantly learn new things.
+                    When you make this a habit, you can get much more out of your days,
+                    allowing you to live a more fullfilling life.
+                </p>
             </div>
         </header>
         <!-- Article content-change classification for "Hobbies" -->
