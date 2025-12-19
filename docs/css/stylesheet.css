@@ -9831,7 +9831,6 @@ textarea.form-control-lg {
 /* Global CSS */
 p {
   text-indent: 3.5em;
-  margin: 0;
 }
 
 p:first-of-type {
@@ -9840,6 +9839,12 @@ p:first-of-type {
 
 h1, .h1 {
   font-size: 2.1em;
+}
+
+.svg {
+  max-height: 1.25em;
+  vertical-align: top;
+  padding-left: 1em;
 }
 
 /* Opening-card-related CSS */
@@ -9872,6 +9877,7 @@ Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
 }
 
 .Opening-card-text-block p {
+  margin: 0;
   font-size: 3vw;
   font-family: monospace;
 }
@@ -9911,10 +9917,6 @@ nav a {
 }
 
 /* Portfolio page-specific css. */
-div.portfolio-container {
-  display: table;
-}
-
 div.portfolio-project {
   float: left;
   width: 33.3%;
