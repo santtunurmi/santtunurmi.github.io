@@ -69,12 +69,6 @@ $dropdown-link-active-color: black;
 
 /* Global CSS */
 
-    p {
-        text-indent: 3.5em;
-    }
-    p:first-of-type {
-        text-indent: 0;
-    }
     h1 {
         font-size: 2.1em;
     }
@@ -85,6 +79,10 @@ $dropdown-link-active-color: black;
         padding-left: 1em;
     }
 
+    hr {
+        opacity: 75%;
+    }
+
 /* Opening-card-related CSS */
 
     .opening-card-background {
@@ -92,7 +90,7 @@ $dropdown-link-active-color: black;
         the right side of a div with a box shadow and a background image
         if there is no parent element resizing it and the width is defined in the element.
         Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
-        height: 75vw;
+        height: 85vw;
         box-shadow: 0 0 1.6vw 1.3vw black inset;
     }
     .Opening-card-fade {
@@ -108,25 +106,25 @@ $dropdown-link-active-color: black;
     .Opening-card-text-block {
         width: 90%;
         left: 5%;
-        top: 66.6666666666667%;
+        top: 60%;
         background: rgb(0, 0, 0);
         background-color: rgba(0, 0, 0, 0.888);
     }
     .Opening-card-text-block p {
         margin: 0;
-        font-size: 3vw;
+        font-size: 3.5vw;
         font-family: monospace;
     }
     .portfolio-image {
         background: url(../content/Portrait.png) no-repeat;
         background-size: 100%;
     }
-    .webserver-image {
-        background: url(../content/mario64opening.png) no-repeat;
+    .bio-image {
+        background: url(../content/Working.png) no-repeat;
         background-size: 100%;
     }
-    .bio-image {
-        background: url(../content/Portrait.png) no-repeat;
+    .webserver-image {
+        background: url(../content/mario64opening.png) no-repeat;
         background-size: 100%;
     }
     .AI-image {
@@ -145,106 +143,6 @@ $dropdown-link-active-color: black;
     }
     nav a {
         font-family: Verdana, Arial, Helvetica, sans-serif;
-    }
-
-/* Portfolio page-specific css. */
-
-    div.portfolio-project {
-        float: left;
-        width: 33.3%;
-    }
-
-    div.portfolio-project img {
-        width: 100%;
-        padding: 1.111em;
-        padding-bottom: 0;
-    }
-
-    div.portfolio-project a {
-        visibility: hidden;
-        width: inherit;
-    }
-
-    h4.portfolio-project-AI{
-        font-size: 1em;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        padding-left: 1.111em;
-        padding-right: 1.111em;
-    }
-
-    h4.portfolio-project-AI a img {
-        visibility: visible;
-        position: relative;
-        float: right;
-        top: -0.5em;
-        height: 2em;
-        width: auto;
-        padding: 0;
-    }
-
-    h4.portfolio-project-Esports{
-        font-size: 1em;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        padding-left: 1.111em;
-        padding-right: 1.111em;
-    }
-
-    h4.portfolio-project-Esports a img {
-        visibility: visible;
-        position: relative;
-        float: right;
-        height: 3.5em;
-        width: auto;
-        top: -1.1em;
-        padding: 0;
-    }
-
-    h4.portfolio-project-wall-calculator{
-        font-size: 1em;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        padding-left: 1.111em;
-        padding-right: 1.111em;
-    }
-
-    h4.portfolio-project-wall-calculator a img {
-        position: relative;
-        visibility: visible;
-        float: right;
-        height: 2em;
-        width: auto;
-        top: -0.5em;
-        padding: 0;
-        padding-left: 0.55em;
-    }
-
-    h4.portfolio-project-portfolio-website{
-        font-size: 1em;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        padding-left: 1.111em;
-        padding-right: 1.111em;
-    }
-
-    h4.portfolio-project-portfolio-website a img {
-        position: relative;
-        visibility: visible;
-        float: right;
-        height: 2em;
-        width: auto;
-        top: -0.5em;
-        padding: 0;
-        padding-left: 0.55em;
-    }
-
-    div.portfolio-project p {
-        font-size: 1em;
-        padding: 1.111em;
-        padding-top: 0;
-        padding-bottom: 0.25em;
-        margin: 0;
     }
 
 /* Bio page-specific css. */
@@ -540,60 +438,4 @@ $dropdown-link-active-color: black;
         text-align: left;
         font-size: 0.9em;
         line-height: 1.4em;
-    }
-
-/* Footer CSS */
-
-    footer {
-        position: relative;;
-        float: left;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 0.5em 1.5em;
-        padding-top: 3.3em;
-        margin-top: 1.111em;
-        border-top: 0.1em inset #ffffff;
-    }
-
-    address {
-        padding-top: 1.111em;
-        float: left;
-        width: fit-content;
-    }
-
-    footer p {
-        text-indent: 0;
-    }
-
-    footer a {
-        color: #ffffff;
-    }
-
-    footer a:hover {
-        color: rgb(0, 153, 255);
-    }
-            
-    footer nav {
-        left: 0%;
-        width: 100%;
-        top: 0;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 1.57em;
-    }
-
-    footer nav h2 {
-        margin: 0;
-        line-height: 1.32em;
-    }
-
-    footer nav a {
-        padding: 1.111em;
-    }
-
-    footer nav a:hover {
-        display: inline;
-        background-color: white;
-        color: black;
     }
