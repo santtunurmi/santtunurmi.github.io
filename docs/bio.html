@@ -19,7 +19,7 @@
 <body class="bg-black">
     <div id="root">
         <!-- Nav -->
-        <div class="position-fixed min-wv-25 h-100 end-0 z-2">
+        <div class="position-fixed min-wv-25 h-100 end-0">
             <nav class="nav flex-column p-2 m-3 text-bg-primary rounded-1" aria-orientation="vertical">
                 <button class="navbar-toggler p-2" type="button" data-bs-toggle="collapse"
                     data-bs-target="#mobile-nav" aria-controls="mobile-nav"
@@ -62,10 +62,9 @@
                 </p>
             </div>
         </header>
-        <!-- Article content-change classification for "bio" -->
-        <article>
-            <!-- Article title -->
-            <h3 class="bio">Bio</h3>
+        <!-- Bio content -->
+        <article class="container-fluid">
+            <h4 class="pt-3 pb-1 fw-semibold">Bio</h4>
             <p>
                 Through my education in JAMK as an information and communication technology engineer, I have studied a
                 wide range of skills in tech.
@@ -100,117 +99,124 @@
             </p>
             <!-- Article image right -->
             <!-- <img src="a" alt="b" class="img-bio-right"> -->
-            <div class="career-container">
-                <!-- Education timeline. -->
-                <section class="education-timeline">
-                    <h4 class="education">Education:</h4>
-                    <div class="education-container">
-                        <h4>JAMK University of Applied Sciences</h4>
-                        <p>Bachelor’s degree in information and communication engineering</p>
-                    </div>
-                    <div class="dates-education August-2022-education June-2026-education">
-                        <p>June 2026</p>
-                        <p>August 2022</p>
-                    </div>
-                    <div style="height: 25%; width: 50%; float: left;"></div>
-                    <div class="education-container">
-                        <h4>High school of Äänekoski</h4>
-                        <p>High school diploma</p>
-                    </div>
-                    <div class="dates-education August-2019-education June-2022-education">
-                        <p>June 2022</p>
-                        <p>August 2019</p>
-                    </div>
-                </section>
-                <div class="Education-info">
-                    <p>
-                        After high school, it was crystal clear to me, that I wanted to choose my higher education to be
-                        in the tech industry.
-                        This was largely because I have always been interested in computers, internet and tech,
-                        but also due to me wanting to pursue a more hands-on field in academia.
-                    </p>
-                    <p>
-                        Currently I am on course for finishing my degree in 2026.
-                        I have always been above average as a student, but I am more focused on projects and innovation,
-                        rather than finding my passion in learning to simply learn. I have my curiosities, and often
-                        they are the impetus to my projects and ideas,
-                        but I prefer to create something tangible with my efforts, rather than to build up skills just
-                        to show them off for validation.
-                    </p>
-                </div>
-                <!-- Work timeline. -->
-                <section class="work-timeline">
-                    <h4 class="career">Career:</h4>
-                    <div style="height: 11%; width: 50%; float: right;"></div>
-                    <div class="dates August-2022 May-2022">
-                        <p>August 2022</p>
-                        <p>May 2022</p>
-                    </div>
-                    <div class="work-container">
-                        <h4>Retail store worker (summer job)</h4>
-                        <p>ABC Hirvaskangas – Hirvaskangas</p>
-                        <p>I worked mainly on shelving, storage and dishes.</p>
-                    </div>
-                    <div style="height: 20%; width: 50%; float: right;"></div>
-                    <div class="dates August-2019 July-2019_2">
-                        <p>August 2019</p>
-                        <p>July 2019</p>
-                    </div>
-                    <div class="work-container">
-                        <h4>Trainee (summer job)</h4>
-                        <p>K-citymarket Äänekoski – Äänekoski</p>
-                        <p>My job involved mainly shelving and cleaning.</p>
-                    </div>
-                    <div class="dates July-2019 June-2019">
-                        <p>July 2019</p>
-                        <p>June 2019</p>
-                    </div>
-                    <div style="height: 2%; width: 50%; float: right;"></div>
-                    <div class="work-container">
-                        <h4>Youth counsellor's assistant (summer job)</h4>
-                        <p>City of Äänekoski – Äänekoski</p>
-                        <p>I worked as an assistant painter as part of the Äänekoski Tärttämäki bridge painting project.
-                        </p>
-                    </div>
-                    <div style="height: 2%; width: 50%; float: right;"></div>
-                    <div class="dates June-2018">
-                        <p>June 2018</p>
-                    </div>
-                    <div class="work-container">
-                        <h4>Summer trainee (summer job)</h4>
-                        <p>Pienryhmäkoti Huvikumpu – Äänekoski</p>
-                        <p>My job mainly consisted of cleaning and assisting with guiding children.</p>
-                    </div>
-                </section>
-                <div class="Work-info">
-                    <p>
-                        In my teenage years I worked several "summer jobs" to get work experience. It is quite common in
-                        Finland to do a short one-month internship
-                        at a local grocery store, for example, as you are not allowed to work even part-time as a
-                        teenager, but a short summer job can still give you
-                        some valuable work experience and own money. Pair that with me growing up working class and my
-                        mom owning a small local business,
-                        which she also ran by working there full-time, I had plenty of influence on my relationship to
-                        work.
-                    </p>
-                    <p>
-                        One of these key lessons was the fact, that in all of the places that I worked at, the manager
-                        would do work as everyone else.
-                        Often better and more efficient than everyone else, too. The fact that you see your boss working
-                        right there beside you gives you the confidence
-                        and respect of their leadership. It makes it obvious, that they know the work inside-and-out,
-                        and can use that knowledge to make better decisions,
-                        when managing the bigger picture. In addition, my coworkers were always encouraging, open to
-                        help, and most of all, respected me as one of their colleagues,
-                        despite of the fact, that I was just a summer intern.
-                    </p>
-                    <p>
+            <div class="container-fluid h-100">
+                <div class="row gap-5">
+                    <!-- Education timeline. -->
+                    <div class="col-sm-5">
+                        <div class="education timeline position-relative mb-4">
+                            <h4 class="w-50 mb-5">Education:</h4>
+                            <div class="timeline-container">
+                                <h5 class="fw-semibold">JAMK University of Applied Sciences</h5>
+                                <p>Bachelor’s degree in information and communication engineering</p>
+                            </div>
+                            <div class="dates August-2022-education June-2026-education">
+                                <p>June 2026</p>
+                                <p>August 2022</p>
+                            </div>
+                            <div class="timeline-container" style="bottom: 16%">
+                                <h5 class="fw-semibold">High school of Äänekoski</h5>
+                                <p>High school diploma</p>
+                            </div>
+                            <div class="dates August-2019-education June-2022-education">
+                                <p>June 2022</p>
+                                <p>August 2019</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>
+                                In my teenage years I worked several "summer jobs" to get work experience. It is quite common in
+                                Finland to do a short one-month internship
+                                at a local grocery store, for example, as you are not allowed to work even part-time as a
+                                teenager, but a short summer job can still give you
+                                some valuable work experience and own money. Pair that with me growing up working class and my
+                                mom owning a small local business,
+                                which she also ran by working there full-time, I had plenty of influence on my relationship to
+                                work.
+                            </p>
+                            <p>
+                                One of these key lessons was the fact, that in all of the places that I worked at, the manager
+                                would do work as everyone else.
+                                Often better and more efficient than everyone else, too. The fact that you see your boss working
+                                right there beside you gives you the confidence
+                                and respect of their leadership. It makes it obvious, that they know the work inside-and-out,
+                                and can use that knowledge to make better decisions,
+                                when managing the bigger picture. In addition, my coworkers were always encouraging, open to
+                                help, and most of all, respected me as one of their colleagues,
+                                despite of the fact, that I was just a summer intern.
+                            </p>
+                            <p>
 
-                        This left an impression on me, and it's one of the core values, that I wish from any future
-                        employer.
-                        I believe it's not just for my benefit, but the work culture as a whole will be a lot more open
-                        and focused, leading to a better business.
-                    </p>
+                                This left an impression on me, and it's one of the core values, that I wish from any future
+                                employer.
+                                I believe it's not just for my benefit, but the work culture as a whole will be a lot more open
+                                and focused, leading to a better business.
+                            </p>
+                        </div>
+
+                    </div>
+                    <!-- Work timeline. -->
+                    <div class="col-sm-5">
+                        <div>
+                            <p>
+                                After high school, it was crystal clear to me, that I wanted to choose my higher education to be
+                                in the tech industry.
+                                This was largely because I have always been interested in computers, internet and tech,
+                                but also due to me wanting to pursue a more hands-on field in academia.
+                            </p>
+                            <p>
+                                Currently I am on course for finishing my degree in 2026.
+                                I have always been above average as a student, but I am more focused on projects and innovation,
+                                rather than finding my passion in learning to simply learn. I have my curiosities, and often
+                                they are the impetus to my projects and ideas,
+                                but I prefer to create something tangible with my efforts, rather than to build up skills just
+                                to show them off for validation.
+                            </p>
+                        </div>
+                        <div class="work timeline position-relative mb-4">
+                            <h4 class="w-50 mb-5">Career:</h4>
+                            <div class="timeline-container">
+                                <h5 class="fw-semibold">Production manager (part-time)</h5>
+                                <p>NUKE-League (Hybrid)</p>
+                                <p>NUKE-League</p>
+                            </div>
+                            <div class="dates July-2025 top-0">
+                                <p></p>
+                                <p>July 2025</p>
+                            </div>
+                            <div class="timeline-container" style="bottom: 46%">
+                                <h5 class="fw-semibold">Retail store worker (summer job)</h5>
+                                <p>ABC Hirvaskangas – Hirvaskangas</p>
+                                <p>I worked mainly on shelving, storage and dishes.</p>
+                            </div>
+                            <div class="dates August-2022 May-2022">
+                                <p>August 2022</p>
+                                <p>May 2022</p>
+                            </div>
+                            <div class="timeline-container" style="bottom: 25%">
+                                <h5 class="fw-semibold">Trainee (summer job)</h5>
+                                <p>K-citymarket Äänekoski – Äänekoski</p>
+                            </div>
+                            <div class="dates August-2019 July-2019_2">
+                                <p>August 2019</p>
+                                <p>July 2019</p>
+                            </div>
+                            <div class="timeline-container" style="bottom: 11.5%">
+                                <h5 class="fw-semibold">Youth counsellor's assistant (summer job)</h5>
+                                <p>City of Äänekoski – Äänekoski</p>
+                            </div>
+                            <div class="dates July-2019 June-2019">
+                                <p>July 2019</p>
+                                <p>June 2019</p>
+                            </div>
+                            <div class="timeline-container" style="bottom: 0">
+                                <h5 class="fw-semibold">Summer trainee (summer job)</h5>
+                                <p>Pienryhmäkoti Huvikumpu – Äänekoski</p>
+                            </div>
+                            <div class="dates June-2018">
+                                <p>June 2018</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Article image left -->
@@ -220,7 +226,7 @@
                 Particularly in AI, I have an interest in furthering my knowledge through my own projects, rather than
                 just relying on my education.
                 You can read more about those projects here:
-                <a onclick="JS_NavLoading(3); JS_PageLoading(3); jump()" href="javascript:void(0);"
+                <a href="ai.html"
                     title="Link to my projects on AI.">Link to my projects on AI.</a>
             </p>
             <p style="text-indent: 0; margin-top: 1em;" class="bio">
@@ -228,47 +234,33 @@
                 that I have,
                 come from these hobbies, so one should not judge me only by my achievements in education or employment.
                 You can read more of my hobbies from here:
-                <a onclick="JS_NavLoading(4); JS_PageLoading(4); jump()" href="javascript:void(0);"
+                <a href="hobbies.html"
                     title="Link to my hobbies.">Link to my hobbies.</a>
             </p>
-            <footer>
-                <address>
-                    <p>Phone: +358 45 1382240</p>
-                    <p>Email: santtunurmi2003@gmail.com</p>
-                    <p>
-                        LinkedIn: 
-                        <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
-                            title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
-                        </a>
-                    </p>
-                    <p>
-                        GitHub: 
-                        <a href="https://github.com/santtunurmi" target="_blank"
-                            title="GitHub">https://github.com/santtunurmi
-                        </a>
-                    </p>
-                </address>
-                <nav>
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Footer nav links -->
-                    <div>
-                        <a href="index.html" class="page" data-id="1">Portfolio</a>
-                        <a href="bio.html" class="page" data-id="2">Bio</a>
-                        <a href="ai.html" class="page" data-id="3">AI</a>
-                        <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
-                    </div>
-                </nav>
-            </footer>
         </article>
+        <hr class="mt-5">
+        <footer class="p-4">
+            <h4 class="mb-4">Santtu Nurmi</h4>
+            <address>
+                <p>Phone: +358 45 1382240</p>
+                <p>Email: santtunurmi2003@gmail.com</p>
+                <p>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
+                        title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
+                    </a>
+                </p>
+                <p>
+                    GitHub:
+                    <a href="https://github.com/santtunurmi" target="_blank"
+                        title="GitHub">https://github.com/santtunurmi
+                    </a>
+                </p>
+            </address>
+        </footer>
     </div>
-    <!-- Javascript files are ran. -->
+    <!-- Bundled Javascript is added to the page. -->
     <script type="module" src="./javascript/bundle.js"></script>
-    <script type="text/javascript" src="./javascript/javascript.js"></script>
-    <!-- Functions get ran. -->
-    <script>
-        /* Checks screen width for mobile-specific functions. */
-        WidthChange(mq);
-    </script>
 </body>
 
 </html>

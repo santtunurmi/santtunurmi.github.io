@@ -1,11 +1,8 @@
 //sass --watch ./scss/main.scss ./docs/css/stylesheet.css
 //^^ sass compiler command
-
 // Functions first
 @import "../node_modules/bootstrap/scss/functions";
-
 // Customizations to defaults
-
 $primary-rgb: rgb(0, 153, 255);
 $nav-pills-link-active-bg: white;
 $nav-pills-link-active-color: black;
@@ -16,7 +13,6 @@ $dropdown-link-hover-bg: white;
 $dropdown-link-hover-color: black;
 $dropdown-link-active-bg: white;
 $dropdown-link-active-color: black;
-
 // Required
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/variables-dark";
@@ -25,7 +21,7 @@ $dropdown-link-active-color: black;
 @import "../node_modules/bootstrap/scss/utilities";
 @import "../node_modules/bootstrap/scss/root";
 @import "../node_modules/bootstrap/scss/reboot";
-
+// Modules
 @import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/images";
 @import "../node_modules/bootstrap/scss/containers";
@@ -55,36 +51,26 @@ $dropdown-link-active-color: black;
 // @import "../node_modules/bootstrap/scss/spinners";
 // @import "../node_modules/bootstrap/scss/offcanvas"; // Requires transitions
 // @import "../node_modules/bootstrap/scss/placeholders";
-
 // Helpers
 @import "../node_modules/bootstrap/scss/helpers";
-
 // Utilities
 @import "../node_modules/bootstrap/scss/utilities/api";
-
-
-//
-// Custom styles
-//
-
 /* Global CSS */
-
     h1 {
         font-size: 2.1em;
     }
-
     .svg {
         max-height: 1.25em;
         vertical-align: top;
         padding-left: 1em;
     }
-
     hr {
         opacity: 75%;
     }
-
+    .position-fixed {
+        z-index: 1030;
+    }
 /* Opening-card-related CSS */
-
     .opening-card-background {
         backdrop-filter: blur(0px); /* This fixes a white line appearing on
         the right side of a div with a box shadow and a background image
@@ -135,307 +121,115 @@ $dropdown-link-active-color: black;
         background: url(../content/bassplaying.png) no-repeat;
         background-size: 100%;
     }
-
 /* Nav-bar-related css. */
-
     .nav-link:hover, .nav-link:focus {
         background-color: white;
     }
     nav a {
         font-family: Verdana, Arial, Helvetica, sans-serif;
     }
-
 /* Bio page-specific css. */
-
-    h3.bio {
-        font-size: 1em;
-    }
-
-    p.bio {
-        float: left;
-        margin: 0;
-        font-size: 1em;
+    /* Timeline CSS */
+        .timeline h4 {
+            font-size: 2em;
         }
-
-    div.career-container {
-        float: left;
-        width: 100%;
-        margin: 1.5em 0;
-    }
-
-    /* Education-timeline css. */
-
-        section.education-timeline {
-            position: relative;
-            float: left;
-            width: 33.34em;
-            height: 33.34em;
-            margin: 0;
-            margin-bottom: 1.5em;
-            font-size: 1em;
-        }
-
-        section.education-timeline::after {
+        .timeline::after {
             content: '';
             position: absolute;
-            width: 0.111em;
-            min-width: 2.96px;
+            min-width: 3px;
             background-color: rgb(255, 255, 255);
             z-index: 1;
             top: 0;
             bottom: 0;
-            left: 23.12em;
+            left: 70%;
         }
-
-        h4.education{
-            width: 20em;
+        .timeline-container {
+            width: 60%;
+            position: absolute;
         }
-
-        div.education-container {
-            position: relative;
-            float: left;
-            margin-top: 1em;
-            width: 20em;
-        }
-
-        div.education-container p {
-            text-indent: 0;
-        }
-
-        div.dates-education {
+        .dates {
             position: absolute;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 9em;
-            left: 23.12em;
+            width: calc( 1/3 * 100% );
+            left: 70%;
         }
-
-        div.August-2019-education {
-            bottom: 5%;
-        }
-
-        div.June-2022-education {
-            height: 40%;
-        }
-
-        div.August-2022-education {
-            bottom: 50%;
-        }
-
-        div.June-2026-education {
-            top: 0;
-        }
-
-        div.dates-education p {
-            position: relative;
+        .dates p {
+            text-wrap: nowrap;
+            padding-left: 4vw;
+            font-size: 0.9em;
+            line-height: 0.9em;
             margin: 0;
-            padding: 0;
-            text-align: right;
-            line-height: 1em;
-            text-indent: 0;
         }
-
-        div.dates-education::before {
+        .dates::before {
             content: '';
             position: absolute;
             width: 0.111em;
-            min-width: 2.96px;
-            background: top rgb(0, 153, 255);
+            min-width: 3px;
+            background: top var(--bs-primary);
             top: 0;
             bottom: 0.5em;
             left: 0em;
             z-index: 2;
         }
-
-        div.dates-education p::before {
+        .dates p::before {
             content: '';
             position: absolute;
             width: 0.834em;
             height: 0.834em;
-            left: -0.44em;
-            background-color: rgb(0, 153, 255);
+            left: calc( -1/3 * 1em );
+            background-color: var(--bs-primary);
             border: 0.111em solid #ffffff;
             border-radius: 0.55em;
             z-index: 3;
         }
-
-    div.Education-info {
-        position: relative;
-        float: right;
-        width: 33.34em;
-        font-size: 1em;
-    }
-
-    div.Work-info {
-        position: relative;
-        clear: left;
-        float: left;
-        width: 33.34em;
-        font-size: 1em;
-    }
-
-    /* Work-timeline css. */
-
-        section.work-timeline {
-            position: relative;
-            float: right;
-            clear: right;
-            width: 33.34em;
-            height: 66.68em;
-            margin: 0 0;
-            margin-top: 1.5em;
-            font-size: 1em;
+    /* Education-timeline css. */
+        .education {
+            height: calc( 1/3 * 100em );
         }
-
-        section.work-timeline::before {
-            content: '';
-            position: absolute;
-            width: 0.1111em;
-            min-width: 2.96px;
-            background-color: rgb(255, 255, 255);
-            z-index: 1;
+        .August-2019-education {
+            bottom: 5%;
+        }
+        .June-2022-education {
+            height: 40%;
+        }
+        .August-2022-education {
+            bottom: 50%;
+        }
+        .June-2026-education {
             top: 0;
-            bottom: 0;
-            right: 26.96em;
         }
-
-        h4.career{
-            position: relative;
-            float: right;
-            width: 13.5em;
+    /* Work-timeline css. */
+        .work {
+            height: calc( 2/3* 100em );
         }
-
-        div.work-container {
-            position: relative;
-            float: right;
-            margin-top: 1em;
-            width: 20em;
+        .June-2018 {
+            bottom: 5%;
         }
-
-        div.work-container p {
-            text-indent: 0;
+        .June-2019 {
+            bottom: 20.22%;
         }
-
-        div.work-container h4 {
-            text-wrap: nowrap;
-        }
-
-        div.dates {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 9em;
-            left: -3.4em;
-        }
-
-        div.June-2018 {
-            bottom: 8%;
-        }
-
-        div.June-2019 {
-            bottom: 28.6%;
-        }
-
-        div.July-2019 {
+        .July-2019 {
             height: 5%;
         }
-
-        div.July-2019_2 {
-            bottom: 32.11%;
+        .July-2019_2 {
+            bottom: 24%;
         }
-
-        div.August-2019 {
+        .August-2019 {
             height: 5%;
         }       
-
-        div.May-2022 {
-            bottom: 65%;
+        .May-2022 {
+            bottom: 45%;
         }
-
-        div.August-2022 {
-            height: 20%;
+        .August-2022 {
+            height: 15%;
         }
-
-        div.dates p {
-            position: relative;
-            bottom: 0.25em;
-            margin: 0;
-            text-align: left;
-            text-indent: 0;
-            line-height: 1em;
+        .July-2025 {
+            bottom: 80%;
         }
-
-        div.dates::after {
-            content: '';
-            position: absolute;
-            width: 0.111em;
-            min-width: 2.96px;
-            background: top rgb(0, 153, 255);
-            left: 9.595em;
-            top: 0;
-            bottom: 0.5em;
-            z-index: 2;
-        }
-
-        div.dates p::after {
-            content: '';
-            position: absolute;
-            width: 0.834em;
-            height: 0.834em;
-            right: -1.18em;
-            top: 0.25em;
-            background-color: rgb(0, 153, 255);
-            border: 0.11em solid #ffffff;
-            border-radius: 0.55em;
-            z-index: 3;
-        }
-
-    p.bio a {
-        color: rgb(0, 153, 255);
-    }
-
-    p.bio a:hover {
-        color: #ffffff;
-    }
-
 /* Hobbies page-specific css */
 
-    h3.hobbies {
-        font-size: 0.95em;
-    }
-
-    h4.hobbies {
-        font-size: 0.95em;
-    }
-
-    div.info-hobby-left {
-        float: left;
-        width: 35%;
-        padding: 0.5em 1em 0.5em 0;
-    }
-
-    div.container {
-        position: relative;
-        float: left;
-        width: 100%;
-        padding: 0.5em;
+    .info {
         border: 0.1em solid #aaa;
-        z-index: 1;        
-    }
-
-    h4.info-hobby-left-title {
-        margin: 0.5em 0 1em 0;
-        margin-top: 0;
-        margin-bottom: 0;
-        text-align: left;
-        font-size: 0.9em;
-    }
-
-    p.info-hobby-left-text {
-        padding: 0;
-        text-align: left;
-        font-size: 0.9em;
-        line-height: 1.4em;
     }

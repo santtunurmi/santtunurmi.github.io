@@ -9843,6 +9843,10 @@ hr {
   opacity: 75%;
 }
 
+.position-fixed {
+  z-index: 1030;
+}
+
 /* Opening-card-related CSS */
 .opening-card-background {
   backdrop-filter: blur(0px); /* This fixes a white line appearing on
@@ -9913,294 +9917,129 @@ nav a {
 }
 
 /* Bio page-specific css. */
-h3.bio, .bio.h3 {
-  font-size: 1em;
+/* Timeline CSS */
+.timeline h4, .timeline .h4 {
+  font-size: 2em;
 }
 
-p.bio {
-  float: left;
-  margin: 0;
-  font-size: 1em;
-}
-
-div.career-container {
-  float: left;
-  width: 100%;
-  margin: 1.5em 0;
-}
-
-/* Education-timeline css. */
-section.education-timeline {
-  position: relative;
-  float: left;
-  width: 33.34em;
-  height: 33.34em;
-  margin: 0;
-  margin-bottom: 1.5em;
-  font-size: 1em;
-}
-
-section.education-timeline::after {
+.timeline::after {
   content: "";
   position: absolute;
-  width: 0.111em;
-  min-width: 2.96px;
+  min-width: 3px;
   background-color: rgb(255, 255, 255);
   z-index: 1;
   top: 0;
   bottom: 0;
-  left: 23.12em;
+  left: 70%;
 }
 
-h4.education, .education.h4 {
-  width: 20em;
+.timeline-container {
+  width: 60%;
+  position: absolute;
 }
 
-div.education-container {
-  position: relative;
-  float: left;
-  margin-top: 1em;
-  width: 20em;
-}
-
-div.education-container p {
-  text-indent: 0;
-}
-
-div.dates-education {
+.dates {
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 9em;
-  left: 23.12em;
+  width: 33.3333333333%;
+  left: 70%;
 }
 
-div.August-2019-education {
-  bottom: 5%;
-}
-
-div.June-2022-education {
-  height: 40%;
-}
-
-div.August-2022-education {
-  bottom: 50%;
-}
-
-div.June-2026-education {
-  top: 0;
-}
-
-div.dates-education p {
-  position: relative;
+.dates p {
+  text-wrap: nowrap;
+  padding-left: 4vw;
+  font-size: 0.9em;
+  line-height: 0.9em;
   margin: 0;
-  padding: 0;
-  text-align: right;
-  line-height: 1em;
-  text-indent: 0;
 }
 
-div.dates-education::before {
+.dates::before {
   content: "";
   position: absolute;
   width: 0.111em;
-  min-width: 2.96px;
-  background: top rgb(0, 153, 255);
+  min-width: 3px;
+  background: top var(--bs-primary);
   top: 0;
   bottom: 0.5em;
   left: 0em;
   z-index: 2;
 }
 
-div.dates-education p::before {
+.dates p::before {
   content: "";
   position: absolute;
   width: 0.834em;
   height: 0.834em;
-  left: -0.44em;
-  background-color: rgb(0, 153, 255);
+  left: -0.3333333333em;
+  background-color: var(--bs-primary);
   border: 0.111em solid #ffffff;
   border-radius: 0.55em;
   z-index: 3;
 }
 
-div.Education-info {
-  position: relative;
-  float: right;
-  width: 33.34em;
-  font-size: 1em;
+/* Education-timeline css. */
+.education {
+  height: 33.3333333333em;
 }
 
-div.Work-info {
-  position: relative;
-  clear: left;
-  float: left;
-  width: 33.34em;
-  font-size: 1em;
+.August-2019-education {
+  bottom: 5%;
+}
+
+.June-2022-education {
+  height: 40%;
+}
+
+.August-2022-education {
+  bottom: 50%;
+}
+
+.June-2026-education {
+  top: 0;
 }
 
 /* Work-timeline css. */
-section.work-timeline {
-  position: relative;
-  float: right;
-  clear: right;
-  width: 33.34em;
-  height: 66.68em;
-  margin: 0 0;
-  margin-top: 1.5em;
-  font-size: 1em;
+.work {
+  height: 66.6666666667em;
 }
 
-section.work-timeline::before {
-  content: "";
-  position: absolute;
-  width: 0.1111em;
-  min-width: 2.96px;
-  background-color: rgb(255, 255, 255);
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  right: 26.96em;
+.June-2018 {
+  bottom: 5%;
 }
 
-h4.career, .career.h4 {
-  position: relative;
-  float: right;
-  width: 13.5em;
+.June-2019 {
+  bottom: 20.22%;
 }
 
-div.work-container {
-  position: relative;
-  float: right;
-  margin-top: 1em;
-  width: 20em;
-}
-
-div.work-container p {
-  text-indent: 0;
-}
-
-div.work-container h4, div.work-container .h4 {
-  text-wrap: nowrap;
-}
-
-div.dates {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 9em;
-  left: -3.4em;
-}
-
-div.June-2018 {
-  bottom: 8%;
-}
-
-div.June-2019 {
-  bottom: 28.6%;
-}
-
-div.July-2019 {
+.July-2019 {
   height: 5%;
 }
 
-div.July-2019_2 {
-  bottom: 32.11%;
+.July-2019_2 {
+  bottom: 24%;
 }
 
-div.August-2019 {
+.August-2019 {
   height: 5%;
 }
 
-div.May-2022 {
-  bottom: 65%;
+.May-2022 {
+  bottom: 45%;
 }
 
-div.August-2022 {
-  height: 20%;
+.August-2022 {
+  height: 15%;
 }
 
-div.dates p {
-  position: relative;
-  bottom: 0.25em;
-  margin: 0;
-  text-align: left;
-  text-indent: 0;
-  line-height: 1em;
-}
-
-div.dates::after {
-  content: "";
-  position: absolute;
-  width: 0.111em;
-  min-width: 2.96px;
-  background: top rgb(0, 153, 255);
-  left: 9.595em;
-  top: 0;
-  bottom: 0.5em;
-  z-index: 2;
-}
-
-div.dates p::after {
-  content: "";
-  position: absolute;
-  width: 0.834em;
-  height: 0.834em;
-  right: -1.18em;
-  top: 0.25em;
-  background-color: rgb(0, 153, 255);
-  border: 0.11em solid #ffffff;
-  border-radius: 0.55em;
-  z-index: 3;
-}
-
-p.bio a {
-  color: rgb(0, 153, 255);
-}
-
-p.bio a:hover {
-  color: #ffffff;
+.July-2025 {
+  bottom: 80%;
 }
 
 /* Hobbies page-specific css */
-h3.hobbies, .hobbies.h3 {
-  font-size: 0.95em;
-}
-
-h4.hobbies, .hobbies.h4 {
-  font-size: 0.95em;
-}
-
-div.info-hobby-left {
-  float: left;
-  width: 35%;
-  padding: 0.5em 1em 0.5em 0;
-}
-
-div.container {
-  position: relative;
-  float: left;
-  width: 100%;
-  padding: 0.5em;
+.info {
   border: 0.1em solid #aaa;
-  z-index: 1;
-}
-
-h4.info-hobby-left-title, .info-hobby-left-title.h4 {
-  margin: 0.5em 0 1em 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  text-align: left;
-  font-size: 0.9em;
-}
-
-p.info-hobby-left-text {
-  padding: 0;
-  text-align: left;
-  font-size: 0.9em;
-  line-height: 1.4em;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */

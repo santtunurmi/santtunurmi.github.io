@@ -77,7 +77,7 @@
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Remember me</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">This does nothing</button>
                         </form>
                     </div>
                     <!-- "Add speedrun" -form -->
@@ -106,43 +106,34 @@
                 </div>
             </div>
         </header>
-        <article>
-            <h3>Speedruns:</h3>
-            <footer>
-                <address>
-                    <p>Phone: +358 45 1382240</p>
-                    <p>Email: santtunurmi2003@gmail.com</p>
-                    <p>
-                        LinkedIn: <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
-                            title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/</a>
-                    </p>
-                    <p>
-                        GitHub: <a href="https://github.com/santtunurmi" target="_blank"
-                            title="GitHub">https://github.com/santtunurmi</a>
-                    </p>
-                </address>
-                <nav>
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Footer nav links -->
-                    <div>
-                        <a href="index.html" class="page" data-id="1">Portfolio</a>
-                        <a href="bio.html" class="page" data-id="2">Bio</a>
-                        <a href="ai.html" class="page" data-id="3">AI</a>
-                        <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
-                    </div>
-                </nav>
-            </footer>
-        </article>
+        <!-- Webserver content -->
+        <div class="container-fluid">
+            <h4 class="pt-3 pb-1 fw-semibold">Speedruns:</h4>
+        </div>
+        <hr class="mt-5">
+        <footer class="p-4">
+            <h4 class="mb-4">Santtu Nurmi</h4>
+            <address>
+                <p>Phone: +358 45 1382240</p>
+                <p>Email: santtunurmi2003@gmail.com</p>
+                <p>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
+                        title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
+                    </a>
+                </p>
+                <p>
+                    GitHub:
+                    <a href="https://github.com/santtunurmi" target="_blank"
+                        title="GitHub">https://github.com/santtunurmi
+                    </a>
+                </p>
+            </address>
+        </footer>
     </div>
-    <!-- Javascript file is ran. -->
+    <!-- Bundled Javascript is added to the page. -->
     <script type="module" src="./javascript/bundle.js"></script>
-    <script type="text/javascript" src="./javascript/javascript.js"></script>
-    <!-- Javascript files are ran. -->
     <script>
-        /* Checks screen width for mobile-specific functions. */
-        WidthChange(mq);
-    </script>
-        <script>
         var lgn = document.querySelector("div.login")
         var form = document.querySelector("div.input")
         lgn.addEventListener('submit', (event)=>{
@@ -154,13 +145,11 @@
                 lgn.classList.remove("d-block"); lgn.classList.add("d-none")
                 form.classList.remove("d-none"); form.classList.add("d-block")
             }
-
             else {
                 form.classList.remove("d-block"); form.classList.add("d-none")
                 lgn.classList.remove("d-none"); lgn.classList.add("d-block")
             }
         }
-
     </script>
 </body>
 

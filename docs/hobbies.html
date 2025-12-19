@@ -62,10 +62,9 @@
                 </p>
             </div>
         </header>
-        <!-- Article content-change classification for "Hobbies" -->
-        <article>
-            <!-- Article title -->
-            <h3 class="hobbies">Hobbies</h3>
+        <!-- AI-page content -->
+        <div class="container-fluid">
+            <h4 class="pt-3 pb-1 fw-semibold">Hobbies</h4>
             <p>
                 Although I have played instruments for a relatively short time, and my profficiency is not yet the best,
                 I nevertheless have a great passion for music, partly due to my musically strong upbringing, and family
@@ -100,8 +99,6 @@
                 and I would argue, that having many different hobbies, allows you to build a selection of skills, that
                 would not be possible,
                 through your work life alone. This sentiment seems to be shared by my generation as a whole.
-                <!-- Article image right -->
-                <!-- <img src="a" alt="b" class="img-bio-right"> -->
             </p>
             <p>
                 Said sentiment is something that came strongest to me through my hobby of speedrunning. Mentioned
@@ -116,7 +113,7 @@
                 put on yourself.
                 It can all be too much.
             </p>
-            <p style="padding-bottom: 0;">
+            <p>
                 There is a key detail that should not go overlooked in speedrunning, however. You have to play
                 flawlessly, in my case for over 2 hours straight.
                 If you make any major mistake it's all for nothing, and it's back to the first level again. When you're
@@ -126,48 +123,16 @@
                 Make any mistake and you lose. Not many people get in that spot at work, even fewer know how to handle
                 it.
             </p>
-            <div class="info-hobby-left read-more-other">
-                <div class="container">
-                    <h4 class="info-hobby-left-title">Of Adrenaline:</h4>
-                    <p class="info-hobby-left-text">
-                        One of the more interesting functions in the body, is the natural production of adrenaline.
-                        Largely responsible for a number of automatic behaviors,
-                        adrenaline is how we are able to function at a much higher level during, let's say, fight or
-                        flight.
-                        The automatic sensory behavior during fight or flight is much more than just one hormone, but
-                        adrenaline's role in increasing blood flow to muscles
-                        is one of the reasons why it is so pivotal to peak-level human performance. This is obviously
-                        handy if you get attacked,
-                        but for as long as sports have been played, it's effects can also be seen there, as being under
-                        extreme stress can cultivate extraordinary physical capabilites.
-                    </p>
-                    <p class="info-hobby-left-text">
-                        This is also my personal experience with the phenomena. 
-                        <!-- Span is to allow mobile-specific "read-me"-button to reveal the rest of the text. -->
-                        <span class="more-other">From my
-                            experience with being able to deal with stress in speedrunning, I have found,
-                            that adrenaline plays a pivotal role in me being able to perform at my highest level.
-                            In-fact, I'd argue, that being able to handle stress well is caused by
-                            being able to channel the adrenaline in your body correctly. Making your focus be "avoiding
-                            disasters", causes your behavior under the immense stress to be fight,
-                            not flight. To make sure, that you are in control and that you use your hightened vigilance
-                            for negative emotions to anticipate potential disasters,
-                            and focus your attention on dealing with them.
-                        </span>
-                    </p>
-                    <p class="info-hobby-left-text more-other">
-                        I find, that when this is done, generally the increased blood flow in your muscles allows your
-                        muscle memory
-                        to handle the actual execution of the task much better than one could consciously. This often
-                        helps dealing with unexpected situations.
-                        In moments of surprise or mistake, there may be a moment of panic, but with good preparation,
-                        you can get yourself to react correctly, which with adrenaline,
-                        will happen very quickly, minimizing damage.
-                    </p>
-                    <!-- Mobile-specific "read more"-button -->
-                    <button id="hobby-read-more-button" onclick="readMoreOther()"
-                        class="read-more-other-button">Read more</button>
-                </div>
+            <div class="container float-start col-sm-3 info p-2 me-3 mb-3">
+                <h5 class="card-title mb-2">Of Adrenaline:</h5>
+                <p class="card-text">
+                    One of the more interesting functions in the body, is the natural production of adrenaline. Largely responsible for a number of automatic behaviors,
+                    adrenaline is how we are able to function at a much higher level during, let's say, fight or flight.
+                    The automatic sensory behavior during fight or flight is much more than just one hormone, but adrenaline's role in increasing blood flow to muscles 
+                    is one of the reasons why it is so pivotal to peak-level human performance. This is obviously handy if you get attacked,
+                    but for as long as sports have been played, it's effects can also be seen there, as being under extreme stress can cultivate extraordinary physical capabilites.
+                </p>
+                <a href="ai.html" class="btn btn-primary">Read more</a>
             </div>
             <p>
                 Racing other people in speedrunning isn't much better either. You are practicing for hours and hours to
@@ -242,40 +207,30 @@
                 could've been better, sure,
                 and there were mistakes, but I avoided disasters and took advantage of the parts where I nailed it.
             </p>
-            <footer>
-                <address>
-                    <p>Phone: +358 45 1382240</p>
-                    <p>Email: santtunurmi2003@gmail.com</p>
-                    <p>
-                        LinkedIn: <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
-                            title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/</a>
-                    </p>
-                    <p>
-                        GitHub: <a href="https://github.com/santtunurmi" target="_blank"
-                            title="GitHub">https://github.com/santtunurmi</a>
-                    </p>
-                </address>
-                <nav>
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Footer nav links -->
-                    <div>
-                        <a href="index.html" class="page" data-id="1">Portfolio</a>
-                        <a href="bio.html" class="page" data-id="2">Bio</a>
-                        <a href="ai.html" class="page" data-id="3">AI</a>
-                        <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
-                    </div>
-                </nav>
-            </footer>
-        </article>
+        </div>
+        <hr class="mt-5">
+        <footer class="p-4">
+            <h4 class="mb-4">Santtu Nurmi</h4>
+            <address>
+                <p>Phone: +358 45 1382240</p>
+                <p>Email: santtunurmi2003@gmail.com</p>
+                <p>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
+                        title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
+                    </a>
+                </p>
+                <p>
+                    GitHub:
+                    <a href="https://github.com/santtunurmi" target="_blank"
+                        title="GitHub">https://github.com/santtunurmi
+                    </a>
+                </p>
+            </address>
+        </footer>
     </div>
-    <!-- Javascript files are ran. -->
+    <!-- Bundled Javascript is added to the page. -->
     <script type="module" src="./javascript/bundle.js"></script>
-    <script type="text/javascript" src="./javascript/javascript.js"></script>
-    <!-- Functions get ran. -->
-    <script>
-        /* Checks screen width for mobile-specific functions. */
-        WidthChange(mq);
-    </script>
 </body>
 
 </html>
