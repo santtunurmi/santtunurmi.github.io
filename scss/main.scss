@@ -78,7 +78,7 @@ $dropdown-link-active-color: black;
         Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
         height: 85vw;
         max-height: 650px;
-        box-shadow: 0 0 1.6vw 1.3vw black inset;
+        box-shadow: 0 0 1.3vw 1.6vw black inset;
     }
     .Opening-card-fade-60, .Opening-card-fade-80 {
         background: rgb(0, 0, 0);
@@ -230,13 +230,17 @@ $dropdown-link-active-color: black;
 /* Media breakpoints */
     /* sm >=576px */
     @include media-breakpoint-up(sm) {
+        .Opening-card-fade-50 {
+            background: rgb(0, 0, 0);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 46%, rgb(0, 0, 0, 1) 50%);
+        }
         .Opening-card-fade-60 {
             background: rgb(0, 0, 0);
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 30%, rgb(0, 0, 0, 1) 60%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 46%, rgb(0, 0, 0, 1) 60%);
         }
         .Opening-card-fade-80 {
             background: rgb(0, 0, 0);
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 50%, rgb(0, 0, 0, 1) 80%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 30%, rgb(0, 0, 0, 1) 100%);
         }
         .Opening-card-text-block {
             width: 70%;
@@ -256,7 +260,7 @@ $dropdown-link-active-color: black;
     @include media-breakpoint-up(md) {
         .bio-image {
             background: url(../content/Working-wide.png) no-repeat;
-            background-size: 1000px;
+            background-size: 1200px;
         }
         .AI-image {
             background-size: 1300px;
