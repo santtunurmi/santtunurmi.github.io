@@ -9829,6 +9829,10 @@ textarea.form-control-lg {
   }
 }
 /* Global CSS */
+.position-fixed {
+  z-index: 1030;
+}
+
 h1, .h1 {
   font-size: 2.1em;
 }
@@ -9841,10 +9845,6 @@ h1, .h1 {
 
 hr {
   opacity: 75%;
-}
-
-.position-fixed {
-  z-index: 1030;
 }
 
 /* Opening-card-related CSS */
@@ -10060,6 +10060,22 @@ nav a {
   .Hobbies-image {
     background: url(../content/bassplaying-tall.png) no-repeat;
     background-size: 100%;
+  }
+}
+/* md >=768px */
+@media (min-width: 768px) {
+  .bio-image {
+    background: url(../content/Working-wide.png) no-repeat;
+    background-size: 1000px;
+  }
+  .AI-image {
+    background-size: 1300px;
+  }
+}
+/* lg >=992px */
+@media (min-width: 992px) {
+  .portfolio-image {
+    background-size: 650px;
   }
 }
 
