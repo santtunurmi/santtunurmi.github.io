@@ -10071,11 +10071,28 @@ nav a {
   .AI-image {
     background-size: 1300px;
   }
+  .Opening-card-text-block {
+    top: 70%;
+    width: 60%;
+  }
 }
 /* lg >=992px */
 @media (min-width: 992px) {
   .portfolio-image {
     background-size: 650px;
+  }
+}
+/* lg >=1200px */
+@media (min-width: 1200px) {
+  #root {
+    max-width: 1200px;
+    position: relative;
+    float: left;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .Opening-card-text-block {
+    top: 75%;
   }
 }
 
