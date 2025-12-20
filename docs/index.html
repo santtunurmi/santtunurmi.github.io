@@ -7,7 +7,8 @@
     <meta name="keywords"
         content="Portfolio, AI, data-analytics, Programming, Job Searching, Internship, Finnish, English, full-stack, innovation, College Student">
     <meta name="author" content="Santtu Nurmi">
-    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta name="viewport"
+        content="width = device-width, initial-scale = 1.0, minimum-scale = 1.0">
     <meta charset="utf-8">
     <!-- Title -->
     <title>Portfolio of Santtu Nurmi</title>
@@ -15,219 +16,135 @@
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 
-<body>
-    <div class="content-root" id="root">
-        <header class="card border-0 mh-10">
+<body class="bg-black">
+    <div id="root">
+        <!-- Nav -->
+        <div class="position-fixed min-wv-25 h-100 end-0 z-2">
+            <nav class="nav flex-column p-2 m-3 text-bg-primary rounded-1" aria-orientation="vertical">
+                <button class="navbar-toggler p-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mobile-nav" aria-controls="mobile-nav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse nav-pills navbar-collapse" id="mobile-nav">
+                    <h2 class="text-center fs-4">Santtu Nurmi</h2>
+                    <!-- Nav links -->
+                    <a class="nav-link active" aria-current="page" href="index.html">Portfolio</a>
+                    <!-- Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                            href="#" role="button" aria-expanded="false">Bio</a>
+                        <ul class="dropdown-menu text-bg-primary">
+                            <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
+                            <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
+                        </ul>
+                    </div>
+                    <a class="nav-link" href="ai.html">AI</a>
+                    <a class="nav-link" href="hobbies.html">Hobbies</a>
+                    <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
+                </div>
+            </nav>
+        </div>
+        <header class="card border-0 mh-10 bg-black">
             <!-- Fade-effect for the portfolio opening card image. -->
-            <div class="Opening-card-fade-portfolio"></div>
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <!-- Opening card article -->
-                    <div class="portfolio">
-                        <article class="Opening-card-text-block">
-                            <p>
-                                Full-stack, AI and data-analytics, Esports-production, programming and much more.
-                                Currently studying information and communication technology at
-                                JAMK university of applied sciences. Browse this portfolio to get to know me better!
-                            </p>
-                        </article>
-                    </div>
+            <div class="row g-0 gap-0 row-gab-0">
+                <div class="Opening-card-fade-60 position-absolute h-100 p-0 z-1"></div>
+                <div class="opening-card-background portfolio-image col-sm-8 p-0 z-0">
                 </div>
-                <div class="col-md-4">
-                    <div class="card-body">
-                        <!-- Right-side nav -->
-                        <nav class="nav nav-pills flex-column">
-                            <h2>Santtu Nurmi</h2>
-                            <!-- Nav links -->
-                            <a class="nav-link active" aria-current="page" href="index.html">Portfolio</a>
-                            <!-- Dropdown -->
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                                    href="#" role="button" aria-expanded="false">Bio</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="bio.html">Main Bio</a></li>
-                                    <li><a class="dropdown-item" href="webserver.html">Webserver</a></li>
-                                </ul>
-                            </div>
-                            <a class="nav-link" href="ai.html">AI</a>
-                            <a class="nav-link" href="hobbies.html">Hobbies</a>
-                            <a class="nav-link" href="content/CV.pdf" target="_blank">Download CV</a>
-                        </nav>
-                    </div>
-                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <!-- Opening card article -->
+            <div class="Opening-card-text-block position-absolute rounded-1 p-2 z-1">
+                <p>
+                    Full-stack, AI and data-analytics, Esports-production, programming and much more.
+                    Currently studying information and communication technology at
+                    JAMK university of applied sciences.
+                </p>
             </div>
         </header>
-        <!-- Article content-change classification for "portfolio" -->
-        <article class="active">
-            <h4 class="portfolio-title">My portfolio:</h4>
-            <div class="portfolio-container">
-                <!-- Portfolio project container AI -->
-                <div class="portfolio-project">
-                    <img src="content/AI-project.png" alt="Data preprocessing code." class="portfolio-project-AI">
-                    <h4 class="portfolio-project-AI">
-                        Developing AI
-                        <a onclick="JS_NavLoading(3); JS_PageLoading(3); jump()" href="javascript:void(0);"
-                            title="Website for this project.">
-                            <img src="content/globe-solid.svg" alt="Project website">
-                        </a>
-                    </h4>
-                    <p>
-                        I am currently specializing in data-analytics and AI, through a JAMK specialization module of 30
-                        credits.
-                        I recognize, however, that 30 credits won't teach me everything there is to learn about
-                        data-analytics and AI.
-                        So, I have made it my mission to specialize myself even further, by working on my own projects.
-                    </p>
-                    <p>
-                        Right now my goals are to create an SQL database for storing data, and then finding +
-                        implementing a suitable machine learning model,
-                        to train on the data. All of this being hosted on this very website. If I apply this project to
-                        a personal interest of mine,
-                        I believe I can achieve much deeper expertese, not only in the utilization of the technology,
-                        but also in how the technology itself is being built.
-                    </p>
-                    <p>
-                        All of my projects concerning AI, will be hosted on the page dedicated for AI on
-                        this site. On this page you can also take a deeper dive into what specific skills I have learnt
-                        in my education, and through my own projects.
-                    </p>
-                </div>
-                <!-- Portfolio project container Esports. -->
-                <div class="portfolio-project" id="Esports">
-                    <img src="content/ladder-league.png" alt="Layout and race from ladder league."
-                        class="portfolio-project-Esports">
-                    <h4 class="portfolio-project-Esports">
-                        Small-scale esports production
-                        <a href="https://www.youtube.com/live/JrvSf4V2kxc?si=fU1kq_3wYppmDpHh" target="_blank"
-                            title="YouTube video showcasing the project.">
-                            <img src="content/youtube-logo.png" alt="Project website">
-                        </a>
-                    </h4>
-                    <p>
-                        Having done speedrunning as a hobby for 9 years, I have participated in, and helped produce many
-                        successful community events.
-                        My main affiliation has been with the LEGO speedrunning community.
-                    </p>
-                    <p>
-                        Most of the events gather money for charity,
-                        and despite our smaller community, so far, we have been able to raise over $10,000 USD total to
-                        several different charities through our many events.
-                        Most events are held online, and it should be noted, that the people involved do the work as a
-                        hobby, meaning that none of us get a salary.
-                        Instead, we get our drive from genuine passion, in not only speedrunning, but developing our
-                        amazing community, by organizing fun and exciting events.
-                    </p>
-                    <p>
-                        My role in these events has been often on the side of the moderation team, who help organize the
-                        events, brainstorm ideas and make content.
-                        I've culminated extensive experience in using tools such as OBS, Twitch and YouTube, as well as
-                        video editing with Davinci Resolve.
-                        I have competed at many events, and also done commentary work.
-                    </p>
-                    <p>
-                        I believe that E-sports events have the genuine power to unite communities,
-                        that no other form of traditional sports, or media, could bring together. I witnessed this
-                        first-hand,
-                        when attending my first Counter-Strike major in Austin, Texas. I attended the event with friends
-                        I had made through speedrunning.
-                    </p>
-                </div>
-                <!-- Portfolio project container portfolio website. -->
-                <div class="portfolio-project">
-                    <img src="content/Portfolio-website.png" alt="Image of this website."
-                        class="portfolio-project-portfolio-website">
-                    <h4 class="portfolio-project-portfolio-website">
-                        This website
-                        <a href="https://github.com/santtunurmi/santtunurmi.github.io" target="_blank"
-                            title="GitHub for this project.">
-                            <img src="content/github-mark-white.png" alt="Project GitHub">
-                        </a>
-                    </h4>
-                    <p>
-                        Having studied HTML and CSS pretty extensively, I felt confident, that I could pull of a great
-                        portfolio website
-                        with just HTML, CSS and JavaScript.
-                    </p>
-                    <p>
-                        I started this project to learn more about all three of those languages, as well as web
-                        development, full-stack
-                        and about hosting a website in general. At the same time I could get bang for my buck by getting
-                        a sweet portfolio website,
-                        which could help me stand out from the crowd of other potential hirees.
-                    </p>
-                    <p>
-                        Part of me wanted to also prove to myself, that I was worth more than the grade 1 in full-stack,
-                        that I got, which was a result of issues long since resolved.
-                        I don't think I'm quite there yet, but this site should already serve as a solid foundational
-                        statement, which I can always add on to, later on.
-                    </p>
-                </div>
-                <!-- Portfolio project container wall-calculator -->
-                <div class="portfolio-project" id="wall-calculator">
-                    <img src="content/minecraft-wall.jpg" alt="Image of pillars in minecraft."
-                        class="portfolio-project-wall-calculator">
-                    <h4 class="portfolio-project-wall-calculator">
-                        Minecraft wall calculator
-                        <!-- Coming soon.
-                            <a href="/Minecraft-wall-calculator" title="Website for this project.">
-                                <img src="content/globe-solid.svg" alt="Project website">
-                            </a>
-                            -->
-                        <a href="https://github.com/santtunurmi/Minecraft-Wall-Calculator" target="_blank"
-                            title="GitHub for this project.">
-                            <img src="content/github-mark-white.png" alt="Project GitHub">
-                        </a>
-                    </h4>
-                    <p>Simple calculator for determining pillar spacing along a wall.</p>
-                    <p style="margin-top: 1em; text-indent: 0;">
-                        This may seem like an odd little project, and it's not complex, I'll admit,
-                        but it was spawned from a genuine need for a program that did exactly this functionality.
-                    </p>
-                    <p>
-                        After unsuccessfully trying to find one online, I simply coded it from scratch with Python, when
-                        I had barely any coding experience.
-                        I still use it to this day.
-                    </p>
+        <!-- Portfolio content -->
+        <h1 class="text-center p-5">My portfolio:</h1>
+        <div class="container-fluid">
+            <div class="container-fluid text-center">
+                <div class="row gy-3">
+                    <!-- Portfolio project container AI -->
+                    <div class="col-sm-6 col-lg-4 card bg-black p-0">
+                        <img src="content/AI-project.png" class="card-img-top" alt="Data preprocessing code.">
+                        <div class="card-body bg-black">
+                            <h5 class="card-title mb-4">Data preprocessing and AI</h5>
+                            <p class="card-text">
+                                I am currently specializing in data-analytics and AI, through a specialization module of
+                                30 credits at JAMK university of applied sciences. I recognize, however,
+                                that 30 credits won't teach me everything there is to learn about data-analytics and AI.
+                                So, I have made it my mission to specialize myself even further, by working on my own projects.
+                            </p>
+                            <a href="ai.html" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                    <!-- Portfolio project container Esports. -->
+                    <div class="col-sm-6 col-lg-4 card bg-black p-0">
+                        <img src="content/ladder-league.png" class="card-img-top" alt="Data preprocessing code.">
+                        <div class="card-body bg-black">
+                            <h5 class="card-title mb-4">Esports event production</h5>
+                            <p class="card-text">
+                                Having done speedrunning as a hobby for 9 years, I have participated in, and helped produce many
+                                successful community events.
+                                My main affiliation has been with the LEGO speedrunning community.
+                            </p>
+                            <a href="ai.html" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                    <!-- Portfolio project container portfolio website. -->
+                    <div class="col-sm-6 col-lg-4 card bg-black p-0">
+                        <img src="content/Portfolio-website.png" class="card-img-top" alt="Image of this website.">
+                        <div class="card-body bg-black">
+                            <h5 class="card-title mb-4">Full-stack development</h5>
+                            <p class="card-text">
+                                Having done speedrunning as a hobby for 9 years, I have participated in, and helped produce many
+                                successful community events.
+                                My main affiliation has been with the LEGO speedrunning community.
+                            </p>
+                            <a href="ai.html" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 card bg-black p-0">
+                        <img src="content/minecraft-wall.jpg" class="card-img-top" alt="Image of pillars in minecraft.">
+                        <div class="card-body bg-black">
+                            <h5 class="card-title mb-4">Minecraft wall calculator</h5>
+                            <p class="card-text">
+                                This may seem like an odd little project, and it's not complex, I'll admit,
+                                but it was spawned from a genuine need for a program that did exactly this functionality.
+                            </p>
+                            <a href="ai.html" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                    <!-- Portfolio project container wall-calculator -->
                 </div>
             </div>
-            <footer>
-                <address>
-                    <p>Phone: +358 45 1382240</p>
-                    <p>Email: santtunurmi2003@gmail.com</p>
-                    <p>
-                        LinkedIn:
-                        <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
-                            title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
-                        </a>
-                    </p>
-                    <p>
-                        GitHub:
-                        <a href="https://github.com/santtunurmi" target="_blank"
-                            title="GitHub">https://github.com/santtunurmi
-                        </a>
-                    </p>
-                </address>
-                <nav>
-                    <h2>Santtu Nurmi</h2>
-                    <!-- Footer nav links -->
-                    <div>
-                        <a href="index.html" class="page" data-id="1">Portfolio</a>
-                        <a href="bio.html" class="page" data-id="2">Bio</a>
-                        <a href="ai.html" class="page" data-id="3">AI</a>
-                        <a href="hobbies.html" class="page" data-id="4">Hobbies</a>
-                    </div>
-                </nav>
-            </footer>
-        </article>
+        </div>
+        <hr class="mt-5">
+        <footer class="p-4">
+            <h4 class="mb-4">Santtu Nurmi</h4>
+            <address>
+                <p>Phone: +358 45 1382240</p>
+                <p>Email: santtunurmi2003@gmail.com</p>
+                <p>
+                    LinkedIn:
+                    <a href="https://www.linkedin.com/in/santtu-nurmi-84a233205/" target="_blank"
+                        title="LinkedIn">https://www.linkedin.com/in/santtu-nurmi-84a233205/
+                    </a>
+                </p>
+                <p>
+                    GitHub:
+                    <a href="https://github.com/santtunurmi" target="_blank"
+                        title="GitHub">https://github.com/santtunurmi
+                    </a>
+                </p>
+            </address>
+        </footer>
     </div>
-    <!-- Javascript files are ran. -->
+    <!-- Bundled Javascript is added to the page. -->
     <script type="module" src="./javascript/bundle.js"></script>
-    <script type="text/javascript" src="./javascript/javascript.js"></script>
-    <!-- Functions get ran. -->
-    <script>
-        /* Checks screen width for mobile-specific functions. */
-        WidthChange(mq);
-    </script>
 </body>
 
 </html>
