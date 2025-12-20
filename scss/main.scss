@@ -271,6 +271,10 @@ $dropdown-link-active-color: black;
         .portfolio-image {
             background-size: 650px;
         }
+        .Hobbies-image {
+            background: url(../content/bassplaying.png) no-repeat;
+            background-size: 750px;
+        }
     }
     /* lg >=1200px */
     @include media-breakpoint-up(xl) {
