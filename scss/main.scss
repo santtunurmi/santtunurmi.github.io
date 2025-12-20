@@ -77,17 +77,12 @@ $dropdown-link-active-color: black;
         if there is no parent element resizing it and the width is defined in the element.
         Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
         height: 85vw;
+        max-height: 650px;
         box-shadow: 0 0 1.6vw 1.3vw black inset;
     }
-    .Opening-card-fade {
+    .Opening-card-fade-60, .Opening-card-fade-80 {
         background: rgb(0, 0, 0);
         background: (rgba(0, 0, 0, 0.14));
-    }
-    @include media-breakpoint-up(md) {
-        .Opening-card-fade {
-            background: rgb(0, 0, 0);
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 40%, rgb(0, 0, 0, 1) 61%);
-        }
     }
     .Opening-card-text-block {
         width: 90%;
@@ -233,3 +228,31 @@ $dropdown-link-active-color: black;
     .info {
         border: 0.1em solid #aaa;
     }
+
+/* Media breakpoints */
+
+    /* sm >=576px */
+
+        @include media-breakpoint-up(sm) {
+            .Opening-card-fade-60 {
+                background: rgb(0, 0, 0);
+                background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 30%, rgb(0, 0, 0, 1) 60%);
+            }
+            .Opening-card-fade-80 {
+                background: rgb(0, 0, 0);
+                background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 50%, rgb(0, 0, 0, 1) 80%);
+            }
+            .Opening-card-text-block {
+                width: 70%;
+            }
+            .Opening-card-text-block p {
+                font-size: 1.25em;
+            }
+            .bio-image {
+                background-size: 110%;
+            }
+            .Hobbies-image {
+                background: url(../content/bassplaying-tall.png) no-repeat;
+                background-size: 100%;
+            }
+        }
