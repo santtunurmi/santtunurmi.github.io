@@ -120,6 +120,10 @@ $dropdown-link-active-color: black;
     nav a {
         font-family: Verdana, Arial, Helvetica, sans-serif;
     }
+
+    .portfolio-card-image {
+        max-height: 11em;
+    }
 /* Bio page-specific css. */
     /* Timeline CSS */
     .timeline h4 {
