@@ -9829,10 +9829,6 @@ textarea.form-control-lg {
   }
 }
 /* Global CSS */
-.position-fixed {
-  z-index: 1030;
-}
-
 h1, .h1 {
   font-size: 2.1em;
 }
