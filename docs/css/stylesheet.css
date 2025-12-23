@@ -9631,7 +9631,7 @@ Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
 .Opening-card-text-block {
   width: 90%;
   left: 5%;
-  top: 60%;
+  bottom: 6%;
   background: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.888);
 }
@@ -9676,6 +9676,10 @@ nav a {
   font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+.portfolio-card-image {
+  max-height: 11em;
+}
+
 /* Bio page-specific css. */
 /* Timeline CSS */
 .timeline h4, .timeline .h4 {
@@ -9709,7 +9713,7 @@ nav a {
 
 .dates p {
   text-wrap: nowrap;
-  padding-left: 4vw;
+  padding-left: 2.5em;
   font-size: 0.9em;
   line-height: 0.9em;
   margin: 0;
@@ -9841,8 +9845,7 @@ nav a {
     background-size: 1300px;
   }
   .Opening-card-text-block {
-    top: 70%;
-    width: 60%;
+    width: 50%;
   }
 }
 /* lg >=992px */
@@ -9863,9 +9866,6 @@ nav a {
     float: left;
     left: 50%;
     transform: translateX(-50%);
-  }
-  .Opening-card-text-block {
-    top: 75%;
   }
 }
 
