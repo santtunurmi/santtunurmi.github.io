@@ -18,7 +18,7 @@ export default function BioPage() {
                     <div className='col-sm-1'></div>
                 </div>
                 <div className='Opening-card-text-block position-absolute rounded-1 p-2 z-1'>
-                    <p>People have described me as hard-working, committed, analytical and improvement oriented. I have received praise from the ability to be reflective on my own work, by being able to take in feedback, as well as my strong ability to get things done. My work at EXEN and NUKE-Liiga are the most recent examples of these qualities in action.</p>
+                    <p>People have described me as hard-working, committed, analytical, and improvement-oriented. I have been praised for reflecting on my own work, taking feedback seriously, and getting things done. My projects and work at EXEN and NUKE-Liiga are the most recent examples of these qualities in action.</p>
                 </div>
             </header>
             <article className='container-fluid'>
@@ -26,18 +26,18 @@ export default function BioPage() {
                 <motion.section className='bio-section' aria-labelledby='education-heading' {...educationReveal}>
                     <h2 id='education-heading' className='h3 fw-semibold'>Education</h2>
                     <BioTimeline entries={educationTimeline} />
-                    <p>My education in information and communication technology at the JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that having a wide range of skills and knowledge is vital for any person to have. You can often find ways to learn how different things can be used together. My education has also challenged me to demand more of myself. I wasn't getting the best grades at the start, and didn't work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; the momentum of which I've used to kickstart my career.</p>
+                    <p>My education in information and communication technology at JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that a wide range of skills and knowledge is vital, because it helps you see how different things can work together. My education has also challenged me to demand more of myself. I did not get the best grades at the start, and I did not work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; I have used that momentum to kickstart my career.</p>
                 </motion.section>
                 <motion.section className='bio-section' aria-labelledby='work-heading' {...workReveal}>
                     <h2 id='work-heading' className='h3 fw-semibold'>Work</h2>
                     <BioTimeline entries={workTimeline} />
-                    <p>In my teenage years I worked several "summer jobs" to get work experience. It is quite common in Finland to do a short one-month internship at a local grocery store, for example. At the time this was just a way for me to get that much needed work experience, but I have come to value the time I spent working at, say, retail. There are people just like you and me doing a lot of important work to keep our stores running. It may be easy to take for granted when we're buying groceries, but without that work we would be buying spoiled milk.</p>
+                    <p>In my teenage years, I worked several summer jobs to gain work experience. In Finland, it is quite common to do a short internship at a local grocery store, for example. At the time, this was simply a way to get much-needed work experience, but I have come to value the time I spent working in retail. People just like you and me do important work to keep our stores running. It is easy to take that for granted when buying groceries, but without that work, we would be buying spoiled milk.</p>
                 </motion.section>
                 <p style={{ textIndent: '0' }} className='bio'>
-                    AI-workflows have become a massive part of how I work, despite of the fact that I used to be strongly anti-AI for a long time. When I understand what the model is doing, and the model understands what I want, I'm able to speed up my productivity, while still maintaining the human touch and creativity. You can read more about my use of AI here: <Link to='/ai' title='Link to my page on AI.'>Link to my page on AI.</Link>
+                    AI-assisted workflows have become a major part of how I work, despite being strongly anti-AI for a long time. When I understand what a model is doing and can guide it clearly, it helps me move faster without giving up human judgment or creativity. You can read more about how I use AI here: <Link to='/ai' title='Read more about my use of AI.'>my AI page</Link>.
                 </p>
                 <p style={{ textIndent: '0', marginTop: '1em' }} className='bio'>
-                    Outside of my work and education, I also have several different hobbies. A lot of the knowledge and experience that I have, come from these hobbies, and I have been able to successfully implement the things I've learned through them into my work. I'm always working on something, so one shouldn't judge me only by what I do in employment or education. You can read more of my hobbies from here: <Link to='/hobbies' title='Link to my hobbies.'>Link to my hobbies.</Link>
+                    Outside work and education, I have several hobbies. Much of my knowledge and experience comes from them, and I have been able to bring what I learn there into my work. I am always working on something, so I do not think I should be judged only by what I do in employment or education. You can read more about my hobbies here: <Link to='/hobbies' title='Read more about my hobbies.'>my hobbies page</Link>.
                 </p>
             </article>
         </>

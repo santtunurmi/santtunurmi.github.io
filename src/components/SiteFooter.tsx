@@ -3,7 +3,7 @@ export default function SiteFooter() {
         <>
             <hr className='mt-5' />
             <footer className='p-4'>
-                <h4 className='mb-4'>Santtu Nurmi</h4>
+                <h2 className='h4 mb-4'>Santtu Nurmi</h2>
                 <address>
                     <p>Phone: +358 45 1382240</p>
                     <p>Email: santtunurmi2003@gmail.com</p>
