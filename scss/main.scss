@@ -94,23 +94,23 @@ $dropdown-link-active-color: black;
         font-family: monospace;
     }
     .portfolio-image {
-        background: url(../content/Portrait.png) no-repeat;
+        background: url(/content/Portrait.png) no-repeat;
         background-size: 100%;
     }
     .bio-image {
-        background: url(../content/Working.png) no-repeat;
+        background: url(/content/Working.png) no-repeat;
         background-size: 100%;
     }
     .webserver-image {
-        background: url(../content/mario64opening.png) no-repeat;
+        background: url(/content/mario64opening.png) no-repeat;
         background-size: 100%;
     }
     .AI-image {
-        background: url(../content/AI-project.png) no-repeat;
+        background: url(/content/AI-project.png) no-repeat;
         background-size: 200%;
     }
     .Hobbies-image {
-        background: url(../content/bassplaying.png) no-repeat;
+        background: url(/content/bassplaying.png) no-repeat;
         background-size: 100%;
     }
 /* Nav-bar-related css. */
@@ -253,14 +253,14 @@ $dropdown-link-active-color: black;
             background-size: 110%;
         }
         .Hobbies-image {
-            background: url(../content/bassplaying-tall.png) no-repeat;
+            background: url(/content/bassplaying-tall.png) no-repeat;
             background-size: 100%;
         }
     }
     /* md >=768px */
     @include media-breakpoint-up(md) {
         .bio-image {
-            background: url(../content/Working-wide.png) no-repeat;
+            background: url(/content/Working-wide.png) no-repeat;
             background-size: 1200px;
         }
         .AI-image {
@@ -276,7 +276,7 @@ $dropdown-link-active-color: black;
             background-size: 650px;
         }
         .Hobbies-image {
-            background: url(../content/bassplaying.png) no-repeat;
+            background: url(/content/bassplaying.png) no-repeat;
             background-size: 750px;
         }
     }
