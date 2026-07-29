@@ -1,4 +1,5 @@
 import PortfolioCard, { type PortfolioCardProps } from '../components/PortfolioCard'
+import PageMetadata from '../components/PageMetadata'
 
 const portfolioCards: PortfolioCardProps[] = [
     {
@@ -56,6 +57,7 @@ const portfolioCards: PortfolioCardProps[] = [
 export default function HomePage() {
     return (
         <>
+            <PageMetadata title='Portfolio of Santtu Nurmi' description="Santtu Nurmi's portfolio of projects and professional work." />
             <header className='card border-0 mh-10 bg-black'>
                 <div className='row g-0 gap-0 row-gab-0'>
                     <div className='Opening-card-fade-50 position-absolute h-100 p-0 z-1'></div>
@@ -76,26 +78,6 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
-            <hr className='mt-5' />
-            <footer className='p-4'>
-                <h4 className='mb-4'>Santtu Nurmi</h4>
-                <address>
-                    <p>Phone: +358 45 1382240</p>
-                    <p>Email: santtunurmi2003@gmail.com</p>
-                    <p>
-                        LinkedIn:{' '}
-                        <a href='https://www.linkedin.com/in/santtu-nurmi-84a233205/' target='_blank' title='LinkedIn'>
-                            https://www.linkedin.com/in/santtu-nurmi-84a233205/
-                        </a>
-                    </p>
-                    <p>
-                        GitHub:{' '}
-                        <a href='https://github.com/santtunurmi' target='_blank' title='GitHub'>
-                            https://github.com/santtunurmi
-                        </a>
-                    </p>
-                </address>
-            </footer>
         </>
     )
 }

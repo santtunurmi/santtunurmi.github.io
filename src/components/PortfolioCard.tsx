@@ -32,7 +32,7 @@ export default function PortfolioCard({ image, alt, title, description, destinat
                         Read more
                     </Link>
                 ) : (
-                    <a href={destination.href} target='_blank' className='btn btn-primary'>
+                    <a href={destination.href} target='_blank' rel='noopener noreferrer' className='btn btn-primary'>
                         Read more
                     </a>
                 )}

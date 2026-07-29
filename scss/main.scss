@@ -290,3 +290,6 @@ $dropdown-link-active-color: black;
             transform: translateX(-50%);
         }
     }
+    #main-content:focus {
+        outline: none;
+    }
