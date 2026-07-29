@@ -53,60 +53,63 @@
                 </div>
                 <div class="col-md-4">
                 </div>
-                <div class="p-2 z-1">
-                    <!-- Login form -->
-                    <div class="container-sm login d-block p-2">
-                        <form class="login">
-                            <div class="row g-3">
-                                <label for="staticEmail" class="col-form-label">
-                                    You must login to view your current speedruns and to add new ones.</label>
-                                <div class="">
-                                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="(login is secure)">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">This does nothing</button>
-                        </form>
-                    </div>
-                    <!-- "Add speedrun" -form -->
-                    <div class="container-sm input d-none p-2 Web-server-text-block">
-                        <h2>Add Speedrun</h2>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Game" aria-label="Game" aria-describedby="basic-addon2">
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon2">
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Time. (e.g. 1:00:00.000)" aria-label="Time" aria-describedby="basic-addon1">
-                            <input type="text" class="form-control" placeholder="Variables. (e.g. RTA=yes)" aria-label="Variables" aria-describedby="basic-addon2">
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Video Link" aria-label="Video" aria-describedby="basic-addon2">
-                        </div>
-                        <div class="input-group mb-3">
-                            <textarea class="form-control" placeholder="Comments." aria-label="Comments"></textarea>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-3">Add Speedrun</button>
-                        </div>
-                    </div>
+                <div class="Opening-card-text-block position-absolute rounded-1 p-2 z-1">
+                    <p>
+                        You have found an easter egg
+                    </p>
                 </div>
             </div>
         </header>
         <!-- Webserver content -->
+        <div class="container-sm login d-block p-2">
+            <!-- Login form -->
+            <form class="login">
+                <div class="row g-3">
+                    <label for="staticEmail" class="col-form-label">
+                        You must login to view your current speedruns and to add new ones.</label>
+                    <div class="">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="(login is secure)">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-primary">This does nothing</button>
+            </form>
+        </div>
+        <!-- "Add speedrun" -form -->
+        <div class="container-sm input d-none p-2 Web-server-text-block">
+            <h2>Add Speedrun</h2>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Game" aria-label="Game" aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Time. (e.g. 1:00:00.000)" aria-label="Time" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Variables. (e.g. RTA=yes)" aria-label="Variables" aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Video Link" aria-label="Video" aria-describedby="basic-addon2">
+            </div>
+            <div class="input-group mb-3">
+                <textarea class="form-control" placeholder="Comments." aria-label="Comments"></textarea>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Add Speedrun</button>
+            </div>
+        </div>
         <div class="container-fluid">
             <h4 class="pt-3 pb-1 fw-semibold">Speedruns:</h4>
         </div>
