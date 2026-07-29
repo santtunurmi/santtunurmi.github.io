@@ -124,6 +124,13 @@ $dropdown-link-active-color: black;
     .portfolio-card-image {
         max-height: 11em;
     }
+    .portfolio-card {
+        transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+    .portfolio-card:hover, .portfolio-card:focus-within {
+        transform: translateY(-4px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 153, 255, 0.2);
+    }
 /* Bio page-specific css. */
     .bio-section {
         max-width: 70rem;
@@ -234,4 +241,15 @@ $dropdown-link-active-color: black;
     }
     #main-content:focus {
         outline: none;
+    }
+    #main-content {
+        position: relative;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .portfolio-card {
+            transition: none;
+        }
+        .portfolio-card:hover, .portfolio-card:focus-within {
+            transform: none;
+        }
     }

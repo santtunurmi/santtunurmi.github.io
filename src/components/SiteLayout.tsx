@@ -1,11 +1,15 @@
-import { Outlet, useLocation } from 'react-router'
+import { AnimatePresence, motion } from 'motion/react'
+import { useLocation, useOutlet } from 'react-router'
 import { useEffect, useRef } from 'react'
 import SiteFooter from './SiteFooter'
 import SiteNav from './SiteNav'
+import { useRouteTransition } from './motion'
 
 function RouteChangeHandler() {
     const location = useLocation()
+    const outlet = useOutlet()
     const mainRef = useRef<HTMLElement>(null)
+    const routeTransition = useRouteTransition()
 
     useEffect(() => {
         const main = mainRef.current
@@ -22,7 +26,11 @@ function RouteChangeHandler() {
 
     return <div className='site-content'>
         <main ref={mainRef} id='main-content' tabIndex={-1}>
-            <Outlet />
+            <AnimatePresence initial={false} mode='popLayout'>
+                <motion.div key={location.pathname} {...routeTransition}>
+                    {outlet}
+                </motion.div>
+            </AnimatePresence>
         </main>
         <SiteFooter />
     </div>

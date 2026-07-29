@@ -1,3 +1,6 @@
+import { motion } from 'motion/react'
+import { useInViewReveal } from './motion'
+
 export type TimelineEntry = {
     id: string
     title: string
@@ -79,17 +82,30 @@ type BioTimelineProps = {
 export default function BioTimeline({ entries }: BioTimelineProps) {
     return (
         <ol className='bio-timeline'>
-            {entries.map((entry) => (
-                <li className='bio-timeline-item' key={entry.id}>
-                    <div className='bio-timeline-marker' aria-hidden='true'></div>
-                    <div className='bio-timeline-content'>
-                        <h3 className='h5 fw-semibold'>{entry.title}</h3>
-                        <p className='mb-1'>{entry.organization} · {entry.location}</p>
-                        <p className='bio-timeline-date mb-0'>{entry.period}</p>
-                        {entry.description && <p className='mb-0 mt-2'>{entry.description}</p>}
-                    </div>
-                </li>
+            {entries.map((entry, index) => (
+                <TimelineItem entry={entry} index={index} key={entry.id} />
             ))}
         </ol>
+    )
+}
+
+type TimelineItemProps = {
+    entry: TimelineEntry
+    index: number
+}
+
+function TimelineItem({ entry, index }: TimelineItemProps) {
+    const reveal = useInViewReveal(index * 0.03)
+
+    return (
+        <motion.li className='bio-timeline-item' {...reveal}>
+            <div className='bio-timeline-marker' aria-hidden='true'></div>
+            <div className='bio-timeline-content'>
+                <h3 className='h5 fw-semibold'>{entry.title}</h3>
+                <p className='mb-1'>{entry.organization} · {entry.location}</p>
+                <p className='bio-timeline-date mb-0'>{entry.period}</p>
+                {entry.description && <p className='mb-0 mt-2'>{entry.description}</p>}
+            </div>
+        </motion.li>
     )
 }

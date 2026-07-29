@@ -72,8 +72,8 @@ export default function HomePage() {
             <div className='container-fluid'>
                 <div className='container-fluid text-center'>
                     <div className='row gy-3'>
-                        {portfolioCards.map((card) => (
-                            <PortfolioCard key={card.title} {...card} />
+                        {portfolioCards.map((card, index) => (
+                            <PortfolioCard key={card.title} revealDelay={index * 0.04} {...card} />
                         ))}
                     </div>
                 </div>

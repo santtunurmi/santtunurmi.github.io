@@ -1,8 +1,13 @@
 import { Link } from 'react-router'
+import { motion } from 'motion/react'
 import BioTimeline, { educationTimeline, workTimeline } from '../components/BioTimeline'
 import PageMetadata from '../components/PageMetadata'
+import { useInViewReveal } from '../components/motion'
 
 export default function BioPage() {
+    const educationReveal = useInViewReveal()
+    const workReveal = useInViewReveal(0.04)
+
     return (
         <>
             <PageMetadata title='Bio | Santtu Nurmi' description="Santtu Nurmi's education, work experience, and professional background." />
@@ -18,16 +23,16 @@ export default function BioPage() {
             </header>
             <article className='container-fluid'>
                 <h1 className='pt-3 pb-1 fw-semibold fs-4'>Bio</h1>
-                <section className='bio-section' aria-labelledby='education-heading'>
+                <motion.section className='bio-section' aria-labelledby='education-heading' {...educationReveal}>
                     <h2 id='education-heading' className='h3 fw-semibold'>Education</h2>
                     <BioTimeline entries={educationTimeline} />
                     <p>My education in information and communication technology at the JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that having a wide range of skills and knowledge is vital for any person to have. You can often find ways to learn how different things can be used together. My education has also challenged me to demand more of myself. I wasn't getting the best grades at the start, and didn't work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; the momentum of which I've used to kickstart my career.</p>
-                </section>
-                <section className='bio-section' aria-labelledby='work-heading'>
+                </motion.section>
+                <motion.section className='bio-section' aria-labelledby='work-heading' {...workReveal}>
                     <h2 id='work-heading' className='h3 fw-semibold'>Work</h2>
                     <BioTimeline entries={workTimeline} />
                     <p>In my teenage years I worked several "summer jobs" to get work experience. It is quite common in Finland to do a short one-month internship at a local grocery store, for example. At the time this was just a way for me to get that much needed work experience, but I have come to value the time I spent working at, say, retail. There are people just like you and me doing a lot of important work to keep our stores running. It may be easy to take for granted when we're buying groceries, but without that work we would be buying spoiled milk.</p>
-                </section>
+                </motion.section>
                 <p style={{ textIndent: '0' }} className='bio'>
                     AI-workflows have become a massive part of how I work, despite of the fact that I used to be strongly anti-AI for a long time. When I understand what the model is doing, and the model understands what I want, I'm able to speed up my productivity, while still maintaining the human touch and creativity. You can read more about my use of AI here: <Link to='/ai' title='Link to my page on AI.'>Link to my page on AI.</Link>
                 </p>
