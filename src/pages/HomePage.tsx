@@ -3,7 +3,7 @@ import PageMetadata from '../components/PageMetadata'
 
 const portfolioCards: PortfolioCardProps[] = [
     {
-        image: '/content/EXEN.png',
+        image: '/content/EXEN-card.webp',
         alt: 'EXEN esports front page.',
         title: 'Software development internship at EXEN esports Oy Jan–May 2026',
         description: 'Worked accross four different projects, ranging from application work, system restoration, technical audit, cloud-host and CI/CD research, WordPress/PHP and live video production. I really got to use the entire range of my skillset at EXEN, which remains the strongest showcase of my project-first mentality and ability to get things done, as all four projects were a success.',
