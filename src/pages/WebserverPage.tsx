@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
 
 export default function WebserverPage() {
@@ -12,16 +13,9 @@ export default function WebserverPage() {
     return (
         <>
             <PageMetadata title='Webserver easter egg | Santtu Nurmi' description="A speedrun-themed webserver easter egg in Santtu Nurmi's portfolio." />
-            <header className='card border-0 mh-10 bg-black'>
-                <div className='row g-0 gap-0 row-gab-0'>
-                    <div className='Opening-card-fade position-absolute h-100 p-0 z-1'></div>
-                    <div className='opening-card-background webserver-image col-md-8 p-0 z-0'></div>
-                    <div className='col-md-4'></div>
-                    <div className='Opening-card-text-block position-absolute rounded-1 p-2 z-1'>
-                        <p>You have found an easter egg</p>
-                    </div>
-                </div>
-            </header>
+            <OpeningCard profile='webserver'>
+                <p>You have found an easter egg</p>
+            </OpeningCard>
             <div className={`container-sm login ${loggedIn ? 'd-none' : 'd-block'} p-2`}>
                 <form className='login' onSubmit={handleSubmit}>
                     <div className='row g-3'>

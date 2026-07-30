@@ -18,7 +18,7 @@ export function useRouteTransition(): MotionProps {
         initial: { opacity: 0, y: 6 },
         animate: { opacity: 1, y: 0 },
         exit: { opacity: 0, y: -4 },
-        transition: { duration: 0.18, ease: easing },
+        transition: { duration: 0.27, ease: easing },
     }
 }
 
@@ -38,6 +38,6 @@ export function useInViewReveal(delay = 0): MotionProps {
         initial: { opacity: 0, y: 8 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.15 },
-        transition: { duration: 0.18, delay, ease: easing },
+        transition: { duration: 0.27, delay, ease: easing },
     }
 }

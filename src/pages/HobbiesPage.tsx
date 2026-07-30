@@ -1,19 +1,13 @@
+import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
 
 export default function HobbiesPage() {
     return (
         <>
             <PageMetadata title='Hobbies | Santtu Nurmi' description="Santtu Nurmi's hobbies in speedrunning and music." />
-            <header className='card border-0 mh-10 bg-black'>
-                <div className='row g-0 gap-0 row-gab-0'>
-                    <div className='Opening-card-fade-60 position-absolute h-100 p-0 z-1'></div>
-                    <div className='opening-card-background Hobbies-image col-sm-8 p-0 z-0'></div>
-                    <div className='col-sm-4'></div>
-                </div>
-                <div className='Opening-card-text-block position-absolute rounded-1 p-2 z-1'>
-                    <p>I believe that one should constantly learn new things. My projects and work at EXEN and NUKE-Liiga provide recent examples of leveraging skills learned through my hobbies and applying them to real, tangible projects.</p>
-                </div>
-            </header>
+            <OpeningCard profile='hobbies'>
+                <p>I believe that one should constantly learn new things. My projects and work at EXEN and NUKE-Liiga provide recent examples of leveraging skills learned through my hobbies and applying them to real, tangible projects.</p>
+            </OpeningCard>
             <div className='container-fluid'>
                 <h1 className='pt-3 pb-1 fw-semibold fs-4'>Hobbies</h1>
                 <p>I originally had a wall of text here, which probably showed my passion for music and video game speedrunning, but I think keeping it shorter is most likely better for everyone involved.</p>

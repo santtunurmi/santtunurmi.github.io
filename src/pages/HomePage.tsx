@@ -1,3 +1,4 @@
+import OpeningCard from '../components/OpeningCard'
 import PortfolioCard, { type PortfolioCardProps } from '../components/PortfolioCard'
 import PageMetadata from '../components/PageMetadata'
 
@@ -58,16 +59,9 @@ export default function HomePage() {
     return (
         <>
             <PageMetadata title='Portfolio of Santtu Nurmi' description="Santtu Nurmi's portfolio of projects and professional work." />
-            <header className='card border-0 mh-10 bg-black'>
-                <div className='row g-0 gap-0 row-gab-0'>
-                    <div className='Opening-card-fade-50 position-absolute h-100 p-0 z-1'></div>
-                    <div className='opening-card-background portfolio-image col-sm-8 p-0 z-0'></div>
-                    <div className='col-sm-4'></div>
-                </div>
-                <div className='Opening-card-text-block position-absolute rounded-1 p-2 z-1'>
-                    <p>Project-first software developer and technical problem-solver. I build and improve practical systems across web, tooling, technical reporting, and live production. AI is part of my human-reviewed workflow for exploration, implementation, and verification. I am finishing an ICT engineering degree, with my thesis planned for autumn 2026.</p>
-                </div>
-            </header>
+            <OpeningCard profile='portfolio'>
+                <p>Project-first software developer and technical problem-solver. I build and improve practical systems across web, tooling, technical reporting, and live production. AI is part of my human-reviewed workflow for exploration, implementation, and verification. I am finishing an ICT engineering degree, with my thesis planned for autumn 2026.</p>
+            </OpeningCard>
             <h1 className='text-center p-5'>My portfolio:</h1>
             <div className='container-fluid'>
                 <div className='container-fluid text-center'>

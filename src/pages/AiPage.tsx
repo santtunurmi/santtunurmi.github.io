@@ -1,19 +1,13 @@
+import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
 
 export default function AiPage() {
     return (
         <>
             <PageMetadata title='AI-assisted workflows | Santtu Nurmi' description="Santtu Nurmi's approach to AI-assisted workflows, tools, and learning." />
-            <header className='card border-0 mh-10 bg-black'>
-                <div className='row g-0 gap-0 row-gab-0'>
-                    <div className='Opening-card-fade-80 position-absolute h-100 p-0 z-1'></div>
-                    <div className='opening-card-background AI-image col-sm-11 p-0 z-0'></div>
-                    <div className='col-sm-1'></div>
-                </div>
-                <div className='Opening-card-text-block position-absolute rounded-1 p-2 z-1'>
-                    <p>I've gone from being strongly anti-AI to seeing how it can be used to get things done faster and better, and now I treat AI-assisted workflow design as a fundamental skill. This page is about that evolution.</p>
-                </div>
-            </header>
+            <OpeningCard profile='ai'>
+                <p>I've gone from being strongly anti-AI to seeing how it can be used to get things done faster and better, and now I treat AI-assisted workflow design as a fundamental skill. This page is about that evolution.</p>
+            </OpeningCard>
             <div className='container-fluid'>
                 <h1 className='pt-3 pb-1 fw-semibold fs-4'>AI-assisted workflows</h1>
                 <p>I tend to use AI for work in files, code, or text, or when I need knowledge I do not immediately have. I have a lot of ideas, so when starting work on something, I translate them for the model of my choice. I prompt through conversation: I format my messages as I would to a human, paint the picture, provide the necessary context, and steer the work as it develops. It is important to understand what you want yourself, so I spend a lot of time thinking about what I write. This can involve extensive research, testing, and learning. I might enlist a different model to help if it is a good fit. The key is to understand what the model understands and where it is missing the picture. Once we are on the same page, I usually set up source-of-truth documentation to keep the context centered. I trust the model to handle itself well, but review, troubleshoot, and verify its work. Often, the problem is missing context or unclear communication rather than a mistake by the model. When the model does make a mistake, I point it out and steer it in the right direction. The main thing I try to avoid is conflict between the model and me. I often ask for explanations and clarifications on things I do not understand. Understanding what the model is doing, and the model understanding what I want, is the basis for a functional workflow.</p>

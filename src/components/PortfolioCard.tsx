@@ -25,20 +25,20 @@ export default function PortfolioCard({ image, alt, title, description, destinat
     const reveal = useInViewReveal(revealDelay)
 
     return (
-        <motion.div className='col-sm-6 col-lg-4 p-0' {...reveal}>
-            <div className='portfolio-card card bg-black'>
+        <motion.div className='col-sm-6 col-lg-4 p-0 d-flex' {...reveal}>
+            <div className='portfolio-card card bg-black h-100 w-100'>
                 <div className='portfolio-card-image'>
                     <img src={image} className='card-img-top' alt={alt} />
                 </div>
-                <div className='card-body bg-black'>
+                <div className='card-body bg-black d-flex flex-column flex-grow-1'>
                     <h5 className='card-title mb-4'>{title}</h5>
                     <p className='card-text'>{description}</p>
                     {destination.type === 'internal' ? (
-                        <Link to={destination.to} className='btn btn-primary'>
+                        <Link to={destination.to} className='btn btn-primary mt-auto align-self-start'>
                             Read more
                         </Link>
                     ) : (
-                        <a href={destination.href} target='_blank' rel='noopener noreferrer' className='btn btn-primary'>
+                        <a href={destination.href} target='_blank' rel='noopener noreferrer' className='btn btn-primary mt-auto align-self-start'>
                             Read more
                         </a>
                     )}

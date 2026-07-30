@@ -75,7 +75,30 @@ $dropdown-link-active-color: black;
         Credit: Regular Jo via https://stackoverflow.com/a/65753827 */
         height: 85vw;
         max-height: 650px;
+        background-color: black;
+        background-image: var(--opening-card-image);
+        background-position: var(--opening-card-position, 0 0);
+        background-repeat: no-repeat;
+        background-size: var(--opening-card-size, 100%);
         box-shadow: 0 0 1.3vw 1.6vw black inset;
+    }
+    .opening-card--portfolio {
+        --opening-card-image: url(/content/portfolio.jpeg);
+        --opening-card-position: left center;
+        --opening-card-size: contain;
+    }
+    .opening-card--bio {
+        --opening-card-image: url(/content/Working.png);
+    }
+    .opening-card--webserver {
+        --opening-card-image: url(/content/mario64opening.png);
+    }
+    .opening-card--ai {
+        --opening-card-image: url(/content/AI-project.png);
+        --opening-card-size: 200%;
+    }
+    .opening-card--hobbies {
+        --opening-card-image: url(/content/bassplaying.png);
     }
     .Opening-card-fade-50, .Opening-card-fade-60, .Opening-card-fade-80 {
         background: rgb(0, 0, 0);
@@ -87,30 +110,12 @@ $dropdown-link-active-color: black;
         bottom: 6%;
         background: rgb(0, 0, 0);
         background-color: rgba(0, 0, 0, 0.888);
+        transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
     }
     .Opening-card-text-block p {
         margin: 0;
         font-size: 3.5vw;
         font-family: monospace;
-    }
-    .portfolio-image {
-        background: url(/content/portfolio.jpeg) center 10% / cover no-repeat;
-    }
-    .bio-image {
-        background: url(/content/Working.png) no-repeat;
-        background-size: 100%;
-    }
-    .webserver-image {
-        background: url(/content/mario64opening.png) no-repeat;
-        background-size: 100%;
-    }
-    .AI-image {
-        background: url(/content/AI-project.png) no-repeat;
-        background-size: 200%;
-    }
-    .Hobbies-image {
-        background: url(/content/bassplaying.png) no-repeat;
-        background-size: 100%;
     }
 /* Nav-bar-related css. */
     .nav-link:hover, .nav-link:focus {
@@ -132,52 +137,199 @@ $dropdown-link-active-color: black;
     }
     .portfolio-card {
         transition: transform 180ms ease, box-shadow 180ms ease;
+        border: 1px solid rgb(255, 255, 255);
+        overflow: hidden;
     }
     .portfolio-card:hover, .portfolio-card:focus-within {
         transform: translateY(-4px);
         box-shadow: 0 0.5rem 1rem rgba(0, 153, 255, 0.2);
+    }
+    @media (hover: hover) {
+        .Opening-card-text-block:hover {
+            background-color: rgba(0, 0, 0, 0.98);
+            transform: translateY(-2px);
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.35);
+        }
     }
 /* Bio page-specific css. */
     .bio-section {
         max-width: 70rem;
         margin-bottom: 2rem;
     }
+    .bio-timeline-block {
+        max-width: 90rem;
+        margin-bottom: 2rem;
+    }
     .bio-timeline {
-        margin: 1rem 0 1.5rem;
+        --timeline-axis-left: 62%;
+        position: relative;
+        min-height: var(--timeline-height);
+        margin: 1rem 0 0;
         padding: 0;
-        list-style: none;
     }
-    .bio-timeline-item {
-        display: grid;
-        grid-template-columns: 1.5rem minmax(0, 1fr);
-        border-inline-start: 3px solid white;
-        padding: 0 0 1.5rem 0;
+    .bio-timeline-axis {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: var(--timeline-axis-left);
+        width: 2px;
+        background: white;
     }
-    .bio-timeline-marker {
-        grid-column: 1;
-        width: 0.875rem;
-        height: 0.875rem;
-        margin-inline-start: -0.5rem;
-        margin-top: 0.25rem;
-        background-color: var(--bs-primary);
-        border: 2px solid white;
-        border-radius: 50%;
+    .bio-timeline-axis-label {
+        position: absolute;
+        left: calc(var(--timeline-axis-left) + 0.75rem);
+        color: white;
+        font-size: 0.75rem;
+        line-height: 1;
     }
-    .bio-timeline-content {
-        grid-column: 2;
-        min-width: 0;
-        padding-inline-end: 0.5rem;
-        overflow-wrap: anywhere;
+    .bio-timeline-axis-label--start {
+        top: 0;
     }
-    .bio-timeline-content h3 {
-        margin-bottom: 0.25rem;
+    .bio-timeline-axis-label--end {
+        bottom: 0;
     }
     .bio-timeline-date {
         color: var(--bs-primary);
         font-weight: 600;
     }
-    .bio-timeline-item:last-child {
-        padding-bottom: 0;
+    .bio-timeline-entries {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .bio-timeline-entry {
+        --entry-lane-offset: calc(var(--entry-lane) * 0.38rem);
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+    }
+    .bio-timeline-viewport-anchor {
+        position: absolute;
+        top: var(--entry-anchor);
+        left: var(--timeline-axis-left);
+        width: 1px;
+        height: 1px;
+    }
+    .bio-timeline-segment {
+        position: absolute;
+        top: var(--entry-start);
+        bottom: calc(100% - var(--entry-end));
+        left: calc(var(--timeline-axis-left) + var(--entry-lane-offset));
+        width: 3px;
+        background: var(--bs-primary);
+        transform-origin: center;
+    }
+    .bio-timeline-dot {
+        position: absolute;
+        left: calc(var(--timeline-axis-left) + var(--entry-lane-offset));
+        width: 0.8rem;
+        height: 0.8rem;
+        margin: -0.4rem 0 0 -0.35rem;
+        background: var(--bs-primary);
+        border: 2px solid white;
+        border-radius: 50%;
+    }
+    .bio-timeline-dot--start, .bio-timeline-entry-date--start {
+        top: var(--entry-start);
+    }
+    .bio-timeline-dot--end, .bio-timeline-entry-date--end {
+        top: var(--entry-end);
+    }
+    .bio-timeline-entry-date {
+        position: absolute;
+        left: calc(var(--timeline-axis-left) + 0.85rem + var(--entry-lane-offset));
+        color: var(--bs-primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+    }
+    .bio-timeline-entry-date--start {
+        transform: translateY(calc(-50% + var(--entry-start-date-offset)));
+    }
+    .bio-timeline-entry-date--end {
+        transform: translateY(calc(-50% + var(--entry-end-date-offset)));
+    }
+    .bio-timeline-connector {
+        position: absolute;
+        top: var(--entry-anchor);
+        right: calc(100% - var(--timeline-axis-left) - var(--entry-lane-offset));
+        left: 52%;
+        height: 2px;
+        background: var(--bs-primary);
+        transform-origin: right;
+    }
+    .bio-timeline-connector-turn {
+        position: absolute;
+        left: calc(52% - 1px);
+        width: 2px;
+        height: var(--entry-connector-height);
+        background: var(--bs-primary);
+    }
+    .bio-timeline-entry--title-down .bio-timeline-connector-turn {
+        top: var(--entry-anchor);
+        transform-origin: top;
+    }
+    .bio-timeline-entry--title-up .bio-timeline-connector-turn {
+        bottom: calc(100% - var(--entry-anchor));
+        transform-origin: bottom;
+    }
+    .bio-timeline-title {
+        position: absolute;
+        top: calc(var(--entry-anchor) + var(--entry-title-offset));
+        left: 0;
+        width: calc(52% - 0.5rem);
+        padding: 0.3rem 0.45rem;
+        color: white;
+        font-size: 0.8rem;
+        line-height: 1.15;
+        text-align: left;
+        pointer-events: auto;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 0.25rem;
+        transform: translateY(-50%);
+    }
+    .bio-timeline-entry:hover .bio-timeline-title, .bio-timeline-entry:focus-within .bio-timeline-title {
+        background: var(--bs-primary);
+        border-color: white;
+    }
+    .bio-timeline-title:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+    .bio-timeline-entry:hover .bio-timeline-segment, .bio-timeline-entry:focus-within .bio-timeline-segment, .bio-timeline-entry:hover .bio-timeline-connector, .bio-timeline-entry:focus-within .bio-timeline-connector, .bio-timeline-entry:hover .bio-timeline-connector-turn, .bio-timeline-entry:focus-within .bio-timeline-connector-turn {
+        background: white;
+    }
+    .bio-timeline-entry:hover .bio-timeline-dot, .bio-timeline-entry:focus-within .bio-timeline-dot {
+        background: white;
+        border-color: var(--bs-primary);
+    }
+    .bio-timeline-entry:hover .bio-timeline-entry-date, .bio-timeline-entry:focus-within .bio-timeline-entry-date {
+        color: white;
+    }
+    .bio-timeline-dialog {
+        width: min(32rem, calc(100% - 2rem));
+        box-sizing: border-box;
+        padding: 0;
+        color: white;
+        background: #111;
+        border: 1px solid white;
+        border-radius: 0.35rem;
+    }
+    .bio-timeline-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.75);
+    }
+    .bio-timeline-dialog-content {
+        position: relative;
+        padding: 1.25rem;
+    }
+    .bio-timeline-dialog-close {
+        float: right;
+        padding: 0.25rem 0.5rem;
+        color: white;
+        background: transparent;
+        border: 1px solid currentColor;
+        border-radius: 0.25rem;
     }
 /* Hobbies page-specific css */
     .info {
@@ -204,22 +356,21 @@ $dropdown-link-active-color: black;
         .Opening-card-text-block p {
             font-size: 1.25em;
         }
-        .bio-image {
-            background-size: 110%;
+        .opening-card--bio {
+            --opening-card-size: 110%;
         }
-        .Hobbies-image {
-            background: url(/content/bassplaying-tall.png) no-repeat;
-            background-size: 100%;
+        .opening-card--hobbies {
+            --opening-card-image: url(/content/bassplaying-tall.png);
         }
     }
     /* md >=768px */
     @include media-breakpoint-up(md) {
-        .bio-image {
-            background: url(/content/Working-wide.png) no-repeat;
-            background-size: 1200px;
+        .opening-card--bio {
+            --opening-card-image: url(/content/Working-wide.png);
+            --opening-card-size: 1200px;
         }
-        .AI-image {
-            background-size: 1300px;
+        .opening-card--ai {
+            --opening-card-size: 1300px;
         }
         .Opening-card-text-block {
             width: 50%;
@@ -227,9 +378,9 @@ $dropdown-link-active-color: black;
     }
     /* lg >=992px */
     @include media-breakpoint-up(lg) {
-        .Hobbies-image {
-            background: url(/content/bassplaying.png) no-repeat;
-            background-size: 750px;
+        .opening-card--hobbies {
+            --opening-card-image: url(/content/bassplaying.png);
+            --opening-card-size: 750px;
         }
     }
     /* lg >=1200px */
@@ -253,6 +404,12 @@ $dropdown-link-active-color: black;
             transition: none;
         }
         .portfolio-card:hover, .portfolio-card:focus-within {
+            transform: none;
+        }
+        .Opening-card-text-block {
+            transition: none;
+        }
+        .Opening-card-text-block:hover {
             transform: none;
         }
     }

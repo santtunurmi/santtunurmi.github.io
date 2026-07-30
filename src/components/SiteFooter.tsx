@@ -5,7 +5,6 @@ export default function SiteFooter() {
             <footer className='p-4'>
                 <h2 className='h4 mb-4'>Santtu Nurmi</h2>
                 <address>
-                    <p>Phone: +358 45 1382240</p>
                     <p>Email: santtunurmi2003@gmail.com</p>
                     <p>
                         LinkedIn:{' '}
