@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router'
 import { useEffect, useRef } from 'react'
 
-type SiteRoute = '/' | '/bio' | '/webserver' | '/ai' | '/hobbies'
+type SiteRoute = '/' | '/education-and-work' | '/webserver' | '/ai' | '/hobbies'
 
 type NavLinkProps = {
     to: SiteRoute
@@ -40,7 +40,7 @@ export default function SiteNav() {
     const { pathname } = useLocation()
     const mobileNavToggleRef = useRef<HTMLButtonElement>(null)
     const homeActive = pathname === '/' || pathname === '/index.html'
-    const bioActive = pathname === '/bio' || pathname === '/bio.html'
+    const educationAndWorkActive = pathname === '/education-and-work' || pathname === '/education-and-work.html'
     const webserverActive = pathname === '/webserver' || pathname === '/webserver.html'
     const aiActive = pathname === '/ai' || pathname === '/ai.html'
     const hobbiesActive = pathname === '/hobbies' || pathname === '/hobbies.html'
@@ -73,18 +73,18 @@ export default function SiteNav() {
                     </NavLink>
                     <div className='nav-item dropdown'>
                         <a
-                            className={`nav-link dropdown-toggle${bioActive || webserverActive ? ' active' : ''}`}
+                            className={`nav-link dropdown-toggle${educationAndWorkActive || webserverActive ? ' active' : ''}`}
                             data-bs-toggle='dropdown'
                             href='#'
                             role='button'
                             aria-expanded='false'
                         >
-                            Bio
+                            Education &amp; Work
                         </a>
                         <ul className='dropdown-menu text-bg-primary'>
                             <li>
-                                <NavLink to='/bio' className='dropdown-item' active={bioActive}>
-                                    Main Bio
+                                <NavLink to='/education-and-work' className='dropdown-item' active={educationAndWorkActive}>
+                                    Education &amp; Work
                                 </NavLink>
                             </li>
                             <li>

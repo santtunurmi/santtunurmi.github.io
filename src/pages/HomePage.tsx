@@ -5,9 +5,9 @@ import PageMetadata from '../components/PageMetadata'
 const portfolioCards: PortfolioCardProps[] = [
     {
         image: '/content/EXEN-card.webp',
-        alt: 'EXEN esports website showing its gaming venue.',
-        title: 'Software development internship at EXEN esports Oy',
-        description: 'Worked across application development, technical auditing, WordPress/PHP improvements, cloud-hosting and CI/CD research, and an inventory-management system for an EXEN business partner.',
+        alt: 'Front page of the EXEN esports website, showcasing their gaming venue.',
+        title: 'Software Development Internship at EXEN esports Oy',
+        description: 'Worked accross four different projects, ranging from application work, system restoration, technical audit, cloud-host and CI/CD research, WordPress/PHP and live video production. I really got to use the entire range of my skillset at EXEN, which remains the strongest showcase of my project-first mentality and ability to get things done, as all four projects were a success.',
         destination: {
             type: 'external',
             href: 'https://exen.fi/en/front-page/',
@@ -15,9 +15,9 @@ const portfolioCards: PortfolioCardProps[] = [
     },
     {
         image: '/content/NUKEliiga.webp',
-        alt: 'NUKE-Liiga logo beside a Counter-Strike player.',
-        title: 'NUKE-Liiga production management',
-        description: 'Production manager for a Finnish youth esports league across two seasons, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team.',
+        alt: 'Promotional banner of NUKE-Liiga, featuring the NUKE-Liiga logo in the center with a subheading of "NUORTEN KILPAPELAAJIEN E-URHEILULIIGA", and a Counter-Strike playermodel on the left.',
+        title: 'Esports Event Production',
+        description: 'I was the production manager at "NUKE-Liiga", a Finnish academy league for Counter-Strike esports, during its first two seasons. As the production manager, I handled the technical execution of the stream, communicated with casters during broadcasts, and created the stream layouts together with graphic designers. I additionally handled the in-game camerawork.',
         destination: {
             type: 'external',
             href: 'https://linktr.ee/nukeliiga',
@@ -26,8 +26,8 @@ const portfolioCards: PortfolioCardProps[] = [
     {
         image: '/content/AI-project.png',
         alt: 'Python notebook showing data preprocessing code.',
-        title: 'AI-assisted workflows',
-        description: 'I use AI for exploration, implementation, and review, while keeping responsibility for context, decisions, testing, and the final result.',
+        title: 'AI-assisted Workflows',
+        description: 'I have many different projects, and using AI-workflows has allowed me to speed up that work considerably, while never sacrificing quality, or losing that human touch and creativity. I use ChatGPT Codex, Anthropic Claude Code, OpenClaw and OpenCode. I talk to them, and I get things done.',
         destination: {
             type: 'internal',
             to: '/ai',
@@ -36,8 +36,8 @@ const portfolioCards: PortfolioCardProps[] = [
     {
         image: '/content/Portfolio-website.png',
         alt: "Screenshot of Santtu Nurmi's portfolio website.",
-        title: 'Portfolio website',
-        description: 'A self-started web project: V1 was hand-built with HTML, CSS, and JavaScript without AI; V2 became a Bootstrap/Sass multi-page site; V3 is a Vite, React, and TypeScript SPA.',
+        title: 'Portfolio Website',
+        description: 'I started this portfolio website in my free time to stand out more during the recruitment process. I ended up spending 2 months making the first version of this site. After, I studied most of the full-stack module in my university and took the lessons from there to improve the site further. The site is a constant work-in-progress but should showcase my skills in full-stack development well.',
         destination: {
             type: 'external',
             href: 'https://github.com/santtunurmi/santtunurmi.github.io',
@@ -46,8 +46,8 @@ const portfolioCards: PortfolioCardProps[] = [
     {
         image: '/content/minecraft-wall.jpg',
         alt: 'Minecraft world with red pillars marking a wall layout.',
-        title: 'Minecraft wall calculator',
-        description: 'A small utility built for a real need: calculating the layout of a Minecraft wall.',
+        title: 'Minecraft Wall Calculator',
+        description: 'This may seem like an odd little project, and it\'s not complex, I\'ll admit, but it spawned from a genuine need for a program that did exactly this functionality.',
         destination: {
             type: 'external',
             href: 'https://github.com/santtunurmi/Minecraft-Wall-Calculator',
@@ -58,14 +58,17 @@ const portfolioCards: PortfolioCardProps[] = [
 export default function HomePage() {
     return (
         <>
-            <PageMetadata title='Portfolio of Santtu Nurmi' description="Santtu Nurmi's portfolio of projects and professional work." />
+            <PageMetadata title='Portfolio of Santtu Nurmi' description="My portfolio of projects and professional work." />
             <OpeningCard profile='portfolio'>
-                <p>Project-first software developer and technical problem-solver. I build and improve practical systems across web, tooling, technical reporting, and live production. AI is part of my human-reviewed workflow for exploration, implementation, and verification. I am finishing an ICT engineering degree, with my thesis planned for autumn 2026.</p>
+                <p>
+                    Project-first software-developer with great technical problem solving skills. My experience spans software, web, tooling, reporting, live production, and more,
+                    while I use AI-assisted workflows to speed up research, problem solving and development.
+                </p>
             </OpeningCard>
             <h1 className='text-center p-5'>My portfolio:</h1>
             <div className='container-fluid'>
                 <div className='container-fluid text-center'>
-                    <div className='row gy-3'>
+                    <div className='row gx-2 gy-3'>
                         {portfolioCards.map((card, index) => (
                             <PortfolioCard key={card.title} revealDelay={index * 0.04} {...card} />
                         ))}

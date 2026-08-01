@@ -2,17 +2,17 @@ import type { ReactNode } from 'react'
 
 const openingCardProfiles = {
     portfolio: {
-        fadeClass: 'Opening-card-fade-50',
+        fadeClass: 'Opening-card-fade',
         mediaClass: 'col-sm-8',
         spacerClass: 'col-sm-4',
     },
     bio: {
-        fadeClass: 'Opening-card-fade-80',
+        fadeClass: 'Opening-card-fade-100',
         mediaClass: 'col-sm-11',
         spacerClass: 'col-sm-1',
     },
     ai: {
-        fadeClass: 'Opening-card-fade-80',
+        fadeClass: 'Opening-card-fade-100',
         mediaClass: 'col-sm-11',
         spacerClass: 'col-sm-1',
     },

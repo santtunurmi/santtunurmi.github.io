@@ -67,6 +67,25 @@ $dropdown-link-active-color: black;
     hr {
         opacity: 75%;
     }
+    @keyframes initial-page-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .initial-page-load #main-content > div > .opening-card {
+        animation: initial-page-reveal 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .initial-page-load #main-content > div > :not(.opening-card) {
+        animation: initial-page-reveal 1000ms 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .initial-page-load #main-content > div > :first-child:last-child:not(.opening-card) {
+        animation-delay: 0ms;
+    }
 /* Opening-card-related CSS */
     .opening-card-background {
         backdrop-filter: blur(0px); /* This fixes a white line appearing on
@@ -81,11 +100,11 @@ $dropdown-link-active-color: black;
         background-repeat: no-repeat;
         background-size: var(--opening-card-size, 100%);
         box-shadow: 0 0 1.3vw 1.6vw black inset;
+        transition: filter 180ms ease;
     }
     .opening-card--portfolio {
-        --opening-card-image: url(/content/portfolio.jpeg);
-        --opening-card-position: left center;
-        --opening-card-size: contain;
+        --opening-card-image: url(/content/Portrait.png);
+        --opening-card-position: 0 -7vw;
     }
     .opening-card--bio {
         --opening-card-image: url(/content/Working.png);
@@ -100,7 +119,7 @@ $dropdown-link-active-color: black;
     .opening-card--hobbies {
         --opening-card-image: url(/content/bassplaying.png);
     }
-    .Opening-card-fade-50, .Opening-card-fade-60, .Opening-card-fade-80 {
+    .Opening-card-fade, .Opening-card-fade-60, .Opening-card-fade-100 {
         background: rgb(0, 0, 0);
         background: (rgba(0, 0, 0, 0.14));
     }
@@ -145,6 +164,9 @@ $dropdown-link-active-color: black;
         box-shadow: 0 0.5rem 1rem rgba(0, 153, 255, 0.2);
     }
     @media (hover: hover) {
+        .opening-card:has(.Opening-card-text-block:hover) .opening-card-background {
+            filter: brightness(0.75);
+        }
         .Opening-card-text-block:hover {
             background-color: rgba(0, 0, 0, 0.98);
             transform: translateY(-2px);
@@ -161,7 +183,7 @@ $dropdown-link-active-color: black;
         margin-bottom: 2rem;
     }
     .bio-timeline {
-        --timeline-axis-left: 62%;
+        --timeline-title-width: calc(var(--timeline-title-left-edge) - 0.5rem);
         position: relative;
         min-height: var(--timeline-height);
         margin: 1rem 0 0;
@@ -169,21 +191,25 @@ $dropdown-link-active-color: black;
     }
     .bio-timeline-axis {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: var(--timeline-axis-left);
-        width: 2px;
-        background: white;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+    }
+    .bio-timeline-axis-line {
+        stroke: white;
+        stroke-width: max(2px, var(--timeline-min-stroke-width));
+        shape-rendering: crispEdges;
+        vector-effect: non-scaling-stroke;
     }
     .bio-timeline-axis-label {
         position: absolute;
-        left: calc(var(--timeline-axis-left) + 0.75rem);
+        right: calc(100% - var(--timeline-axis-left) + 0.75rem);
         color: white;
         font-size: 0.75rem;
         line-height: 1;
-    }
-    .bio-timeline-axis-label--start {
-        top: 0;
+        text-align: right;
     }
     .bio-timeline-axis-label--end {
         bottom: 0;
@@ -198,9 +224,17 @@ $dropdown-link-active-color: black;
         list-style: none;
     }
     .bio-timeline-entry {
-        --entry-lane-offset: calc(var(--entry-lane) * 0.38rem);
+        --entry-lane-offset: calc(var(--entry-lane) * var(--timeline-lane-offset));
         position: absolute;
         inset: 0;
+        pointer-events: none;
+    }
+    .bio-timeline-entry-artwork {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
         pointer-events: none;
     }
     .bio-timeline-viewport-anchor {
@@ -211,28 +245,24 @@ $dropdown-link-active-color: black;
         height: 1px;
     }
     .bio-timeline-segment {
-        position: absolute;
-        top: var(--entry-start);
-        bottom: calc(100% - var(--entry-end));
-        left: calc(var(--timeline-axis-left) + var(--entry-lane-offset));
-        width: 3px;
-        background: var(--bs-primary);
-        transform-origin: center;
+        stroke: var(--bs-primary);
+        stroke-width: max(3px, var(--timeline-min-stroke-width));
+        shape-rendering: crispEdges;
+        vector-effect: non-scaling-stroke;
     }
     .bio-timeline-dot {
-        position: absolute;
-        left: calc(var(--timeline-axis-left) + var(--entry-lane-offset));
-        width: 0.8rem;
-        height: 0.8rem;
-        margin: -0.4rem 0 0 -0.35rem;
-        background: var(--bs-primary);
-        border: 2px solid white;
-        border-radius: 50%;
+        fill: var(--bs-primary);
+        stroke: white;
+        stroke-width: max(2px, var(--timeline-min-stroke-width));
+        transform-box: fill-box;
+        transform-origin: center;
+        shape-rendering: geometricPrecision;
+        vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-dot--start, .bio-timeline-entry-date--start {
+    .bio-timeline-entry-date--start {
         top: var(--entry-start);
     }
-    .bio-timeline-dot--end, .bio-timeline-entry-date--end {
+    .bio-timeline-entry-date--end {
         top: var(--entry-end);
     }
     .bio-timeline-entry-date {
@@ -242,52 +272,63 @@ $dropdown-link-active-color: black;
         font-size: 0.75rem;
         font-weight: 600;
         line-height: 1;
+        pointer-events: auto;
+        translate: 0 -50%;
     }
-    .bio-timeline-entry-date--start {
-        transform: translateY(calc(-50% + var(--entry-start-date-offset)));
-    }
-    .bio-timeline-entry-date--end {
-        transform: translateY(calc(-50% + var(--entry-end-date-offset)));
+    .bio-timeline-entry-date--left {
+        right: calc(100% - var(--timeline-axis-left) + 0.85rem);
+        left: auto;
+        text-align: right;
     }
     .bio-timeline-connector {
-        position: absolute;
-        top: var(--entry-anchor);
-        right: calc(100% - var(--timeline-axis-left) - var(--entry-lane-offset));
-        left: 52%;
-        height: 2px;
-        background: var(--bs-primary);
-        transform-origin: right;
+        fill: none;
+        stroke: var(--bs-primary);
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+        stroke-width: max(2px, var(--timeline-min-stroke-width));
+        shape-rendering: crispEdges;
+        vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-connector-turn {
-        position: absolute;
-        left: calc(52% - 1px);
-        width: 2px;
-        height: var(--entry-connector-height);
-        background: var(--bs-primary);
+    .bio-timeline-entry-hit-line {
+        fill: none;
+        stroke: transparent;
+        stroke-linecap: round;
+        stroke-width: 0.9rem;
+        pointer-events: stroke;
+        vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-entry--title-down .bio-timeline-connector-turn {
-        top: var(--entry-anchor);
-        transform-origin: top;
-    }
-    .bio-timeline-entry--title-up .bio-timeline-connector-turn {
-        bottom: calc(100% - var(--entry-anchor));
-        transform-origin: bottom;
+    .bio-timeline-entry-hit-dot {
+        fill: transparent;
+        pointer-events: all;
     }
     .bio-timeline-title {
         position: absolute;
         top: calc(var(--entry-anchor) + var(--entry-title-offset));
         left: 0;
-        width: calc(52% - 0.5rem);
+        width: var(--timeline-title-width);
         padding: 0.3rem 0.45rem;
         color: white;
         font-size: 0.8rem;
         line-height: 1.15;
         text-align: left;
         pointer-events: auto;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgb(0, 0, 0);
         border: 1px solid rgba(255, 255, 255, 0.6);
         border-radius: 0.25rem;
-        transform: translateY(-50%);
+        translate: 0 -50%;
+    }
+    .bio-timeline-title-name, .bio-timeline-title-organization {
+        display: block;
+    }
+    .bio-timeline-title-organization {
+        margin-top: 0.2rem;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.72rem;
+    }
+    .bio-timeline-entry--title-right .bio-timeline-title {
+        right: 0;
+        left: auto;
+        width: var(--timeline-title-width);
     }
     .bio-timeline-entry:hover .bio-timeline-title, .bio-timeline-entry:focus-within .bio-timeline-title {
         background: var(--bs-primary);
@@ -297,31 +338,45 @@ $dropdown-link-active-color: black;
         outline: 2px solid white;
         outline-offset: 2px;
     }
-    .bio-timeline-entry:hover .bio-timeline-segment, .bio-timeline-entry:focus-within .bio-timeline-segment, .bio-timeline-entry:hover .bio-timeline-connector, .bio-timeline-entry:focus-within .bio-timeline-connector, .bio-timeline-entry:hover .bio-timeline-connector-turn, .bio-timeline-entry:focus-within .bio-timeline-connector-turn {
-        background: white;
+    .bio-timeline-entry:hover .bio-timeline-segment, .bio-timeline-entry:focus-within .bio-timeline-segment, .bio-timeline-entry:hover .bio-timeline-connector, .bio-timeline-entry:focus-within .bio-timeline-connector {
+        stroke: white;
     }
     .bio-timeline-entry:hover .bio-timeline-dot, .bio-timeline-entry:focus-within .bio-timeline-dot {
-        background: white;
-        border-color: var(--bs-primary);
+        fill: white;
+        stroke: var(--bs-primary);
     }
     .bio-timeline-entry:hover .bio-timeline-entry-date, .bio-timeline-entry:focus-within .bio-timeline-entry-date {
         color: white;
     }
     .bio-timeline-dialog {
-        width: min(32rem, calc(100% - 2rem));
+        width: min(1200px, calc(100% - 2rem));
+        height: calc(100dvh - 2rem);
+        max-width: none;
+        max-height: 648px;
         box-sizing: border-box;
         padding: 0;
         color: white;
-        background: #111;
-        border: 1px solid white;
-        border-radius: 0.35rem;
+        background: transparent;
+        border: 0;
+        overflow: visible;
     }
     .bio-timeline-dialog::backdrop {
-        background: rgba(0, 0, 0, 0.75);
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 540ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bio-timeline-dialog--visible::backdrop {
+        background-color: rgba(0, 0, 0, 0.75);
     }
     .bio-timeline-dialog-content {
         position: relative;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
         padding: 1.25rem;
+        background: #111;
+        border: 1px solid white;
+        border-radius: 0.35rem;
+        overflow: auto;
     }
     .bio-timeline-dialog-close {
         float: right;
@@ -331,22 +386,32 @@ $dropdown-link-active-color: black;
         border: 1px solid currentColor;
         border-radius: 0.25rem;
     }
-/* Hobbies page-specific css */
-    .info {
-        border: 0.1em solid #aaa;
+    @media (prefers-reduced-motion: reduce) {
+        .bio-timeline-dialog::backdrop {
+            transition-duration: 0s;
+        }
     }
+
 /* Media breakpoints */
+    /* xs <576px */
+    @include media-breakpoint-down(sm) {
+        .bio-timeline-entry-date--right.bio-timeline-entry-date--offset-lane {
+            right: calc(100% - var(--timeline-axis-left) + 0.85rem);
+            left: auto;
+            text-align: right;
+        }
+    }
     /* sm >=576px */
     @include media-breakpoint-up(sm) {
-        .Opening-card-fade-50 {
+        .Opening-card-fade {
             background: rgb(0, 0, 0);
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 46%, rgb(0, 0, 0, 1) 50%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 50%, rgb(0, 0, 0, 1) 80%);
         }
         .Opening-card-fade-60 {
             background: rgb(0, 0, 0);
             background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 46%, rgb(0, 0, 0, 1) 60%);
         }
-        .Opening-card-fade-80 {
+        .Opening-card-fade-100 {
             background: rgb(0, 0, 0);
             background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 30%, rgb(0, 0, 0, 1) 100%);
         }
@@ -355,6 +420,9 @@ $dropdown-link-active-color: black;
         }
         .Opening-card-text-block p {
             font-size: 1.25em;
+        }
+        .opening-card--portfolio {
+            --opening-card-position: initial;
         }
         .opening-card--bio {
             --opening-card-size: 110%;
@@ -382,8 +450,15 @@ $dropdown-link-active-color: black;
             --opening-card-image: url(/content/bassplaying.png);
             --opening-card-size: 750px;
         }
+        .opening-card--portfolio {
+            --opening-card-size: 80%;
+        }
+        .Opening-card-fade {
+            background: rgb(0, 0, 0);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.14) 0, rgb(0, 0, 0, 0.14) 40%, rgb(0, 0, 0, 1) 53%);
+        }
     }
-    /* lg >=1200px */
+    /* xl >=1200px */
     @include media-breakpoint-up(xl) {
         .site-content {
             max-width: 1200px;
@@ -400,6 +475,9 @@ $dropdown-link-active-color: black;
         position: relative;
     }
     @media (prefers-reduced-motion: reduce) {
+        .initial-page-load #main-content > div > .opening-card, .initial-page-load #main-content > div > :not(.opening-card) {
+            animation: none;
+        }
         .portfolio-card {
             transition: none;
         }
@@ -407,6 +485,9 @@ $dropdown-link-active-color: black;
             transform: none;
         }
         .Opening-card-text-block {
+            transition: none;
+        }
+        .opening-card-background {
             transition: none;
         }
         .Opening-card-text-block:hover {

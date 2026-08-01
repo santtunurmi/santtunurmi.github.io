@@ -2,7 +2,7 @@ import { useReducedMotion, type MotionProps } from 'motion/react'
 
 const easing = [0.22, 1, 0.36, 1] as const
 
-export function useRouteTransition(): MotionProps {
+function useVerticalTransition(duration: number): MotionProps {
     const reducedMotion = useReducedMotion()
 
     if (reducedMotion) {
@@ -18,11 +18,19 @@ export function useRouteTransition(): MotionProps {
         initial: { opacity: 0, y: 6 },
         animate: { opacity: 1, y: 0 },
         exit: { opacity: 0, y: -4 },
-        transition: { duration: 0.27, ease: easing },
+        transition: { duration, ease: easing },
     }
 }
 
-export function useInViewReveal(delay = 0): MotionProps {
+export function useRouteTransition(): MotionProps {
+    return useVerticalTransition(0.27)
+}
+
+export function useDialogTransition(): MotionProps {
+    return useVerticalTransition(0.54)
+}
+
+export function useInViewReveal(delay = 0, amount = 0.15): MotionProps {
     const reducedMotion = useReducedMotion()
 
     if (reducedMotion) {
@@ -37,7 +45,7 @@ export function useInViewReveal(delay = 0): MotionProps {
     return {
         initial: { opacity: 0, y: 8 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.15 },
+        viewport: { once: true, amount },
         transition: { duration: 0.27, delay, ease: easing },
     }
 }

@@ -12,7 +12,7 @@ export default function WebserverPage() {
 
     return (
         <>
-            <PageMetadata title='Webserver easter egg | Santtu Nurmi' description="A speedrun-themed webserver easter egg in Santtu Nurmi's portfolio." />
+            <PageMetadata title='Easter Egg | Santtu Nurmi' description="Easter Egg" />
             <OpeningCard profile='webserver'>
                 <p>You have found an easter egg</p>
             </OpeningCard>
