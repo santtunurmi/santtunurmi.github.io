@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
+import { siteRoutes } from '../routes'
 
 export default function WebserverPage() {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -10,9 +11,13 @@ export default function WebserverPage() {
         setLoggedIn((current) => !current)
     }
 
+    function handleSpeedrunSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+    }
+
     return (
         <>
-            <PageMetadata title='Easter Egg | Santtu Nurmi' description="Easter Egg" canonicalPath='/webserver' />
+            <PageMetadata title='Easter Egg | Santtu Nurmi' description="Easter Egg" canonicalPath={siteRoutes.webserver} />
             <OpeningCard profile='webserver'>
                 <p>You have found an easter egg</p>
             </OpeningCard>
@@ -42,20 +47,20 @@ export default function WebserverPage() {
                     <button type='submit' className='btn btn-primary'>This does nothing</button>
                 </form>
             </div>
-            <div className={`container-sm input ${loggedIn ? 'd-block' : 'd-none'} p-2 Web-server-text-block`}>
+            <form className={`container-sm input ${loggedIn ? 'd-block' : 'd-none'} p-2 Web-server-text-block`} onSubmit={handleSpeedrunSubmit}>
                 <h2>Add Speedrun</h2>
                 <div className='input-group mb-3'>
-                    <input type='text' className='form-control' placeholder='Game' aria-label='Game' aria-describedby='basic-addon2' />
+                    <input type='text' className='form-control' placeholder='Game' aria-label='Game' />
                 </div>
                 <div className='input-group mb-3'>
-                    <input type='text' className='form-control' placeholder='Category' aria-label='Category' aria-describedby='basic-addon2' />
+                    <input type='text' className='form-control' placeholder='Category' aria-label='Category' />
                 </div>
                 <div className='input-group mb-3'>
-                    <input type='text' className='form-control' placeholder='Time. (e.g. 1:00:00.000)' aria-label='Time' aria-describedby='basic-addon1' />
-                    <input type='text' className='form-control' placeholder='Variables. (e.g. RTA=yes)' aria-label='Variables' aria-describedby='basic-addon2' />
+                    <input type='text' className='form-control' placeholder='Time. (e.g. 1:00:00.000)' aria-label='Time' />
+                    <input type='text' className='form-control' placeholder='Variables. (e.g. RTA=yes)' aria-label='Variables' />
                 </div>
                 <div className='input-group mb-3'>
-                    <input type='text' className='form-control' placeholder='Video Link' aria-label='Video' aria-describedby='basic-addon2' />
+                    <input type='text' className='form-control' placeholder='Video Link' aria-label='Video' />
                 </div>
                 <div className='input-group mb-3'>
                     <textarea className='form-control' placeholder='Comments.' aria-label='Comments'></textarea>
@@ -63,7 +68,7 @@ export default function WebserverPage() {
                 <div className='col-auto'>
                     <button type='submit' className='btn btn-primary mb-3'>Add Speedrun</button>
                 </div>
-            </div>
+            </form>
             <div className='container-fluid'>
                 <h1 className='pt-3 pb-1 fw-semibold fs-4'>Speedruns:</h1>
             </div>

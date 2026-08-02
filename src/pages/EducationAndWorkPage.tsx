@@ -1,10 +1,13 @@
 import { Link } from 'react-router'
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import EducationAndWorkTimeline, { createTimelineScale, educationAndWorkTimeline } from '../components/EducationAndWorkTimeline'
+import EducationAndWorkTimeline from '../components/education-and-work/EducationAndWorkTimeline'
+import { educationAndWorkTimeline } from '../components/education-and-work/education-and-work-data'
+import { createTimelineScale } from '../components/education-and-work/timeline-layout'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
 import { useInViewReveal } from '../components/motion'
+import { siteRoutes } from '../routes'
 
 export default function EducationAndWorkPage() {
     const timelineReveal = useInViewReveal(0, 0)
@@ -13,7 +16,7 @@ export default function EducationAndWorkPage() {
 
     return (
         <>
-            <PageMetadata title='Education & Work | Santtu Nurmi' description="My education, work experience, and professional background." canonicalPath='/education-and-work' />
+            <PageMetadata title='Education & Work | Santtu Nurmi' description="My education, work experience, and professional background." canonicalPath={siteRoutes.educationAndWork} />
             <OpeningCard profile='education-and-work'>
                 <p>
                     People have described me as hard-working, committed, analytical and improvement oriented. I have received praise from the ability to be reflective on my own work,
@@ -52,7 +55,7 @@ export default function EducationAndWorkPage() {
                             <p>
                                 You can read more about my use of AI here:
                             </p>
-                            <Link to='/ai' title='Read more about my use of AI.'>Link to my page on AI</Link>
+                            <Link to={siteRoutes.ai} title='Read more about my use of AI.'>Link to my page on AI</Link>
                         </div>
                         <div className='mt-4'>
                             <p>
@@ -63,7 +66,7 @@ export default function EducationAndWorkPage() {
                             <p>
                                 You can read more about my hobbies here:
                             </p>
-                            <Link to='/hobbies' title='Read more about my hobbies.'>Link to my page about hobbies</Link>
+                            <Link to={siteRoutes.hobbies} title='Read more about my hobbies.'>Link to my page about hobbies</Link>
                         </div>
                     </motion.section>
                 </section>

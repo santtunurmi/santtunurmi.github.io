@@ -1,23 +1,14 @@
 import { Link } from 'react-router'
 import { motion } from 'motion/react'
+import type { LinkTarget } from '../models/content'
 import { useInViewReveal } from './motion'
-
-export type LinkDestination =
-    | {
-          type: 'internal'
-          to: string
-      }
-    | {
-          type: 'external'
-          href: string
-      }
 
 export type PortfolioCardProps = {
     image: string
     alt: string
     title: string
     description: string
-    destination: LinkDestination
+    destination: LinkTarget
     revealDelay?: number
 }
 

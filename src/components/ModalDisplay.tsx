@@ -1,39 +1,34 @@
 import { Link } from 'react-router'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useId, useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
+import type { ContentImage, ContentLink } from '../models/content'
 import { useDialogTransition } from './motion'
-
-export type ModalLink = {
-    pathType: 'to' | 'href'
-    path: string
-    title: string
-    text: string
-}
-
-export type ModalImage = {
-    src: string
-    alt: string
-}
 
 export type ModalDisplayProps = {
     open: boolean
     title: string
     children: ReactNode
-    link?: ModalLink
-    images?: readonly ModalImage[]
+    links?: readonly ContentLink[]
+    images?: readonly ContentImage[]
     onClosed: () => void
     returnFocusRef?: RefObject<HTMLElement | null>
 }
 
-export default function ModalDisplay({ open, title, children, link, images, onClosed, returnFocusRef }: ModalDisplayProps) {
+export default function ModalDisplay({ open, title, children, links, images, onClosed, returnFocusRef }: ModalDisplayProps) {
     const titleId = useId()
     const dialogRef = useRef<HTMLDialogElement>(null)
     const closeButtonRef = useRef<HTMLButtonElement>(null)
+    const openFrameRef = useRef<number | null>(null)
+    const closeButtonFocusFrameRef = useRef<number | null>(null)
+    const returnFocusFrameRef = useRef<number | null>(null)
     const [visible, setVisible] = useState(false)
     const dialogTransition = useDialogTransition()
 
     useEffect(() => {
         const dialog = dialogRef.current
+
+        cancelFrame(openFrameRef)
+        cancelFrame(closeButtonFocusFrameRef)
 
         if (!dialog) {
             return
@@ -44,14 +39,26 @@ export default function ModalDisplay({ open, title, children, link, images, onCl
                 dialog.showModal()
             }
 
-            requestAnimationFrame(() => {
+            cancelFrame(returnFocusFrameRef)
+            openFrameRef.current = requestAnimationFrame(() => {
                 setVisible(true)
-                requestAnimationFrame(() => closeButtonRef.current?.focus())
+                closeButtonFocusFrameRef.current = requestAnimationFrame(() => closeButtonRef.current?.focus())
             })
         } else if (dialog.open) {
-            setVisible(false)
+            if (dialog.querySelector('.modal-display-content')) {
+                setVisible(false)
+            } else {
+                dialog.close()
+            }
+        }
+
+        return () => {
+            cancelFrame(openFrameRef)
+            cancelFrame(closeButtonFocusFrameRef)
         }
     }, [open])
+
+    useEffect(() => () => cancelFrame(returnFocusFrameRef), [])
 
     function requestClose() {
         setVisible(false)
@@ -66,7 +73,7 @@ export default function ModalDisplay({ open, title, children, link, images, onCl
     function finishNativeClose() {
         setVisible(false)
         onClosed()
-        requestAnimationFrame(() => returnFocusRef?.current?.focus())
+        returnFocusFrameRef.current = requestAnimationFrame(() => returnFocusRef?.current?.focus())
     }
 
     function closeFromBackdrop(event: ReactMouseEvent<HTMLDialogElement>) {
@@ -83,13 +90,7 @@ export default function ModalDisplay({ open, title, children, link, images, onCl
                         <button className='modal-display-close' ref={closeButtonRef} type='button' onClick={requestClose} aria-label='Close'>Close</button>
                         <h2 id={titleId} className='h4 fw-semibold'>{title}</h2>
                         {children}
-                        {link && (
-                            link.pathType === 'to' ? (
-                                <Link to={link.path} title={link.title}>{link.text}</Link>
-                            ) : (
-                                <a href={link.path} title={link.title} target='_blank' rel='noopener noreferrer'>{link.text}</a>
-                            )
-                        )}
+                        {links && links.length > 0 && <ModalLinks links={links} />}
                         {images && images.length > 0 && <ModalImageCarousel images={images} />}
                     </motion.div>
                 )}
@@ -99,7 +100,7 @@ export default function ModalDisplay({ open, title, children, link, images, onCl
 }
 
 export type ModalImageCarouselProps = {
-    images: readonly ModalImage[]
+    images: readonly ContentImage[]
 }
 
 export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
@@ -173,4 +174,27 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             )}
         </div>
     )
+}
+
+function ModalLinks({ links }: { links: readonly ContentLink[] }) {
+    return (
+        <ul className='list-unstyled mb-0'>
+            {links.map((link, index) => (
+                <li key={`${link.type}-${link.type === 'internal' ? link.to : link.href}-${index}`}>
+                    {link.type === 'internal' ? (
+                        <Link to={link.to} title={link.title}>{link.text}</Link>
+                    ) : (
+                        <a href={link.href} title={link.title} target='_blank' rel='noopener noreferrer'>{link.text}</a>
+                    )}
+                </li>
+            ))}
+        </ul>
+    )
+}
+
+function cancelFrame(frameRef: RefObject<number | null>) {
+    if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current)
+        frameRef.current = null
+    }
 }

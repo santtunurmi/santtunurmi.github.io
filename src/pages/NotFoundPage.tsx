@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import PageMetadata from '../components/PageMetadata'
+import { siteRoutes } from '../routes'
 
 export default function NotFoundPage() {
     return (
@@ -7,7 +8,7 @@ export default function NotFoundPage() {
             <PageMetadata title='Page Not Found | Santtu Nurmi' description='The requested page was not found.' />
             <h1 className='fw-semibold'>Page Not Found</h1>
             <p>The page you requested does not exist.</p>
-            <Link to='/' className='btn btn-primary'>Return To The Portfolio</Link>
+            <Link to={siteRoutes.home} className='btn btn-primary'>Return To The Portfolio</Link>
         </div>
     )
 }

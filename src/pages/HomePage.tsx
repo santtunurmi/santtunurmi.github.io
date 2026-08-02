@@ -1,6 +1,7 @@
 import OpeningCard from '../components/OpeningCard'
 import PortfolioCard, { type PortfolioCardProps } from '../components/PortfolioCard'
 import PageMetadata from '../components/PageMetadata'
+import { siteRoutes } from '../routes'
 
 const portfolioCards: PortfolioCardProps[] = [
     {
@@ -30,7 +31,7 @@ const portfolioCards: PortfolioCardProps[] = [
         description: 'I have many different projects, and using AI-workflows has allowed me to speed up that work considerably, while never sacrificing quality, or losing that human touch and creativity. I use ChatGPT Codex, Anthropic Claude Code, OpenClaw and OpenCode. I talk to them, and I get things done.',
         destination: {
             type: 'internal',
-            to: '/ai',
+            to: siteRoutes.ai,
         },
     },
     {
@@ -58,7 +59,7 @@ const portfolioCards: PortfolioCardProps[] = [
 export default function HomePage() {
     return (
         <>
-            <PageMetadata title='Portfolio of Santtu Nurmi' description="My portfolio of projects and professional work." canonicalPath='/' />
+            <PageMetadata title='Portfolio of Santtu Nurmi' description="My portfolio of projects and professional work." canonicalPath={siteRoutes.home} />
             <OpeningCard profile='portfolio'>
                 <p>
                     Project-first software-developer with great technical problem solving skills. My experience spans software, web, tooling, reporting, live production, and more,

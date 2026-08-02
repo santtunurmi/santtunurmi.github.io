@@ -1,49 +1,33 @@
-import { Link, useLocation } from 'react-router'
+import { NavLink as RouterNavLink, useLocation } from 'react-router'
 import { useEffect, useRef } from 'react'
-
-type SiteRoute = '/' | '/education-and-work' | '/webserver' | '/ai' | '/hobbies'
+import { educationAndWorkRouteGroup, siteRoutes, type SiteRoute } from '../routes'
 
 type NavLinkProps = {
     to: SiteRoute
     children: string
     className?: string
     disabled?: boolean
-    active?: boolean
 }
 
-function NavLink({ to, children, className = 'nav-link', disabled = false, active = false }: NavLinkProps) {
-    const activeClassName = `${className}${active ? ' active' : ''}`
-
-    if (disabled) {
-        return (
-            <Link
-                to={to}
-                className={`${activeClassName} disabled`}
-                aria-disabled='true'
-                aria-current={active ? 'page' : undefined}
-                tabIndex={-1}
-                onClick={(event) => event.preventDefault()}
-            >
-                {children}
-            </Link>
-        )
-    }
-
+function NavLink({ to, children, className = 'nav-link', disabled = false }: NavLinkProps) {
     return (
-        <Link to={to} className={activeClassName} aria-current={active ? 'page' : undefined}>
+        <RouterNavLink
+            to={to}
+            end
+            className={({ isActive }) => `${className}${isActive ? ' active' : ''}${disabled ? ' disabled' : ''}`}
+            aria-disabled={disabled || undefined}
+            tabIndex={disabled ? -1 : undefined}
+            onClick={disabled ? (event) => event.preventDefault() : undefined}
+        >
             {children}
-        </Link>
+        </RouterNavLink>
     )
 }
 
 export default function SiteNav() {
     const { pathname } = useLocation()
     const mobileNavToggleRef = useRef<HTMLButtonElement>(null)
-    const homeActive = pathname === '/' || pathname === '/index.html'
-    const educationAndWorkActive = pathname === '/education-and-work' || pathname === '/education-and-work.html'
-    const webserverActive = pathname === '/webserver' || pathname === '/webserver.html'
-    const aiActive = pathname === '/ai' || pathname === '/ai.html'
-    const hobbiesActive = pathname === '/hobbies' || pathname === '/hobbies.html'
+    const educationAndWorkActive = educationAndWorkRouteGroup.some((route) => pathname === route)
 
     useEffect(() => {
         if (mobileNavToggleRef.current?.getAttribute('aria-expanded') === 'true') {
@@ -68,34 +52,33 @@ export default function SiteNav() {
                 </button>
                 <div className='collapse nav-pills navbar-collapse' id='mobile-nav'>
                     <h2 className='text-center fs-4'>Santtu Nurmi</h2>
-                    <NavLink to='/' active={homeActive}>
+                    <NavLink to={siteRoutes.home}>
                         Portfolio
                     </NavLink>
                     <div className='nav-item dropdown'>
-                        <a
-                            className={`nav-link dropdown-toggle${educationAndWorkActive || webserverActive ? ' active' : ''}`}
+                        <button
+                            className={`nav-link dropdown-toggle${educationAndWorkActive ? ' active' : ''}`}
+                            type='button'
                             data-bs-toggle='dropdown'
-                            href='#'
-                            role='button'
                             aria-expanded='false'
                         >
                             Education &amp; Work
-                        </a>
+                        </button>
                         <ul className='dropdown-menu text-bg-primary'>
                             <li>
-                                <NavLink to='/education-and-work' className='dropdown-item' active={educationAndWorkActive}>
+                                <NavLink to={siteRoutes.educationAndWork} className='dropdown-item'>
                                     Education &amp; Work
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/webserver' className='dropdown-item' disabled active={webserverActive}>
+                                <NavLink to={siteRoutes.webserver} className='dropdown-item' disabled>
                                     Webserver (Coming Soon)
                                 </NavLink>
                             </li>
                         </ul>
                     </div>
-                    <NavLink to='/ai' active={aiActive}>AI</NavLink>
-                    <NavLink to='/hobbies' active={hobbiesActive}>Hobbies</NavLink>
+                    <NavLink to={siteRoutes.ai}>AI</NavLink>
+                    <NavLink to={siteRoutes.hobbies}>Hobbies</NavLink>
                     <a className='nav-link' href='/content/CV.pdf' target='_blank' rel='noopener noreferrer'>
                         Download CV
                     </a>

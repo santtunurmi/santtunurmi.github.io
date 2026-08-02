@@ -99,4 +99,5 @@ HTMLDialogElement.prototype.close = function close() {
 afterEach(() => {
     cleanup()
     document.head.innerHTML = ''
+    vi.restoreAllMocks()
 })
