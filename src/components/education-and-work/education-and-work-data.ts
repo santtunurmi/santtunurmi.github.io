@@ -144,8 +144,8 @@ const workTimeline: readonly TimelineEntry[] = [
         },
     },
     {
-        id: 'aanekoski-youth-counsellor-2019',
-        title: "Youth Counsellor's Assistant (summer job)",
+        id: 'aanekoski-youth-counselor-2019',
+        title: "Youth Counselor's Assistant (summer job)",
         organization: 'City of Äänekoski',
         location: 'Äänekoski',
         period: 'June 2019',

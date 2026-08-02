@@ -21,7 +21,7 @@ export default function HobbiesPage() {
                 <h2 className='h5 pt-3 pb-3'>Speedrunning</h2>
                 <p>
                     I started speedrunning video games when I was 12. For more than 10 years, I have gone on to make a lot of wonderful friends through the hobby, learn a lot of valuable skills,
-                    get a few world records, and even travel to Austin, Texas, to meet some of my speedrunning friends and attending our first Counter-Strike Major together.
+                    get a few world records, and even travel to Austin, Texas, to meet some of my speedrunning friends and attend our first Counter-Strike Major together.
                     I got involved with NUKE-Liiga off the back of my work on charity events in our speedrunning community. Through the hobby,
                     I also gained a strong understanding of tools like OBS for streaming.
                 </p>
@@ -31,7 +31,7 @@ export default function HobbiesPage() {
                 </p>
                 <p>
                     We concluded that speedrunning is almost a natural teacher for handling pressure. You must play flawlessly to get a new personal best,
-                    with the pressure often mounting to ridiculous levels towards the very end of the game. This creates an environment where you must learn strategies to
+                    with the pressure often mounting to ridiculous levels toward the very end of the game. This creates an environment where you must learn strategies to
                     handle the pressure if you want to continue to improve your time. By the time I came to NUKE-Liiga, I had been speedrunning for 10 years and had been there and done that,
                     in a way.
                 </p>

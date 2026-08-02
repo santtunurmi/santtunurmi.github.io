@@ -16,9 +16,9 @@ Live: [Netlify](https://santtunurmi.netlify.app/) | [GitHub Pages](https://santt
 - Bootstrap and Sass
 - React Router and Motion
 
-## AI-Assisted V3 Workflow
+## AI-Assisted V3.0 Workflow
 
-I used OpenClaw, Codex, Claude Code, and OpenCode to support the V3.0 migration, animation work, and modular implementation while preserving my original writing and content direction. I retained project control, audited changes, and wrote code manually where needed.
+I used OpenClaw, ChatGPT Codex, Claude Code, and OpenCode to support the V3.0 migration, animation work, and modular implementation while preserving my original writing and content direction. I retained project control, audited changes, and wrote code manually where needed.
 
 ## Local Testing
 

@@ -16,7 +16,7 @@ const portfolioCards: PortfolioCardProps[] = [
     },
     {
         image: '/content/NUKEliiga.webp',
-        alt: 'Promotional banner of NUKE-Liiga, featuring the NUKE-Liiga logo in the center with a subheading of "NUORTEN KILPAPELAAJIEN E-URHEILULIIGA", and a Counter-Strike playermodel on the left.',
+        alt: 'Promotional banner of NUKE-Liiga, featuring the NUKE-Liiga logo in the center with a subheading of "NUORTEN KILPAPELAAJIEN E-URHEILULIIGA", and a Counter-Strike player model on the left.',
         title: 'Esports Event Production',
         description: 'Production manager for a Finnish youth esports league across two seasons, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
         destination: {
@@ -27,8 +27,8 @@ const portfolioCards: PortfolioCardProps[] = [
     {
         image: '/content/AI-project.png',
         alt: 'Python notebook showing data preprocessing code.',
-        title: 'AI-assisted Workflows',
-        description: 'I use AI-assisted workflows over many different projects for exploration, implementation, and review, while keeping responsibility for context, decisions, testing, and the final result. I use ChatGPT Codex, Anthropic Claude Code, OpenClaw and OpenCode. I talk to them, and I get things done.',
+        title: 'AI-Assisted Workflows',
+        description: 'I use AI-assisted workflows over many different projects for exploration, implementation, and review, while keeping responsibility for context, direction, testing, and final decisions. I use ChatGPT Codex, Claude Code, OpenClaw, and OpenCode. I talk to them, and I get things done.',
         destination: {
             type: 'internal',
             to: siteRoutes.ai,
@@ -38,7 +38,7 @@ const portfolioCards: PortfolioCardProps[] = [
         image: '/content/Portfolio-website.png',
         alt: "Screenshot of Santtu Nurmi's portfolio website.",
         title: 'Portfolio Website',
-        description: 'A self-started web project: V1 was hand-built with HTML, CSS, and JavaScript without AI; V2 became a Bootstrap/Sass multi-page site; and V3 migrated to Vite, React, and TypeScript with AI-assisted workflows, enabling better interactivity, animation, and modularity.',
+        description: 'A self-started web project: V1.0 was hand-built with HTML, CSS, and JavaScript without AI; V2.0 became a Bootstrap/Sass multi-page site; and V3.0 migrated to Vite, React, and TypeScript with AI-assisted workflows, enabling better interactivity, animation, and modularity.',
         destination: {
             type: 'external',
             href: 'https://github.com/santtunurmi/santtunurmi.github.io',

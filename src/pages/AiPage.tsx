@@ -15,7 +15,7 @@ export default function AiPage() {
                 </p>
             </OpeningCard>
             <div className='container-fluid'>
-                <h1 className='pt-3 pb-1 fw-semibold fs-4'>AI-assisted Workflows</h1>
+                <h1 className='pt-3 pb-1 fw-semibold fs-4'>AI-Assisted Workflows</h1>
                 <p>
                     I tend to use AI for work in files, code, or text, or when I need knowledge I do not immediately have. I have a lot of ideas, so when starting work on something,
                     I translate them for the model of my choice. I prompt through conversation: I format my messages as I would to a human, paint the picture, provide the necessary context,
@@ -66,7 +66,7 @@ export default function AiPage() {
                 </p>
                 <p>
                     These courses taught me a lot about the fundamental technical aspects of the many AI models around us today.
-                    I think the sizable data-analytics portion of these courses also gave me a better understanding of why good data is so important.
+                    I think the sizable data analytics portion of these courses also gave me a better understanding of why good data is so important.
                     They also served as a great refresher on Python, which is what I first started coding with in high school. The group project at the end was a highlight for me.
                     I was initially anxious about it, but the group turned out to be really into AI. It was an interesting experience working together and figuring out how we could fit our
                     agentic workflows together. Ultimately, active human communication kept the project on track. Clear responsibilities, good Git hygiene,
@@ -77,7 +77,7 @@ export default function AiPage() {
                     It all goes back to understanding your model and your model understanding you.
                 </p>
                 <p>
-                    I moved to Linux as my main operating system in the summer of 2026, which was the final change that really unlocked the full potential of AI workflows for me.
+                    I moved to Linux as my main operating system in the summer of 2026, which was the final change that really unlocked the full potential of AI-assisted workflows for me.
                     Previously, I was working in tight WSL environments, but now I had much more freedom to speed things up using the skills I had built up.
                     This allowed me to tackle many projects in my spare time that I otherwise would not have gotten around to.
                     These projects kept my skills sharp while simultaneously refining my workflow into a complete stack of the tools I had messed around with independently from the start of the
