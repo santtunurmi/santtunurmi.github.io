@@ -4,7 +4,7 @@ import PageMetadata from '../components/PageMetadata'
 export default function HobbiesPage() {
     return (
         <>
-            <PageMetadata title='Hobbies | Santtu Nurmi' description="My hobbies in speedrunning and music." />
+            <PageMetadata title='Hobbies | Santtu Nurmi' description="My hobbies in speedrunning and music." canonicalPath='/hobbies' />
             <OpeningCard profile='hobbies'>
                 <p>
                     I believe that one should constantly learn new things. My work at EXEN and NUKE-Liiga are the latest examples of leveraging skills learnt through my hobbies,

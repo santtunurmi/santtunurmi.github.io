@@ -1,6 +1,6 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent, type RefObject } from 'react'
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
-import { useDialogTransition } from './motion'
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type RefObject } from 'react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
+import ModalDisplay, { type ModalImage, type ModalLink } from './ModalDisplay'
 
 type TimelineMonth = {
     year: number
@@ -31,6 +31,8 @@ export type TimelineEntry = {
     location: string
     period: string
     description?: string
+    link?: ModalLink
+    images?: readonly ModalImage[]
     geometry: TimelineGeometry
 }
 
@@ -74,6 +76,13 @@ const educationTimeline: readonly TimelineEntry[] = [
         organization: 'JAMK University of Applied Sciences',
         location: 'Jyväskylä',
         period: 'August 2022 – thesis planned for autumn 2026',
+        description: 'My education in information and communication technology at the JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that having a wide range of skills and knowledge is vital for any person to have. You can often find ways to learn how different things can be used together. My education has also challenged me to demand more of myself. I wasn\'t getting the best grades at the start, and didn\'t work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; the momentum of which I\'ve used to kickstart my career.',
+            link: {
+            pathType: 'href',
+            path: 'https://www.jamk.fi/en/apply-to-Jamk/bachelors-degree/become-an-ict-engineer-ready-for-rapidly-digitalising-world',
+            title: 'Click here for more information about the Programme.',
+            text: 'Click here for more information about the Programme.',
+        },
         geometry: {
             type: 'duration',
             start: { year: 2022, month: 8 },
@@ -102,6 +111,18 @@ const workTimeline: readonly TimelineEntry[] = [
         location: 'Jyväskylä / Hybrid',
         period: 'January – May 2026',
         description: 'Worked accross four different projects, ranging from application work, system restoration, technical audit, cloud-host and CI/CD research, WordPress/PHP and live video production. I really got to use the entire range of my skillset at EXEN, which remains the strongest showcase of my project-first mentality and ability to get things done, as all four projects were a success.',
+        link: {
+            pathType: 'href',
+            path: 'https://exen.fi/en/front-page/',
+            title: 'Official website of EXEN esports Oy.',
+            text: 'https://exen.fi/en/front-page/',
+        },
+        images: [
+            {
+                src: '/content/Exen1.jpeg',
+                alt: 'Santtu Nurmi standing in front of the EXEN esports logo.',
+            },
+        ],
         geometry: {
             type: 'duration',
             start: { year: 2026, month: 1 },
@@ -116,7 +137,39 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'NUKE-Liiga',
         location: 'Hybrid',
         period: 'June 2025 – May 2026',
-        description: 'I was the production manager at "NUKE-Liiga", a Finnish academy league for Counter-Strike esports, during its first two seasons. As the production manager, I handled the technical execution of the stream, communicated with casters during broadcasts, and created the stream layouts together with graphic designers. I additionally handled the in-game camerawork.',
+        description: 'I was the production manager at "NUKE-Liiga", a Finnish academy league for Counter-Strike esports, during its first two seasons. As the production manager, I handled the technical execution of the stream, communicated with casters during broadcasts, and created the stream layouts together with graphic designers. I additionally handled the in-game camerawork. During the second season, I interviewed and onboarded an assistant producer while carrying live broadcast responsibility.',
+        link: {
+            pathType: 'href',
+            path: 'https://www.youtube.com/watch?v=cNMYjpt7Qfc',
+            title: 'Aftermovie from the LAN final of the second season, hosted on the official NUKE-Liiga YouTube channel.',
+            text: 'https://www.youtube.com/watch?v=cNMYjpt7Qfc',
+        },
+        images: [
+            {
+                src: '/content/Working-wide.png',
+                alt: 'Santtu Nurmi working at a production desk with three monitors and a Stream Deck.',
+            },
+            {
+                src: '/content/Nukeliiga1.jpeg',
+                alt: 'Santtu Nurmi working at a computer alongside a colleague at NUKE-Liiga.',
+            },
+            {
+                src: '/content/Nukeliiga2.jpeg',
+                alt: 'Selfie of Santtu Nurmi at the NUKE-Liiga production venue.',
+            },
+            {
+                src: '/content/Nukeliiga3.jpg',
+                alt: 'Santtu Nurmi working backstage beside a NUKE-Liiga trophy and production equipment.',
+            },
+            {
+                src: '/content/Nukeliiga4.png',
+                alt: 'Jeme and Herasmie wearing headsets during a FINNALI broadcast.',
+            },
+            {
+                src: '/content/Nukeliiga5.png',
+                alt: 'Santtu Nurmi standing in front of hexagonal wall lights at the NUKE-Liiga venue.',
+            },
+        ],
         geometry: {
             type: 'duration',
             start: { year: 2025, month: 6 },
@@ -158,6 +211,19 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'City of Äänekoski',
         location: 'Äänekoski',
         period: 'June 2019',
+        description: 'Took part in a painting project organized by the city of Äänekoski. With no prior experience in painting, I was able to learn the required skills to provide valuable help for the project, which was completed in a month and on schedule. With the work being conducted outdoors and as a group effort, the considerably different work environment gave me valuable variety in my work experience early on. My active participation also gave me an opportunity to appear on the news:',
+        link: {
+            pathType: 'href',
+            path: 'https://yle.fi/a/3-10856187',
+            title: 'News article about the project.',
+            text: 'https://yle.fi/a/3-10856187',
+        },
+        images: [
+            {
+                src: '/content/YouthCounsellorsAssistant1.jpeg',
+                alt: 'Four people standing in front of a colorful outdoor mural during the Äänekoski painting project.',
+            },
+        ],
         geometry: {
             type: 'point',
             at: { year: 2019, month: 6 },
@@ -177,57 +243,25 @@ const workTimeline: readonly TimelineEntry[] = [
     },
 ]
 
-export const bioTimeline: readonly TimelineEntry[] = [...educationTimeline, ...workTimeline]
+export const educationAndWorkTimeline: readonly TimelineEntry[] = [...educationTimeline, ...workTimeline]
 
-type BioTimelineProps = {
+type EducationAndWorkTimelineProps = {
     entries: readonly TimelineEntry[]
     scale: TimelineScale
 }
 
-export default function BioTimeline({ entries, scale }: BioTimelineProps) {
-    const dialogTitleId = useId()
-    const dialogRef = useRef<HTMLDialogElement>(null)
-    const dialogCloseRef = useRef<HTMLButtonElement>(null)
+export default function EducationAndWorkTimeline({ entries, scale }: EducationAndWorkTimelineProps) {
     const timelineRef = useRef<HTMLDivElement>(null)
     const triggerRef = useRef<HTMLButtonElement>(null)
     const [selectedEntry, setSelectedEntry] = useState<TimelineEntry | null>(null)
-    const [dialogVisible, setDialogVisible] = useState(false)
     const timelineWidth = useElementWidth(timelineRef)
     const minimumDevicePixelStrokeWidth = useMinimumDevicePixelStrokeWidth()
     const timelineHeight = scale.months * timelinePixelsPerMonth
     const titleOffsets = useTimelineTitleOffsets(timelineRef, entries, scale, timelineHeight, timelineWidth)
-    const dialogTransition = useDialogTransition()
 
     function openEntry(entry: TimelineEntry, trigger: HTMLButtonElement) {
         triggerRef.current = trigger
         setSelectedEntry(entry)
-        requestAnimationFrame(() => {
-            dialogRef.current?.showModal()
-            setDialogVisible(true)
-            requestAnimationFrame(() => dialogCloseRef.current?.focus())
-        })
-    }
-
-    function closeEntry() {
-        setDialogVisible(false)
-    }
-
-    function finishDialogClose() {
-        if (!dialogVisible) {
-            dialogRef.current?.close()
-        }
-    }
-
-    function restoreTriggerFocus() {
-        setDialogVisible(false)
-        setSelectedEntry(null)
-        requestAnimationFrame(() => triggerRef.current?.focus())
-    }
-
-    function closeFromBackdrop(event: ReactMouseEvent<HTMLDialogElement>) {
-        if (event.target === event.currentTarget) {
-            closeEntry()
-        }
     }
 
     const timelineStyle = {
@@ -240,29 +274,25 @@ export default function BioTimeline({ entries, scale }: BioTimelineProps) {
     const dateLabelSides = getDateLabelSides(entries)
 
     return (
-        <div className='bio-timeline' style={timelineStyle} ref={timelineRef}>
-            <svg className='bio-timeline-axis' viewBox={`0 0 ${timelineWidth || 1} ${timelineHeight}`} preserveAspectRatio='none' aria-hidden='true' focusable='false'>
-                <line className='bio-timeline-axis-line' x1={timelineWidth * timelineAxisRatio} x2={timelineWidth * timelineAxisRatio} y1={0} y2={timelineHeight} />
+        <div className='education-and-work-timeline' style={timelineStyle} ref={timelineRef}>
+            <svg className='education-and-work-timeline-axis' viewBox={`0 0 ${timelineWidth || 1} ${timelineHeight}`} preserveAspectRatio='none' aria-hidden='true' focusable='false'>
+                <line className='education-and-work-timeline-axis-line' x1={timelineWidth * timelineAxisRatio} x2={timelineWidth * timelineAxisRatio} y1={0} y2={timelineHeight} />
             </svg>
-            <span className='bio-timeline-axis-label bio-timeline-axis-label--end'>{formatAxisMonth(scale.baseline)}</span>
-            <ol className='bio-timeline-entries'>
+            <span className='education-and-work-timeline-axis-label education-and-work-timeline-axis-label--end'>{formatAxisMonth(scale.baseline)}</span>
+            <ol className='education-and-work-timeline-entries'>
                 {entries.map((entry) => (
                     <TimelineItem entry={entry} scale={scale} timelineWidth={timelineWidth} timelineHeight={timelineHeight} titleOffset={titleOffsets.get(entry.id) ?? entry.geometry.titleOffset ?? 0} dateLabelSides={dateLabelSides} onOpen={openEntry} key={entry.id} />
                 ))}
             </ol>
-            <dialog className={`bio-timeline-dialog${dialogVisible ? ' bio-timeline-dialog--visible' : ''}`} ref={dialogRef} onClick={closeFromBackdrop} onCancel={(event) => { event.preventDefault(); closeEntry() }} onClose={restoreTriggerFocus} aria-labelledby={dialogTitleId}>
-                <AnimatePresence onExitComplete={finishDialogClose}>
-                    {selectedEntry && dialogVisible && (
-                        <motion.div className='bio-timeline-dialog-content' {...dialogTransition}>
-                            <button className='bio-timeline-dialog-close' ref={dialogCloseRef} type='button' onClick={closeEntry} aria-label='Close'>Close</button>
-                            <h3 id={dialogTitleId} className='h4 fw-semibold'>{selectedEntry.title}</h3>
-                            <p className='mb-1'>{selectedEntry.organization} · {selectedEntry.location}</p>
-                            <p className='bio-timeline-date mb-0'>{selectedEntry.period}</p>
-                            {selectedEntry.description && <p className='mb-0 mt-3'>{selectedEntry.description}</p>}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </dialog>
+            <ModalDisplay open={selectedEntry !== null} title={selectedEntry?.title ?? ''} link={selectedEntry?.link} images={selectedEntry?.images} onClosed={() => setSelectedEntry(null)} returnFocusRef={triggerRef}>
+                {selectedEntry && (
+                    <>
+                        <p className='mb-1'>{selectedEntry.organization} · {selectedEntry.location}</p>
+                        <p className='education-and-work-timeline-date mb-0'>{selectedEntry.period}</p>
+                        {selectedEntry.description && <p className='mb-0 mt-3'>{selectedEntry.description}</p>}
+                    </>
+                )}
+            </ModalDisplay>
         </div>
     )
 }
@@ -323,33 +353,33 @@ function TimelineItem({ entry, scale, timelineWidth, timelineHeight, titleOffset
     const immediate = reducedMotion ? { duration: 0 } : undefined
 
     return (
-        <motion.li className={`bio-timeline-entry bio-timeline-entry--title-${titleSide}${isDuration ? ' bio-timeline-entry--duration' : ' bio-timeline-entry--point'}${titleOffset > 0 ? ' bio-timeline-entry--title-down' : ''}${titleOffset < 0 ? ' bio-timeline-entry--title-up' : ''}`} style={itemStyle} initial='hidden' animate={reducedMotion || entryInView ? 'visible' : 'hidden'}>
-            <span ref={viewportAnchorRef} className='bio-timeline-viewport-anchor' aria-hidden='true'></span>
-            <svg className='bio-timeline-entry-artwork' viewBox={`0 0 ${artworkWidth} ${timelineHeight}`} preserveAspectRatio='none' aria-hidden='true' focusable='false'>
+        <motion.li className={`education-and-work-timeline-entry education-and-work-timeline-entry--title-${titleSide}`} style={itemStyle} initial='hidden' animate={reducedMotion || entryInView ? 'visible' : 'hidden'}>
+            <span ref={viewportAnchorRef} className='education-and-work-timeline-viewport-anchor' aria-hidden='true'></span>
+            <svg className='education-and-work-timeline-entry-artwork' viewBox={`0 0 ${artworkWidth} ${timelineHeight}`} preserveAspectRatio='none' aria-hidden='true' focusable='false'>
                 {isDuration && (
                     <>
-                        <motion.line className='bio-timeline-segment' x1={laneX} x2={laneX} y1={anchorY} y2={startY} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : durationLineDuration, ease: 'easeInOut' }} />
-                        <motion.line className='bio-timeline-segment' x1={laneX} x2={laneX} y1={anchorY} y2={endY} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : durationLineDuration, ease: 'easeInOut' }} />
+                        <motion.line className='education-and-work-timeline-segment' x1={laneX} x2={laneX} y1={anchorY} y2={startY} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : durationLineDuration, ease: 'easeInOut' }} />
+                        <motion.line className='education-and-work-timeline-segment' x1={laneX} x2={laneX} y1={anchorY} y2={endY} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : durationLineDuration, ease: 'easeInOut' }} />
                     </>
                 )}
-                <motion.path className='bio-timeline-connector' d={connectorPath} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : connectorDuration, delay: reducedMotion ? 0 : connectorDelay }} />
-                <motion.circle className='bio-timeline-dot' cx={laneX} cy={startY} r={timelineDotRadius} variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }} />
-                {isDuration && !isOngoing && <motion.circle className='bio-timeline-dot' cx={laneX} cy={endY} r={timelineDotRadius} variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }} />}
+                <motion.path className='education-and-work-timeline-connector' d={connectorPath} variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1 } }} transition={{ duration: reducedMotion ? 0 : connectorDuration, delay: reducedMotion ? 0 : connectorDelay }} />
+                <motion.circle className='education-and-work-timeline-dot' cx={laneX} cy={startY} r={timelineDotRadius} variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }} />
+                {isDuration && !isOngoing && <motion.circle className='education-and-work-timeline-dot' cx={laneX} cy={endY} r={timelineDotRadius} variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }} />}
                 {isDuration && (
                     <>
-                        <line className='bio-timeline-entry-hit-line' x1={laneX} x2={laneX} y1={anchorY} y2={startY} />
-                        <line className='bio-timeline-entry-hit-line' x1={laneX} x2={laneX} y1={anchorY} y2={endY} />
+                        <line className='education-and-work-timeline-entry-hit-line' x1={laneX} x2={laneX} y1={anchorY} y2={startY} />
+                        <line className='education-and-work-timeline-entry-hit-line' x1={laneX} x2={laneX} y1={anchorY} y2={endY} />
                     </>
                 )}
-                <path className='bio-timeline-entry-hit-line' d={connectorPath} />
-                <circle className='bio-timeline-entry-hit-dot' cx={laneX} cy={startY} r={timelineDotHitRadius} />
-                {isDuration && !isOngoing && <circle className='bio-timeline-entry-hit-dot' cx={laneX} cy={endY} r={timelineDotHitRadius} />}
+                <path className='education-and-work-timeline-entry-hit-line' d={connectorPath} />
+                <circle className='education-and-work-timeline-entry-hit-dot' cx={laneX} cy={startY} r={timelineDotHitRadius} />
+                {isDuration && !isOngoing && <circle className='education-and-work-timeline-entry-hit-dot' cx={laneX} cy={endY} r={timelineDotHitRadius} />}
             </svg>
-            {showStartDate && <motion.span className={`bio-timeline-entry-date bio-timeline-entry-date--start bio-timeline-entry-date--${startDateSide}${isOffsetLane ? ' bio-timeline-entry-date--offset-lane' : ''}`} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }}>{formatAxisMonth(startMonth)}</motion.span>}
-            {isDuration && showEndDate && <motion.span className={`bio-timeline-entry-date bio-timeline-entry-date--end bio-timeline-entry-date--${endDateSide ?? (isOffsetLane ? 'right' : 'left')}${isOffsetLane ? ' bio-timeline-entry-date--offset-lane' : ''}`} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }}>{isOngoing ? 'Ongoing' : formatAxisMonth(endMonth)}</motion.span>}
-            <motion.button className='bio-timeline-title' type='button' data-timeline-entry-id={entry.id} onClick={(event) => onOpen(entry, event.currentTarget)} variants={{ hidden: { opacity: 0, x: titleSide === 'right' ? -4 : 4 }, visible: { opacity: 1, x: 0 } }} transition={immediate ?? { duration: titleRevealDuration, delay: titleDelay }}>
-                <span className='bio-timeline-title-name'>{entry.title}</span>
-                <span className='bio-timeline-title-organization'>{entry.organization}</span>
+            {showStartDate && <motion.span className={`education-and-work-timeline-entry-date education-and-work-timeline-entry-date--start education-and-work-timeline-entry-date--${startDateSide}${isOffsetLane ? ' education-and-work-timeline-entry-date--offset-lane' : ''}`} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }}>{formatAxisMonth(startMonth)}</motion.span>}
+            {isDuration && showEndDate && <motion.span className={`education-and-work-timeline-entry-date education-and-work-timeline-entry-date--end education-and-work-timeline-entry-date--${endDateSide ?? (isOffsetLane ? 'right' : 'left')}${isOffsetLane ? ' education-and-work-timeline-entry-date--offset-lane' : ''}`} variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} transition={{ duration: reducedMotion ? 0 : endpointRevealDuration, delay: reducedMotion ? 0 : endpointDelay }}>{isOngoing ? 'Ongoing' : formatAxisMonth(endMonth)}</motion.span>}
+            <motion.button className='education-and-work-timeline-title' type='button' data-timeline-entry-id={entry.id} onClick={(event) => onOpen(entry, event.currentTarget)} variants={{ hidden: { opacity: 0, x: titleSide === 'right' ? -4 : 4 }, visible: { opacity: 1, x: 0 } }} transition={immediate ?? { duration: titleRevealDuration, delay: titleDelay }}>
+                <span className='education-and-work-timeline-title-name'>{entry.title}</span>
+                <span className='education-and-work-timeline-title-organization'>{entry.organization}</span>
             </motion.button>
         </motion.li>
     )

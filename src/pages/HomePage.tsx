@@ -58,7 +58,7 @@ const portfolioCards: PortfolioCardProps[] = [
 export default function HomePage() {
     return (
         <>
-            <PageMetadata title='Portfolio of Santtu Nurmi' description="My portfolio of projects and professional work." />
+            <PageMetadata title='Portfolio of Santtu Nurmi' description="My portfolio of projects and professional work." canonicalPath='/' />
             <OpeningCard profile='portfolio'>
                 <p>
                     Project-first software-developer with great technical problem solving skills. My experience spans software, web, tooling, reporting, live production, and more,

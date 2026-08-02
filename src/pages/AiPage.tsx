@@ -4,7 +4,7 @@ import PageMetadata from '../components/PageMetadata'
 export default function AiPage() {
     return (
         <>
-            <PageMetadata title='AI-Assisted Workflows | Santtu Nurmi' description="My approach to AI-assisted workflows, tools, and learning." />
+            <PageMetadata title='AI-Assisted Workflows | Santtu Nurmi' description="My approach to AI-assisted workflows, tools, and learning." canonicalPath='/ai' />
             <OpeningCard profile='ai'>
                 <p>
                     I've gone from being strongly anti-AI, to seeing how it can be used to get things done faster AND better, to finally mastering AI-workflows as a fundamental part of how I work.

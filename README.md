@@ -23,11 +23,12 @@ Requires Node.js 24 and npm 11.
 ```bash
 npm ci
 npm run dev
+npm run test
 npm run build
 npm run verify
 ```
 
-`npm run verify` runs linting, type checking, and the production build. The build writes the deployable static site to `docs/`, including static route entries for GitHub Pages.
+`npm run verify` runs linting, type checking, automated tests, and the production build. The build writes the deployable static site to `docs/`, including static route entries for GitHub Pages.
 
 ## Deployment
 

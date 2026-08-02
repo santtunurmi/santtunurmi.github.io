@@ -1,5 +1,3 @@
-//sass --watch ./scss/main.scss ./docs/css/stylesheet.css
-//^^ sass compiler command
 // Functions first
 @import "../node_modules/bootstrap/scss/functions";
 // Customizations to defaults
@@ -103,10 +101,10 @@ $dropdown-link-active-color: black;
         transition: filter 180ms ease;
     }
     .opening-card--portfolio {
-        --opening-card-image: url(/content/Portrait.png);
+        --opening-card-image: url(/content/Portrait.jpeg);
         --opening-card-position: 0 -7vw;
     }
-    .opening-card--bio {
+    .opening-card--education-and-work {
         --opening-card-image: url(/content/Working.png);
     }
     .opening-card--webserver {
@@ -173,23 +171,19 @@ $dropdown-link-active-color: black;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.35);
         }
     }
-/* Bio page-specific css. */
-    .bio-section {
-        max-width: 70rem;
-        margin-bottom: 2rem;
-    }
-    .bio-timeline-block {
+/* Education and Work page-specific css. */
+    .education-and-work-timeline-block {
         max-width: 90rem;
         margin-bottom: 2rem;
     }
-    .bio-timeline {
+    .education-and-work-timeline {
         --timeline-title-width: calc(var(--timeline-title-left-edge) - 0.5rem);
         position: relative;
         min-height: var(--timeline-height);
         margin: 1rem 0 0;
         padding: 0;
     }
-    .bio-timeline-axis {
+    .education-and-work-timeline-axis {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -197,13 +191,13 @@ $dropdown-link-active-color: black;
         overflow: visible;
         pointer-events: none;
     }
-    .bio-timeline-axis-line {
+    .education-and-work-timeline-axis-line {
         stroke: white;
         stroke-width: max(2px, var(--timeline-min-stroke-width));
         shape-rendering: crispEdges;
         vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-axis-label {
+    .education-and-work-timeline-axis-label {
         position: absolute;
         right: calc(100% - var(--timeline-axis-left) + 0.75rem);
         color: white;
@@ -211,25 +205,25 @@ $dropdown-link-active-color: black;
         line-height: 1;
         text-align: right;
     }
-    .bio-timeline-axis-label--end {
+    .education-and-work-timeline-axis-label--end {
         bottom: 0;
     }
-    .bio-timeline-date {
+    .education-and-work-timeline-date {
         color: var(--bs-primary);
         font-weight: 600;
     }
-    .bio-timeline-entries {
+    .education-and-work-timeline-entries {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-    .bio-timeline-entry {
+    .education-and-work-timeline-entry {
         --entry-lane-offset: calc(var(--entry-lane) * var(--timeline-lane-offset));
         position: absolute;
         inset: 0;
         pointer-events: none;
     }
-    .bio-timeline-entry-artwork {
+    .education-and-work-timeline-entry-artwork {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -237,20 +231,20 @@ $dropdown-link-active-color: black;
         overflow: visible;
         pointer-events: none;
     }
-    .bio-timeline-viewport-anchor {
+    .education-and-work-timeline-viewport-anchor {
         position: absolute;
         top: var(--entry-anchor);
         left: var(--timeline-axis-left);
         width: 1px;
         height: 1px;
     }
-    .bio-timeline-segment {
+    .education-and-work-timeline-segment {
         stroke: var(--bs-primary);
         stroke-width: max(3px, var(--timeline-min-stroke-width));
         shape-rendering: crispEdges;
         vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-dot {
+    .education-and-work-timeline-dot {
         fill: var(--bs-primary);
         stroke: white;
         stroke-width: max(2px, var(--timeline-min-stroke-width));
@@ -259,13 +253,13 @@ $dropdown-link-active-color: black;
         shape-rendering: geometricPrecision;
         vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-entry-date--start {
+    .education-and-work-timeline-entry-date--start {
         top: var(--entry-start);
     }
-    .bio-timeline-entry-date--end {
+    .education-and-work-timeline-entry-date--end {
         top: var(--entry-end);
     }
-    .bio-timeline-entry-date {
+    .education-and-work-timeline-entry-date {
         position: absolute;
         left: calc(var(--timeline-axis-left) + 0.85rem + var(--entry-lane-offset));
         color: var(--bs-primary);
@@ -275,12 +269,12 @@ $dropdown-link-active-color: black;
         pointer-events: auto;
         translate: 0 -50%;
     }
-    .bio-timeline-entry-date--left {
+    .education-and-work-timeline-entry-date--left {
         right: calc(100% - var(--timeline-axis-left) + 0.85rem);
         left: auto;
         text-align: right;
     }
-    .bio-timeline-connector {
+    .education-and-work-timeline-connector {
         fill: none;
         stroke: var(--bs-primary);
         stroke-linecap: square;
@@ -289,7 +283,7 @@ $dropdown-link-active-color: black;
         shape-rendering: crispEdges;
         vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-entry-hit-line {
+    .education-and-work-timeline-entry-hit-line {
         fill: none;
         stroke: transparent;
         stroke-linecap: round;
@@ -297,11 +291,11 @@ $dropdown-link-active-color: black;
         pointer-events: stroke;
         vector-effect: non-scaling-stroke;
     }
-    .bio-timeline-entry-hit-dot {
+    .education-and-work-timeline-entry-hit-dot {
         fill: transparent;
         pointer-events: all;
     }
-    .bio-timeline-title {
+    .education-and-work-timeline-title {
         position: absolute;
         top: calc(var(--entry-anchor) + var(--entry-title-offset));
         left: 0;
@@ -317,38 +311,38 @@ $dropdown-link-active-color: black;
         border-radius: 0.25rem;
         translate: 0 -50%;
     }
-    .bio-timeline-title-name, .bio-timeline-title-organization {
+    .education-and-work-timeline-title-name, .education-and-work-timeline-title-organization {
         display: block;
     }
-    .bio-timeline-title-organization {
+    .education-and-work-timeline-title-organization {
         margin-top: 0.2rem;
         color: rgba(255, 255, 255, 0.72);
         font-size: 0.72rem;
     }
-    .bio-timeline-entry--title-right .bio-timeline-title {
+    .education-and-work-timeline-entry--title-right .education-and-work-timeline-title {
         right: 0;
         left: auto;
         width: var(--timeline-title-width);
     }
-    .bio-timeline-entry:hover .bio-timeline-title, .bio-timeline-entry:focus-within .bio-timeline-title {
+    .education-and-work-timeline-entry:hover .education-and-work-timeline-title, .education-and-work-timeline-entry:focus-within .education-and-work-timeline-title {
         background: var(--bs-primary);
         border-color: white;
     }
-    .bio-timeline-title:focus-visible {
+    .education-and-work-timeline-title:focus-visible {
         outline: 2px solid white;
         outline-offset: 2px;
     }
-    .bio-timeline-entry:hover .bio-timeline-segment, .bio-timeline-entry:focus-within .bio-timeline-segment, .bio-timeline-entry:hover .bio-timeline-connector, .bio-timeline-entry:focus-within .bio-timeline-connector {
+    .education-and-work-timeline-entry:hover .education-and-work-timeline-segment, .education-and-work-timeline-entry:focus-within .education-and-work-timeline-segment, .education-and-work-timeline-entry:hover .education-and-work-timeline-connector, .education-and-work-timeline-entry:focus-within .education-and-work-timeline-connector {
         stroke: white;
     }
-    .bio-timeline-entry:hover .bio-timeline-dot, .bio-timeline-entry:focus-within .bio-timeline-dot {
+    .education-and-work-timeline-entry:hover .education-and-work-timeline-dot, .education-and-work-timeline-entry:focus-within .education-and-work-timeline-dot {
         fill: white;
         stroke: var(--bs-primary);
     }
-    .bio-timeline-entry:hover .bio-timeline-entry-date, .bio-timeline-entry:focus-within .bio-timeline-entry-date {
+    .education-and-work-timeline-entry:hover .education-and-work-timeline-entry-date, .education-and-work-timeline-entry:focus-within .education-and-work-timeline-entry-date {
         color: white;
     }
-    .bio-timeline-dialog {
+    .modal-display {
         width: min(1200px, calc(100% - 2rem));
         height: calc(100dvh - 2rem);
         max-width: none;
@@ -360,15 +354,17 @@ $dropdown-link-active-color: black;
         border: 0;
         overflow: visible;
     }
-    .bio-timeline-dialog::backdrop {
+    .modal-display::backdrop {
         background-color: rgba(0, 0, 0, 0);
         transition: background-color 540ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .bio-timeline-dialog--visible::backdrop {
+    .modal-display--visible::backdrop {
         background-color: rgba(0, 0, 0, 0.75);
     }
-    .bio-timeline-dialog-content {
+    .modal-display-content {
         position: relative;
+        display: flex;
+        flex-direction: column;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
@@ -378,16 +374,72 @@ $dropdown-link-active-color: black;
         border-radius: 0.35rem;
         overflow: auto;
     }
-    .bio-timeline-dialog-close {
-        float: right;
+    .modal-display-close {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
         padding: 0.25rem 0.5rem;
         color: white;
         background: transparent;
         border: 1px solid currentColor;
         border-radius: 0.25rem;
     }
+    .modal-display-content > h2 {
+        padding-right: 5rem;
+    }
+    .modal-display-carousel {
+        position: relative;
+        margin-top: auto;
+        padding-top: 1.5rem;
+    }
+    .modal-display-carousel-viewport {
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: none;
+    }
+    .modal-display-carousel-viewport::-webkit-scrollbar {
+        display: none;
+    }
+    .modal-display-carousel-track {
+        display: flex;
+        justify-content: center;
+        width: max-content;
+        min-width: 100%;
+        gap: 1rem;
+    }
+    .modal-display-carousel-image {
+        flex: 0 0 auto;
+        width: min(350px, calc(100vw - 5rem));
+        height: 250px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+    }
+    .modal-display-carousel-control {
+        position: absolute;
+        top: 50%;
+        z-index: 1;
+        width: 2.5rem;
+        height: 3.5rem;
+        padding: 0;
+        color: white;
+        font-size: 3rem;
+        line-height: 1;
+        background: rgba(0, 0, 0, 0.65);
+        border: 1px solid white;
+        border-radius: 0.25rem;
+        translate: 0 -50%;
+    }
+    .modal-display-carousel-control:disabled {
+        opacity: 0.35;
+    }
+    .modal-display-carousel-control--previous {
+        left: 0.5rem;
+    }
+    .modal-display-carousel-control--next {
+        right: 0.5rem;
+    }
     @media (prefers-reduced-motion: reduce) {
-        .bio-timeline-dialog::backdrop {
+        .modal-display::backdrop {
             transition-duration: 0s;
         }
     }
@@ -395,7 +447,7 @@ $dropdown-link-active-color: black;
 /* Media breakpoints */
     /* xs <576px */
     @include media-breakpoint-down(sm) {
-        .bio-timeline-entry-date--right.bio-timeline-entry-date--offset-lane {
+        .education-and-work-timeline-entry-date--right.education-and-work-timeline-entry-date--offset-lane {
             right: calc(100% - var(--timeline-axis-left) + 0.85rem);
             left: auto;
             text-align: right;
@@ -424,16 +476,16 @@ $dropdown-link-active-color: black;
         .opening-card--portfolio {
             --opening-card-position: initial;
         }
-        .opening-card--bio {
+        .opening-card--education-and-work {
             --opening-card-size: 110%;
         }
         .opening-card--hobbies {
-            --opening-card-image: url(/content/bassplaying-tall.png);
+            --opening-card-image: url(/content/bassplaying-tall.jpeg);
         }
     }
     /* md >=768px */
     @include media-breakpoint-up(md) {
-        .opening-card--bio {
+        .opening-card--education-and-work {
             --opening-card-image: url(/content/Working-wide.png);
             --opening-card-size: 1200px;
         }

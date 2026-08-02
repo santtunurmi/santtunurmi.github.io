@@ -1,34 +1,34 @@
 import { Link } from 'react-router'
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import BioTimeline, { bioTimeline, createTimelineScale } from '../components/BioTimeline'
+import EducationAndWorkTimeline, { createTimelineScale, educationAndWorkTimeline } from '../components/EducationAndWorkTimeline'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
 import { useInViewReveal } from '../components/motion'
 
-export default function BioPage() {
+export default function EducationAndWorkPage() {
     const timelineReveal = useInViewReveal(0, 0)
     const proseReveal = useInViewReveal(2, 0.1)
     const [timelineScale] = useState(createTimelineScale)
 
     return (
         <>
-            <PageMetadata title='Education & Work | Santtu Nurmi' description="My education, work experience, and professional background." />
-            <OpeningCard profile='bio'>
+            <PageMetadata title='Education & Work | Santtu Nurmi' description="My education, work experience, and professional background." canonicalPath='/education-and-work' />
+            <OpeningCard profile='education-and-work'>
                 <p>
                     People have described me as hard-working, committed, analytical and improvement oriented. I have received praise from the ability to be reflective on my own work,
                     by being able to take in feedback, as well as my strong ability to get things done. My work at EXEN and NUKE-Liiga are the most recent examples of these qualities in action.
                 </p>
             </OpeningCard>
             <article className='container-fluid mt-5'>
-                <section className='bio-timeline-block row g-4'>
+                <section className='education-and-work-timeline-block row g-4'>
                     <motion.section className='col-md-8' aria-labelledby='timeline-heading' {...timelineReveal}>
                         <h1 id='timeline-heading' className='fw-semibold'>Education & Work Timeline</h1>
-                        <BioTimeline entries={bioTimeline} scale={timelineScale} />
+                        <EducationAndWorkTimeline entries={educationAndWorkTimeline} scale={timelineScale} />
                     </motion.section>
-                    <motion.section className='col-md-4 row g-4 justify-content-between' {...proseReveal}>
+                    <motion.section className='col-md-4 row g-4 justify-content-between' aria-labelledby='info-heading' {...proseReveal}>
                         <div>
-                            <h3 className='h3 fw-semibold'>Info</h3>
+                            <h2 id='info-heading' className='h3 fw-semibold'>Info</h2>
                             <p className='mt-5'>
                                 My education in information and communication technology at the JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills.
                                 I strongly believe that having a wide range of skills and knowledge is vital for any person to have. You can often find ways to learn how different things can be used
@@ -63,7 +63,7 @@ export default function BioPage() {
                             <p>
                                 You can read more about my hobbies here:
                             </p>
-                            <Link to='/ai' title='Read more about my hobbies.'>Link to my page about hobbies</Link>
+                            <Link to='/hobbies' title='Read more about my hobbies.'>Link to my page about hobbies</Link>
                         </div>
                     </motion.section>
                 </section>

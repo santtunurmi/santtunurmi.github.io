@@ -52,7 +52,7 @@ export default function SiteNav() {
     }, [pathname])
 
     return (
-        <div className='position-fixed min-wv-25 h-100 end-0 z-2'>
+        <div className='position-fixed h-100 end-0 z-2'>
             <nav className='nav flex-column p-2 m-3 text-bg-primary rounded-1' aria-orientation='vertical'>
                 <button
                     ref={mobileNavToggleRef}

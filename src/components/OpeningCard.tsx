@@ -6,7 +6,7 @@ const openingCardProfiles = {
         mediaClass: 'col-sm-8',
         spacerClass: 'col-sm-4',
     },
-    bio: {
+    'education-and-work': {
         fadeClass: 'Opening-card-fade-100',
         mediaClass: 'col-sm-11',
         spacerClass: 'col-sm-1',
@@ -39,8 +39,8 @@ export default function OpeningCard({ profile, children }: OpeningCardProps) {
     const { fadeClass, mediaClass, spacerClass } = openingCardProfiles[profile]
 
     return (
-        <header className={`card border-0 mh-10 bg-black opening-card opening-card--${profile}`}>
-            <div className='row g-0 gap-0 row-gab-0'>
+        <header className={`card border-0 bg-black opening-card opening-card--${profile}`}>
+            <div className='row g-0'>
                 <div className={`${fadeClass} position-absolute h-100 p-0 z-1`}></div>
                 <div className={`opening-card-background ${mediaClass} p-0 z-0`}></div>
                 <div className={spacerClass}></div>
