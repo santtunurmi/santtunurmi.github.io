@@ -55,7 +55,7 @@ const workTimeline: readonly TimelineEntry[] = [
         images: [
             {
                 src: '/content/Exen1.jpeg',
-                alt: 'Santtu Nurmi standing in front of the EXEN esports logo.',
+                alt: 'An image of me taken at the EXEN esports sauna and gaming venue. I\'m wearing an EXEN-branded sweater and the wall behind me has the EXEN logo on it.',
             },
         ],
         geometry: {
@@ -78,33 +78,33 @@ const workTimeline: readonly TimelineEntry[] = [
                 type: 'external',
                 href: 'https://www.youtube.com/watch?v=cNMYjpt7Qfc',
                 title: 'Aftermovie from the LAN final of the second season, hosted on the official NUKE-Liiga YouTube channel.',
-                text: 'https://www.youtube.com/watch?v=cNMYjpt7Qfc',
+                text: 'Click here to view the second season LAN final aftermovie!',
             },
         ],
         images: [
             {
                 src: '/content/Working-wide.png',
-                alt: 'Santtu Nurmi working at a production desk with three monitors and a Stream Deck.',
+                alt: 'An image of me working during the LAN final of the first season of NUKE-Liiga, with a production desk of three monitors and a Stream Deck.',
             },
             {
                 src: '/content/Nukeliiga1.jpeg',
-                alt: 'Santtu Nurmi working at a computer alongside a colleague at NUKE-Liiga.',
+                alt: 'An image of me working during the LAN final of the first season of NUKE-Liiga.',
             },
             {
                 src: '/content/Nukeliiga2.jpeg',
-                alt: 'Selfie of Santtu Nurmi at the NUKE-Liiga production venue.',
+                alt: 'An selfie of me in the NUKE-Liiga production t-shirt during the LAN final of the first season of NUKE-Liiga.',
             },
             {
                 src: '/content/Nukeliiga3.jpg',
-                alt: 'Santtu Nurmi working backstage beside a NUKE-Liiga trophy and production equipment.',
+                alt: 'An image of the trophy of the first season of NUKE-Liiga, with me working in the background.',
             },
             {
                 src: '/content/Nukeliiga4.png',
-                alt: 'Jeme and Herasmie wearing headsets during a FINNALI broadcast.',
+                alt: 'An image of me being interviewed during the NUKE-Liiga second season LAN final broadcast.',
             },
             {
                 src: '/content/Nukeliiga5.png',
-                alt: 'Santtu Nurmi standing in front of hexagonal wall lights at the NUKE-Liiga venue.',
+                alt: 'An image of me taken during the LAN final of the first season of NUKE-Liiga.',
             },
         ],
         geometry: {
@@ -121,7 +121,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'ABC Hirvaskangas',
         location: 'Äänekoski',
         period: 'May 2022 – August 2022',
-        description: 'I Worked mainly on shelving, storage and dishes.',
+        description: 'My second summer job in retail, building off of my previous experience. Worked shelving, storage and dishwashing. In a longer term, and more involved role, I learnt more about what it takes to run a store. The hands-on work continues to be a grounding experience, as my work has shifted to more technical roles through my education and projects.',
         geometry: {
             type: 'duration',
             start: { year: 2022, month: 5 },
@@ -136,6 +136,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'K-Citymarket Äänekoski',
         location: 'Äänekoski',
         period: 'July 2019',
+        description: 'Worked shelving and storage. A valuable experience that helped me land a second summer job in retail later on.',
         geometry: {
             type: 'point',
             at: { year: 2019, month: 7 },
@@ -157,12 +158,6 @@ const workTimeline: readonly TimelineEntry[] = [
                 text: 'https://yle.fi/a/3-10856187',
             },
         ],
-        images: [
-            {
-                src: '/content/YouthCounsellorsAssistant1.jpeg',
-                alt: 'Four people standing in front of a colorful outdoor mural during the Äänekoski painting project.',
-            },
-        ],
         geometry: {
             type: 'point',
             at: { year: 2019, month: 6 },
@@ -175,6 +170,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'Pienryhmäkoti Huvikumpu',
         location: 'Äänekoski',
         period: 'June 2018',
+        description: 'My first paid summer job, my worked consisted of cleaning, and assisting in guiding customers. As a first experience in work life, it instilled a strong sense of work ethic and a dedication to quality in my work, that I still value today.',
         geometry: {
             type: 'point',
             at: { year: 2018, month: 6 },

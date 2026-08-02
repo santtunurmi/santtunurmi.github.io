@@ -1,14 +1,14 @@
 # Santtu Nurmi's Portfolio
 
-Personal portfolio website for Santtu Nurmi: project-first software developer and technical problem-solver.
+A self-started web project that grew from a hand-built HTML/CSS/JavaScript SPA into a Vite, React, and TypeScript application.
 
-Live: [Netlify](https://santtunurmi.netlify.app/) | [GitHub Pages](https://santtunurmi.github.io/)
+Externally hosted on Netlify: [https://santtunurmi.netlify.app/](https://santtunurmi.netlify.app/) | GitHub pages: [https://santtunurmi.github.io/](https://santtunurmi.github.io/)
 
 ## History
 
-- **V1.0 (archived major branch):** Hand-built with HTML, CSS, and JavaScript. V1.0 was built without AI.
-- **V2.0 (archived major branch):** Rebuilt as a Bootstrap and Sass multi-page site.
-- **V3:** The current Vite, React, and TypeScript single-page application.
+- **V1.0 (archived major branch):** Hand-built single-page application with HTML, CSS, and JavaScript. Built without AI.
+- **V2.0 (archived major branch):** V1.0 rebuilt as a Bootstrap and Sass multi-page site. Built without AI.
+- **V3:** V2.0 migrated to Vite, React, and TypeScript single-page application to leverage better interactability, animations and modularity. Built using AI-assisted workflows.
 
 ## Current Stack
 
@@ -16,7 +16,11 @@ Live: [Netlify](https://santtunurmi.netlify.app/) | [GitHub Pages](https://santt
 - Bootstrap and Sass
 - React Router and Motion
 
-## Local Development
+## AI-Assisted V3 Workflow
+
+Used a stack of OpenClaw, ChatGPT, Claude Code and OpenCode to maintain a produciton environment which could tackle V3.0 migration, animation implementation and module code-work, while maintaining my original writing and content direction. I maintained project control, audited changes and coded manually on specific occasions.
+
+## Local Testing
 
 Requires Node.js 24 and npm 11.
 
@@ -32,8 +36,4 @@ npm run verify
 
 ## Deployment
 
-The generated `docs/` directory is the GitHub Pages deployment artifact. The site can also be deployed to Netlify using the production build command (`npm run build`) and `docs/` as the publish directory.
-
-## AI-Assisted V3 Workflow
-
-V3 uses an AI-assisted, human-reviewed workflow for exploration, implementation, review, and documentation. AI is not a substitute for judgment: Santtu keeps responsibility for context, direction, testing, and final decisions.
+The generated `docs/` directory is the GitHub Pages deployment artifact. The site is deployed to Netlify using the production build command (`npm run build`) and `docs/` as the publish directory.

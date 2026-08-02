@@ -38,7 +38,7 @@ const portfolioCards: PortfolioCardProps[] = [
         image: '/content/Portfolio-website.png',
         alt: "Screenshot of Santtu Nurmi's portfolio website.",
         title: 'Portfolio Website',
-        description: 'I started this portfolio website in my free time to stand out more during the recruitment process. I ended up spending 2 months making the first version of this site. After, I studied most of the full-stack module in my university and took the lessons from there to improve the site further. The site is a constant work-in-progress but should showcase my skills in full-stack development well.',
+        description: 'A self-started web project that grew from a hand-built HTML/CSS/JavaScript SPA into a Vite, React, and TypeScript application. The first two versions were hand-built with no AI-assistance, while the V3.0 utilizes AI-asissted workflows to speed up development. This facilitated a full migration to a Vite, React, and TypeScript application stack, which in turn made better interactability, animations and modularity possible.',
         destination: {
             type: 'external',
             href: 'https://github.com/santtunurmi/santtunurmi.github.io',
