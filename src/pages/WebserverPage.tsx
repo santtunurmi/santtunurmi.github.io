@@ -17,7 +17,7 @@ export default function WebserverPage() {
 
     return (
         <>
-            <PageMetadata title='Easter Egg | Santtu Nurmi' description="Easter Egg" canonicalPath={siteRoutes.webserver} />
+            <PageMetadata title='Webserver easter egg | Santtu Nurmi' description="A speedrun-themed webserver easter egg in Santtu Nurmi's portfolio." canonicalPath={siteRoutes.webserver} />
             <OpeningCard profile='webserver'>
                 <p>You have found an easter egg</p>
             </OpeningCard>

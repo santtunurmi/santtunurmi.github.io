@@ -59,7 +59,7 @@ describe('Education and Work page', () => {
             </MemoryRouter>,
         )
 
-        expect(screen.getByRole('link', { name: 'Link to my page about hobbies' }).getAttribute('href')).toBe('/hobbies')
+        expect(screen.getByRole('link', { name: 'my hobbies page' }).getAttribute('href')).toBe('/hobbies')
     })
 
     it('publishes its clean canonical URL', () => {

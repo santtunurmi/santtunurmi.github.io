@@ -7,7 +7,7 @@ const educationTimeline: readonly TimelineEntry[] = [
         organization: 'JAMK University of Applied Sciences',
         location: 'Jyväskylä',
         period: 'August 2022 – thesis planned for autumn 2026',
-        description: 'My education in information and communication technology at the JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that having a wide range of skills and knowledge is vital for any person to have. You can often find ways to learn how different things can be used together. My education has also challenged me to demand more of myself. I wasn\'t getting the best grades at the start, and didn\'t work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; the momentum of which I\'ve used to kickstart my career.',
+        description: 'My education in information and communication technology at JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that a wide range of skills and knowledge is vital, because it helps you see how different things can work together. My education has also challenged me to demand more of myself. I did not get the best grades at the start, and I did not work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; I have used that momentum to kickstart my career.',
         links: [
             {
                 type: 'external',
@@ -43,7 +43,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'EXEN esports Oy',
         location: 'Jyväskylä / Hybrid',
         period: 'January – May 2026',
-        description: 'Worked accross four different projects, ranging from application work, system restoration, technical audit, cloud-host and CI/CD research, WordPress/PHP and live video production. I really got to use the entire range of my skillset at EXEN, which remains the strongest showcase of my project-first mentality and ability to get things done, as all four projects were a success.',
+        description: 'Worked across four successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
         links: [
             {
                 type: 'external',
@@ -55,7 +55,7 @@ const workTimeline: readonly TimelineEntry[] = [
         images: [
             {
                 src: '/content/Exen1.jpeg',
-                alt: 'An image of me taken at the EXEN esports sauna and gaming venue. I\'m wearing an EXEN-branded sweater and the wall behind me has the EXEN logo on it.',
+                alt: 'Santtu Nurmi in an EXEN-branded sweater in front of the EXEN logo at its sauna and gaming venue.',
             },
         ],
         geometry: {
@@ -72,7 +72,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'NUKE-Liiga',
         location: 'Hybrid',
         period: 'June 2025 – May 2026',
-        description: 'I was the production manager at "NUKE-Liiga", a Finnish academy league for Counter-Strike esports, during its first two seasons. As the production manager, I handled the technical execution of the stream, communicated with casters during broadcasts, and created the stream layouts together with graphic designers. I additionally handled the in-game camerawork. During the second season, I interviewed and onboarded an assistant producer while carrying live broadcast responsibility.',
+        description: 'Production manager for a Finnish youth esports league across two seasons, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
         links: [
             {
                 type: 'external',
@@ -84,27 +84,27 @@ const workTimeline: readonly TimelineEntry[] = [
         images: [
             {
                 src: '/content/Working-wide.png',
-                alt: 'An image of me working during the LAN final of the first season of NUKE-Liiga, with a production desk of three monitors and a Stream Deck.',
+                alt: 'Santtu Nurmi at a three-monitor production desk during the first NUKE-Liiga season\'s LAN final.',
             },
             {
                 src: '/content/Nukeliiga1.jpeg',
-                alt: 'An image of me working during the LAN final of the first season of NUKE-Liiga.',
+                alt: 'Santtu Nurmi working during the first NUKE-Liiga season\'s LAN final.',
             },
             {
                 src: '/content/Nukeliiga2.jpeg',
-                alt: 'An selfie of me in the NUKE-Liiga production t-shirt during the LAN final of the first season of NUKE-Liiga.',
+                alt: 'Santtu Nurmi in a NUKE-Liiga production shirt during the first season\'s LAN final.',
             },
             {
                 src: '/content/Nukeliiga3.jpg',
-                alt: 'An image of the trophy of the first season of NUKE-Liiga, with me working in the background.',
+                alt: 'The first NUKE-Liiga season\'s trophy, with Santtu Nurmi working in the background.',
             },
             {
                 src: '/content/Nukeliiga4.png',
-                alt: 'An image of me being interviewed during the NUKE-Liiga second season LAN final broadcast.',
+                alt: 'Santtu Nurmi being interviewed during the second NUKE-Liiga season\'s LAN final broadcast.',
             },
             {
                 src: '/content/Nukeliiga5.png',
-                alt: 'An image of me taken during the LAN final of the first season of NUKE-Liiga.',
+                alt: 'Santtu Nurmi at the first NUKE-Liiga season\'s LAN final.',
             },
         ],
         geometry: {
@@ -121,7 +121,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'ABC Hirvaskangas',
         location: 'Äänekoski',
         period: 'May 2022 – August 2022',
-        description: 'My second summer job in retail, building off of my previous experience. Worked shelving, storage and dishwashing. In a longer term, and more involved role, I learnt more about what it takes to run a store. The hands-on work continues to be a grounding experience, as my work has shifted to more technical roles through my education and projects.',
+        description: 'My second summer job in retail built on my previous experience with stocking shelves and storage, while adding dishwashing and a longer, more involved role. I learned more about the work it takes to keep a store running. That hands-on experience remains grounding as my education and projects have moved me toward more technical roles.',
         geometry: {
             type: 'duration',
             start: { year: 2022, month: 5 },
@@ -136,7 +136,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'K-Citymarket Äänekoski',
         location: 'Äänekoski',
         period: 'July 2019',
-        description: 'Worked shelving and storage. A valuable experience that helped me land a second summer job in retail later on.',
+        description: 'Worked with stocking shelves and storage. A valuable experience that helped me land a second summer job in retail later on.',
         geometry: {
             type: 'point',
             at: { year: 2019, month: 7 },
@@ -149,7 +149,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'City of Äänekoski',
         location: 'Äänekoski',
         period: 'June 2019',
-        description: 'Took part in a painting project organized by the city of Äänekoski. With no prior experience in painting, I was able to learn the required skills to provide valuable help for the project, which was completed in a month and on schedule. With the work being conducted outdoors and as a group effort, the considerably different work environment gave me valuable variety in my work experience early on. My active participation also gave me an opportunity to appear on the news:',
+        description: 'Took part in a painting project organized by the city of Äänekoski. With no prior experience in painting, I was able to learn the required skills to provide valuable help for the project, which was completed in a month and on schedule. The outdoor group project gave me useful variety in my early work experience. My active participation also gave me an opportunity to be featured in a news article about the project:',
         links: [
             {
                 type: 'external',
@@ -170,7 +170,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'Pienryhmäkoti Huvikumpu',
         location: 'Äänekoski',
         period: 'June 2018',
-        description: 'My first paid summer job, my worked consisted of cleaning, and assisting in guiding customers. As a first experience in work life, it instilled a strong sense of work ethic and a dedication to quality in my work, that I still value today.',
+        description: 'My first paid summer job consisted of cleaning and assisting with guiding children. As my first experience of working life, it instilled a strong work ethic and a dedication to quality that I still value today.',
         geometry: {
             type: 'point',
             at: { year: 2018, month: 6 },

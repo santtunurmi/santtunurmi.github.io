@@ -2,13 +2,13 @@
 
 A self-started web project that grew from a hand-built HTML/CSS/JavaScript SPA into a Vite, React, and TypeScript application.
 
-Externally hosted on Netlify: [https://santtunurmi.netlify.app/](https://santtunurmi.netlify.app/) | GitHub pages: [https://santtunurmi.github.io/](https://santtunurmi.github.io/)
+Live: [Netlify](https://santtunurmi.netlify.app/) | [GitHub Pages](https://santtunurmi.github.io/)
 
 ## History
 
 - **V1.0 (archived major branch):** Hand-built single-page application with HTML, CSS, and JavaScript. Built without AI.
 - **V2.0 (archived major branch):** V1.0 rebuilt as a Bootstrap and Sass multi-page site. Built without AI.
-- **V3:** V2.0 migrated to Vite, React, and TypeScript single-page application to leverage better interactability, animations and modularity. Built using AI-assisted workflows.
+- **V3.0:** V2.0 was migrated into a Vite, React, and TypeScript single-page application to improve interactivity, animation, and modularity. Built using AI-assisted workflows.
 
 ## Current Stack
 
@@ -18,7 +18,7 @@ Externally hosted on Netlify: [https://santtunurmi.netlify.app/](https://santtun
 
 ## AI-Assisted V3 Workflow
 
-Used a stack of OpenClaw, ChatGPT, Claude Code and OpenCode to maintain a produciton environment which could tackle V3.0 migration, animation implementation and module code-work, while maintaining my original writing and content direction. I maintained project control, audited changes and coded manually on specific occasions.
+I used OpenClaw, Codex, Claude Code, and OpenCode to support the V3.0 migration, animation work, and modular implementation while preserving my original writing and content direction. I retained project control, audited changes, and wrote code manually where needed.
 
 ## Local Testing
 
