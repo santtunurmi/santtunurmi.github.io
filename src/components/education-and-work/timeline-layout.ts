@@ -1,6 +1,6 @@
 import type { TimelineDateSide, TimelineEntry, TimelineMonth, TimelineScale } from './timeline-types'
 
-export const timelinePixelsPerMonth = 18
+export const timelinePixelsPerMonth = 12
 export const nearbyDateRangeMonths = 2
 export const timelineAxisRatio = 0.44
 export const timelineTitleLeftEdgeRatio = 0.35
@@ -16,7 +16,7 @@ export const endpointRevealDuration = 0.3
 export const connectorDuration = 0.46
 export const titleRevealDuration = 0.22
 
-const TIMELINE_BASELINE: TimelineMonth = { year: 2018, month: 1 }
+const TIMELINE_BASELINE: TimelineMonth = { year: 2018, month: 6 }
 
 export function createTimelineScale(now = new Date()): TimelineScale {
     const current = { year: now.getFullYear(), month: now.getMonth() + 1 }

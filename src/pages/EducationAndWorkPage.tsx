@@ -55,7 +55,7 @@ export default function EducationAndWorkPage() {
                             <p>
                                 You can read more about how I use AI here:
                             </p>
-                            <Link to={siteRoutes.ai} title='Read more about my use of AI.'>my AI page</Link>
+                            <Link to={siteRoutes.aiAssistedWorkflows} title='Read more about my use of AI.'>my AI page</Link>
                         </div>
                         <div className='mt-4'>
                             <p>

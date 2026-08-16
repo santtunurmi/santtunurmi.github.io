@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, type CSSProperties } from 'react'
 import ModalDisplay from '../ModalDisplay'
 import TimelineItem from './TimelineItem'
 import { useElementWidth, useMinimumDevicePixelStrokeWidth, useTimelineTitleOffsets } from './timeline-hooks'
-import { formatAxisMonth, getDateLabelSides, timelineAxisRatio, timelineLaneOffset, timelinePixelsPerMonth, timelineTitleLeftEdgeRatio } from './timeline-layout'
+import { getDateLabelSides, timelineAxisRatio, timelineLaneOffset, timelinePixelsPerMonth, timelineTitleLeftEdgeRatio } from './timeline-layout'
 import type { TimelineEntry, TimelineScale } from './timeline-types'
 
 type EducationAndWorkTimelineProps = {
@@ -38,7 +38,6 @@ export default function EducationAndWorkTimeline({ entries, scale }: EducationAn
             <svg className='education-and-work-timeline-axis' viewBox={`0 0 ${timelineWidth || 1} ${timelineHeight}`} preserveAspectRatio='none' aria-hidden='true' focusable='false'>
                 <line className='education-and-work-timeline-axis-line' x1={timelineWidth * timelineAxisRatio} x2={timelineWidth * timelineAxisRatio} y1={0} y2={timelineHeight} />
             </svg>
-            <span className='education-and-work-timeline-axis-label education-and-work-timeline-axis-label--end'>{formatAxisMonth(scale.baseline)}</span>
             <ol className='education-and-work-timeline-entries'>
                 {entries.map((entry) => (
                     <TimelineItem entry={entry} scale={scale} timelineWidth={timelineWidth} timelineHeight={timelineHeight} titleOffset={titleOffsets.get(entry.id) ?? entry.geometry.titleOffset ?? 0} dateLabelSides={dateLabelSides} onOpen={openEntry} key={entry.id} />

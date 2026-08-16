@@ -7,9 +7,9 @@ describe('timeline scale and positioning', () => {
         const scale = createTimelineScale(new Date(2026, 7, 1))
 
         expect(scale).toEqual({
-            baseline: { year: 2018, month: 1 },
+            baseline: { year: 2018, month: 6 },
             current: { year: 2026, month: 8 },
-            months: 104,
+            months: 99,
         })
         expect(monthPosition(scale.baseline, scale)).toBe(100)
         expect(monthPosition(scale.current, scale)).toBe(0)

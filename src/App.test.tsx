@@ -25,7 +25,9 @@ describe('route compatibility', () => {
         ['/education-and-work.html', '/education-and-work'],
         ['/bio', '/education-and-work'],
         ['/bio.html', '/education-and-work'],
-        ['/ai.html', '/ai'],
+        ['/ai', '/blog/ai-assisted-workflows'],
+        ['/ai.html', '/blog/ai-assisted-workflows'],
+        ['/blog.html', '/blog'],
         ['/hobbies.html', '/hobbies'],
         ['/webserver.html', '/webserver'],
     ])('redirects %s to %s', async (legacyPath, canonicalPath) => {

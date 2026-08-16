@@ -5,7 +5,7 @@ import { siteRoutes } from '../routes'
 export default function AiPage() {
     return (
         <>
-            <PageMetadata title='AI-Assisted Workflows | Santtu Nurmi' description="My approach to AI-assisted workflows, tools, and learning." canonicalPath={siteRoutes.ai} />
+            <PageMetadata title='AI-Assisted Workflows | Santtu Nurmi' description="My approach to AI-assisted workflows, tools, and learning." canonicalPath={siteRoutes.aiAssistedWorkflows} />
             <OpeningCard profile='ai'>
                 <p>
                     I've gone from being strongly anti-AI to seeing how it can be used to get things done faster and better, and now I treat AI-assisted workflow design as a fundamental skill.

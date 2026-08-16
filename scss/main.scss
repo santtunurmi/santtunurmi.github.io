@@ -135,11 +135,63 @@ $dropdown-link-active-color: black;
         font-family: monospace;
     }
 /* Nav-bar-related css. */
-    .nav-link:hover, .nav-link:focus {
+    .site-navigation {
+        pointer-events: none;
+    }
+    .site-nav {
+        max-width: calc(1200px - 2rem);
+        pointer-events: auto;
+        box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.4);
+    }
+    .site-nav-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 3.25rem;
+        padding: 0.35rem 0.5rem 0.35rem 0.9rem;
+    }
+    .site-nav-name {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .site-nav-toggle {
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+    }
+    .site-nav-links {
+        flex-direction: column;
+        max-height: 0;
+        padding: 0 0.5rem;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+        transform: translateY(-0.4rem);
+        transition: max-height 220ms ease, padding 220ms ease, opacity 160ms ease, transform 220ms ease, visibility 0s linear 220ms;
+    }
+    .site-nav-links--open {
+        max-height: 22rem;
+        padding: 0 0.5rem 0.5rem;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition-delay: 0s;
+    }
+    .site-nav .nav-link {
+        border-radius: var(--bs-border-radius-sm);
+        white-space: nowrap;
+    }
+    .site-nav .nav-link:hover, .site-nav .nav-link:focus {
         background-color: white;
     }
-    nav a {
+    .site-nav a {
         font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+
+    .page-without-opening-card {
+        min-height: 60vh;
+        padding-top: 6.25rem;
     }
 
     .portfolio-card-image {
@@ -161,6 +213,77 @@ $dropdown-link-active-color: black;
         transform: translateY(-4px);
         box-shadow: 0 0.5rem 1rem rgba(0, 153, 255, 0.2);
     }
+    .portfolio-card-link-icon {
+        width: 1rem;
+        height: 1rem;
+        margin-left: 0.45rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: square;
+        stroke-linejoin: miter;
+        stroke-width: 1.5;
+        vertical-align: -0.15rem;
+    }
+/* Case-study-related CSS. */
+    .case-study {
+        max-width: 1000px;
+    }
+    .case-study-breadcrumb {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.72);
+    }
+    .case-study-label {
+        margin-bottom: 0.5rem;
+        color: var(--bs-primary);
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .case-study-sections section {
+        padding: 1.25rem;
+        background: #111;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 0.25rem;
+    }
+    .case-study-sections > section {
+        height: 100%;
+    }
+    .case-study-facts {
+        margin: 0;
+    }
+    .case-study-facts div + div {
+        margin-top: 1rem;
+    }
+    .case-study-facts dt {
+        color: var(--bs-primary);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+    .case-study-facts dd {
+        margin: 0.15rem 0 0;
+    }
+    .case-study-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: 0.75rem;
+    }
+    .case-study-gallery img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 0.25rem;
+    }
+    .case-study-links {
+        padding-left: 1.25rem;
+    }
+    .case-study-links li + li {
+        margin-top: 0.5rem;
+    }
     @media (hover: hover) {
         .opening-card:has(.Opening-card-text-block:hover) .opening-card-background {
             filter: brightness(0.75);
@@ -177,10 +300,10 @@ $dropdown-link-active-color: black;
         margin-bottom: 2rem;
     }
     .education-and-work-timeline {
-        --timeline-title-width: calc(var(--timeline-title-left-edge) - 0.5rem);
+        --timeline-title-width: calc(40% - 0.25rem);
         position: relative;
         min-height: var(--timeline-height);
-        margin: 1rem 0 0;
+        margin: 1rem 0 5rem;
         padding: 0;
     }
     .education-and-work-timeline-axis {
@@ -196,17 +319,6 @@ $dropdown-link-active-color: black;
         stroke-width: max(2px, var(--timeline-min-stroke-width));
         shape-rendering: crispEdges;
         vector-effect: non-scaling-stroke;
-    }
-    .education-and-work-timeline-axis-label {
-        position: absolute;
-        right: calc(100% - var(--timeline-axis-left) + 0.75rem);
-        color: white;
-        font-size: 0.75rem;
-        line-height: 1;
-        text-align: right;
-    }
-    .education-and-work-timeline-axis-label--end {
-        bottom: 0;
     }
     .education-and-work-timeline-date {
         color: var(--bs-primary);
@@ -263,7 +375,7 @@ $dropdown-link-active-color: black;
         position: absolute;
         left: calc(var(--timeline-axis-left) + 0.85rem + var(--entry-lane-offset));
         color: var(--bs-primary);
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         font-weight: 600;
         line-height: 1;
         pointer-events: auto;
@@ -317,7 +429,7 @@ $dropdown-link-active-color: black;
     .education-and-work-timeline-title-organization {
         margin-top: 0.2rem;
         color: rgba(255, 255, 255, 0.72);
-        font-size: 0.72rem;
+        font-size: 0.7rem;
     }
     .education-and-work-timeline-entry--title-right .education-and-work-timeline-title {
         right: 0;
@@ -485,6 +597,19 @@ $dropdown-link-active-color: black;
     }
     /* md >=768px */
     @include media-breakpoint-up(md) {
+        .education-and-work-timeline {
+            --timeline-title-width: calc(var(--timeline-title-left-edge) - 0.5rem);
+            margin-bottom: 0;
+        }
+        .education-and-work-timeline-entry-date {
+            font-size: 1rem;
+        }
+        .education-and-work-timeline-title {
+            font-size: 0.95rem;
+        }
+        .education-and-work-timeline-title-organization {
+            font-size: 0.85rem;
+        }
         .opening-card--education-and-work {
             --opening-card-image: url(/content/Working-wide.png);
             --opening-card-size: 1200px;
@@ -498,6 +623,32 @@ $dropdown-link-active-color: black;
     }
     /* lg >=992px */
     @include media-breakpoint-up(lg) {
+        .site-nav {
+            display: flex;
+            align-items: center;
+            margin-right: auto !important;
+            margin-left: auto !important;
+            padding: 0.35rem;
+        }
+        .site-nav-heading {
+            min-height: 0;
+            padding: 0 0.65rem;
+        }
+        .site-nav-toggle {
+            display: none;
+        }
+        .site-nav-links {
+            flex: 1 1 auto;
+            flex-direction: row;
+            justify-content: flex-end;
+            max-height: none;
+            padding: 0;
+            opacity: 1;
+            overflow: visible;
+            visibility: visible;
+            transform: none;
+            transition: none;
+        }
         .opening-card--hobbies {
             --opening-card-image: url(/content/bassplaying.png);
             --opening-card-size: 750px;
@@ -527,6 +678,9 @@ $dropdown-link-active-color: black;
         position: relative;
     }
     @media (prefers-reduced-motion: reduce) {
+        .site-nav-links {
+            transition: none;
+        }
         .initial-page-load #main-content > div > .opening-card, .initial-page-load #main-content > div > :not(.opening-card) {
             animation: none;
         }
