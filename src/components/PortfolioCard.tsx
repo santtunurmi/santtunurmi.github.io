@@ -36,12 +36,12 @@ export default function PortfolioCard({ image, alt, title, description, destinat
                     <h5 className='card-title mb-4'>{title}</h5>
                     <p className='card-text'>{description}</p>
                     {destination.type === 'internal' ? (
-                        <Link to={destination.to} className='btn btn-primary mt-auto align-self-center'>
-                            {actionLabel}
+                        <Link to={destination.to} className='site-control btn btn-primary mt-auto align-self-center'>
+                            <span>{actionLabel}</span>
                         </Link>
                     ) : (
-                        <a href={destination.href} target='_blank' rel='noopener noreferrer' className='btn btn-primary mt-auto align-self-center'>
-                            {actionLabel}
+                        <a href={destination.href} target='_blank' rel='noopener noreferrer' className='site-control btn btn-primary mt-auto align-self-center'>
+                            <span>{actionLabel}</span>
                             {externalIcon && <ExternalLinkIcon />}
                         </a>
                     )}

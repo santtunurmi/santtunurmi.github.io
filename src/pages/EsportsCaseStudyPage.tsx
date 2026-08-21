@@ -1,19 +1,22 @@
 import CaseStudy from '../components/CaseStudy'
 import PageMetadata from '../components/PageMetadata'
+import SiteNav from '../components/SiteNav'
 import { siteRoutes } from '../routes'
 
 export default function EsportsCaseStudyPage() {
     return (
         <>
             <PageMetadata title='Esports Event Production Case Study | Santtu Nurmi' description='A case study of my production manager work for NUKE-Liiga.' canonicalPath={siteRoutes.esportsCaseStudy} />
+            <SiteNav />
             <CaseStudy
                 title='Esports Event Production'
                 role='Production Manager'
                 organization='NUKE-Liiga'
                 location='Hybrid'
-                period='June 2025 – May 2026'
-                responsibilities='Production manager for a Finnish youth esports league across two seasons, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team.'
+                period='June 2025 – present'
+                responsibilities='Production manager for a Finnish youth esports league across two completed seasons, now continuing into a third in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team.'
                 outcome='During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.'
+                articleTitle='In detail'
                 images={[
                     {
                         src: '/content/Working-wide.png',
@@ -54,7 +57,9 @@ export default function EsportsCaseStudyPage() {
                         text: 'Official NUKE-Liiga links',
                     },
                 ]}
-            />
+            >
+                {/* Case-study prose goes here. */}
+            </CaseStudy>
         </>
     )
 }

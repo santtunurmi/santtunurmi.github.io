@@ -14,6 +14,7 @@ describe('SiteNav', () => {
         expect(screen.getByRole('link', { name: 'Education & Work' }).classList.contains('active')).toBe(true)
         expect(screen.getByRole('link', { name: 'Portfolio' }).classList.contains('active')).toBe(false)
         expect(screen.getByRole('link', { name: 'Blog' })).not.toBeNull()
+        expect(screen.queryByRole('link', { name: 'Hobbies' })).toBeNull()
     })
 
     it('keeps Blog active on article and case-study routes', () => {

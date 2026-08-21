@@ -1,5 +1,7 @@
+import ArticleContext from '../components/ArticleContext'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
+import SiteNav from '../components/SiteNav'
 import { siteRoutes } from '../routes'
 
 export default function HobbiesPage() {
@@ -12,8 +14,10 @@ export default function HobbiesPage() {
                     hobbies and applying them to real, tangible projects.
                 </p>
             </OpeningCard>
+            <SiteNav />
             <div className='container-fluid'>
-                <h1 className='pt-3 pb-1 fw-semibold fs-4'>Hobbies</h1>
+                <ArticleContext label='Article' />
+                <h1 className='pb-1 fw-semibold fs-4'>Hobbies</h1>
                 <p>
                     I originally had a wall of text here, which probably showed my passion for music and video game speedrunning but I think keeping it shorter is most likely better for
                     everyone involved.

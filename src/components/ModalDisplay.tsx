@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { useEffect, useId, useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
 import type { ContentImage, ContentLink } from '../models/content'
 import { useDialogTransition } from './motion'
 
@@ -10,18 +10,23 @@ export type ModalDisplayProps = {
     children: ReactNode
     links?: readonly ContentLink[]
     images?: readonly ContentImage[]
+    onClosing?: () => void
     onClosed: () => void
     returnFocusRef?: RefObject<HTMLElement | null>
+    restoreFocus?: boolean
 }
 
-export default function ModalDisplay({ open, title, children, links, images, onClosed, returnFocusRef }: ModalDisplayProps) {
+export default function ModalDisplay({ open, title, children, links, images, onClosing, onClosed, returnFocusRef, restoreFocus = false }: ModalDisplayProps) {
     const titleId = useId()
     const dialogRef = useRef<HTMLDialogElement>(null)
     const closeButtonRef = useRef<HTMLButtonElement>(null)
     const openFrameRef = useRef<number | null>(null)
     const closeButtonFocusFrameRef = useRef<number | null>(null)
     const returnFocusFrameRef = useRef<number | null>(null)
+    const returnFocusAfterCloseRef = useRef(false)
+    const visibleRef = useRef(false)
     const [visible, setVisible] = useState(false)
+    const [closing, setClosing] = useState(false)
     const dialogTransition = useDialogTransition()
 
     useEffect(() => {
@@ -41,15 +46,20 @@ export default function ModalDisplay({ open, title, children, links, images, onC
 
             cancelFrame(returnFocusFrameRef)
             openFrameRef.current = requestAnimationFrame(() => {
+                visibleRef.current = true
                 setVisible(true)
                 closeButtonFocusFrameRef.current = requestAnimationFrame(() => closeButtonRef.current?.focus())
             })
         } else if (dialog.open) {
-            if (dialog.querySelector('.modal-display-content')) {
-                setVisible(false)
+            setVisible(false)
+
+            if (visibleRef.current) {
+                setClosing(true)
             } else {
                 dialog.close()
             }
+        } else {
+            setClosing(false)
         }
 
         return () => {
@@ -61,19 +71,36 @@ export default function ModalDisplay({ open, title, children, links, images, onC
     useEffect(() => () => cancelFrame(returnFocusFrameRef), [])
 
     function requestClose() {
+        returnFocusAfterCloseRef.current = restoreFocus
+        visibleRef.current = false
         setVisible(false)
+        setClosing(true)
+        onClosing?.()
     }
 
     function finishClose() {
-        if (!visible) {
+        if (closing) {
             dialogRef.current?.close()
         }
     }
 
     function finishNativeClose() {
+        const shouldRestoreFocus = returnFocusAfterCloseRef.current
+
+        visibleRef.current = false
         setVisible(false)
+        setClosing(false)
         onClosed()
-        returnFocusFrameRef.current = requestAnimationFrame(() => returnFocusRef?.current?.focus())
+        returnFocusAfterCloseRef.current = false
+        returnFocusFrameRef.current = requestAnimationFrame(() => {
+            const trigger = returnFocusRef?.current
+
+            if (shouldRestoreFocus) {
+                trigger?.focus()
+            } else if (trigger && document.activeElement === trigger) {
+                trigger.blur()
+            }
+        })
     }
 
     function closeFromBackdrop(event: ReactMouseEvent<HTMLDialogElement>) {
@@ -85,9 +112,9 @@ export default function ModalDisplay({ open, title, children, links, images, onC
     return (
         <dialog className={`modal-display${visible ? ' modal-display--visible' : ''}`} ref={dialogRef} onClick={closeFromBackdrop} onCancel={(event) => { event.preventDefault(); requestClose() }} onClose={finishNativeClose} aria-labelledby={titleId}>
             <AnimatePresence onExitComplete={finishClose}>
-                {open && visible && (
+                {open && !closing && (
                     <motion.div className='modal-display-content' {...dialogTransition}>
-                        <button className='modal-display-close' ref={closeButtonRef} type='button' onClick={requestClose} aria-label='Close'>Close</button>
+                        <button className='modal-display-close site-control' ref={closeButtonRef} type='button' onClick={requestClose} aria-label='Close' autoFocus>Close</button>
                         <h2 id={titleId} className='h4 fw-semibold'>{title}</h2>
                         {children}
                         {links && links.length > 0 && <ModalLinks links={links} />}
@@ -105,8 +132,37 @@ export type ModalImageCarouselProps = {
 
 export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const viewportRef = useRef<HTMLDivElement>(null)
+    const targetIndexRef = useRef<number | null>(null)
     const reducedMotion = useReducedMotion()
-    const [scrollState, setScrollState] = useState({ hasOverflow: false, atStart: true, atEnd: true })
+    const [scrollState, setScrollState] = useState({ hasOverflow: false, activeIndex: 0 })
+
+    const scroll = useCallback((direction: -1 | 1) => {
+        const viewport = viewportRef.current
+
+        if (!viewport) {
+            return
+        }
+
+        const carouselImages = getCarouselImages(viewport)
+        const currentIndex = targetIndexRef.current ?? getCenteredImageIndex(viewport, carouselImages)
+        const targetIndex = Math.max(0, Math.min(carouselImages.length - 1, currentIndex + direction))
+        const target = carouselImages[targetIndex]
+
+        if (!target || targetIndex === currentIndex) {
+            return
+        }
+
+        const viewportRect = viewport.getBoundingClientRect()
+        const targetRect = target.getBoundingClientRect()
+        const left = viewport.scrollLeft + targetRect.left - viewportRect.left - (viewport.clientWidth - targetRect.width) / 2
+
+        targetIndexRef.current = targetIndex
+        setScrollState((current) => ({ ...current, activeIndex: targetIndex }))
+        viewport.scrollTo({
+            left,
+            behavior: reducedMotion ? 'auto' : 'smooth',
+        })
+    }, [reducedMotion])
 
     useLayoutEffect(() => {
         const viewport = viewportRef.current
@@ -118,12 +174,35 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         const viewportElement = viewport
 
         function updateScrollState() {
-            const hasOverflow = viewportElement.scrollWidth > viewportElement.clientWidth + 1
+            viewportElement.style.setProperty('--carousel-image-max-width', `${viewportElement.clientWidth}px`)
+
+            const carouselImages = getCarouselImages(viewportElement)
+            const track = viewportElement.firstElementChild
+            const gap = track ? Number.parseFloat(getComputedStyle(track).columnGap) || 0 : 0
+            const contentWidth = carouselImages.reduce((width, image) => width + image.getBoundingClientRect().width, 0) + Math.max(0, carouselImages.length - 1) * gap
+            const hasOverflow = contentWidth > viewportElement.clientWidth + 1
+            const edgeSpace = hasOverflow && carouselImages[0]
+                ? Math.max(0, (viewportElement.clientWidth - carouselImages[0].getBoundingClientRect().width) / 2)
+                : 0
+
+            viewportElement.style.setProperty('--carousel-edge-space', `${edgeSpace}px`)
+
+            const centeredIndex = getCenteredImageIndex(viewportElement, carouselImages)
+            const targetIndex = targetIndexRef.current
+
+            if (targetIndex !== null) {
+                const target = carouselImages[targetIndex]
+                const viewportCenter = viewportElement.getBoundingClientRect().left + viewportElement.clientWidth / 2
+                const targetCenter = target ? target.getBoundingClientRect().left + target.getBoundingClientRect().width / 2 : viewportCenter
+
+                if (Math.abs(targetCenter - viewportCenter) <= 1) {
+                    targetIndexRef.current = null
+                }
+            }
 
             setScrollState({
                 hasOverflow,
-                atStart: viewportElement.scrollLeft <= 1,
-                atEnd: !hasOverflow || viewportElement.scrollLeft + viewportElement.clientWidth >= viewportElement.scrollWidth - 1,
+                activeIndex: targetIndexRef.current ?? centeredIndex,
             })
         }
 
@@ -138,24 +217,30 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             resizeObserver.observe(track)
         }
 
+        getCarouselImages(viewport).forEach((image) => resizeObserver.observe(image))
+
         return () => {
             viewport.removeEventListener('scroll', updateScrollState)
             resizeObserver.disconnect()
         }
     }, [images])
 
-    function scroll(direction: -1 | 1) {
-        const viewport = viewportRef.current
+    useEffect(() => {
+        function scrollFromArrowKey(event: KeyboardEvent) {
+            if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || isEditableElement(event.target)) {
+                return
+            }
 
-        if (!viewport) {
-            return
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                event.preventDefault()
+                scroll(event.key === 'ArrowLeft' ? -1 : 1)
+            }
         }
 
-        viewport.scrollBy({
-            left: direction * Math.max(300, viewport.clientWidth * 0.8),
-            behavior: reducedMotion ? 'auto' : 'smooth',
-        })
-    }
+        document.addEventListener('keydown', scrollFromArrowKey)
+
+        return () => document.removeEventListener('keydown', scrollFromArrowKey)
+    }, [scroll])
 
     return (
         <div className='modal-display-carousel' role='region' aria-label='Images'>
@@ -168,11 +253,19 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             </div>
             {scrollState.hasOverflow && (
                 <>
-                    <button className='modal-display-carousel-control modal-display-carousel-control--previous' type='button' onClick={() => scroll(-1)} disabled={scrollState.atStart} aria-label='Scroll images left'>&lsaquo;</button>
-                    <button className='modal-display-carousel-control modal-display-carousel-control--next' type='button' onClick={() => scroll(1)} disabled={scrollState.atEnd} aria-label='Scroll images right'>&rsaquo;</button>
+                    <button className='modal-display-carousel-control modal-display-carousel-control--previous site-control' type='button' onClick={() => scroll(-1)} disabled={scrollState.activeIndex === 0} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
+                    <button className='modal-display-carousel-control modal-display-carousel-control--next site-control' type='button' onClick={() => scroll(1)} disabled={scrollState.activeIndex === images.length - 1} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
                 </>
             )}
         </div>
+    )
+}
+
+function CarouselArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
+    return (
+        <svg className='modal-display-carousel-arrow' viewBox='0 0 16 16' aria-hidden='true' focusable='false'>
+            <path d={direction === 'previous' ? 'M10.5 2.5 5 8l5.5 5.5' : 'M5.5 2.5 11 8l-5.5 5.5'} />
+        </svg>
     )
 }
 
@@ -190,6 +283,32 @@ function ModalLinks({ links }: { links: readonly ContentLink[] }) {
             ))}
         </ul>
     )
+}
+
+function getCarouselImages(viewport: HTMLElement): HTMLImageElement[] {
+    return [...viewport.querySelectorAll<HTMLImageElement>('.modal-display-carousel-image')]
+}
+
+function getCenteredImageIndex(viewport: HTMLElement, images: readonly HTMLImageElement[]): number {
+    const viewportCenter = viewport.getBoundingClientRect().left + viewport.clientWidth / 2
+    let closestIndex = 0
+    let closestDistance = Number.POSITIVE_INFINITY
+
+    images.forEach((image, index) => {
+        const imageRect = image.getBoundingClientRect()
+        const distance = Math.abs(imageRect.left + imageRect.width / 2 - viewportCenter)
+
+        if (distance < closestDistance) {
+            closestIndex = index
+            closestDistance = distance
+        }
+    })
+
+    return closestIndex
+}
+
+function isEditableElement(target: EventTarget | null): boolean {
+    return target instanceof HTMLElement && (target.isContentEditable || ['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName))
 }
 
 function cancelFrame(frameRef: RefObject<number | null>) {

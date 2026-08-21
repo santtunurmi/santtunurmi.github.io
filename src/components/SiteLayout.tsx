@@ -1,16 +1,37 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useLocation, useOutlet } from 'react-router'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, type ReactNode, type RefObject } from 'react'
 import SiteFooter from './SiteFooter'
-import SiteNav from './SiteNav'
 import { useRouteTransition } from './motion'
+
+type RouteContentProps = {
+    hash: string
+    mainRef: RefObject<HTMLElement | null>
+    outlet: ReactNode
+}
+
+function RouteContent({ hash, mainRef, outlet }: RouteContentProps) {
+    const routeTransition = useRouteTransition()
+
+    useLayoutEffect(() => {
+        if (hash) {
+            const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+            target?.scrollIntoView({ behavior: 'instant' })
+        } else {
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        }
+
+        mainRef.current?.focus({ preventScroll: true })
+    }, [hash, mainRef])
+
+    return <motion.div {...routeTransition}>{outlet}</motion.div>
+}
 
 function RouteChangeHandler() {
     const location = useLocation()
     const outlet = useOutlet()
     const initialLocation = useRef(location.key)
     const mainRef = useRef<HTMLElement>(null)
-    const routeTransition = useRouteTransition()
 
     useLayoutEffect(() => {
         if (location.key !== initialLocation.current) {
@@ -39,25 +60,10 @@ function RouteChangeHandler() {
         }
     }, [])
 
-    useEffect(() => {
-        const main = mainRef.current
-
-        if (location.hash) {
-            const target = document.getElementById(decodeURIComponent(location.hash.slice(1)))
-            target?.scrollIntoView({ behavior: 'instant' })
-        } else {
-            window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-        }
-
-        main?.focus({ preventScroll: true })
-    }, [location.pathname, location.hash])
-
     return <div className='site-content'>
         <main ref={mainRef} id='main-content' tabIndex={-1}>
-            <AnimatePresence initial={false} mode='popLayout'>
-                <motion.div key={location.pathname} {...routeTransition}>
-                    {outlet}
-                </motion.div>
+            <AnimatePresence initial={false} mode='wait'>
+                <RouteContent hash={location.hash} mainRef={mainRef} outlet={outlet} key={location.key} />
             </AnimatePresence>
         </main>
         <SiteFooter />
@@ -65,10 +71,5 @@ function RouteChangeHandler() {
 }
 
 export default function SiteLayout() {
-    return (
-        <>
-            <SiteNav />
-            <RouteChangeHandler />
-        </>
-    )
+    return <RouteChangeHandler />
 }

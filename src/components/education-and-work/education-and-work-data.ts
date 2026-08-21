@@ -71,8 +71,8 @@ const workTimeline: readonly TimelineEntry[] = [
         title: 'Production Manager',
         organization: 'NUKE-Liiga',
         location: 'Hybrid',
-        period: 'June 2025 – May 2026',
-        description: 'Production manager for a Finnish youth esports league across two seasons, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
+        period: 'June 2025 – present',
+        description: 'Production manager for a Finnish youth esports league across two completed seasons, now continuing into a third in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
         links: [
             {
                 type: 'external',
@@ -110,7 +110,7 @@ const workTimeline: readonly TimelineEntry[] = [
         geometry: {
             type: 'duration',
             start: { year: 2025, month: 6 },
-            end: { year: 2026, month: 5 },
+            end: 'current',
             lane: 1,
             titleSide: 'right',
         },

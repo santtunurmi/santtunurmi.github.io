@@ -6,12 +6,14 @@ import { educationAndWorkTimeline } from '../components/education-and-work/educa
 import { createTimelineScale } from '../components/education-and-work/timeline-layout'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
-import { useInViewReveal } from '../components/motion'
+import SiteNav from '../components/SiteNav'
+import { useInViewReveal, useMediaQuery } from '../components/motion'
 import { siteRoutes } from '../routes'
 
 export default function EducationAndWorkPage() {
     const timelineReveal = useInViewReveal(0, 0)
-    const proseReveal = useInViewReveal(2, 0.1)
+    const desktopLayout = useMediaQuery('(min-width: 768px)')
+    const proseReveal = useInViewReveal(2, 0.1, desktopLayout)
     const [timelineScale] = useState(createTimelineScale)
 
     return (
@@ -23,13 +25,14 @@ export default function EducationAndWorkPage() {
                     taking feedback seriously, and getting things done. My projects and work at EXEN and NUKE-Liiga are the most recent examples of these qualities in action.
                 </p>
             </OpeningCard>
+            <SiteNav />
             <article className='container-fluid mt-5'>
                 <section className='education-and-work-timeline-block row g-4'>
                     <motion.section className='col-md-8' aria-labelledby='timeline-heading' {...timelineReveal}>
                         <h1 id='timeline-heading' className='fw-semibold'>Education & Work Timeline</h1>
                         <EducationAndWorkTimeline entries={educationAndWorkTimeline} scale={timelineScale} />
                     </motion.section>
-                    <motion.section className='col-md-4 row g-4 justify-content-between' aria-labelledby='info-heading' {...proseReveal}>
+                    <motion.section className={`education-and-work-info col-md-4 row g-4 justify-content-between${desktopLayout ? '' : ' education-and-work-info--immediate'}`} aria-labelledby='info-heading' {...proseReveal}>
                         <div>
                             <h2 id='info-heading' className='h3 fw-semibold'>Info</h2>
                             <p className='mt-5'>

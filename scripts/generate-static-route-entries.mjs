@@ -19,6 +19,7 @@ const staticEntryDocuments = [
     'ai/index.html',
     'blog/index.html',
     'blog/ai-assisted-workflows/index.html',
+    'blog/hobbies/index.html',
     'blog/exen-internship/index.html',
     'blog/esports-event-production/index.html',
     'hobbies/index.html',

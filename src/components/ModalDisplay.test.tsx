@@ -45,7 +45,7 @@ describe('ModalDisplay', () => {
     it('closes from its button and returns focus to the trigger', async () => {
         const onClosed = vi.fn()
 
-        render(<ModalHarness onClosed={onClosed} />)
+        render(<ModalHarness onClosed={onClosed} restoreFocus />)
 
         expect(await screen.findByRole('heading', { level: 2, name: 'Project title' })).not.toBeNull()
         await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Close' })))
@@ -54,6 +54,27 @@ describe('ModalDisplay', () => {
 
         await waitFor(() => expect(onClosed).toHaveBeenCalledOnce(), { timeout: 1500 })
         await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Open modal' })))
+    })
+
+    it('does not return focus to the trigger after a pointer close', async () => {
+        const onClosed = vi.fn()
+
+        render(<ModalHarness onClosed={onClosed} />)
+
+        const closeButton = await screen.findByRole('button', { name: 'Close' })
+        await waitFor(() => expect(document.activeElement).toBe(closeButton))
+
+        fireEvent.click(closeButton, { detail: 1 })
+
+        await waitFor(() => expect(onClosed).toHaveBeenCalledOnce(), { timeout: 1500 })
+        expect(document.activeElement).not.toBe(screen.getByRole('button', { name: 'Open modal' }))
+    })
+
+    it('keeps the dialog container out of the Tab order', async () => {
+        const { container } = render(<ModalHarness onClosed={vi.fn()} />)
+
+        expect(await screen.findByRole('button', { name: 'Close' })).not.toBeNull()
+        expect(container.querySelector('dialog')?.hasAttribute('tabindex')).toBe(false)
     })
 
     it('closes from Escape through the native cancel event', async () => {
@@ -119,7 +140,19 @@ describe('ModalImageCarousel', () => {
     it('shows manual controls only when the image row overflows', async () => {
         const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
         const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1000)
-        const scrollBy = vi.spyOn(HTMLElement.prototype, 'scrollBy')
+        const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo')
+        const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
+            if (this.classList.contains('modal-display-carousel-viewport')) {
+                return createRect(0, 600)
+            }
+
+            if (this instanceof HTMLImageElement) {
+                const index = [...this.parentElement!.children].indexOf(this)
+                return createRect(125 + index * 366, 350)
+            }
+
+            return createRect(0, 0)
+        })
 
         render(<ModalImageCarousel images={[
             { src: '/one.jpg', alt: 'First view.' },
@@ -134,11 +167,17 @@ describe('ModalImageCarousel', () => {
         expect(previous.hasAttribute('disabled')).toBe(true)
         expect(next.hasAttribute('disabled')).toBe(false)
         fireEvent.click(next)
-        expect(scrollBy).toHaveBeenCalledWith({ left: 480, behavior: 'smooth' })
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        fireEvent.click(next)
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 732, behavior: 'smooth' })
+
+        fireEvent.keyDown(document, { key: 'ArrowLeft' })
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
 
         clientWidth.mockRestore()
         scrollWidth.mockRestore()
-        scrollBy.mockRestore()
+        scrollTo.mockRestore()
+        elementRect.mockRestore()
     })
 
     it('centers a short row without rendering scroll controls', () => {
@@ -159,16 +198,30 @@ describe('ModalImageCarousel', () => {
     })
 })
 
-function ModalHarness({ onClosed }: { onClosed: () => void }) {
+function ModalHarness({ onClosed, restoreFocus = false }: { onClosed: () => void; restoreFocus?: boolean }) {
     const [open, setOpen] = useState(true)
     const triggerRef = useRef<HTMLButtonElement>(null)
 
     return (
         <>
             <button ref={triggerRef} type='button' onClick={() => setOpen(true)}>Open modal</button>
-            <ModalDisplay open={open} title='Project title' onClosed={() => { setOpen(false); onClosed() }} returnFocusRef={triggerRef}>
+            <ModalDisplay open={open} title='Project title' onClosed={() => { setOpen(false); onClosed() }} returnFocusRef={triggerRef} restoreFocus={restoreFocus}>
                 <p>Project details</p>
             </ModalDisplay>
         </>
     )
+}
+
+function createRect(left: number, width: number): DOMRect {
+    return {
+        bottom: 250,
+        height: 250,
+        left,
+        right: left + width,
+        top: 0,
+        width,
+        x: left,
+        y: 0,
+        toJSON: () => ({}),
+    }
 }

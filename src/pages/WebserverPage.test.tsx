@@ -1,10 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import { describe, expect, it } from 'vitest'
 import WebserverPage from './WebserverPage'
 
 describe('WebserverPage', () => {
     it('keeps the Add Speedrun controls in a form without broken descriptions', () => {
-        render(<WebserverPage />)
+        render(
+            <MemoryRouter>
+                <WebserverPage />
+            </MemoryRouter>,
+        )
 
         const submitButton = screen.getByRole('button', { name: 'Add Speedrun' })
         const form = submitButton.closest('form')

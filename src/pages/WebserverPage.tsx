@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
+import SiteNav from '../components/SiteNav'
 import { siteRoutes } from '../routes'
 
 export default function WebserverPage() {
@@ -21,6 +22,7 @@ export default function WebserverPage() {
             <OpeningCard profile='webserver'>
                 <p>You have found an easter egg</p>
             </OpeningCard>
+            <SiteNav />
             <div className={`container-sm login ${loggedIn ? 'd-none' : 'd-block'} p-2`}>
                 <form className='login' onSubmit={handleSubmit}>
                     <div className='row g-3'>
@@ -44,7 +46,7 @@ export default function WebserverPage() {
                         <input type='checkbox' className='form-check-input' id='exampleCheck1' />
                         <label className='form-check-label' htmlFor='exampleCheck1'>Remember me</label>
                     </div>
-                    <button type='submit' className='btn btn-primary'>This does nothing</button>
+                    <button type='submit' className='site-control btn btn-primary'>This does nothing</button>
                 </form>
             </div>
             <form className={`container-sm input ${loggedIn ? 'd-block' : 'd-none'} p-2 Web-server-text-block`} onSubmit={handleSpeedrunSubmit}>
@@ -66,7 +68,7 @@ export default function WebserverPage() {
                     <textarea className='form-control' placeholder='Comments.' aria-label='Comments'></textarea>
                 </div>
                 <div className='col-auto'>
-                    <button type='submit' className='btn btn-primary mb-3'>Add Speedrun</button>
+                    <button type='submit' className='site-control btn btn-primary mb-3'>Add Speedrun</button>
                 </div>
             </form>
             <div className='container-fluid'>

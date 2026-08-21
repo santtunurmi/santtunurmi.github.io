@@ -1,5 +1,7 @@
+import ArticleContext from '../components/ArticleContext'
 import OpeningCard from '../components/OpeningCard'
 import PageMetadata from '../components/PageMetadata'
+import SiteNav from '../components/SiteNav'
 import { siteRoutes } from '../routes'
 
 export default function AiPage() {
@@ -14,8 +16,10 @@ export default function AiPage() {
                     This page is about that evolution.
                 </p>
             </OpeningCard>
+            <SiteNav />
             <div className='container-fluid'>
-                <h1 className='pt-3 pb-1 fw-semibold fs-4'>AI-Assisted Workflows</h1>
+                <ArticleContext label='Article' />
+                <h1 className='pb-1 fw-semibold fs-4'>AI-Assisted Workflows</h1>
                 <p>
                     I tend to use AI for work in files, code, or text, or when I need knowledge I do not immediately have. I have a lot of ideas, so when starting work on something,
                     I translate them for the model of my choice. I prompt through conversation: I format my messages as I would to a human, paint the picture, provide the necessary context,

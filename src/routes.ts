@@ -5,7 +5,7 @@ export const siteRoutes = {
     aiAssistedWorkflows: '/blog/ai-assisted-workflows',
     exenCaseStudy: '/blog/exen-internship',
     esportsCaseStudy: '/blog/esports-event-production',
-    hobbies: '/hobbies',
+    hobbies: '/blog/hobbies',
     webserver: '/webserver',
 } as const
 
@@ -19,6 +19,7 @@ export const legacyRouteRedirects: readonly { from: string; to: SiteRoute }[] = 
     { from: '/ai', to: siteRoutes.aiAssistedWorkflows },
     { from: '/ai.html', to: siteRoutes.aiAssistedWorkflows },
     { from: '/blog.html', to: siteRoutes.blog },
+    { from: '/hobbies', to: siteRoutes.hobbies },
     { from: '/hobbies.html', to: siteRoutes.hobbies },
     { from: '/webserver.html', to: siteRoutes.webserver },
 ]

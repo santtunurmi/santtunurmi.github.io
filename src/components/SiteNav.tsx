@@ -14,7 +14,7 @@ function NavLink({ to, children, onClick, end = true }: NavLinkProps) {
         <RouterNavLink
             to={to}
             end={end}
-            className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+            className={({ isActive }) => `nav-link site-control${isActive ? ' active' : ''}`}
             onClick={onClick}
         >
             {children}
@@ -59,13 +59,13 @@ export default function SiteNav() {
     }, [mobileNavOpen])
 
     return (
-        <header className='site-navigation position-fixed top-0 start-0 w-100 z-2'>
-            <nav ref={navRef} className='site-nav nav-pills m-3 text-bg-primary rounded-1' aria-label='Primary navigation'>
+        <header className='site-navigation'>
+            <nav ref={navRef} className='site-nav nav-pills text-bg-primary rounded-1' aria-label='Primary navigation'>
                 <div className='site-nav-heading'>
                     <span className='site-nav-name'>Santtu Nurmi</span>
                     <button
                         ref={mobileNavToggleRef}
-                        className='site-nav-toggle navbar-toggler p-2'
+                        className='site-nav-toggle site-control navbar-toggler p-2'
                         type='button'
                         aria-controls='primary-navigation-links'
                         aria-expanded={mobileNavOpen}
@@ -79,8 +79,7 @@ export default function SiteNav() {
                     <NavLink to={siteRoutes.home} onClick={closeMobileNav}>Portfolio</NavLink>
                     <NavLink to={siteRoutes.educationAndWork} onClick={closeMobileNav}>Education &amp; Work</NavLink>
                     <NavLink to={siteRoutes.blog} onClick={closeMobileNav} end={false}>Blog</NavLink>
-                    <NavLink to={siteRoutes.hobbies} onClick={closeMobileNav}>Hobbies</NavLink>
-                    <a className='nav-link' href='/content/CV.pdf' target='_blank' rel='noopener noreferrer' onClick={closeMobileNav}>
+                    <a className='nav-link site-control' href='/content/CV.pdf' target='_blank' rel='noopener noreferrer' onClick={closeMobileNav}>
                         Download CV
                     </a>
                 </div>
