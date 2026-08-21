@@ -214,6 +214,11 @@ $dropdown-link-active-color: black;
         padding-top: 1rem;
     }
 
+    .portfolio-card-grid {
+        --bs-gutter-x: 0.5rem;
+        --bs-gutter-y: 1rem;
+        text-align: center;
+    }
     .portfolio-card-image {
         aspect-ratio: 16 / 9;
         overflow: hidden;

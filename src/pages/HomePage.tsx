@@ -91,17 +91,15 @@ export default function HomePage() {
             <SiteNav />
             <h1 className='text-center p-5'>My portfolio:</h1>
             <div className='container-fluid'>
-                <div className='container-fluid text-center'>
-                    <div className='row gx-2 gy-3'>
-                        {portfolioCards.map((card, index) => (
-                            <PortfolioCard key={card.title} revealDelay={index * 0.04} {...card} />
-                        ))}
-                    </div>
+                <div className='portfolio-card-grid row'>
+                    {portfolioCards.map((card, index) => (
+                        <PortfolioCard key={card.title} revealDelay={index * 0.04} {...card} />
+                    ))}
                 </div>
             </div>
             <section className='container-fluid mt-5' aria-labelledby='latest-writing-heading'>
                 <h2 id='latest-writing-heading' className='text-center pb-4'>Latest writing</h2>
-                <div className='row gx-2 gy-3 text-center'>
+                <div className='portfolio-card-grid row'>
                     {latestWriting.map((entry) => (
                         <PortfolioCard key={entry.title} {...entry} />
                     ))}

@@ -58,7 +58,7 @@ export default function BlogPage() {
             <div className='page-without-opening-card container-fluid'>
                 <h1 className='fw-semibold'>Blog</h1>
                 <p>Articles and case studies.</p>
-                <div className='row gx-2 gy-3 mt-3 text-center'>
+                <div className='portfolio-card-grid row mt-3'>
                     {blogEntries.map((entry, index) => (
                         <PortfolioCard key={entry.title} revealDelay={index * 0.04} {...entry} />
                     ))}

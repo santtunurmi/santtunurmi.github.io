@@ -120,6 +120,7 @@ describe('article and listing layouts', () => {
         const titles = [...container.querySelectorAll('.card-title')].map((title) => title.textContent)
 
         expect(cardColumns).toHaveLength(4)
+        expect(container.querySelectorAll('.portfolio-card-grid')).toHaveLength(1)
         expect(cardColumns.every((column) => column?.classList.contains('col-sm-6'))).toBe(true)
         expect(cardColumns.some((column) => column?.classList.contains('col-md-4'))).toBe(false)
         expect(titles).toEqual([
@@ -140,11 +141,13 @@ describe('article and listing layouts', () => {
     })
 
     it('orders AI-Assisted Workflows before Hobbies in Latest writing', async () => {
-        renderAppAt('/')
+        const { container } = renderAppAt('/')
 
         const latestWriting = (await screen.findByRole('heading', { level: 2, name: 'Latest writing' })).closest('section')
         const titles = [...latestWriting!.querySelectorAll('.card-title')].map((title) => title.textContent)
 
         expect(titles).toEqual(['AI-Assisted Workflows', 'Hobbies'])
+        expect(container.querySelectorAll('.portfolio-card-grid')).toHaveLength(2)
+        expect([...container.querySelectorAll('.portfolio-card')].every((card) => card.closest('.portfolio-card-grid'))).toBe(true)
     })
 })
