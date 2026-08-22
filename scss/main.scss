@@ -578,7 +578,7 @@ $dropdown-link-active-color: black;
         justify-content: center;
         width: max-content;
         min-width: 100%;
-        padding-inline: var(--carousel-edge-space, 0);
+        padding-inline-end: var(--carousel-edge-space, 0);
         gap: 1rem;
     }
     .modal-display-carousel-image {
@@ -587,7 +587,7 @@ $dropdown-link-active-color: black;
         height: 250px;
         object-fit: cover;
         border-radius: 0.25rem;
-        scroll-snap-align: center;
+        scroll-snap-align: start;
     }
     .modal-display-carousel-control {
         position: absolute;

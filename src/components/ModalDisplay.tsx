@@ -144,7 +144,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         }
 
         const carouselImages = getCarouselImages(viewport)
-        const currentIndex = targetIndexRef.current ?? getCenteredImageIndex(viewport, carouselImages)
+        const currentIndex = targetIndexRef.current ?? getLeftAlignedImageIndex(viewport, carouselImages)
         const targetIndex = Math.max(0, Math.min(carouselImages.length - 1, currentIndex + direction))
         const target = carouselImages[targetIndex]
 
@@ -154,7 +154,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         const viewportRect = viewport.getBoundingClientRect()
         const targetRect = target.getBoundingClientRect()
-        const left = viewport.scrollLeft + targetRect.left - viewportRect.left - (viewport.clientWidth - targetRect.width) / 2
+        const left = viewport.scrollLeft + targetRect.left - viewportRect.left
 
         targetIndexRef.current = targetIndex
         setScrollState((current) => ({ ...current, activeIndex: targetIndex }))
@@ -182,27 +182,27 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             const contentWidth = carouselImages.reduce((width, image) => width + image.getBoundingClientRect().width, 0) + Math.max(0, carouselImages.length - 1) * gap
             const hasOverflow = contentWidth > viewportElement.clientWidth + 1
             const edgeSpace = hasOverflow && carouselImages[0]
-                ? Math.max(0, (viewportElement.clientWidth - carouselImages[0].getBoundingClientRect().width) / 2)
+                ? Math.max(0, viewportElement.clientWidth - carouselImages[0].getBoundingClientRect().width)
                 : 0
 
             viewportElement.style.setProperty('--carousel-edge-space', `${edgeSpace}px`)
 
-            const centeredIndex = getCenteredImageIndex(viewportElement, carouselImages)
+            const leftAlignedIndex = getLeftAlignedImageIndex(viewportElement, carouselImages)
             const targetIndex = targetIndexRef.current
 
             if (targetIndex !== null) {
                 const target = carouselImages[targetIndex]
-                const viewportCenter = viewportElement.getBoundingClientRect().left + viewportElement.clientWidth / 2
-                const targetCenter = target ? target.getBoundingClientRect().left + target.getBoundingClientRect().width / 2 : viewportCenter
+                const viewportLeft = viewportElement.getBoundingClientRect().left
+                const targetLeft = target ? target.getBoundingClientRect().left : viewportLeft
 
-                if (Math.abs(targetCenter - viewportCenter) <= 1) {
+                if (Math.abs(targetLeft - viewportLeft) <= 1) {
                     targetIndexRef.current = null
                 }
             }
 
             setScrollState({
                 hasOverflow,
-                activeIndex: targetIndexRef.current ?? centeredIndex,
+                activeIndex: targetIndexRef.current ?? leftAlignedIndex,
             })
         }
 
@@ -289,14 +289,14 @@ function getCarouselImages(viewport: HTMLElement): HTMLImageElement[] {
     return [...viewport.querySelectorAll<HTMLImageElement>('.modal-display-carousel-image')]
 }
 
-function getCenteredImageIndex(viewport: HTMLElement, images: readonly HTMLImageElement[]): number {
-    const viewportCenter = viewport.getBoundingClientRect().left + viewport.clientWidth / 2
+function getLeftAlignedImageIndex(viewport: HTMLElement, images: readonly HTMLImageElement[]): number {
+    const viewportLeft = viewport.getBoundingClientRect().left
     let closestIndex = 0
     let closestDistance = Number.POSITIVE_INFINITY
 
     images.forEach((image, index) => {
         const imageRect = image.getBoundingClientRect()
-        const distance = Math.abs(imageRect.left + imageRect.width / 2 - viewportCenter)
+        const distance = Math.abs(imageRect.left - viewportLeft)
 
         if (distance < closestDistance) {
             closestIndex = index

@@ -38,35 +38,6 @@ const educationTimeline: readonly TimelineEntry[] = [
 
 const workTimeline: readonly TimelineEntry[] = [
     {
-        id: 'exen-intern-2026',
-        title: 'Software Development Intern',
-        organization: 'EXEN esports Oy',
-        location: 'Jyväskylä / Hybrid',
-        period: 'January – May 2026',
-        description: 'Worked across four successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
-        links: [
-            {
-                type: 'external',
-                href: 'https://exen.fi/en/front-page/',
-                title: 'Official website of EXEN esports Oy.',
-                text: 'https://exen.fi/en/front-page/',
-            },
-        ],
-        images: [
-            {
-                src: '/content/Exen1.jpeg',
-                alt: 'Santtu Nurmi in an EXEN-branded sweater in front of the EXEN logo at its sauna and gaming venue.',
-            },
-        ],
-        geometry: {
-            type: 'duration',
-            start: { year: 2026, month: 1 },
-            end: { year: 2026, month: 5 },
-            lane: 2,
-            titleSide: 'right',
-        },
-    },
-    {
         id: 'nuke-liiga-production-manager-2025',
         title: 'Production Manager',
         organization: 'NUKE-Liiga',
@@ -112,6 +83,35 @@ const workTimeline: readonly TimelineEntry[] = [
             start: { year: 2025, month: 6 },
             end: 'current',
             lane: 1,
+            titleSide: 'right',
+        },
+    },
+    {
+        id: 'exen-intern-2026',
+        title: 'Software Development Intern',
+        organization: 'EXEN esports Oy',
+        location: 'Jyväskylä / Hybrid',
+        period: 'January – May 2026',
+        description: 'Worked across four successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
+        links: [
+            {
+                type: 'external',
+                href: 'https://exen.fi/en/front-page/',
+                title: 'Official website of EXEN esports Oy.',
+                text: 'https://exen.fi/en/front-page/',
+            },
+        ],
+        images: [
+            {
+                src: '/content/Exen1.jpeg',
+                alt: 'Santtu Nurmi in an EXEN-branded sweater in front of the EXEN logo at its sauna and gaming venue.',
+            },
+        ],
+        geometry: {
+            type: 'duration',
+            start: { year: 2026, month: 1 },
+            end: { year: 2026, month: 5 },
+            lane: 2,
             titleSide: 'right',
         },
     },

@@ -4,6 +4,21 @@ import { describe, expect, it } from 'vitest'
 import { educationAndWorkTimeline } from './education-and-work-data'
 
 describe('educationAndWorkTimeline', () => {
+    it('lists the ongoing NUKE-Liiga role before the completed EXEN internship', () => {
+        const nukeLiigaIndex = educationAndWorkTimeline.findIndex((entry) => entry.id === 'nuke-liiga-production-manager-2025')
+        const exenIndex = educationAndWorkTimeline.findIndex((entry) => entry.id === 'exen-intern-2026')
+        const nukeLiiga = educationAndWorkTimeline[nukeLiigaIndex]
+
+        expect(nukeLiigaIndex).toBeGreaterThanOrEqual(0)
+        expect(exenIndex).toBeGreaterThan(nukeLiigaIndex)
+        expect(nukeLiiga?.period).toBe('June 2025 – present')
+        expect(nukeLiiga?.geometry.type).toBe('duration')
+
+        if (nukeLiiga?.geometry.type === 'duration') {
+            expect(nukeLiiga.geometry.end).toBe('current')
+        }
+    })
+
     it('uses unique identifiers and complete core content fields', () => {
         const entryIds = educationAndWorkTimeline.map((entry) => entry.id)
 

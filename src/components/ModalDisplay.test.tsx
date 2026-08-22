@@ -137,7 +137,7 @@ describe('ModalDisplay', () => {
 })
 
 describe('ModalImageCarousel', () => {
-    it('shows manual controls only when the image row overflows', async () => {
+    it('starts an overflowing row at the left edge and advances one image for each button or arrow key press', async () => {
         const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
         const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1000)
         const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo')
@@ -148,7 +148,7 @@ describe('ModalImageCarousel', () => {
 
             if (this instanceof HTMLImageElement) {
                 const index = [...this.parentElement!.children].indexOf(this)
-                return createRect(125 + index * 366, 350)
+                return createRect(index * 366, 350)
             }
 
             return createRect(0, 0)
@@ -164,6 +164,8 @@ describe('ModalImageCarousel', () => {
         const previous = await screen.findByRole('button', { name: 'Scroll images left' })
         const next = screen.getByRole('button', { name: 'Scroll images right' })
 
+        expect(screen.getAllByRole('img')[0].getBoundingClientRect().left).toBe(0)
+        expect(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')?.style.getPropertyValue('--carousel-edge-space')).toBe('250px')
         expect(previous.hasAttribute('disabled')).toBe(true)
         expect(next.hasAttribute('disabled')).toBe(false)
         fireEvent.click(next)
@@ -173,6 +175,10 @@ describe('ModalImageCarousel', () => {
 
         fireEvent.keyDown(document, { key: 'ArrowLeft' })
         expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        fireEvent.click(next)
+        fireEvent.click(next)
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 1098, behavior: 'smooth' })
+        expect(next.hasAttribute('disabled')).toBe(true)
 
         clientWidth.mockRestore()
         scrollWidth.mockRestore()
