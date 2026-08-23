@@ -202,6 +202,56 @@ describe('ModalImageCarousel', () => {
         clientWidth.mockRestore()
         scrollWidth.mockRestore()
     })
+
+    it('tracks native scrolling without remeasuring layout or updating unchanged state', () => {
+        let frameId = 0
+        const frames = new Map<number, FrameRequestCallback>()
+        const requestFrame = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+            frameId += 1
+            frames.set(frameId, callback)
+            return frameId
+        })
+        const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
+        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1000)
+        const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
+            if (this.classList.contains('modal-display-carousel-viewport')) {
+                return createRect(0, 600)
+            }
+
+            if (this instanceof HTMLImageElement) {
+                const index = [...this.parentElement!.children].indexOf(this)
+                return createRect(index * 366, 350)
+            }
+
+            return createRect(0, 0)
+        })
+
+        const { container } = render(<ModalImageCarousel images={[
+            { src: '/one.jpg', alt: 'First view.' },
+            { src: '/two.jpg', alt: 'Second view.' },
+        ]} />)
+        const viewport = container.querySelector<HTMLDivElement>('.modal-display-carousel-viewport')!
+
+        elementRect.mockClear()
+        viewport.scrollLeft = 366
+        fireEvent.scroll(viewport)
+        fireEvent.scroll(viewport)
+
+        expect(requestFrame).toHaveBeenCalledTimes(1)
+        act(() => frames.forEach((callback) => callback(performance.now())))
+        expect(elementRect).not.toHaveBeenCalled()
+        expect(screen.getByRole('button', { name: 'Scroll images left' }).hasAttribute('disabled')).toBe(false)
+        expect(screen.getByRole('button', { name: 'Scroll images right' }).hasAttribute('disabled')).toBe(true)
+
+        fireEvent.scroll(viewport)
+        act(() => frames.forEach((callback) => callback(performance.now())))
+        expect(elementRect).not.toHaveBeenCalled()
+
+        requestFrame.mockRestore()
+        clientWidth.mockRestore()
+        scrollWidth.mockRestore()
+        elementRect.mockRestore()
+    })
 })
 
 function ModalHarness({ onClosed, restoreFocus = false }: { onClosed: () => void; restoreFocus?: boolean }) {

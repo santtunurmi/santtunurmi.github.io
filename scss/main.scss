@@ -568,6 +568,7 @@ $dropdown-link-active-color: black;
         overflow-x: auto;
         overscroll-behavior-inline: contain;
         scroll-snap-type: inline mandatory;
+        touch-action: pan-x pan-y;
         scrollbar-width: none;
     }
     .modal-display-carousel-viewport::-webkit-scrollbar {

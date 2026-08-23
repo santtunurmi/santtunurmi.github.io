@@ -133,8 +133,12 @@ export type ModalImageCarouselProps = {
 export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const viewportRef = useRef<HTMLDivElement>(null)
     const targetIndexRef = useRef<number | null>(null)
+    const imagePositionsRef = useRef<number[]>([])
+    const hasOverflowRef = useRef(false)
+    const scrollFrameRef = useRef<number | null>(null)
     const reducedMotion = useReducedMotion()
     const [scrollState, setScrollState] = useState({ hasOverflow: false, activeIndex: 0 })
+    const scrollStateRef = useRef(scrollState)
 
     const scroll = useCallback((direction: -1 | 1) => {
         const viewport = viewportRef.current
@@ -157,7 +161,10 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         const left = viewport.scrollLeft + targetRect.left - viewportRect.left
 
         targetIndexRef.current = targetIndex
-        setScrollState((current) => ({ ...current, activeIndex: targetIndex }))
+        if (scrollStateRef.current.activeIndex !== targetIndex) {
+            scrollStateRef.current = { ...scrollStateRef.current, activeIndex: targetIndex }
+            setScrollState(scrollStateRef.current)
+        }
         viewport.scrollTo({
             left,
             behavior: reducedMotion ? 'auto' : 'smooth',
@@ -173,43 +180,72 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         const viewportElement = viewport
 
-        function updateScrollState() {
-            viewportElement.style.setProperty('--carousel-image-max-width', `${viewportElement.clientWidth}px`)
+        function updateScrollState(hasOverflow: boolean, activeIndex: number) {
+            if (scrollStateRef.current.hasOverflow !== hasOverflow || scrollStateRef.current.activeIndex !== activeIndex) {
+                scrollStateRef.current = { hasOverflow, activeIndex }
+                setScrollState(scrollStateRef.current)
+            }
+        }
+
+        function updateScrollPosition() {
+            scrollFrameRef.current = null
+
+            const positions = imagePositionsRef.current
+
+            if (positions.length === 0) {
+                return
+            }
+
+            const leftAlignedIndex = getClosestPositionIndex(viewportElement.scrollLeft, positions)
+            const targetIndex = targetIndexRef.current
+
+            if (targetIndex !== null && Math.abs(positions[targetIndex] - viewportElement.scrollLeft) <= 1) {
+                targetIndexRef.current = null
+            }
+
+            updateScrollState(hasOverflowRef.current, targetIndexRef.current ?? leftAlignedIndex)
+        }
+
+        function measureLayout() {
+            setCssCustomProperty(viewportElement, '--carousel-image-max-width', `${viewportElement.clientWidth}px`)
 
             const carouselImages = getCarouselImages(viewportElement)
             const track = viewportElement.firstElementChild
             const gap = track ? Number.parseFloat(getComputedStyle(track).columnGap) || 0 : 0
-            const contentWidth = carouselImages.reduce((width, image) => width + image.getBoundingClientRect().width, 0) + Math.max(0, carouselImages.length - 1) * gap
+            const viewportRect = viewportElement.getBoundingClientRect()
+            const imageRects = carouselImages.map((image) => image.getBoundingClientRect())
+            const contentWidth = imageRects.reduce((width, imageRect) => width + imageRect.width, 0) + Math.max(0, carouselImages.length - 1) * gap
             const hasOverflow = contentWidth > viewportElement.clientWidth + 1
-            const edgeSpace = hasOverflow && carouselImages[0]
-                ? Math.max(0, viewportElement.clientWidth - carouselImages[0].getBoundingClientRect().width)
+            const edgeSpace = hasOverflow && imageRects[0]
+                ? Math.max(0, viewportElement.clientWidth - imageRects[0].width)
                 : 0
 
-            viewportElement.style.setProperty('--carousel-edge-space', `${edgeSpace}px`)
+            setCssCustomProperty(viewportElement, '--carousel-edge-space', `${edgeSpace}px`)
+            imagePositionsRef.current = imageRects.map((imageRect) => viewportElement.scrollLeft + imageRect.left - viewportRect.left)
+            hasOverflowRef.current = hasOverflow
 
-            const leftAlignedIndex = getLeftAlignedImageIndex(viewportElement, carouselImages)
+            const leftAlignedIndex = getClosestPositionIndex(viewportElement.scrollLeft, imagePositionsRef.current)
             const targetIndex = targetIndexRef.current
 
             if (targetIndex !== null) {
-                const target = carouselImages[targetIndex]
-                const viewportLeft = viewportElement.getBoundingClientRect().left
-                const targetLeft = target ? target.getBoundingClientRect().left : viewportLeft
-
-                if (Math.abs(targetLeft - viewportLeft) <= 1) {
+                if (Math.abs(imagePositionsRef.current[targetIndex] - viewportElement.scrollLeft) <= 1) {
                     targetIndexRef.current = null
                 }
             }
 
-            setScrollState({
-                hasOverflow,
-                activeIndex: targetIndexRef.current ?? leftAlignedIndex,
-            })
+            updateScrollState(hasOverflow, targetIndexRef.current ?? leftAlignedIndex)
         }
 
-        updateScrollState()
-        viewport.addEventListener('scroll', updateScrollState)
+        function scheduleScrollPositionUpdate() {
+            if (scrollFrameRef.current === null) {
+                scrollFrameRef.current = requestAnimationFrame(updateScrollPosition)
+            }
+        }
 
-        const resizeObserver = new ResizeObserver(updateScrollState)
+        measureLayout()
+        viewport.addEventListener('scroll', scheduleScrollPositionUpdate, { passive: true })
+
+        const resizeObserver = new ResizeObserver(measureLayout)
         resizeObserver.observe(viewport)
         const track = viewport.firstElementChild
 
@@ -217,11 +253,17 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             resizeObserver.observe(track)
         }
 
-        getCarouselImages(viewport).forEach((image) => resizeObserver.observe(image))
+        const carouselImages = getCarouselImages(viewport)
+        carouselImages.forEach((image) => {
+            resizeObserver.observe(image)
+            image.addEventListener('load', measureLayout)
+        })
 
         return () => {
-            viewport.removeEventListener('scroll', updateScrollState)
+            viewport.removeEventListener('scroll', scheduleScrollPositionUpdate)
             resizeObserver.disconnect()
+            carouselImages.forEach((image) => image.removeEventListener('load', measureLayout))
+            cancelFrame(scrollFrameRef)
         }
     }, [images])
 
@@ -305,6 +347,28 @@ function getLeftAlignedImageIndex(viewport: HTMLElement, images: readonly HTMLIm
     })
 
     return closestIndex
+}
+
+function getClosestPositionIndex(position: number, positions: readonly number[]): number {
+    let closestIndex = 0
+    let closestDistance = Number.POSITIVE_INFINITY
+
+    positions.forEach((imagePosition, index) => {
+        const distance = Math.abs(imagePosition - position)
+
+        if (distance < closestDistance) {
+            closestIndex = index
+            closestDistance = distance
+        }
+    })
+
+    return closestIndex
+}
+
+function setCssCustomProperty(element: HTMLElement, property: string, value: string) {
+    if (element.style.getPropertyValue(property) !== value) {
+        element.style.setProperty(property, value)
+    }
 }
 
 function isEditableElement(target: EventTarget | null): boolean {
