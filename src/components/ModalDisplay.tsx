@@ -134,6 +134,7 @@ export type ModalImageCarouselProps = {
 
 export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const viewportRef = useRef<HTMLDivElement>(null)
+    const targetPositionRef = useRef<number | null>(null)
     const imagePositionsRef = useRef<number[]>([])
     const scrollFrameRef = useRef<number | null>(null)
     const momentumFrameRef = useRef<number | null>(null)
@@ -153,6 +154,21 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         return Math.max(0, viewport.scrollWidth - viewport.clientWidth)
     }
 
+    const updateScrollState = useCallback((viewport: HTMLElement) => {
+        const maximumScroll = getMaximumScroll(viewport)
+        const currentScroll = targetPositionRef.current ?? viewport.scrollLeft
+        const nextScrollState = {
+            hasOverflow: maximumScroll > 1,
+            atStart: currentScroll <= 1,
+            atEnd: maximumScroll - currentScroll <= 1,
+        }
+
+        if (scrollStateRef.current.hasOverflow !== nextScrollState.hasOverflow || scrollStateRef.current.atStart !== nextScrollState.atStart || scrollStateRef.current.atEnd !== nextScrollState.atEnd) {
+            scrollStateRef.current = nextScrollState
+            setScrollState(scrollStateRef.current)
+        }
+    }, [])
+
     const scroll = useCallback((direction: -1 | 1) => {
         const viewport = viewportRef.current
 
@@ -161,25 +177,26 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         }
 
         const maximumScroll = getMaximumScroll(viewport)
-        const currentScroll = viewport.scrollLeft
+        const currentScroll = targetPositionRef.current ?? viewport.scrollLeft
 
         if ((direction === -1 && currentScroll <= 1) || (direction === 1 && maximumScroll - currentScroll <= 1)) {
             return
         }
 
         cancelMouseMomentum()
-        viewport.scrollTo({ left: viewport.scrollLeft, behavior: 'auto' })
 
         const imagePositions = imagePositionsRef.current
         const left = direction === 1
             ? imagePositions.find((position) => position > currentScroll + 1) ?? maximumScroll
             : [...imagePositions].reverse().find((position) => position < currentScroll - 1) ?? 0
 
+        targetPositionRef.current = left
+        updateScrollState(viewport)
         viewport.scrollTo({
             left,
             behavior: reducedMotion ? 'auto' : 'smooth',
         })
-    }, [reducedMotion])
+    }, [reducedMotion, updateScrollState])
 
     function startMouseMomentum(velocity: number, movedAt: number, releasedAt: number) {
         if (reducedMotion || releasedAt - movedAt > 120 || Math.abs(velocity) < 0.02) {
@@ -228,8 +245,9 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         }
 
         const maximumScroll = getMaximumScroll(viewport)
+        const currentScroll = targetPositionRef.current ?? viewport.scrollLeft
 
-        if ((direction === -1 && viewport.scrollLeft <= 1) || (direction === 1 && maximumScroll - viewport.scrollLeft <= 1)) {
+        if ((direction === -1 && currentScroll <= 1) || (direction === 1 && maximumScroll - currentScroll <= 1)) {
             return
         }
 
@@ -247,7 +265,9 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     }, [scroll])
 
     function cancelProgrammaticScroll(viewport: HTMLElement) {
+        targetPositionRef.current = null
         viewport.scrollTo({ left: viewport.scrollLeft, behavior: 'auto' })
+        updateScrollState(viewport)
     }
 
     useLayoutEffect(() => {
@@ -259,24 +279,14 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         const viewportElement = viewport
 
-        function updateScrollState() {
-            const maximumScroll = getMaximumScroll(viewportElement)
-            const nextScrollState = {
-                hasOverflow: maximumScroll > 1,
-                atStart: viewportElement.scrollLeft <= 1,
-                atEnd: maximumScroll - viewportElement.scrollLeft <= 1,
-            }
-
-            if (scrollStateRef.current.hasOverflow !== nextScrollState.hasOverflow || scrollStateRef.current.atStart !== nextScrollState.atStart || scrollStateRef.current.atEnd !== nextScrollState.atEnd) {
-                scrollStateRef.current = nextScrollState
-                setScrollState(scrollStateRef.current)
-            }
-        }
-
         function updateScrollPosition() {
             scrollFrameRef.current = null
 
-            updateScrollState()
+            if (targetPositionRef.current !== null && Math.abs(targetPositionRef.current - viewportElement.scrollLeft) <= 1) {
+                targetPositionRef.current = null
+            }
+
+            updateScrollState(viewportElement)
         }
 
         function measureLayout() {
@@ -288,8 +298,9 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             const imageRects = carouselImages.map((image) => image.getBoundingClientRect())
             const maximumScroll = getMaximumScroll(viewportElement)
             imagePositionsRef.current = imageRects.map((imageRect) => Math.min(maximumScroll, Math.max(0, viewportElement.scrollLeft + imageRect.left - viewportRect.left)))
+            targetPositionRef.current = targetPositionRef.current === null ? null : Math.min(maximumScroll, targetPositionRef.current)
 
-            updateScrollState()
+            updateScrollState(viewportElement)
         }
 
         function scheduleScrollPositionUpdate() {
@@ -329,8 +340,9 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             }
 
             dragRef.current = null
+            targetPositionRef.current = null
         }
-    }, [images])
+    }, [images, updateScrollState])
 
     useEffect(() => () => {
         if (pressedControlTimeoutRef.current !== null) {
@@ -348,7 +360,13 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
                 const viewport = viewportRef.current
                 const direction = event.key === 'ArrowLeft' ? -1 : 1
 
-                if (!viewport || (direction === -1 && viewport.scrollLeft <= 1) || (direction === 1 && getMaximumScroll(viewport) - viewport.scrollLeft <= 1)) {
+                if (!viewport) {
+                    return
+                }
+
+                const currentScroll = targetPositionRef.current ?? viewport.scrollLeft
+
+                if ((direction === -1 && currentScroll <= 1) || (direction === 1 && getMaximumScroll(viewport) - currentScroll <= 1)) {
                     return
                 }
 

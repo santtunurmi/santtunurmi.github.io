@@ -190,6 +190,51 @@ describe('ModalImageCarousel', () => {
         elementRect.mockRestore()
     })
 
+    it('retargets rapid button and keyboard navigation from the last requested stop', () => {
+        const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
+        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1464)
+        const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo')
+        const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
+            if (this.classList.contains('modal-display-carousel-viewport')) {
+                return createRect(0, 600)
+            }
+
+            if (this instanceof HTMLImageElement) {
+                return createRect([...this.parentElement!.children].indexOf(this) * 366, 350)
+            }
+
+            return createRect(0, 0)
+        })
+
+        render(<ModalImageCarousel images={[
+            { src: '/one.jpg', alt: 'First view.' },
+            { src: '/two.jpg', alt: 'Second view.' },
+            { src: '/three.jpg', alt: 'Third view.' },
+            { src: '/four.jpg', alt: 'Fourth view.' },
+        ]} />)
+
+        const next = screen.getByRole('button', { name: 'Scroll images right' })
+
+        fireEvent.click(next)
+        fireEvent.click(next)
+        fireEvent.keyDown(document, { key: 'ArrowRight' })
+        fireEvent.keyDown(document, { key: 'ArrowLeft' })
+        fireEvent.keyDown(document, { key: 'ArrowLeft' })
+
+        expect(scrollTo.mock.calls.map(([options]) => options)).toEqual([
+            { left: 366, behavior: 'smooth' },
+            { left: 732, behavior: 'smooth' },
+            { left: 864, behavior: 'smooth' },
+            { left: 732, behavior: 'smooth' },
+            { left: 366, behavior: 'smooth' },
+        ])
+
+        clientWidth.mockRestore()
+        scrollWidth.mockRestore()
+        scrollTo.mockRestore()
+        elementRect.mockRestore()
+    })
+
     it('centers a short row without rendering scroll controls', () => {
         const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
         const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(600)
