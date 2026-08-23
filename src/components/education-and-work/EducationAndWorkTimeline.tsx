@@ -53,7 +53,7 @@ export default function EducationAndWorkTimeline({ entries, scale }: EducationAn
                     <TimelineItem entry={entry} scale={scale} timelineWidth={timelineWidth} timelineHeight={timelineHeight} titleOffset={titleLayout.offsets.get(entry.id) ?? entry.geometry.titleOffset ?? 0} titleHeight={titleLayout.heights.get(entry.id) ?? 0} titleWidth={titleLayout.widths.get(entry.id) ?? 0} connectorY={titleLayout.connectorYs.get(entry.id)} endpointPositions={endpointPositions} dateLabelSides={titleLayout.dateLabelSides} active={activeEntryId === entry.id} onOpen={openEntry} key={entry.id} />
                 ))}
             </ol>
-            <ModalDisplay open={selectedEntry !== null} title={selectedEntry?.title ?? ''} links={selectedEntry?.links} images={selectedEntry?.images} onClosing={() => setActiveEntryId(null)} onClosed={() => setSelectedEntry(null)} returnFocusRef={triggerRef} restoreFocus={restoreFocus}>
+            <ModalDisplay open={selectedEntry !== null} title={selectedEntry?.title ?? ''} caseStudy={selectedEntry?.caseStudy} links={selectedEntry?.links} images={selectedEntry?.images} onClosing={() => setActiveEntryId(null)} onClosed={() => setSelectedEntry(null)} returnFocusRef={triggerRef} restoreFocus={restoreFocus}>
                 {selectedEntry && (
                     <>
                         <p className='mb-1'>{selectedEntry.organization} · {selectedEntry.location}</p>

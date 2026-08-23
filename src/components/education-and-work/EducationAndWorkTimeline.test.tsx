@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { describe, expect, it } from 'vitest'
 import EducationAndWorkTimeline from './EducationAndWorkTimeline'
+import { educationAndWorkTimeline } from './education-and-work-data'
 import type { TimelineEntry, TimelineScale } from './timeline-types'
 
 const entry: TimelineEntry = {
@@ -66,5 +67,29 @@ describe('EducationAndWorkTimeline', () => {
         fireEvent.click(keyboardTrigger, { detail: 0 })
         fireEvent(container.querySelector('dialog')!, new Event('cancel', { cancelable: true }))
         await waitFor(() => expect(document.activeElement).toBe(keyboardTrigger), { timeout: 1500 })
+    })
+
+    it('renders each case study separately before its existing external links', async () => {
+        const entries = educationAndWorkTimeline.filter((item) => item.id === 'nuke-liiga-production-manager-2025' || item.id === 'exen-intern-2026')
+
+        render(
+            <MemoryRouter>
+                <EducationAndWorkTimeline entries={entries} scale={scale} />
+            </MemoryRouter>,
+        )
+
+        fireEvent.click(screen.getByRole('button', { name: /Production Manager/ }), { detail: 1 })
+        const nukeCaseStudy = await screen.findByRole('link', { name: 'Esports Event Production at NUKE-Liiga' })
+
+        expect(screen.getByRole('heading', { level: 3, name: 'Case study' })).not.toBeNull()
+        expect(nukeCaseStudy.closest('section')).not.toBeNull()
+        expect(screen.getByRole('link', { name: 'Click here to view the second season LAN final aftermovie!' }).closest('section')).toBeNull()
+
+        fireEvent.click(screen.getByRole('button', { name: 'Close' }), { detail: 1 })
+        await waitFor(() => expect(screen.queryByRole('link', { name: 'Esports Event Production at NUKE-Liiga' })).toBeNull(), { timeout: 1500 })
+        fireEvent.click(screen.getByRole('button', { name: /Software Development Intern/ }), { detail: 1 })
+
+        expect(await screen.findByRole('link', { name: 'Software Development Internship at EXEN esports Oy' })).toMatchObject({ pathname: '/blog/exen-internship' })
+        expect(screen.getByRole('link', { name: 'https://exen.fi/en/front-page/' }).closest('section')).toBeNull()
     })
 })

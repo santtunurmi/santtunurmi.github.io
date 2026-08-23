@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode, type RefObject } from 'react'
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type RefObject } from 'react'
 import type { ContentImage, ContentLink } from '../models/content'
 import { useDialogTransition } from './motion'
 
@@ -8,6 +8,7 @@ export type ModalDisplayProps = {
     open: boolean
     title: string
     children: ReactNode
+    caseStudy?: Extract<ContentLink, { type: 'internal' }>
     links?: readonly ContentLink[]
     images?: readonly ContentImage[]
     onClosing?: () => void
@@ -16,7 +17,7 @@ export type ModalDisplayProps = {
     restoreFocus?: boolean
 }
 
-export default function ModalDisplay({ open, title, children, links, images, onClosing, onClosed, returnFocusRef, restoreFocus = false }: ModalDisplayProps) {
+export default function ModalDisplay({ open, title, children, caseStudy, links, images, onClosing, onClosed, returnFocusRef, restoreFocus = false }: ModalDisplayProps) {
     const titleId = useId()
     const dialogRef = useRef<HTMLDialogElement>(null)
     const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -117,6 +118,7 @@ export default function ModalDisplay({ open, title, children, links, images, onC
                         <button className='modal-display-close site-control' ref={closeButtonRef} type='button' onClick={requestClose} aria-label='Close' autoFocus>Close</button>
                         <h2 id={titleId} className='h4 fw-semibold'>{title}</h2>
                         {children}
+                        {caseStudy && <CaseStudyLink link={caseStudy} />}
                         {links && links.length > 0 && <ModalLinks links={links} />}
                         {images && images.length > 0 && <ModalImageCarousel images={images} />}
                     </motion.div>
@@ -136,11 +138,14 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const imagePositionsRef = useRef<number[]>([])
     const hasOverflowRef = useRef(false)
     const scrollFrameRef = useRef<number | null>(null)
+    const settleTimeoutRef = useRef<number | null>(null)
+    const dragRef = useRef<{ pointerId: number; startX: number; startY: number; startIndex: number; startScrollLeft: number; horizontal: boolean } | null>(null)
     const reducedMotion = useReducedMotion()
     const [scrollState, setScrollState] = useState({ hasOverflow: false, activeIndex: 0 })
     const scrollStateRef = useRef(scrollState)
+    const [dragging, setDragging] = useState(false)
 
-    const scroll = useCallback((direction: -1 | 1) => {
+    const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = reducedMotion ? 'auto' : 'smooth') => {
         const viewport = viewportRef.current
 
         if (!viewport) {
@@ -148,17 +153,23 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         }
 
         const carouselImages = getCarouselImages(viewport)
-        const currentIndex = targetIndexRef.current ?? getLeftAlignedImageIndex(viewport, carouselImages)
-        const targetIndex = Math.max(0, Math.min(carouselImages.length - 1, currentIndex + direction))
+        const targetIndex = Math.max(0, Math.min(carouselImages.length - 1, index))
         const target = carouselImages[targetIndex]
 
-        if (!target || targetIndex === currentIndex) {
+        if (!target) {
             return
         }
 
-        const viewportRect = viewport.getBoundingClientRect()
-        const targetRect = target.getBoundingClientRect()
-        const left = viewport.scrollLeft + targetRect.left - viewportRect.left
+        const left = imagePositionsRef.current[targetIndex] ?? viewport.scrollLeft + target.getBoundingClientRect().left - viewport.getBoundingClientRect().left
+
+        if (Math.abs(left - viewport.scrollLeft) <= 1) {
+            targetIndexRef.current = null
+            if (scrollStateRef.current.activeIndex !== targetIndex) {
+                scrollStateRef.current = { ...scrollStateRef.current, activeIndex: targetIndex }
+                setScrollState(scrollStateRef.current)
+            }
+            return
+        }
 
         targetIndexRef.current = targetIndex
         if (scrollStateRef.current.activeIndex !== targetIndex) {
@@ -167,9 +178,20 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         }
         viewport.scrollTo({
             left,
-            behavior: reducedMotion ? 'auto' : 'smooth',
+            behavior,
         })
     }, [reducedMotion])
+
+    const scroll = useCallback((direction: -1 | 1) => {
+        const currentIndex = targetIndexRef.current ?? getClosestPositionIndex(viewportRef.current?.scrollLeft ?? 0, imagePositionsRef.current)
+
+        scrollToIndex(currentIndex + direction)
+    }, [scrollToIndex])
+
+    function cancelProgrammaticScroll(viewport: HTMLElement) {
+        targetIndexRef.current = null
+        viewport.scrollTo({ left: viewport.scrollLeft, behavior: 'auto' })
+    }
 
     useLayoutEffect(() => {
         const viewport = viewportRef.current
@@ -240,6 +262,18 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             if (scrollFrameRef.current === null) {
                 scrollFrameRef.current = requestAnimationFrame(updateScrollPosition)
             }
+
+            if (settleTimeoutRef.current !== null) {
+                window.clearTimeout(settleTimeoutRef.current)
+            }
+
+            settleTimeoutRef.current = window.setTimeout(() => {
+                settleTimeoutRef.current = null
+
+                if (dragRef.current === null && targetIndexRef.current === null) {
+                    scrollToIndex(getClosestPositionIndex(viewportElement.scrollLeft, imagePositionsRef.current))
+                }
+            }, 120)
         }
 
         measureLayout()
@@ -264,8 +298,18 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             resizeObserver.disconnect()
             carouselImages.forEach((image) => image.removeEventListener('load', measureLayout))
             cancelFrame(scrollFrameRef)
+            const drag = dragRef.current
+
+            if (drag && viewportElement.hasPointerCapture(drag.pointerId)) {
+                viewportElement.releasePointerCapture(drag.pointerId)
+            }
+
+            dragRef.current = null
+            if (settleTimeoutRef.current !== null) {
+                window.clearTimeout(settleTimeoutRef.current)
+            }
         }
-    }, [images])
+    }, [images, scrollToIndex])
 
     useEffect(() => {
         function scrollFromArrowKey(event: KeyboardEvent) {
@@ -284,12 +328,93 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         return () => document.removeEventListener('keydown', scrollFromArrowKey)
     }, [scroll])
 
+    function finishDrag(pointerId: number, returnToStart: boolean) {
+        const drag = dragRef.current
+
+        if (!drag || drag.pointerId !== pointerId) {
+            return
+        }
+
+        dragRef.current = null
+        setDragging(false)
+
+        if (viewportRef.current?.hasPointerCapture(pointerId)) {
+            viewportRef.current.releasePointerCapture(pointerId)
+        }
+
+        if (returnToStart && drag.horizontal) {
+            scrollToIndex(drag.startIndex)
+        }
+    }
+
+    function startDrag(event: ReactPointerEvent<HTMLDivElement>) {
+        if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) {
+            return
+        }
+
+        const viewport = event.currentTarget
+        cancelProgrammaticScroll(viewport)
+        const startIndex = getClosestPositionIndex(viewport.scrollLeft, imagePositionsRef.current)
+
+        viewport.setPointerCapture(event.pointerId)
+        dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, startIndex, startScrollLeft: viewport.scrollLeft, horizontal: false }
+    }
+
+    function moveDrag(event: ReactPointerEvent<HTMLDivElement>) {
+        const drag = dragRef.current
+
+        if (!drag || drag.pointerId !== event.pointerId) {
+            return
+        }
+
+        const horizontalDistance = event.clientX - drag.startX
+        const verticalDistance = event.clientY - drag.startY
+
+        if (!drag.horizontal) {
+            if (Math.abs(verticalDistance) > 8 && Math.abs(verticalDistance) > Math.abs(horizontalDistance)) {
+                finishDrag(event.pointerId, false)
+                return
+            }
+
+            if (Math.abs(horizontalDistance) <= 8 || Math.abs(horizontalDistance) < Math.abs(verticalDistance)) {
+                return
+            }
+
+            drag.horizontal = true
+            targetIndexRef.current = null
+            setDragging(true)
+        }
+
+        event.preventDefault()
+        event.currentTarget.scrollLeft = drag.startScrollLeft - horizontalDistance
+    }
+
+    function endDrag(event: ReactPointerEvent<HTMLDivElement>) {
+        const drag = dragRef.current
+
+        if (!drag || drag.pointerId !== event.pointerId) {
+            return
+        }
+
+        const horizontalDistance = event.clientX - drag.startX
+        const targetIndex = drag.horizontal && Math.abs(horizontalDistance) >= 48
+            ? drag.startIndex + (horizontalDistance < 0 ? 1 : -1)
+            : drag.startIndex
+
+        finishDrag(event.pointerId, false)
+        scrollToIndex(targetIndex)
+    }
+
+    function cancelDrag(event: ReactPointerEvent<HTMLDivElement>) {
+        finishDrag(event.pointerId, true)
+    }
+
     return (
         <div className='modal-display-carousel' role='region' aria-label='Images'>
-            <div className='modal-display-carousel-viewport' ref={viewportRef}>
+            <div className={`modal-display-carousel-viewport${dragging ? ' modal-display-carousel-viewport--dragging' : ''}`} ref={viewportRef} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={cancelDrag} onLostPointerCapture={cancelDrag} onWheel={(event) => cancelProgrammaticScroll(event.currentTarget)}>
                 <div className='modal-display-carousel-track'>
                     {images.map((image, index) => (
-                        <img className='modal-display-carousel-image' src={image.src} alt={image.alt} loading='lazy' key={`${image.src}-${index}`} />
+                        <img className='modal-display-carousel-image' src={image.src} alt={image.alt} loading='lazy' draggable={false} onDragStart={(event) => event.preventDefault()} key={`${image.src}-${index}`} />
                     ))}
                 </div>
             </div>
@@ -300,6 +425,15 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
                 </>
             )}
         </div>
+    )
+}
+
+function CaseStudyLink({ link }: { link: Extract<ContentLink, { type: 'internal' }> }) {
+    return (
+        <section className='mt-3 mb-3' aria-label='Case study'>
+            <h3 className='h6 mb-1'>Case study</h3>
+            <Link to={link.to} title={link.title}>{link.text}</Link>
+        </section>
     )
 }
 
@@ -329,24 +463,6 @@ function ModalLinks({ links }: { links: readonly ContentLink[] }) {
 
 function getCarouselImages(viewport: HTMLElement): HTMLImageElement[] {
     return [...viewport.querySelectorAll<HTMLImageElement>('.modal-display-carousel-image')]
-}
-
-function getLeftAlignedImageIndex(viewport: HTMLElement, images: readonly HTMLImageElement[]): number {
-    const viewportLeft = viewport.getBoundingClientRect().left
-    let closestIndex = 0
-    let closestDistance = Number.POSITIVE_INFINITY
-
-    images.forEach((image, index) => {
-        const imageRect = image.getBoundingClientRect()
-        const distance = Math.abs(imageRect.left - viewportLeft)
-
-        if (distance < closestDistance) {
-            closestIndex = index
-            closestDistance = distance
-        }
-    })
-
-    return closestIndex
 }
 
 function getClosestPositionIndex(position: number, positions: readonly number[]): number {

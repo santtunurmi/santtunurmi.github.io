@@ -1,3 +1,4 @@
+import { siteRoutes } from '../../routes'
 import type { TimelineEntry } from './timeline-types'
 
 const educationTimeline: readonly TimelineEntry[] = [
@@ -44,6 +45,12 @@ const workTimeline: readonly TimelineEntry[] = [
         location: 'Hybrid',
         period: 'June 2025 – present',
         description: 'Production manager for a Finnish youth esports league across two completed seasons, now continuing in the role for NUKE-Liiga\'s third season in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
+        caseStudy: {
+            type: 'internal',
+            to: siteRoutes.esportsCaseStudy,
+            title: 'Esports Event Production at NUKE-Liiga',
+            text: 'Esports Event Production at NUKE-Liiga',
+        },
         links: [
             {
                 type: 'external',
@@ -93,6 +100,12 @@ const workTimeline: readonly TimelineEntry[] = [
         location: 'Jyväskylä / Hybrid',
         period: 'January – May 2026',
         description: 'Worked across successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
+        caseStudy: {
+            type: 'internal',
+            to: siteRoutes.exenCaseStudy,
+            title: 'Software Development Internship at EXEN esports Oy',
+            text: 'Software Development Internship at EXEN esports Oy',
+        },
         links: [
             {
                 type: 'external',

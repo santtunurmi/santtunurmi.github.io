@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { siteRoutes } from '../../routes'
 import { educationAndWorkTimeline } from './education-and-work-data'
 
 describe('educationAndWorkTimeline', () => {
@@ -62,6 +63,14 @@ describe('educationAndWorkTimeline', () => {
                 expect(['http:', 'https:']).toContain(new URL(link.href).protocol)
             }
         }
+    })
+
+    it('assigns the EXEN and NUKE-Liiga case studies to their existing routes', () => {
+        const nukeLiiga = educationAndWorkTimeline.find((entry) => entry.id === 'nuke-liiga-production-manager-2025')
+        const exen = educationAndWorkTimeline.find((entry) => entry.id === 'exen-intern-2026')
+
+        expect(nukeLiiga?.caseStudy).toMatchObject({ type: 'internal', to: siteRoutes.esportsCaseStudy, text: 'Esports Event Production at NUKE-Liiga' })
+        expect(exen?.caseStudy).toMatchObject({ type: 'internal', to: siteRoutes.exenCaseStudy, text: 'Software Development Internship at EXEN esports Oy' })
     })
 
     it('uses complete image metadata that resolves to public assets', () => {

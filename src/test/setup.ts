@@ -1,6 +1,19 @@
 import { cleanup } from '@testing-library/react'
 import { afterEach, vi } from 'vitest'
 
+class TestPointerEvent extends MouseEvent {
+    readonly pointerId: number
+    readonly pointerType: string
+    readonly isPrimary: boolean
+
+    constructor(type: string, init: PointerEventInit = {}) {
+        super(type, init)
+        this.pointerId = init.pointerId ?? 1
+        this.pointerType = init.pointerType ?? 'mouse'
+        this.isPrimary = init.isPrimary ?? true
+    }
+}
+
 class TestIntersectionObserver implements IntersectionObserver {
     readonly root = null
     readonly rootMargin = '0px'
@@ -60,6 +73,16 @@ Object.defineProperty(window, 'matchMedia', {
         removeEventListener: vi.fn(),
         removeListener: vi.fn(),
     })),
+})
+
+Object.defineProperty(window, 'PointerEvent', {
+    configurable: true,
+    value: TestPointerEvent,
+})
+
+Object.defineProperty(globalThis, 'PointerEvent', {
+    configurable: true,
+    value: TestPointerEvent,
 })
 
 Object.defineProperty(window, 'IntersectionObserver', {

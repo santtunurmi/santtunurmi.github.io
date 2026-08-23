@@ -567,8 +567,7 @@ $dropdown-link-active-color: black;
     .modal-display-carousel-viewport {
         overflow-x: auto;
         overscroll-behavior-inline: contain;
-        scroll-snap-type: inline mandatory;
-        touch-action: pan-x pan-y;
+        touch-action: pan-y;
         scrollbar-width: none;
     }
     .modal-display-carousel-viewport::-webkit-scrollbar {
@@ -588,7 +587,11 @@ $dropdown-link-active-color: black;
         height: 250px;
         object-fit: cover;
         border-radius: 0.25rem;
-        scroll-snap-align: start;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+    .modal-display-carousel-viewport--dragging {
+        cursor: grabbing;
     }
     .modal-display-carousel-control {
         position: absolute;

@@ -30,6 +30,7 @@ export type TimelineEntry = {
     location: string
     period: string
     description?: string
+    caseStudy?: Extract<ContentLink, { type: 'internal' }>
     links?: readonly ContentLink[]
     images?: readonly ContentImage[]
     geometry: TimelineGeometry
