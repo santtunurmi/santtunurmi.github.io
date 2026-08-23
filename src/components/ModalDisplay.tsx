@@ -138,12 +138,13 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const imagePositionsRef = useRef<number[]>([])
     const hasOverflowRef = useRef(false)
     const scrollFrameRef = useRef<number | null>(null)
-    const settleTimeoutRef = useRef<number | null>(null)
-    const dragRef = useRef<{ pointerId: number; startX: number; startY: number; startIndex: number; startScrollLeft: number; horizontal: boolean } | null>(null)
+    const pressedControlTimeoutRef = useRef<number | null>(null)
+    const dragRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number } | null>(null)
     const reducedMotion = useReducedMotion()
     const [scrollState, setScrollState] = useState({ hasOverflow: false, activeIndex: 0 })
     const scrollStateRef = useRef(scrollState)
     const [dragging, setDragging] = useState(false)
+    const [pressedControl, setPressedControl] = useState<-1 | 1 | null>(null)
 
     const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = reducedMotion ? 'auto' : 'smooth') => {
         const viewport = viewportRef.current
@@ -187,6 +188,19 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         scrollToIndex(currentIndex + direction)
     }, [scrollToIndex])
+
+    const activateControl = useCallback((direction: -1 | 1) => {
+        if (pressedControlTimeoutRef.current !== null) {
+            window.clearTimeout(pressedControlTimeoutRef.current)
+        }
+
+        setPressedControl(direction)
+        pressedControlTimeoutRef.current = window.setTimeout(() => {
+            pressedControlTimeoutRef.current = null
+            setPressedControl(null)
+        }, 160)
+        scroll(direction)
+    }, [scroll])
 
     function cancelProgrammaticScroll(viewport: HTMLElement) {
         targetIndexRef.current = null
@@ -263,17 +277,6 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
                 scrollFrameRef.current = requestAnimationFrame(updateScrollPosition)
             }
 
-            if (settleTimeoutRef.current !== null) {
-                window.clearTimeout(settleTimeoutRef.current)
-            }
-
-            settleTimeoutRef.current = window.setTimeout(() => {
-                settleTimeoutRef.current = null
-
-                if (dragRef.current === null && targetIndexRef.current === null) {
-                    scrollToIndex(getClosestPositionIndex(viewportElement.scrollLeft, imagePositionsRef.current))
-                }
-            }, 120)
         }
 
         measureLayout()
@@ -305,11 +308,14 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             }
 
             dragRef.current = null
-            if (settleTimeoutRef.current !== null) {
-                window.clearTimeout(settleTimeoutRef.current)
-            }
         }
-    }, [images, scrollToIndex])
+    }, [images])
+
+    useEffect(() => () => {
+        if (pressedControlTimeoutRef.current !== null) {
+            window.clearTimeout(pressedControlTimeoutRef.current)
+        }
+    }, [])
 
     useEffect(() => {
         function scrollFromArrowKey(event: KeyboardEvent) {
@@ -319,16 +325,16 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
                 event.preventDefault()
-                scroll(event.key === 'ArrowLeft' ? -1 : 1)
+                activateControl(event.key === 'ArrowLeft' ? -1 : 1)
             }
         }
 
         document.addEventListener('keydown', scrollFromArrowKey)
 
         return () => document.removeEventListener('keydown', scrollFromArrowKey)
-    }, [scroll])
+    }, [activateControl])
 
-    function finishDrag(pointerId: number, returnToStart: boolean) {
+    function finishDrag(pointerId: number) {
         const drag = dragRef.current
 
         if (!drag || drag.pointerId !== pointerId) {
@@ -342,22 +348,28 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             viewportRef.current.releasePointerCapture(pointerId)
         }
 
-        if (returnToStart && drag.horizontal) {
-            scrollToIndex(drag.startIndex)
-        }
     }
 
     function startDrag(event: ReactPointerEvent<HTMLDivElement>) {
-        if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) {
+        if (!event.isPrimary) {
             return
         }
 
         const viewport = event.currentTarget
-        cancelProgrammaticScroll(viewport)
-        const startIndex = getClosestPositionIndex(viewport.scrollLeft, imagePositionsRef.current)
 
+        if (event.pointerType !== 'mouse') {
+            cancelProgrammaticScroll(viewport)
+            return
+        }
+
+        if (event.button !== 0) {
+            return
+        }
+
+        cancelProgrammaticScroll(viewport)
         viewport.setPointerCapture(event.pointerId)
-        dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, startIndex, startScrollLeft: viewport.scrollLeft, horizontal: false }
+        dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: viewport.scrollLeft }
+        setDragging(true)
     }
 
     function moveDrag(event: ReactPointerEvent<HTMLDivElement>) {
@@ -367,46 +379,24 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             return
         }
 
-        const horizontalDistance = event.clientX - drag.startX
-        const verticalDistance = event.clientY - drag.startY
-
-        if (!drag.horizontal) {
-            if (Math.abs(verticalDistance) > 8 && Math.abs(verticalDistance) > Math.abs(horizontalDistance)) {
-                finishDrag(event.pointerId, false)
-                return
-            }
-
-            if (Math.abs(horizontalDistance) <= 8 || Math.abs(horizontalDistance) < Math.abs(verticalDistance)) {
-                return
-            }
-
-            drag.horizontal = true
-            targetIndexRef.current = null
-            setDragging(true)
-        }
-
         event.preventDefault()
-        event.currentTarget.scrollLeft = drag.startScrollLeft - horizontalDistance
+        event.currentTarget.scrollLeft = drag.startScrollLeft - (event.clientX - drag.startX)
     }
 
     function endDrag(event: ReactPointerEvent<HTMLDivElement>) {
-        const drag = dragRef.current
-
-        if (!drag || drag.pointerId !== event.pointerId) {
-            return
-        }
-
-        const horizontalDistance = event.clientX - drag.startX
-        const targetIndex = drag.horizontal && Math.abs(horizontalDistance) >= 48
-            ? drag.startIndex + (horizontalDistance < 0 ? 1 : -1)
-            : drag.startIndex
-
-        finishDrag(event.pointerId, false)
-        scrollToIndex(targetIndex)
+        finishDrag(event.pointerId)
     }
 
     function cancelDrag(event: ReactPointerEvent<HTMLDivElement>) {
-        finishDrag(event.pointerId, true)
+        finishDrag(event.pointerId)
+    }
+
+    function clickControl(direction: -1 | 1, event: ReactMouseEvent<HTMLButtonElement>) {
+        activateControl(direction)
+
+        if (event.detail > 0) {
+            event.currentTarget.blur()
+        }
     }
 
     return (
@@ -420,8 +410,8 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             </div>
             {scrollState.hasOverflow && (
                 <>
-                    <button className='modal-display-carousel-control modal-display-carousel-control--previous site-control' type='button' onClick={() => scroll(-1)} disabled={scrollState.activeIndex === 0} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
-                    <button className='modal-display-carousel-control modal-display-carousel-control--next site-control' type='button' onClick={() => scroll(1)} disabled={scrollState.activeIndex === images.length - 1} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--previous site-control${pressedControl === -1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(-1, event)} disabled={scrollState.activeIndex === 0} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--next site-control${pressedControl === 1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(1, event)} disabled={scrollState.activeIndex === images.length - 1} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
                 </>
             )}
         </div>
@@ -431,7 +421,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 function CaseStudyLink({ link }: { link: Extract<ContentLink, { type: 'internal' }> }) {
     return (
         <section className='mt-3 mb-3' aria-label='Case study'>
-            <h3 className='h6 mb-1'>Case study</h3>
+            <h3 className='h6 mb-1'>Case study:</h3>
             <Link to={link.to} title={link.title}>{link.text}</Link>
         </section>
     )
@@ -447,17 +437,20 @@ function CarouselArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
 
 function ModalLinks({ links }: { links: readonly ContentLink[] }) {
     return (
-        <ul className='list-unstyled mb-0'>
-            {links.map((link, index) => (
-                <li key={`${link.type}-${link.type === 'internal' ? link.to : link.href}-${index}`}>
-                    {link.type === 'internal' ? (
-                        <Link to={link.to} title={link.title}>{link.text}</Link>
-                    ) : (
-                        <a href={link.href} title={link.title} target='_blank' rel='noopener noreferrer'>{link.text}</a>
-                    )}
-                </li>
-            ))}
-        </ul>
+        <section className='mt-3 mb-3' aria-label='Other links'>
+            <h3 className='h6 mb-1'>Other links:</h3>
+            <ul className='list-unstyled mb-0'>
+                {links.map((link, index) => (
+                    <li key={`${link.type}-${link.type === 'internal' ? link.to : link.href}-${index}`}>
+                        {link.type === 'internal' ? (
+                            <Link to={link.to} title={link.title}>{link.text}</Link>
+                        ) : (
+                            <a href={link.href} title={link.title} target='_blank' rel='noopener noreferrer'>{link.text}</a>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </section>
     )
 }
 

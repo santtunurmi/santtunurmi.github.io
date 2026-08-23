@@ -81,15 +81,18 @@ describe('EducationAndWorkTimeline', () => {
         fireEvent.click(screen.getByRole('button', { name: /Production Manager/ }), { detail: 1 })
         const nukeCaseStudy = await screen.findByRole('link', { name: 'Esports Event Production at NUKE-Liiga' })
 
-        expect(screen.getByRole('heading', { level: 3, name: 'Case study' })).not.toBeNull()
-        expect(nukeCaseStudy.closest('section')).not.toBeNull()
-        expect(screen.getByRole('link', { name: 'Click here to view the second season LAN final aftermovie!' }).closest('section')).toBeNull()
+        const caseStudyHeading = screen.getByRole('heading', { level: 3, name: 'Case study:' })
+        const otherLinksHeading = screen.getByRole('heading', { level: 3, name: 'Other links:' })
+
+        expect(nukeCaseStudy.closest('section')).toBe(caseStudyHeading.closest('section'))
+        expect(screen.getByRole('link', { name: 'Click here to view the second season LAN final aftermovie!' }).closest('section')).toBe(otherLinksHeading.closest('section'))
+        expect(caseStudyHeading.closest('section')?.compareDocumentPosition(otherLinksHeading.closest('section')!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING)
 
         fireEvent.click(screen.getByRole('button', { name: 'Close' }), { detail: 1 })
         await waitFor(() => expect(screen.queryByRole('link', { name: 'Esports Event Production at NUKE-Liiga' })).toBeNull(), { timeout: 1500 })
         fireEvent.click(screen.getByRole('button', { name: /Software Development Intern/ }), { detail: 1 })
 
         expect(await screen.findByRole('link', { name: 'Software Development Internship at EXEN esports Oy' })).toMatchObject({ pathname: '/blog/exen-internship' })
-        expect(screen.getByRole('link', { name: 'https://exen.fi/en/front-page/' }).closest('section')).toBeNull()
+        expect(screen.getByRole('link', { name: 'https://exen.fi/en/front-page/' }).closest('section')).toBe(screen.getByRole('heading', { level: 3, name: 'Other links:' }).closest('section'))
     })
 })

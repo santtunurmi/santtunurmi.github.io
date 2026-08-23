@@ -38,6 +38,8 @@ describe('ModalDisplay', () => {
             pathname: '/project',
             title: 'Open the project page.',
         })
+        expect(screen.getByRole('heading', { level: 3, name: 'Other links:' })).not.toBeNull()
+        expect(screen.getByRole('link', { name: 'Project story' }).closest('section')).not.toBeNull()
         expect(screen.getAllByRole('img').map((image) => image.getAttribute('src'))).toEqual(['/first.jpg', '/second.jpg'])
         expect(screen.getAllByRole('img').map((image) => image.getAttribute('alt'))).toEqual(['First project view.', 'Second project view.'])
     })
@@ -253,94 +255,57 @@ describe('ModalImageCarousel', () => {
         elementRect.mockRestore()
     })
 
-    it('handles mouse pointer dragging and advances exactly one image', async () => {
+    it('handles mouse pointer dragging as free scrolling', async () => {
         const { viewport, scrollTo, restore } = renderOverflowingCarousel()
 
         setPointerCapture(viewport)
         fireEvent.pointerDown(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 500, clientY: 20, button: 0, isPrimary: true })
         fireEvent.pointerMove(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true })
         expect(viewport.classList.contains('modal-display-carousel-viewport--dragging')).toBe(true)
+        expect(viewport.scrollLeft).toBe(200)
         fireEvent.pointerUp(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true })
 
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'auto' })
         expect(viewport.classList.contains('modal-display-carousel-viewport--dragging')).toBe(false)
         restore()
     })
 
-    it('limits long and fast pointer gestures to one image from their starting position', () => {
+    it('leaves touch gestures native while cancelling a programmatic arrow scroll', () => {
         const { viewport, scrollTo, restore } = renderOverflowingCarousel()
 
-        setPointerCapture(viewport)
         fireEvent.pointerDown(viewport, { pointerId: 1, pointerType: 'touch', clientX: 1000, clientY: 10, isPrimary: true })
         fireEvent.pointerMove(viewport, { pointerId: 1, pointerType: 'touch', clientX: 1, clientY: 10, isPrimary: true })
         fireEvent.pointerUp(viewport, { pointerId: 1, pointerType: 'touch', clientX: 1, clientY: 10, isPrimary: true })
 
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        expect(viewport.setPointerCapture).toBeUndefined()
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'auto' })
         restore()
     })
 
-    it('returns a sub-threshold pointer drag to its starting image', () => {
-        const { viewport, scrollTo, restore } = renderOverflowingCarousel()
-
-        setPointerCapture(viewport)
-        fireEvent.pointerDown(viewport, { pointerId: 1, pointerType: 'touch', clientX: 200, clientY: 10, isPrimary: true })
-        fireEvent.pointerMove(viewport, { pointerId: 1, pointerType: 'touch', clientX: 170, clientY: 10, isPrimary: true })
-        fireEvent.pointerUp(viewport, { pointerId: 1, pointerType: 'touch', clientX: 170, clientY: 10, isPrimary: true })
-
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'smooth' })
-        restore()
-    })
-
-    it('uses the actual position after a settled gesture and native reset', () => {
-        let frameId = 0
-        const frames = new Map<number, FrameRequestCallback>()
-        const requestFrame = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
-            frameId += 1
-            frames.set(frameId, callback)
-            return frameId
-        })
-        const cancelFrame = vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
-            frames.delete(id)
-        })
-
+    it('briefly activates controls for document and click arrows while preserving keyboard focus', () => {
         vi.useFakeTimers()
-        const { viewport, scrollTo, restore } = renderOverflowingCarousel()
-        setPointerCapture(viewport)
+        const { scrollTo, restore } = renderOverflowingCarousel()
+        const next = screen.getByRole('button', { name: 'Scroll images right' })
+        const previous = screen.getByRole('button', { name: 'Scroll images left' })
 
-        fireEvent.pointerDown(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 500, clientY: 20, button: 0, isPrimary: true })
-        fireEvent.pointerMove(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 280, clientY: 20, isPrimary: true })
-        fireEvent.pointerUp(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 280, clientY: 20, isPrimary: true })
-        viewport.scrollLeft = 366
-        fireEvent.scroll(viewport)
-        act(() => frames.forEach((callback) => callback(performance.now())))
-        act(() => vi.advanceTimersByTime(120))
-
-        viewport.scrollLeft = 0
-        fireEvent.scroll(viewport)
-        act(() => frames.forEach((callback) => callback(performance.now())))
-        setPointerCapture(viewport)
-        fireEvent.pointerDown(viewport, { pointerId: 2, pointerType: 'mouse', clientX: 1000, clientY: 20, button: 0, isPrimary: true })
-        fireEvent.pointerMove(viewport, { pointerId: 2, pointerType: 'mouse', clientX: 100, clientY: 20, isPrimary: true })
-        fireEvent.pointerUp(viewport, { pointerId: 2, pointerType: 'mouse', clientX: 100, clientY: 20, isPrimary: true })
+        fireEvent.keyDown(document, { key: 'ArrowRight' })
         expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
+        act(() => vi.advanceTimersByTime(160))
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(false)
 
-        viewport.scrollLeft = 366
-        fireEvent.scroll(viewport)
-        act(() => frames.forEach((callback) => callback(performance.now())))
-        act(() => vi.advanceTimersByTime(120))
+        next.focus()
+        fireEvent.click(next, { detail: 1 })
+        expect(document.activeElement).not.toBe(next)
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
+        act(() => vi.advanceTimersByTime(160))
 
-        viewport.scrollLeft = 0
-        fireEvent.scroll(viewport)
-        act(() => frames.forEach((callback) => callback(performance.now())))
-        setPointerCapture(viewport)
-        fireEvent.pointerDown(viewport, { pointerId: 3, pointerType: 'mouse', clientX: 200, clientY: 20, button: 0, isPrimary: true })
-        fireEvent.pointerMove(viewport, { pointerId: 3, pointerType: 'mouse', clientX: 170, clientY: 20, isPrimary: true })
-        fireEvent.pointerUp(viewport, { pointerId: 3, pointerType: 'mouse', clientX: 170, clientY: 20, isPrimary: true })
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'smooth' })
+        previous.focus()
+        fireEvent.click(previous, { detail: 0 })
+        expect(document.activeElement).toBe(previous)
+        expect(previous.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
 
         restore()
-        requestFrame.mockRestore()
-        cancelFrame.mockRestore()
         vi.useRealTimers()
     })
 
