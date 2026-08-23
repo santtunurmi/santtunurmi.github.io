@@ -615,7 +615,6 @@ $dropdown-link-active-color: black;
     }
     .modal-display-carousel-control:disabled {
         opacity: 0.35;
-        pointer-events: none;
     }
     .modal-display-carousel-control.modal-display-carousel-control--pressed:not(:disabled), .modal-display-carousel-control.modal-display-carousel-control--pressed:disabled {
         color: white;
