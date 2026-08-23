@@ -139,6 +139,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const scrollFrameRef = useRef<number | null>(null)
     const momentumFrameRef = useRef<number | null>(null)
     const pressedControlTimeoutRef = useRef<number | null>(null)
+    const controlPointerTypeRef = useRef<string | null>(null)
     const dragRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number; lastX: number; lastTime: number; velocity: number } | null>(null)
     const reducedMotion = useReducedMotion()
     const [scrollState, setScrollState] = useState({ hasOverflow: false, atStart: true, atEnd: true })
@@ -449,8 +450,26 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         finishDrag(event.pointerId, false, event.timeStamp)
     }
 
+    function pressControl(direction: -1 | 1, event: ReactPointerEvent<HTMLButtonElement>) {
+        if (!event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) {
+            return
+        }
+
+        controlPointerTypeRef.current = event.pointerType
+
+        if (event.pointerType === 'mouse') {
+            activateControl(direction)
+            event.currentTarget.blur()
+        }
+    }
+
     function clickControl(direction: -1 | 1, event: ReactMouseEvent<HTMLButtonElement>) {
-        activateControl(direction)
+        const pointerType = controlPointerTypeRef.current
+        controlPointerTypeRef.current = null
+
+        if (event.detail === 0 || pointerType !== 'mouse') {
+            activateControl(direction)
+        }
 
         if (event.detail > 0) {
             event.currentTarget.blur()
@@ -468,8 +487,8 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             </div>
             {scrollState.hasOverflow && (
                 <>
-                    <button className={`modal-display-carousel-control modal-display-carousel-control--previous site-control${pressedControl === -1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(-1, event)} disabled={scrollState.atStart} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
-                    <button className={`modal-display-carousel-control modal-display-carousel-control--next site-control${pressedControl === 1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(1, event)} disabled={scrollState.atEnd} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--previous site-control${pressedControl === -1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onPointerDown={(event) => pressControl(-1, event)} onClick={(event) => clickControl(-1, event)} disabled={scrollState.atStart} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--next site-control${pressedControl === 1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onPointerDown={(event) => pressControl(1, event)} onClick={(event) => clickControl(1, event)} disabled={scrollState.atEnd} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
                 </>
             )}
         </div>

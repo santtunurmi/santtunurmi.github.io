@@ -383,22 +383,36 @@ describe('ModalImageCarousel', () => {
         vi.useRealTimers()
     })
 
-    it('briefly activates enabled controls while preserving keyboard focus and blurring pointer clicks', () => {
+    it('uses one navigation activation per physical press while preserving keyboard focus', () => {
         vi.useFakeTimers()
-        const { restore } = renderOverflowingCarousel()
+        const { scrollTo, restore } = renderOverflowingCarousel()
         const next = screen.getByRole('button', { name: 'Scroll images right' })
+        const previous = screen.getByRole('button', { name: 'Scroll images left' })
 
         fireEvent.keyDown(document, { key: 'ArrowRight' })
         expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
         act(() => vi.advanceTimersByTime(160))
 
         next.focus()
+        fireEvent.pointerDown(next, { pointerId: 1, pointerType: 'mouse', button: 0, isPrimary: true })
         fireEvent.click(next, { detail: 1 })
+        fireEvent.pointerDown(next, { pointerId: 1, pointerType: 'mouse', button: 0, isPrimary: true })
+        fireEvent.click(next, { detail: 2 })
         expect(document.activeElement).not.toBe(next)
+        expect(scrollTo.mock.calls.map(([options]) => options)).toEqual([
+            { left: 366, behavior: 'smooth' },
+            { left: 732, behavior: 'smooth' },
+            { left: 864, behavior: 'smooth' },
+        ])
 
-        next.focus()
-        fireEvent.click(next, { detail: 0 })
-        expect(document.activeElement).toBe(next)
+        previous.focus()
+        fireEvent.click(previous, { detail: 0 })
+        expect(document.activeElement).toBe(previous)
+
+        fireEvent.pointerDown(previous, { pointerId: 2, pointerType: 'touch', button: 0, isPrimary: true })
+        expect(scrollTo).toHaveBeenCalledTimes(4)
+        fireEvent.click(previous, { detail: 1 })
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
 
         restore()
         vi.useRealTimers()
