@@ -19,7 +19,7 @@ const blogEntries: PortfolioCardProps[] = [
         image: '/content/EXEN-card.webp',
         alt: 'Front page of the EXEN esports website, showcasing their gaming venue.',
         title: 'Software Development Internship at EXEN esports Oy',
-        description: 'Worked across four successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
+        description: 'Worked across successful projects spanning application development, system restoration, technical auditing, cloud-hosting and CI/CD research, WordPress/PHP work, and live video production. The range let me use my full skill set and remains the strongest showcase of my project-first approach.',
         actionLabel: 'Read case study',
         destination: {
             type: 'internal',
@@ -30,7 +30,7 @@ const blogEntries: PortfolioCardProps[] = [
         image: '/content/NUKEliiga.webp',
         alt: 'Promotional banner of NUKE-Liiga, featuring the NUKE-Liiga logo in the center with a subheading of "NUORTEN KILPAPELAAJIEN E-URHEILULIIGA", and a Counter-Strike player model on the left.',
         title: 'Esports Event Production',
-        description: 'Production manager for a Finnish youth esports league across two completed seasons, now continuing into a third in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
+        description: "Production manager for a Finnish youth esports league across two completed seasons, now continuing in the role for NUKE-Liiga's third season in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.",
         actionLabel: 'Read case study',
         destination: {
             type: 'internal',
