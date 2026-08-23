@@ -134,62 +134,106 @@ export type ModalImageCarouselProps = {
 
 export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const viewportRef = useRef<HTMLDivElement>(null)
-    const targetIndexRef = useRef<number | null>(null)
     const imagePositionsRef = useRef<number[]>([])
-    const hasOverflowRef = useRef(false)
     const scrollFrameRef = useRef<number | null>(null)
+    const momentumFrameRef = useRef<number | null>(null)
     const pressedControlTimeoutRef = useRef<number | null>(null)
-    const dragRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number } | null>(null)
+    const dragRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number; lastX: number; lastTime: number; velocity: number } | null>(null)
     const reducedMotion = useReducedMotion()
-    const [scrollState, setScrollState] = useState({ hasOverflow: false, activeIndex: 0 })
+    const [scrollState, setScrollState] = useState({ hasOverflow: false, atStart: true, atEnd: true })
     const scrollStateRef = useRef(scrollState)
     const [dragging, setDragging] = useState(false)
     const [pressedControl, setPressedControl] = useState<-1 | 1 | null>(null)
 
-    const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = reducedMotion ? 'auto' : 'smooth') => {
+    function cancelMouseMomentum() {
+        cancelFrame(momentumFrameRef)
+    }
+
+    function getMaximumScroll(viewport: HTMLElement): number {
+        return Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+    }
+
+    const scroll = useCallback((direction: -1 | 1) => {
         const viewport = viewportRef.current
 
         if (!viewport) {
             return
         }
 
-        const carouselImages = getCarouselImages(viewport)
-        const targetIndex = Math.max(0, Math.min(carouselImages.length - 1, index))
-        const target = carouselImages[targetIndex]
+        const maximumScroll = getMaximumScroll(viewport)
+        const currentScroll = viewport.scrollLeft
 
-        if (!target) {
+        if ((direction === -1 && currentScroll <= 1) || (direction === 1 && maximumScroll - currentScroll <= 1)) {
             return
         }
 
-        const left = imagePositionsRef.current[targetIndex] ?? viewport.scrollLeft + target.getBoundingClientRect().left - viewport.getBoundingClientRect().left
+        cancelMouseMomentum()
+        viewport.scrollTo({ left: viewport.scrollLeft, behavior: 'auto' })
 
-        if (Math.abs(left - viewport.scrollLeft) <= 1) {
-            targetIndexRef.current = null
-            if (scrollStateRef.current.activeIndex !== targetIndex) {
-                scrollStateRef.current = { ...scrollStateRef.current, activeIndex: targetIndex }
-                setScrollState(scrollStateRef.current)
-            }
-            return
-        }
+        const imagePositions = imagePositionsRef.current
+        const left = direction === 1
+            ? imagePositions.find((position) => position > currentScroll + 1) ?? maximumScroll
+            : [...imagePositions].reverse().find((position) => position < currentScroll - 1) ?? 0
 
-        targetIndexRef.current = targetIndex
-        if (scrollStateRef.current.activeIndex !== targetIndex) {
-            scrollStateRef.current = { ...scrollStateRef.current, activeIndex: targetIndex }
-            setScrollState(scrollStateRef.current)
-        }
         viewport.scrollTo({
             left,
-            behavior,
+            behavior: reducedMotion ? 'auto' : 'smooth',
         })
     }, [reducedMotion])
 
-    const scroll = useCallback((direction: -1 | 1) => {
-        const currentIndex = targetIndexRef.current ?? getClosestPositionIndex(viewportRef.current?.scrollLeft ?? 0, imagePositionsRef.current)
+    function startMouseMomentum(velocity: number, movedAt: number, releasedAt: number) {
+        if (reducedMotion || releasedAt - movedAt > 120 || Math.abs(velocity) < 0.02) {
+            return
+        }
 
-        scrollToIndex(currentIndex + direction)
-    }, [scrollToIndex])
+        const viewport = viewportRef.current
+
+        if (!viewport) {
+            return
+        }
+
+        let lastTime = performance.now()
+
+        function continueMomentum(time: number) {
+            momentumFrameRef.current = null
+
+            const currentViewport = viewportRef.current
+
+            if (!currentViewport) {
+                return
+            }
+
+            const elapsed = Math.min(32, Math.max(1, time - lastTime))
+            lastTime = time
+            velocity *= Math.pow(0.92, elapsed / 16)
+            const maximumScroll = getMaximumScroll(currentViewport)
+            const nextScroll = Math.min(maximumScroll, Math.max(0, currentViewport.scrollLeft + velocity * elapsed))
+            currentViewport.scrollLeft = nextScroll
+
+            if (nextScroll <= 0 || nextScroll >= maximumScroll || Math.abs(velocity) < 0.02) {
+                return
+            }
+
+            momentumFrameRef.current = requestAnimationFrame(continueMomentum)
+        }
+
+        momentumFrameRef.current = requestAnimationFrame(continueMomentum)
+    }
 
     const activateControl = useCallback((direction: -1 | 1) => {
+        const viewport = viewportRef.current
+
+        if (!viewport) {
+            return
+        }
+
+        const maximumScroll = getMaximumScroll(viewport)
+
+        if ((direction === -1 && viewport.scrollLeft <= 1) || (direction === 1 && maximumScroll - viewport.scrollLeft <= 1)) {
+            return
+        }
+
+        cancelMouseMomentum()
         if (pressedControlTimeoutRef.current !== null) {
             window.clearTimeout(pressedControlTimeoutRef.current)
         }
@@ -203,7 +247,6 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     }, [scroll])
 
     function cancelProgrammaticScroll(viewport: HTMLElement) {
-        targetIndexRef.current = null
         viewport.scrollTo({ left: viewport.scrollLeft, behavior: 'auto' })
     }
 
@@ -216,9 +259,16 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         const viewportElement = viewport
 
-        function updateScrollState(hasOverflow: boolean, activeIndex: number) {
-            if (scrollStateRef.current.hasOverflow !== hasOverflow || scrollStateRef.current.activeIndex !== activeIndex) {
-                scrollStateRef.current = { hasOverflow, activeIndex }
+        function updateScrollState() {
+            const maximumScroll = getMaximumScroll(viewportElement)
+            const nextScrollState = {
+                hasOverflow: maximumScroll > 1,
+                atStart: viewportElement.scrollLeft <= 1,
+                atEnd: maximumScroll - viewportElement.scrollLeft <= 1,
+            }
+
+            if (scrollStateRef.current.hasOverflow !== nextScrollState.hasOverflow || scrollStateRef.current.atStart !== nextScrollState.atStart || scrollStateRef.current.atEnd !== nextScrollState.atEnd) {
+                scrollStateRef.current = nextScrollState
                 setScrollState(scrollStateRef.current)
             }
         }
@@ -226,50 +276,20 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         function updateScrollPosition() {
             scrollFrameRef.current = null
 
-            const positions = imagePositionsRef.current
-
-            if (positions.length === 0) {
-                return
-            }
-
-            const leftAlignedIndex = getClosestPositionIndex(viewportElement.scrollLeft, positions)
-            const targetIndex = targetIndexRef.current
-
-            if (targetIndex !== null && Math.abs(positions[targetIndex] - viewportElement.scrollLeft) <= 1) {
-                targetIndexRef.current = null
-            }
-
-            updateScrollState(hasOverflowRef.current, targetIndexRef.current ?? leftAlignedIndex)
+            updateScrollState()
         }
 
         function measureLayout() {
+            cancelMouseMomentum()
             setCssCustomProperty(viewportElement, '--carousel-image-max-width', `${viewportElement.clientWidth}px`)
 
             const carouselImages = getCarouselImages(viewportElement)
-            const track = viewportElement.firstElementChild
-            const gap = track ? Number.parseFloat(getComputedStyle(track).columnGap) || 0 : 0
             const viewportRect = viewportElement.getBoundingClientRect()
             const imageRects = carouselImages.map((image) => image.getBoundingClientRect())
-            const contentWidth = imageRects.reduce((width, imageRect) => width + imageRect.width, 0) + Math.max(0, carouselImages.length - 1) * gap
-            const hasOverflow = contentWidth > viewportElement.clientWidth + 1
-            const edgeSpace = hasOverflow && imageRects[0]
-                ? Math.max(0, viewportElement.clientWidth - imageRects[0].width)
-                : 0
+            const maximumScroll = getMaximumScroll(viewportElement)
+            imagePositionsRef.current = imageRects.map((imageRect) => Math.min(maximumScroll, Math.max(0, viewportElement.scrollLeft + imageRect.left - viewportRect.left)))
 
-            setCssCustomProperty(viewportElement, '--carousel-edge-space', `${edgeSpace}px`)
-            imagePositionsRef.current = imageRects.map((imageRect) => viewportElement.scrollLeft + imageRect.left - viewportRect.left)
-            hasOverflowRef.current = hasOverflow
-
-            const leftAlignedIndex = getClosestPositionIndex(viewportElement.scrollLeft, imagePositionsRef.current)
-            const targetIndex = targetIndexRef.current
-
-            if (targetIndex !== null) {
-                if (Math.abs(imagePositionsRef.current[targetIndex] - viewportElement.scrollLeft) <= 1) {
-                    targetIndexRef.current = null
-                }
-            }
-
-            updateScrollState(hasOverflow, targetIndexRef.current ?? leftAlignedIndex)
+            updateScrollState()
         }
 
         function scheduleScrollPositionUpdate() {
@@ -301,6 +321,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             resizeObserver.disconnect()
             carouselImages.forEach((image) => image.removeEventListener('load', measureLayout))
             cancelFrame(scrollFrameRef)
+            cancelMouseMomentum()
             const drag = dragRef.current
 
             if (drag && viewportElement.hasPointerCapture(drag.pointerId)) {
@@ -324,8 +345,15 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             }
 
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                const viewport = viewportRef.current
+                const direction = event.key === 'ArrowLeft' ? -1 : 1
+
+                if (!viewport || (direction === -1 && viewport.scrollLeft <= 1) || (direction === 1 && getMaximumScroll(viewport) - viewport.scrollLeft <= 1)) {
+                    return
+                }
+
                 event.preventDefault()
-                activateControl(event.key === 'ArrowLeft' ? -1 : 1)
+                activateControl(direction)
             }
         }
 
@@ -334,7 +362,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         return () => document.removeEventListener('keydown', scrollFromArrowKey)
     }, [activateControl])
 
-    function finishDrag(pointerId: number) {
+    function finishDrag(pointerId: number, continueWithMomentum: boolean, releasedAt: number) {
         const drag = dragRef.current
 
         if (!drag || drag.pointerId !== pointerId) {
@@ -348,6 +376,9 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             viewportRef.current.releasePointerCapture(pointerId)
         }
 
+        if (continueWithMomentum) {
+            startMouseMomentum(drag.velocity, drag.lastTime, releasedAt)
+        }
     }
 
     function startDrag(event: ReactPointerEvent<HTMLDivElement>) {
@@ -358,6 +389,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
         const viewport = event.currentTarget
 
         if (event.pointerType !== 'mouse') {
+            cancelMouseMomentum()
             cancelProgrammaticScroll(viewport)
             return
         }
@@ -366,9 +398,10 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             return
         }
 
+        cancelMouseMomentum()
         cancelProgrammaticScroll(viewport)
         viewport.setPointerCapture(event.pointerId)
-        dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: viewport.scrollLeft }
+        dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: viewport.scrollLeft, lastX: event.clientX, lastTime: event.timeStamp, velocity: 0 }
         setDragging(true)
     }
 
@@ -381,14 +414,21 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
         event.preventDefault()
         event.currentTarget.scrollLeft = drag.startScrollLeft - (event.clientX - drag.startX)
+        const elapsed = event.timeStamp - drag.lastTime
+
+        if (elapsed > 0) {
+            drag.velocity = -(event.clientX - drag.lastX) / elapsed
+            drag.lastX = event.clientX
+            drag.lastTime = event.timeStamp
+        }
     }
 
     function endDrag(event: ReactPointerEvent<HTMLDivElement>) {
-        finishDrag(event.pointerId)
+        finishDrag(event.pointerId, true, event.timeStamp)
     }
 
     function cancelDrag(event: ReactPointerEvent<HTMLDivElement>) {
-        finishDrag(event.pointerId)
+        finishDrag(event.pointerId, false, event.timeStamp)
     }
 
     function clickControl(direction: -1 | 1, event: ReactMouseEvent<HTMLButtonElement>) {
@@ -401,7 +441,7 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
 
     return (
         <div className='modal-display-carousel' role='region' aria-label='Images'>
-            <div className={`modal-display-carousel-viewport${dragging ? ' modal-display-carousel-viewport--dragging' : ''}`} ref={viewportRef} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={cancelDrag} onLostPointerCapture={cancelDrag} onWheel={(event) => cancelProgrammaticScroll(event.currentTarget)}>
+            <div className={`modal-display-carousel-viewport${dragging ? ' modal-display-carousel-viewport--dragging' : ''}`} ref={viewportRef} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={cancelDrag} onLostPointerCapture={cancelDrag} onWheel={(event) => { cancelMouseMomentum(); cancelProgrammaticScroll(event.currentTarget) }}>
                 <div className='modal-display-carousel-track'>
                     {images.map((image, index) => (
                         <img className='modal-display-carousel-image' src={image.src} alt={image.alt} loading='lazy' draggable={false} onDragStart={(event) => event.preventDefault()} key={`${image.src}-${index}`} />
@@ -410,8 +450,8 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             </div>
             {scrollState.hasOverflow && (
                 <>
-                    <button className={`modal-display-carousel-control modal-display-carousel-control--previous site-control${pressedControl === -1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(-1, event)} disabled={scrollState.activeIndex === 0} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
-                    <button className={`modal-display-carousel-control modal-display-carousel-control--next site-control${pressedControl === 1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(1, event)} disabled={scrollState.activeIndex === images.length - 1} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--previous site-control${pressedControl === -1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(-1, event)} disabled={scrollState.atStart} aria-label='Scroll images left'><CarouselArrowIcon direction='previous' /></button>
+                    <button className={`modal-display-carousel-control modal-display-carousel-control--next site-control${pressedControl === 1 ? ' modal-display-carousel-control--pressed' : ''}`} type='button' onClick={(event) => clickControl(1, event)} disabled={scrollState.atEnd} aria-label='Scroll images right'><CarouselArrowIcon direction='next' /></button>
                 </>
             )}
         </div>
@@ -456,22 +496,6 @@ function ModalLinks({ links }: { links: readonly ContentLink[] }) {
 
 function getCarouselImages(viewport: HTMLElement): HTMLImageElement[] {
     return [...viewport.querySelectorAll<HTMLImageElement>('.modal-display-carousel-image')]
-}
-
-function getClosestPositionIndex(position: number, positions: readonly number[]): number {
-    let closestIndex = 0
-    let closestDistance = Number.POSITIVE_INFINITY
-
-    positions.forEach((imagePosition, index) => {
-        const distance = Math.abs(imagePosition - position)
-
-        if (distance < closestDistance) {
-            closestIndex = index
-            closestDistance = distance
-        }
-    })
-
-    return closestIndex
 }
 
 function setCssCustomProperty(element: HTMLElement, property: string, value: string) {

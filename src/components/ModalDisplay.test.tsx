@@ -139,10 +139,13 @@ describe('ModalDisplay', () => {
 })
 
 describe('ModalImageCarousel', () => {
-    it('starts an overflowing row at the left edge and advances one image for each button or arrow key press', async () => {
+    it('uses natural image edges and real bounded arrow stops', async () => {
         const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
-        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1000)
-        const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo')
+        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1464)
+        const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo').mockImplementation(function scrollTo(this: HTMLElement, options: ScrollToOptions | number, y?: number) {
+            void y
+            this.scrollLeft = typeof options === 'number' ? options : options.left ?? this.scrollLeft
+        })
         const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
             if (this.classList.contains('modal-display-carousel-viewport')) {
                 return createRect(0, 600)
@@ -167,20 +170,19 @@ describe('ModalImageCarousel', () => {
         const next = screen.getByRole('button', { name: 'Scroll images right' })
 
         expect(screen.getAllByRole('img')[0].getBoundingClientRect().left).toBe(0)
-        expect(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')?.style.getPropertyValue('--carousel-edge-space')).toBe('250px')
+        expect(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')?.style.getPropertyValue('--carousel-edge-space')).toBe('')
         expect(previous.hasAttribute('disabled')).toBe(true)
         expect(next.hasAttribute('disabled')).toBe(false)
         fireEvent.click(next)
         expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        fireEvent.scroll(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')!)
         fireEvent.click(next)
         expect(scrollTo).toHaveBeenLastCalledWith({ left: 732, behavior: 'smooth' })
-
-        fireEvent.keyDown(document, { key: 'ArrowLeft' })
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        fireEvent.scroll(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')!)
         fireEvent.click(next)
-        fireEvent.click(next)
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 1098, behavior: 'smooth' })
-        expect(next.hasAttribute('disabled')).toBe(true)
+        expect(scrollTo).toHaveBeenLastCalledWith({ left: 864, behavior: 'smooth' })
+        fireEvent.scroll(screen.getByRole('region', { name: 'Images' }).querySelector<HTMLDivElement>('.modal-display-carousel-viewport')!)
+        await waitFor(() => expect(next.hasAttribute('disabled')).toBe(true))
 
         clientWidth.mockRestore()
         scrollWidth.mockRestore()
@@ -214,7 +216,7 @@ describe('ModalImageCarousel', () => {
             return frameId
         })
         const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
-        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1000)
+        const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1464)
         const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
             if (this.classList.contains('modal-display-carousel-viewport')) {
                 return createRect(0, 600)
@@ -235,7 +237,7 @@ describe('ModalImageCarousel', () => {
         const viewport = container.querySelector<HTMLDivElement>('.modal-display-carousel-viewport')!
 
         elementRect.mockClear()
-        viewport.scrollLeft = 366
+        viewport.scrollLeft = 864
         fireEvent.scroll(viewport)
         fireEvent.scroll(viewport)
 
@@ -255,18 +257,53 @@ describe('ModalImageCarousel', () => {
         elementRect.mockRestore()
     })
 
-    it('handles mouse pointer dragging as free scrolling', async () => {
-        const { viewport, scrollTo, restore } = renderOverflowingCarousel()
+    it('continues a fast mouse drag with momentum and cancels it for new interactions and unmounting', () => {
+        let frameId = 0
+        const frames = new Map<number, FrameRequestCallback>()
+        const requestFrame = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+            frameId += 1
+            frames.set(frameId, callback)
+            return frameId
+        })
+        const cancelFrame = vi.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => {
+            frames.delete(id)
+        })
+        const { viewport, unmount, restore } = renderOverflowingCarousel()
 
         setPointerCapture(viewport)
-        fireEvent.pointerDown(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 500, clientY: 20, button: 0, isPrimary: true })
-        fireEvent.pointerMove(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true })
+        firePointerEvent(viewport, 'pointerdown', { pointerId: 1, pointerType: 'mouse', clientX: 500, clientY: 20, button: 0, isPrimary: true }, 100)
+        firePointerEvent(viewport, 'pointermove', { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true }, 116)
         expect(viewport.classList.contains('modal-display-carousel-viewport--dragging')).toBe(true)
         expect(viewport.scrollLeft).toBe(200)
-        fireEvent.pointerUp(viewport, { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true })
+        firePointerEvent(viewport, 'pointerup', { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true }, 116)
 
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 0, behavior: 'auto' })
         expect(viewport.classList.contains('modal-display-carousel-viewport--dragging')).toBe(false)
+        expect(frames.size).toBe(1)
+        act(() => [...frames.values()][0](132))
+        expect(viewport.scrollLeft).toBeGreaterThan(200)
+
+        fireEvent.pointerDown(viewport, { pointerId: 2, pointerType: 'mouse', clientX: 300, clientY: 20, button: 0, isPrimary: true })
+        expect(cancelFrame).toHaveBeenCalled()
+        fireEvent.wheel(viewport)
+        unmount()
+
+        requestFrame.mockRestore()
+        cancelFrame.mockRestore()
+        restore()
+    })
+
+    it('does not continue mouse momentum after a pause before release', () => {
+        const requestFrame = vi.spyOn(window, 'requestAnimationFrame')
+        const { viewport, restore } = renderOverflowingCarousel()
+
+        setPointerCapture(viewport)
+        firePointerEvent(viewport, 'pointerdown', { pointerId: 1, pointerType: 'mouse', clientX: 500, clientY: 20, button: 0, isPrimary: true }, 100)
+        firePointerEvent(viewport, 'pointermove', { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true }, 116)
+        firePointerEvent(viewport, 'pointerup', { pointerId: 1, pointerType: 'mouse', clientX: 300, clientY: 20, isPrimary: true }, 316)
+
+        expect(requestFrame).not.toHaveBeenCalled()
+
+        requestFrame.mockRestore()
         restore()
     })
 
@@ -282,34 +319,75 @@ describe('ModalImageCarousel', () => {
         restore()
     })
 
-    it('briefly activates controls for document and click arrows while preserving keyboard focus', () => {
+    it('does not activate disabled directions from the keyboard', () => {
         vi.useFakeTimers()
-        const { scrollTo, restore } = renderOverflowingCarousel()
+        const { viewport, scrollTo, restore } = renderOverflowingCarousel()
         const next = screen.getByRole('button', { name: 'Scroll images right' })
         const previous = screen.getByRole('button', { name: 'Scroll images left' })
 
+        fireEvent.keyDown(document, { key: 'ArrowLeft' })
+        expect(scrollTo).not.toHaveBeenCalled()
+        expect(previous.classList.contains('modal-display-carousel-control--pressed')).toBe(false)
+
+        viewport.scrollLeft = 864
         fireEvent.keyDown(document, { key: 'ArrowRight' })
-        expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
-        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
-        act(() => vi.advanceTimersByTime(160))
+        expect(scrollTo).not.toHaveBeenCalled()
         expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(false)
-
-        next.focus()
-        fireEvent.click(next, { detail: 1 })
-        expect(document.activeElement).not.toBe(next)
-        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
-        act(() => vi.advanceTimersByTime(160))
-
-        previous.focus()
-        fireEvent.click(previous, { detail: 0 })
-        expect(document.activeElement).toBe(previous)
-        expect(previous.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
 
         restore()
         vi.useRealTimers()
     })
 
+    it('briefly activates enabled controls while preserving keyboard focus and blurring pointer clicks', () => {
+        vi.useFakeTimers()
+        const { restore } = renderOverflowingCarousel()
+        const next = screen.getByRole('button', { name: 'Scroll images right' })
+
+        fireEvent.keyDown(document, { key: 'ArrowRight' })
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
+        act(() => vi.advanceTimersByTime(160))
+
+        next.focus()
+        fireEvent.click(next, { detail: 1 })
+        expect(document.activeElement).not.toBe(next)
+
+        next.focus()
+        fireEvent.click(next, { detail: 0 })
+        expect(document.activeElement).toBe(next)
+
+        restore()
+        vi.useRealTimers()
+    })
+
+    it('keeps pressed feedback through an activation that reaches the real end', () => {
+        vi.useFakeTimers()
+        let frame: FrameRequestCallback | null = null
+        const requestFrame = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+            frame = callback
+            return 1
+        })
+        const { viewport, restore } = renderOverflowingCarousel()
+        const next = screen.getByRole('button', { name: 'Scroll images right' })
+
+        viewport.scrollLeft = 732
+        fireEvent.scroll(viewport)
+        act(() => frame!(performance.now()))
+        fireEvent.click(next)
+        fireEvent.scroll(viewport)
+        act(() => frame!(performance.now()))
+
+        expect(next.hasAttribute('disabled')).toBe(true)
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(true)
+        act(() => vi.advanceTimersByTime(160))
+        expect(next.classList.contains('modal-display-carousel-control--pressed')).toBe(false)
+
+        requestFrame.mockRestore()
+        restore()
+        vi.useRealTimers()
+    })
+
     it('cleans up pointer dragging after release, cancellation, and lost capture', () => {
+        const requestFrame = vi.spyOn(window, 'requestAnimationFrame')
         const { viewport, restore } = renderOverflowingCarousel()
         const events: Array<'pointerUp' | 'pointerCancel' | 'lostPointerCapture'> = ['pointerUp', 'pointerCancel', 'lostPointerCapture']
 
@@ -323,14 +401,22 @@ describe('ModalImageCarousel', () => {
 
             expect(viewport.classList.contains('modal-display-carousel-viewport--dragging')).toBe(false)
             expect(releasePointerCapture).toHaveBeenCalledOnce()
+
+            if (type !== 'pointerUp') {
+                expect(requestFrame).not.toHaveBeenCalled()
+            }
+
+            requestFrame.mockClear()
         }
 
+        requestFrame.mockRestore()
         restore()
     })
 })
 
 function renderOverflowingCarousel() {
     const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(600)
+    const scrollWidth = vi.spyOn(HTMLElement.prototype, 'scrollWidth', 'get').mockReturnValue(1464)
     const elementRect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function getBoundingClientRect(this: HTMLElement) {
         if (this.classList.contains('modal-display-carousel-viewport')) {
             return createRect(0, 600)
@@ -342,8 +428,11 @@ function renderOverflowingCarousel() {
 
         return createRect(0, 0)
     })
-    const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo')
-    const { container } = render(<ModalImageCarousel images={[
+    const scrollTo = vi.spyOn(HTMLElement.prototype, 'scrollTo').mockImplementation(function scrollTo(this: HTMLElement, options: ScrollToOptions | number, y?: number) {
+        void y
+        this.scrollLeft = typeof options === 'number' ? options : options.left ?? this.scrollLeft
+    })
+    const { container, unmount } = render(<ModalImageCarousel images={[
         { src: '/one.jpg', alt: 'First view.' },
         { src: '/two.jpg', alt: 'Second view.' },
         { src: '/three.jpg', alt: 'Third view.' },
@@ -352,12 +441,22 @@ function renderOverflowingCarousel() {
     return {
         viewport,
         scrollTo,
+        unmount,
         restore: () => {
             clientWidth.mockRestore()
+            scrollWidth.mockRestore()
             elementRect.mockRestore()
             scrollTo.mockRestore()
         },
     }
+}
+
+function firePointerEvent(viewport: HTMLDivElement, type: string, init: PointerEventInit, timeStamp: number) {
+    const event = new Event(type, { bubbles: true, cancelable: true })
+
+    Object.assign(event, init)
+    Object.defineProperty(event, 'timeStamp', { value: timeStamp })
+    fireEvent(viewport, event)
 }
 
 function setPointerCapture(viewport: HTMLDivElement) {

@@ -584,7 +584,6 @@ $dropdown-link-active-color: black;
         justify-content: center;
         width: max-content;
         min-width: 100%;
-        padding-inline-end: var(--carousel-edge-space, 0);
         gap: 1rem;
     }
     .modal-display-carousel-image {
@@ -618,10 +617,13 @@ $dropdown-link-active-color: black;
         opacity: 0.35;
         pointer-events: none;
     }
-    .modal-display-carousel-control--pressed {
+    .modal-display-carousel-control.modal-display-carousel-control--pressed:not(:disabled), .modal-display-carousel-control.modal-display-carousel-control--pressed:disabled {
         color: white;
         background: var(--bs-primary);
         transform: translateY(1px);
+    }
+    .modal-display-carousel-control--pressed:disabled {
+        opacity: 1;
     }
     .modal-display-carousel-arrow {
         width: 1.5rem;
@@ -770,7 +772,7 @@ $dropdown-link-active-color: black;
         .site-control:not(:disabled):active {
             transform: none;
         }
-        .modal-display-carousel-control--pressed {
+        .modal-display-carousel-control.modal-display-carousel-control--pressed:not(:disabled), .modal-display-carousel-control.modal-display-carousel-control--pressed:disabled {
             transform: none;
         }
         .initial-page-load #main-content > div > .opening-card, .initial-page-load #main-content > div > :not(.opening-card) {
