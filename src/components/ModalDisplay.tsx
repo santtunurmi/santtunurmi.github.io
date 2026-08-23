@@ -139,7 +139,6 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
     const scrollFrameRef = useRef<number | null>(null)
     const momentumFrameRef = useRef<number | null>(null)
     const pressedControlTimeoutRef = useRef<number | null>(null)
-    const controlPointerTypeRef = useRef<string | null>(null)
     const dragRef = useRef<{ pointerId: number; startX: number; startScrollLeft: number; lastX: number; lastTime: number; velocity: number } | null>(null)
     const reducedMotion = useReducedMotion()
     const [scrollState, setScrollState] = useState({ hasOverflow: false, atStart: true, atEnd: true })
@@ -455,19 +454,12 @@ export function ModalImageCarousel({ images }: ModalImageCarouselProps) {
             return
         }
 
-        controlPointerTypeRef.current = event.pointerType
-
-        if (event.pointerType === 'mouse') {
-            activateControl(direction)
-            event.currentTarget.blur()
-        }
+        activateControl(direction)
+        event.currentTarget.blur()
     }
 
     function clickControl(direction: -1 | 1, event: ReactMouseEvent<HTMLButtonElement>) {
-        const pointerType = controlPointerTypeRef.current
-        controlPointerTypeRef.current = null
-
-        if (event.detail === 0 || pointerType !== 'mouse') {
+        if (event.detail === 0) {
             activateControl(direction)
         }
 

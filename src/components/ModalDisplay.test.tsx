@@ -410,9 +410,18 @@ describe('ModalImageCarousel', () => {
         expect(document.activeElement).toBe(previous)
 
         fireEvent.pointerDown(previous, { pointerId: 2, pointerType: 'touch', button: 0, isPrimary: true })
-        expect(scrollTo).toHaveBeenCalledTimes(4)
         fireEvent.click(previous, { detail: 1 })
         expect(scrollTo).toHaveBeenLastCalledWith({ left: 366, behavior: 'smooth' })
+        fireEvent.pointerDown(previous, { pointerId: 2, pointerType: 'touch', button: 0, isPrimary: true })
+        fireEvent.click(previous, { detail: 2 })
+        expect(scrollTo.mock.calls.map(([options]) => options)).toEqual([
+            { left: 366, behavior: 'smooth' },
+            { left: 732, behavior: 'smooth' },
+            { left: 864, behavior: 'smooth' },
+            { left: 732, behavior: 'smooth' },
+            { left: 366, behavior: 'smooth' },
+            { left: 0, behavior: 'smooth' },
+        ])
 
         restore()
         vi.useRealTimers()
