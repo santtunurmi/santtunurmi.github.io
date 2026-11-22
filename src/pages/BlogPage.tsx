@@ -8,7 +8,7 @@ const blogEntries: PortfolioCardProps[] = [
         image: '/content/AI-project.png',
         alt: 'Python notebook showing data preprocessing code.',
         title: 'AI-Assisted Workflows',
-        description: 'I use AI-assisted workflows over many different projects for exploration, implementation, and review, while keeping responsibility for context, direction, testing, and final decisions. I use ChatGPT Codex, Claude Code, OpenClaw, and OpenCode. I talk to them, and I get things done.',
+        description: 'I use AI-assisted workflows over many different projects for exploration, implementation, and review, while keeping responsibility for context, direction, testing, and final decisions. I use ChatGPT Codex, Claude Code, OpenClaw, and Hermes. I talk to them, and I get things done.',
         actionLabel: 'Read article',
         destination: {
             type: 'internal',
@@ -30,7 +30,7 @@ const blogEntries: PortfolioCardProps[] = [
         image: '/content/NUKEliiga.webp',
         alt: 'Promotional banner of NUKE-Liiga, featuring the NUKE-Liiga logo in the center with a subheading of "NUORTEN KILPAPELAAJIEN E-URHEILULIIGA", and a Counter-Strike player model on the left.',
         title: 'Esports Event Production',
-        description: "Production manager for a Finnish youth esports league across two completed seasons, now continuing in the role for NUKE-Liiga's third season in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.",
+        description: "Production manager for a Finnish youth esports league across two completed seasons and NUKE-Liiga's ongoing third season, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.",
         actionLabel: 'Read case study',
         destination: {
             type: 'internal',

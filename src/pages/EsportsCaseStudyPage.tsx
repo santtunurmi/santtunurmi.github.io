@@ -14,7 +14,7 @@ export default function EsportsCaseStudyPage() {
                 organization='NUKE-Liiga'
                 location='Hybrid'
                 period='June 2025 – present'
-                responsibilities="Production manager for a Finnish youth esports league across two completed seasons, now continuing in the role for NUKE-Liiga's third season in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team."
+                responsibilities="Production manager for a Finnish youth esports league across two completed seasons and NUKE-Liiga's ongoing third season, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team."
                 outcome='During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.'
                 articleTitle='In detail'
                 images={[
