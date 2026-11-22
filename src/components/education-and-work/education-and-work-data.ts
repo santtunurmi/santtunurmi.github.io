@@ -7,7 +7,7 @@ const educationTimeline: readonly TimelineEntry[] = [
         title: "Bachelor's Degree Programme in Information and Communication Technology",
         organization: 'JAMK University of Applied Sciences',
         location: 'Jyväskylä',
-        period: 'August 2022 – thesis planned for autumn 2026',
+        period: 'August 2022 – present; thesis completion estimated for February 2027',
         description: 'My education in information and communication technology at JAMK University of Applied Sciences in Jyväskylä has taught me the importance of learning new skills. I strongly believe that a wide range of skills and knowledge is vital, because it helps you see how different things can work together. My education has also challenged me to demand more of myself. I did not get the best grades at the start, and I did not work as hard as I could have to get the most out of my education. A change of heart and a lot of hard work allowed me to turn things around; I have used that momentum to kickstart my career.',
         links: [
             {
@@ -44,7 +44,7 @@ const workTimeline: readonly TimelineEntry[] = [
         organization: 'NUKE-Liiga',
         location: 'Hybrid',
         period: 'June 2025 – present',
-        description: 'Production manager for a Finnish youth esports league across two completed seasons, now continuing in the role for NUKE-Liiga\'s third season in fall 2026, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
+        description: 'Production manager for a Finnish youth esports league across two completed seasons and NUKE-Liiga\'s ongoing third season, handling broadcast preparation, technical execution, in-game camerawork, and coordination with the production team. During the second season, interviewed and oriented an assistant producer while retaining responsibility for live technical delivery.',
         caseStudy: {
             type: 'internal',
             to: siteRoutes.esportsCaseStudy,

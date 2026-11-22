@@ -35,7 +35,7 @@ export default function AiPage() {
                 <p>
                     I use ChatGPT Codex for demanding technical work. I find Claude Code's more verbose and exploratory nature useful, especially when I want to investigate an approach,
                     though I have also run into mistakes on tasks that ChatGPT Codex would handle well. I use both actively depending on the work and the usage available to me. If a model is struggling,
-                    I switch approaches or models rather than repeating the same fixes. OpenCode is my coding workbench across models, while OpenClaw is the management and context layer.
+                    I switch approaches or models rather than repeating the same fixes. I use Hermes for day-to-day project work and OpenClaw for project context and coordination.
                 </p>
                 <h2 className='h5 pt-3 pb-3'>How I Got Here</h2>
                 <p>
@@ -85,8 +85,7 @@ export default function AiPage() {
                     Previously, I was working in tight WSL environments, but now I had much more freedom to speed things up using the skills I had built up.
                     This allowed me to tackle many projects in my spare time that I otherwise would not have gotten around to.
                     These projects kept my skills sharp while simultaneously refining my workflow into a complete stack of the tools I had messed around with independently from the start of the
-                    year: ChatGPT Codex for demanding and complex tasks, Claude Code for useful verbose and exploratory work, OpenCode as the coding workbench,
-                    and OpenClaw as the management and context layer. I just talk to them and get things done.
+                    year. I briefly used OpenCode as a coding workbench and later moved to Hermes for day-to-day project work. I just talk to them and get things done.
                 </p>
             </div>
         </>
