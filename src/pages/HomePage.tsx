@@ -90,7 +90,6 @@ export default function HomePage() {
             </OpeningCard>
             <SiteNav />
             <h1 className='text-center p-5'>My portfolio:</h1>
-            <p className='container text-center'>I’m open to full-time employment, with an earliest estimated start in early March 2027, and to scoped projects through light entrepreneurship.</p>
             <div className='container-fluid'>
                 <div className='portfolio-card-grid row'>
                     {portfolioCards.map((card, index) => (
